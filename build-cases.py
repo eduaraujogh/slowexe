@@ -204,7 +204,7 @@ def main():
         body = build_body(c, prev, nxt)
         out = '\n'.join(head) + '\n' + body + '\n' + '\n'.join(tail)
         out = re.sub(r'<title>.*?</title>',
-                     '<title>%s, Projeto, Slowexe</title>' % c['name'], out, count=1)
+                     '<title>%s | Projeto | Slowexe</title>' % c['name'], out, count=1)
         out = out.replace('</head>', '<style>\n%s</style>\n</head>' % EXTRA_CSS, 1)
         path = os.path.join(BASE, 'projeto-%s.html' % c['slug'])
         io.open(path, 'w', encoding='utf-8').write(out)

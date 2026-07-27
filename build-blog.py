@@ -270,13 +270,18 @@ def head_seo(p, url):
        esc(p['title_pt']), esc(p['desc_pt']),
        json.dumps(ld, ensure_ascii=False))
 
+ARROW = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
+         'stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>')
+# o botao tem DUAS setas: no hover a primeira sai e a segunda entra. Emitir so uma faz a seta sumir.
+GO = '<span class="bpost-go">%s%s</span>' % (ARROW, ARROW)
+
 def card(p):
     y, m, d = p['date']
-    return '''        <a class="bpost" href="blog-%s.html" data-reveal>
+    return ('''        <a class="bpost" href="blog-%s.html" data-reveal>
           <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="background:linear-gradient(135deg,%s 0%%,%s 100%%)"><b class="bf-cat">%s</b></span><span class="bpost-face back" style="background:linear-gradient(135deg,%s 0%%,%s 100%%)"><b class="bf-cat">%s</b></span></div></div>
-          <div class="bpost-row"><span class="bpost-date">%d <span data-pt>%s</span><span data-en>%s</span> %d</span><span class="bpost-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div>
+          <div class="bpost-row"><span class="bpost-date">%d <span data-pt>%s</span><span data-en>%s</span> %d</span>''' + GO + '''</div>
           <h3 class="bpost-title">%s</h3>
-        </a>''' % (p['slug'], CAPAS[p['slug']][0], CAPAS[p['slug']][1], bil(p['cat_pt'], p['cat_en']),
+        </a>''') % (p['slug'], CAPAS[p['slug']][0], CAPAS[p['slug']][1], bil(p['cat_pt'], p['cat_en']),
                    CAPAS[p['slug']][1], CAPAS[p['slug']][0], bil(p['cat_pt'], p['cat_en']),
                    d, MESES[m-1], MONTHS[m-1], y, bil(p['title_pt'], p['title_en']))
 
@@ -334,8 +339,61 @@ def main():
         io.open(os.path.join(BASE, 'blog-%s.html' % p['slug']), 'w', encoding='utf-8').write(s)
         print('gerado  blog-%s.html  (%d min)' % (p['slug'], leitura(p)))
 
+    # ---- cards de blog na home ----
+    HOME_CSS = ('  .bpost-img{display:grid;place-items:center}\n'
+                '  .bh-cat{font-family:"Bricolage Grotesque";font-weight:800;font-size:20px;color:#fff;opacity:.95}\n'
+                '  .bpost-av{width:40px;height:40px;border-radius:50%;flex:0 0 auto;background:var(--primary);'
+                'color:#fff;display:grid;place-items:center;font-family:"Bricolage Grotesque";font-weight:800;font-size:17px}\n')
+    def home_card(p):
+        y, m, d = p['date']
+        a, bcol = CAPAS[p['slug']]
+        return ('''        <a href="blog-%s.html" class="bpost" data-reveal>
+          <div class="bpost-img" style="background:linear-gradient(135deg,%s 0%%,%s 100%%)"><span class="bh-cat">%s</span></div>
+          <span class="bpost-cat">%s</span>
+          <h3 class="bpost-title">%s</h3>
+          <p class="bpost-desc">%s</p>
+          <div class="bpost-author">
+            <span class="bpost-av" aria-hidden="true">E</span>
+            <div><div class="bpost-name">%s</div><div class="bpost-date">%s</div></div>
+          </div>
+        </a>''' % (p['slug'], a, bcol, bil(p['cat_pt'], p['cat_en']), bil(p['cat_pt'], p['cat_en']),
+                   bil(p['title_pt'], p['title_en']), bil(p['desc_pt'], p['desc_en']), AUTOR,
+                   bil('%d %s %d' % (d, MESES[m-1], y), '%s %d, %d' % (MONTHS[m-1], d, y))))
+
+    ix = os.path.join(BASE, 'index.html')
+    h = io.open(ix, encoding='utf-8').read()
+    novo = '\n'.join(home_card(p) for p in POSTS[:3])
+
+    def bloco_balanceado(txt, abre):
+        """devolve (ini, fim) do conteudo de <div class=...> contando abre/fecha.
+        Regex nao serve aqui: o primeiro </div> encontrado nao e o que fecha a grid."""
+        i = txt.index(abre) + len(abre)
+        prof, j = 1, i
+        for m in re.finditer(r'<div\b|</div>', txt[i:]):
+            prof += 1 if m.group(0) == '<div' else -1
+            if prof == 0:
+                j = i + m.start()
+                break
+        return i, j
+
+    ini, fim = bloco_balanceado(h, '<div class="blog-grid">')
+    h2 = h[:ini] + '\n' + novo + '\n      ' + h[fim:]
+    if '<a href="blog-' in h2:
+        if '.bh-cat{' not in h2:
+            h2 = h2.replace('</head>', '<style>\n%s</style>\n</head>' % HOME_CSS, 1)
+        io.open(ix, 'w', encoding='utf-8').write(h2)
+        print('atualizado  index.html  (3 cards de blog na home)')
+    else:
+        print('AVISO: cards de blog da home nao substituidos')
+
     # grid do blog.html
     b = io.open(os.path.join(BASE, 'blog.html'), encoding='utf-8').read()
+    # paginacao: so faz sentido com mais de PER_PAGE posts. Botao que nao pagina engana o usuario.
+    PER_PAGE = 6
+    if len(POSTS) <= PER_PAGE:
+        b = re.sub(r' *<nav class="blog-pager".*?</nav>\n',
+                   '      <!-- paginacao oculta: %d posts cabem em uma pagina -->\n' % len(POSTS),
+                   b, count=1, flags=re.S)
     b2 = re.sub(r'( *<a class="bpost".*?</a>\n)+', '\n'.join(card(p) for p in POSTS) + '\n',
                 b, count=1, flags=re.S)
     if '<a class="bpost"' not in b2:

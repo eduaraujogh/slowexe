@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Branding, Slowexe</title>
+<title>Branding | Slowexe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -1385,7 +1385,7 @@
 
   // ===== infinite logo marquee (duplicate track for a seamless loop) =====
   (function(){
-    document.querySelectorAll('.sol-track.wc-track.ribbon-track.svc-belt-track').forEach(track=>{
+    document.querySelectorAll('.sol-track,.wc-track,.ribbon-track,.svc-belt-track').forEach(track=>{
       track.insertAdjacentHTML('beforeend', track.innerHTML);
     });
   })();
@@ -1456,9 +1456,11 @@
       }
       requestAnimationFrame(tick);
 
-      belt.addEventListener('pointerenter', function(){ hover = true; belt.classList.add('hot'); });
-      belt.addEventListener('pointerleave', function(){ hover = false; belt.classList.remove('hot'); });
-      belt.addEventListener('pointermove', function(e){
+      vp.addEventListener('pointerenter', function(){ hover = true; });
+      vp.addEventListener('pointerleave', function(){ hover = false; belt.classList.remove('hot'); });
+      vp.addEventListener('pointermove', function(e){
+        // so mostra o badge quando o ponteiro esta sobre um card, nao no vao nem no padding
+        belt.classList.toggle('hot', !!(e.target.closest && e.target.closest('.svc-belt-track > *')));
         if(badge){
           var r = belt.getBoundingClientRect();
           badge.style.left = (e.clientX - r.left) + 'px';
