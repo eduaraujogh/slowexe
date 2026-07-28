@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 Gera as páginas de case do site Slowexe a partir de projeto.html (template).
-Rode com: python build-cases.py
+Rode da raiz do repo com: python tools/build-cases.py
 Regenera todos os projeto-<slug>.html e reescreve a grid de projetos.html.
 Conteúdo dos cases: dicionário CASES abaixo. Edite ali, não nos HTMLs gerados.
 """
 import os, re, io
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+# o script vive em tools/, mas le e escreve na raiz do repo
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TPL  = os.path.join(BASE, 'projeto.html')
 
 # ordem = ordem na grid e na navegação prev/next
@@ -110,6 +111,15 @@ def imgs(slug):
 def esc(s):
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
+
+def descricao(c, limite=158):
+    """meta description do case, montada a partir do proprio conteudo."""
+    primeira = c['sol_pt'].split('. ')[0].rstrip('.')
+    d = '%s, %s. %s.' % (c['name'], c['tag_pt'].lower(), primeira)
+    if len(d) > limite:
+        d = d[:limite - 1].rsplit(' ', 1)[0] + '.'
+    return esc(d).replace('"', '&quot;')
+
 def build_body(c, prev, nxt):
     f = imgs(c['slug'])
     if len(f) < 2:
@@ -117,12 +127,15 @@ def build_body(c, prev, nxt):
     p = 'assets/cases/'
     cover_cls = '' if c['hero'] else ' pc-cover--contained'
 
+    # a galeria fica toda abaixo da dobra: lazy em todas.
+    # a capa (f[0], mais abaixo) fica eager, e ela que conta pro LCP.
+    lz = ' loading="lazy" decoding="async"'
     g = f[1:]
     gal = []
-    if len(g) >= 1: gal.append(f'      <img data-reveal src="{p}{g[0]}" alt="{esc(c["name"])}, {esc(c["tag_pt"])}">')
-    if len(g) >= 3: gal.append(f'      <div class="pc-two"><img data-reveal src="{p}{g[1]}" alt=""><img data-reveal src="{p}{g[2]}" alt=""></div>')
+    if len(g) >= 1: gal.append(f'      <img data-reveal src="{p}{g[0]}" alt="{esc(c["name"])}, {esc(c["tag_pt"])}"{lz}>')
+    if len(g) >= 3: gal.append(f'      <div class="pc-two"><img data-reveal src="{p}{g[1]}" alt="{esc(c["name"])}"{lz}><img data-reveal src="{p}{g[2]}" alt="{esc(c["name"])}"{lz}></div>')
     for extra in g[3:]:
-        gal.append(f'      <img data-reveal src="{p}{extra}" alt="">')
+        gal.append(f'      <img data-reveal src="{p}{extra}" alt="{esc(c["name"])}"{lz}>')
 
     scope = '\n'.join(
       f'        <div data-reveal><b><span data-pt>{a}</span><span data-en>{b}</span></b>'
@@ -203,8 +216,15 @@ def main():
         nxt  = CASES[(k + 1) % len(CASES)]
         body = build_body(c, prev, nxt)
         out = '\n'.join(head) + '\n' + body + '\n' + '\n'.join(tail)
+        # projeto.html e template e leva noindex. O case gerado e pagina de
+        # verdade: se o noindex vazasse, nenhum case seria indexado.
+        out = re.sub(r'\s*<meta name="robots" content="noindex[^>]*>', '', out)
         out = re.sub(r'<title>.*?</title>',
                      '<title>%s | Projeto | Slowexe</title>' % c['name'], out, count=1)
+        # description vem do conteudo do case; o resto do SEO entra no build-meta.py
+        if '<meta name="description"' not in out:
+            out = out.replace('</title>',
+                              '</title>\n<meta name="description" content="%s" />' % descricao(c), 1)
         out = out.replace('</head>', '<style>\n%s</style>\n</head>' % EXTRA_CSS, 1)
         path = os.path.join(BASE, 'projeto-%s.html' % c['slug'])
         io.open(path, 'w', encoding='utf-8').write(out)

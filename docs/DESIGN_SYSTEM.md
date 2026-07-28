@@ -213,12 +213,35 @@ Base `.btn`: `inline-flex; gap:9px; font-weight:600; font-size:14.5px; border-ra
 - **Lang toggle:** pill com 2 botões; ativo = bg salmão.
 - **Bell + promo:** ícone com `.dot` salmão pulsante; painel `.notif-panel` escuro com card promo em gradiente salmão + shine animado.
 
-### 8.6 Marquees (esteiras infinitas)
+### 8.6 Menu mobile (drawer) — `≤760px`
+
+Abaixo de 760px o `.nav-links` some e entra o `.menu-toggle`. O painel é o
+`#mnav`, presente nas 20 páginas (`tools/check.py` acusa se faltar em alguma).
+
+- **Painel:** fixo à direita, `width:min(86vw,380px)`, altura total, fundo `--bg`,
+  borda esquerda `--border`, `padding:20px 24px 28px`. Entra de
+  `transform:translateX(100%)` para `none` em `.5s cubic-bezier(.22,1,.36,1)`.
+- **Backdrop:** `rgba(10,11,13,.6)` + `blur(6px)`, fade de `.4s`.
+- **Links:** Bricolage 700, 26px, tracking `-.02em`, separados por
+  `border-bottom:1px solid var(--border)`. Hover salmão. Sublinks em Inter 500
+  14.5px `--text-muted`, com bolinha salmão e deslize de `4px` no hover.
+- **Rodapé do painel:** toggle PT/EN (pill, ativo salmão) + CTA salmão de largura
+  total que inverte para branco no hover, mesmo DNA do `.btn-primary`.
+- **Comportamento:** fecha por botão, backdrop, `Esc`, clique em link e ao voltar
+  para `>760px`. Trava o scroll do body, move o foco para o botão de fechar,
+  tem trap de `Tab` e mantém `aria-expanded` no toggle.
+- **Header no mobile:** em `≤760px` o sino de notificação sai e o CTA encolhe;
+  em `≤430px` o CTA também sai, sobrando logo + hamburguer.
+
+> ⚠️ Sem esse painel a página fica **sem navegação nenhuma** no celular, porque
+> o `.nav-links` está em `display:none` nessa faixa. Página nova precisa dele.
+
+### 8.7 Marquees (esteiras infinitas)
 - Track duplicado via JS (`track.innerHTML += track.innerHTML`); anima `translateX(-50%)` linear infinito; **pausa no hover**.
 - Máscara de fade nas bordas: `mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)`.
 - Velocidades: logos 34s, faces 22s, ribbons 26s.
 
-### 8.7 Padrões de movimento "premium"
+### 8.8 Padrões de movimento "premium"
 - **Sticky stacking cards** (Projetos/Feedback): cards `position:sticky` com `top` incremental (`+ var(--i)*30px`); o de cima cobre, com leve rotação/escala. `--cardtop` calculado por JS.
 - **Scroll text-fill** (About/Why): palavras `.fw` começam cinza (`#C9CDD4`/`#d2ccc1`) e viram `#0A0B0D` conforme o scroll.
 - **Letras cubo 3D** (Works): cada letra é um cubo `preserve-3d` que gira no eixo X ao entrar (uma vez).

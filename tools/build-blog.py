@@ -3,18 +3,23 @@
 Gera as páginas de post do blog da Slowexe a partir de blog-post.html (template)
 e reescreve a grid de blog.html.
 
-Rode com: python build-blog.py
+Rode da raiz do repo com: python tools/build-blog.py
 
 Todo o conteúdo vive no dicionário POSTS abaixo. Edite ali, nunca nos HTMLs gerados.
 Regra de estilo do projeto: NUNCA usar travessao no texto. Use virgula, dois-pontos ou ponto.
 """
-import io, os, re, json
+import io, os, re, json, sys
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+# o script vive em tools/, mas le e escreve na raiz do repo
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TPL  = os.path.join(BASE, 'blog-post.html')
 
-# Trocar pelo domínio real antes de publicar (usado em canonical, og:url e JSON-LD).
-SITE_URL = 'https://slowexe.com.br'
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import siteconfig as cfg
+
+# Endereco do site: fonte unica em tools/siteconfig.py.
+# Usado em canonical, og:url e JSON-LD.
+SITE_URL = cfg.SITE_URL
 
 AUTOR   = 'Eduardo Araujo'
 AUTOR_PT = 'Fundador · Slowexe'
@@ -299,6 +304,9 @@ def main():
         y, m, d = p['date']
 
         # head
+        # blog-post.html e template e leva noindex. O post gerado e pagina de
+        # verdade: se o noindex vazasse, o Google nao indexaria nenhum post.
+        s = re.sub(r'\s*<meta name="robots" content="noindex[^>]*>', '', s)
         s = re.sub(r'<title>.*?</title>',
                    '<title>%s | Slowexe</title>' % esc(p['title_pt']), s, count=1)
         s = s.replace('<link rel="preconnect" href="https://fonts.googleapis.com" />',
@@ -379,8 +387,9 @@ def main():
     ini, fim = bloco_balanceado(h, '<div class="blog-grid">')
     h2 = h[:ini] + '\n' + novo + '\n      ' + h[fim:]
     if '<a href="blog-' in h2:
-        if '.bh-cat{' not in h2:
-            h2 = h2.replace('</head>', '<style>\n%s</style>\n</head>' % HOME_CSS, 1)
+        if 'id="blog-home-css"' not in h2 and '.bh-cat{' not in h2:
+            h2 = h2.replace('</head>',
+                            '<style id="blog-home-css">\n%s</style>\n</head>' % HOME_CSS, 1)
         io.open(ix, 'w', encoding='utf-8').write(h2)
         print('atualizado  index.html  (3 cards de blog na home)')
     else:
@@ -399,7 +408,11 @@ def main():
     if '<a class="bpost"' not in b2:
         print('AVISO: grid do blog.html nao substituida')
     else:
-        b2 = b2.replace('</head>', '<style>\n%s</style>\n</head>' % CARD_CSS, 1)
+        # sem esta guarda o bloco era reinjetado a cada rodada (blog.html chegou a ter 8 copias).
+        # a marca e o id do <style>, nao o seletor: '.bpost-face{' ja existe na folha principal.
+        if 'id="blog-card-css"' not in b2:
+            b2 = b2.replace('</head>',
+                            '<style id="blog-card-css">\n%s</style>\n</head>' % CARD_CSS, 1)
         io.open(os.path.join(BASE, 'blog.html'), 'w', encoding='utf-8').write(b2)
         print('atualizado  blog.html  (%d posts)' % len(POSTS))
 

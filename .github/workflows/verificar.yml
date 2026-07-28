@@ -1,0 +1,33 @@
+name: Verificar
+
+# Roda as checagens em pull request e em branch que nao seja a main.
+# Na main quem verifica e o deploy.yml, antes de publicar.
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Checagens do site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Checagens do site
+        run: python tools/check.py
+
+      - name: O build esta em dia com os scripts?
+        run: |
+          python tools/build-all.py
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::Os HTML gerados estao fora de sincronia com tools/."
+            echo "Rode 'python tools/build-all.py' e commite o resultado."
+            git --no-pager diff --stat
+            exit 1
+          fi
+          echo "build em dia"

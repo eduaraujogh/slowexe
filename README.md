@@ -1,15 +1,18 @@
 # Slowexe — Site
 
-Site institucional da **Slowexe**, agência de branding e design. Estático, multipágina, bilíngue PT/EN.
+Site institucional da **Slowexe**, estúdio de branding e design.
+Estático, multipágina, bilíngue PT/EN.
+
+**No ar:** https://eduaraujogh.github.io/slowexe/
 
 ## Stack
 
-HTML, CSS e JavaScript vanilla — sem framework, sem build step obrigatório. Os textos em dois idiomas convivem no mesmo HTML via atributos `data-pt` / `data-en`, alternados por JS.
+HTML, CSS e JavaScript vanilla. Sem framework e sem bundler. Os dois idiomas
+convivem no mesmo HTML via atributos `data-pt` / `data-en`, alternados por JS
+e por duas regras de CSS (`.lang-en [data-pt]` / `.lang-pt [data-en]`).
 
-Dois scripts Python geram páginas repetitivas a partir de templates:
-
-- `build-cases.py` — gera as páginas `projeto-*.html` a partir de `projeto.html`
-- `build-blog.py` — gera as páginas `blog-*.html` a partir de `blog-post.html`
+Páginas repetitivas são **geradas** por scripts Python a partir de templates.
+O conteúdo mora nos scripts, nunca nos HTML gerados.
 
 ## Estrutura
 
@@ -19,41 +22,95 @@ servicos.html              hub de serviços
 servico-branding.html      página de serviço
 servico-rebranding.html    página de serviço
 projetos.html              índice de cases
-projeto.html               template de case study
-projeto-*.html             cases gerados
+projeto.html               TEMPLATE de case (noindex, não é página)
+projeto-*.html             7 cases gerados
 blog.html                  índice do blog
-blog-post.html             template de post
-blog-*.html                posts gerados
+blog-post.html             TEMPLATE de post (noindex, não é página)
+blog-*.html                4 posts gerados
 contato.html               contato + modal de agendamento
-assets/                    imagens dos cases (.webp) e vídeo do hero
+
+assets/cases/              imagens dos cases (.webp)
+assets/icons/              favicons, apple-touch, og-image
+favicon.ico  favicon.svg   ícones na raiz
+robots.txt  sitemap.xml    gerados por tools/
+site.webmanifest           PWA básico
+.nojekyll                  o Pages serve os arquivos como estão
+
+docs/                      documentação do projeto
+tools/                     scripts de build e verificação
+.github/workflows/         CI e deploy
 ```
 
-## Documentação
-
-- **`DESIGN_SYSTEM.md`** — fonte da verdade de design: cores, tipografia, espaçamento, raios, sombras, movimento e componentes. Consultar antes de qualquer página nova ou edição.
-- **`CLAUDE.md`** — contexto e convenções do projeto para trabalho assistido por IA.
-- **`CASES-BRIEF.md`** — briefing de conteúdo dos cases.
-
 ## Rodando localmente
-
-Basta abrir `index.html` no navegador. Para navegação entre páginas funcionar como em produção, um servidor local ajuda:
 
 ```bash
 python -m http.server 8000
 ```
 
-Depois acesse `http://localhost:8000`.
+E abrir `http://localhost:8000`. Abrir o `index.html` direto pelo arquivo
+funciona, mas um servidor local reproduz o comportamento de produção.
 
-## Regenerando páginas
+## Build
 
 ```bash
-python build-cases.py
-python build-blog.py
+python tools/build-all.py
 ```
+
+Roda tudo na ordem certa. Os passos individuais:
+
+| Script | O que faz |
+|---|---|
+| `tools/build-cases.py` | Gera `projeto-*.html` e a grid de `projetos.html` a partir do dicionário `CASES` |
+| `tools/build-blog.py` | Gera `blog-*.html`, a grid de `blog.html` e os cards da home a partir de `POSTS` |
+| `tools/build-meta.py` | Aplica SEO (description, canonical, OG, Twitter) e os ícones em todas as páginas |
+| `tools/build-sitemap.py` | Gera `sitemap.xml` e `robots.txt` |
+| `tools/make-favicon.py` | Regenera os ícones. Só quando a marca mudar |
+
+O build é **idempotente**: rodar duas vezes produz exatamente o mesmo resultado.
+O CI verifica isso — se os HTML gerados estiverem fora de sincronia com os
+scripts, o build falha.
+
+## Verificação
+
+```bash
+python tools/check.py
+```
+
+Checa links quebrados, assets faltando, paridade PT/EN, SEO obrigatório por
+página, presença do menu mobile, blocos duplicados e conteúdo de rascunho.
+Sai com código 1 se achar erro. Roda no CI a cada push e antes de cada deploy.
+
+## Trocar o endereço do site
+
+Tudo que é URL absoluta (canonical, `og:url`, sitemap, robots) sai de um
+único lugar: `SITE_URL` em `tools/siteconfig.py`. Ao comprar o domínio:
+
+1. Trocar `SITE_URL` para `https://slowexe.com.br`
+2. `python tools/build-all.py`
+3. Criar o arquivo `CNAME` na raiz com `slowexe.com.br`
+4. Apontar o DNS e ativar o domínio em Settings → Pages
+
+Nenhum HTML tem URL escrita à mão.
+
+## Deploy
+
+Push na `main` dispara `.github/workflows/deploy.yml`, que roda as checagens e
+publica no GitHub Pages. Requer, uma vez só: **Settings → Pages → Source =
+GitHub Actions**.
+
+## Documentação
+
+- **[`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md)** — fonte da verdade de design.
+  Consultar antes de qualquer página nova ou edição visual.
+- **[`docs/CASES-BRIEF.md`](docs/CASES-BRIEF.md)** — o que falta de conteúdo nos cases.
+- **[`docs/PENDENCIAS.md`](docs/PENDENCIAS.md)** — o que ainda não está pronto pra produção.
+- **[`CLAUDE.md`](CLAUDE.md)** — contexto e convenções pra trabalho assistido por IA.
 
 ## Convenções
 
 - Cor de destaque única: salmão `#F07A65` (hover `#E2674F`)
 - Títulos em Bricolage Grotesque, corpo e UI em Inter
-- Validar JS com `node --check` antes de commitar
-- Qualquer mudança visual passa pelo `DESIGN_SYSTEM.md` primeiro
+- Nunca usar travessão no texto: vírgula, dois-pontos ou ponto
+- Nunca inventar número, depoimento ou cliente. Sem dado real, o bloco sai
+- Qualquer mudança visual passa pelo `docs/DESIGN_SYSTEM.md` primeiro
+- Editar os templates e os scripts, nunca os HTML gerados
