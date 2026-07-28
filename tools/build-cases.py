@@ -250,5 +250,33 @@ f'''        <a class="pg-card" href="projeto-{c['slug']}.html" data-cat="brandin
         io.open(os.path.join(BASE, 'projetos.html'), 'w', encoding='utf-8').write(px2)
         print('atualizado  projetos.html  (%d cards)' % len(CASES))
 
+    # ---- baralho do hero da home ----
+    ix = os.path.join(BASE, 'index.html')
+    h = io.open(ix, encoding='utf-8').read()
+    baralho = []
+    for k, c in enumerate(CASES):
+        cover = imgs(c['slug'])[0]
+        # o card da frente e candidato a LCP: carrega com prioridade
+        carga = ('loading="eager" fetchpriority="high" decoding="async"' if k == 0
+                 else 'loading="lazy" decoding="async"')
+        baralho.append(
+f'''        <a class="deck-card" href="projeto-{c['slug']}.html">
+          <img src="assets/cases/{cover}" alt="{esc(c['name'])}, {esc(c['tag_pt'])}" {carga}>
+          <span class="deck-meta">
+            <span class="deck-name">{esc(c['name'])}</span>
+            <span class="deck-cat"><span data-pt>{esc(c['tag_pt'])}</span><span data-en>{esc(c['tag_en'])}</span></span>
+          </span>
+        </a>''')
+    novo = '\n'.join(baralho)
+    h2, n = re.subn(r'(<div class="deck" id="deckTrack">\n)(.*?)(^ *</div>)',
+                    lambda m: m.group(1) + novo + '\n' + m.group(3),
+                    h, count=1, flags=re.S | re.M)
+    if not n:
+        print('AVISO: baralho do hero nao encontrado em index.html')
+    else:
+        io.open(ix, 'w', encoding='utf-8').write(h2)
+        print('atualizado  index.html  (%d cards no baralho do hero)' % len(CASES))
+
+
 if __name__ == '__main__':
     main()
