@@ -233,9 +233,10 @@
     border-radius:22px;overflow:hidden;
     background:#efeeec;
     box-shadow:0 18px 46px rgba(10,11,13,.16);
-    /* troca a menos de 1s: a transicao precisa terminar antes da proxima */
-    transition:transform .62s cubic-bezier(.22,1,.36,1),
-               opacity .62s cubic-bezier(.22,1,.36,1),
+    /* .9s de movimento. O INTERVALO no JS e maior que isso de proposito:
+       sem um respiro entre as trocas o baralho vira agitacao. */
+    transition:transform .9s cubic-bezier(.22,1,.36,1),
+               opacity .9s cubic-bezier(.22,1,.36,1),
                box-shadow .4s;
     will-change:transform;
   }
@@ -739,9 +740,13 @@
 <style id="header-glass">
   /* ============ HEADER DE VIDRO ============ */
   /* O ".ct-page header" existe porque as paginas internas ja escopavam um
-     header escuro por classe do body, com especificidade (0,2,0). Repetir o
-     seletor aqui empata a especificidade e, como este bloco e o ultimo do
-     <head>, ele vence. Sem isso o fundo continuaria escuro com texto escuro. */
+     header por classe do body, com especificidade (0,2,0). Repetir o seletor
+     aqui empata e, como este bloco e o ultimo do <head>, ele vence. */
+  header .btn-contact{background:var(--primary);color:#fff}
+  header .btn-contact:hover{background:#0A0B0D;color:#fff}
+  header .lang-toggle button.active{background:var(--primary);color:#fff}
+
+  /* ---- tema claro: para hero branco ou creme ---- */
   header,.ct-page header{
     background:rgba(255,255,255,.82);
     backdrop-filter:blur(20px) saturate(150%);
@@ -759,18 +764,13 @@
   header .nav-links a:hover{color:#0A0B0D;background:rgba(10,11,13,.06)}
   header .lang-toggle{border-color:rgba(10,11,13,.12);background:rgba(10,11,13,.04)}
   header .lang-toggle button{color:#6b7078}
-  header .lang-toggle button.active{background:var(--primary);color:#fff}
   header .bell{border-color:rgba(10,11,13,.12);background:rgba(10,11,13,.04)}
   header .bell:hover{background:rgba(10,11,13,.08)}
   header .bell svg{stroke:#3a3f47}
-  /* branco sobre vidro claro sumiria: o CTA vira salmao */
-  header .btn-contact{background:var(--primary);color:#fff}
-  header .btn-contact:hover{background:#0A0B0D;color:#fff}
   header .menu-toggle{border-color:rgba(10,11,13,.12)}
   header .menu-toggle svg{stroke:#0A0B0D}
-  /* navegador sem backdrop-filter recebe um branco quase solido */
   @supports not (backdrop-filter: blur(1px)){
-    header,header.scrolled{background:rgba(255,255,255,.97)}
+    header,header.scrolled,.ct-page header{background:rgba(255,255,255,.97)}
   }
 </style>
 </head>
@@ -1535,7 +1535,9 @@
   var cards=[].slice.call(deck.querySelectorAll('.deck-card'));
   if(cards.length<3) return;
 
-  var INTERVALO=900;   // ms entre uma troca e outra (a transicao dura .62s)
+  // .9s de movimento + .9s de descanso. O card precisa parar pra ser lido:
+  // com o intervalo colado na duracao a animacao nunca assenta.
+  var INTERVALO=1800;
 
   // Cada posicao e a distancia do centro. O Z empurra o card pra tras: a
   // perspectiva do container cuida de encolher e sobrepor sozinha.

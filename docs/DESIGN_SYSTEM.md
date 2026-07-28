@@ -206,25 +206,35 @@ Base `.btn`: `inline-flex; gap:9px; font-weight:600; font-size:14.5px; border-ra
 - Erro: `border-color:#e26b54`. Label: 13.5–14.5px, 600. Obrigatório `*` salmão.
 - **Select customizado** (não nativo, pra garantir clique) ou dropdown próprio com seta chevron.
 
-### 8.5 Header / nav — **vidro claro**
+### 8.5 Header / nav — **vidro, em dois temas**
 - Fixo, 80px → 64px ao rolar. Esconde ao descer, reaparece ao subir (`.hide`).
-- **Fundo:** `rgba(255,255,255,.82)` + `backdrop-filter:blur(20px) saturate(150%)`,
-  borda inferior `rgba(10,11,13,.07)`. Ao rolar sobe pra `.9` e `blur(24px)`.
-- **Texto sempre escuro:** logo `#0A0B0D`, links `#3a3f47`, ícones `#3a3f47`.
-  O CTA do header é **salmão** (branco sobre vidro claro sumiria).
-- Gerado por `tools/build-header.py`, igual nas 20 páginas.
+- Gerado por `tools/build-header.py`. O tema sai do **hero da página**, detectado
+  pelo conteúdo (`class="svc-*hero"` = hero escuro), não por lista de arquivos.
+- O CTA do header é **salmão** nos dois temas.
 
-> **Por que vidro e não branco sólido:** o header é fixo e passa por cima de
-> coisas muito diferentes — hero branco na home, seções escuras no meio das
-> páginas e o vídeo no topo de `servico-branding.html`. O vidro claro resolve
-> os três com a **mesma** cor de texto, sem tema de header por página.
-> Contraste medido: 10,6:1 sobre branco e 7,1:1 sobre `#0A0B0D`.
+| | Hero claro (17 páginas) | Hero escuro (3 de serviço) |
+|---|---|---|
+| Fundo | `rgba(255,255,255,.82)` | `linear-gradient(180deg, rgba(10,11,13,.72), rgba(10,11,13,.34))` |
+| Blur | `blur(20px) saturate(150%)` | `blur(16px) saturate(130%)` |
+| Ao rolar | `rgba(255,255,255,.9)`, `blur(24px)` | `rgba(10,11,13,.8)`, `blur(22px)` |
+| Logo | `#0A0B0D` | `#fff` |
+| Links | `#3a3f47` | `#E4E6EA` |
+| Borda | `rgba(10,11,13,.07)` | `rgba(255,255,255,.08)` |
+
+> **Por que dois temas e não um só:** o vidro branco sobre o vídeo escuro das
+> páginas de serviço virava uma barra cinza opaca. O tema escuro usa **degradê**
+> em vez de cor chapada — mais denso em cima, onde ficam logo e menu, quase
+> transparente embaixo. Dá contraste sem tapar o vídeo.
+>
+> Contraste medido do menu: 10,6:1 no branco · 10,4:1 no creme · 6,7:1 sobre o
+> vídeo de `servicos.html` · 15,8:1 sobre `#0A0B0D`. Todos acima do AA.
 >
 > ⚠️ As páginas internas têm `.ct-page header{background:...}` com
-> especificidade (0,2,0). O bloco do vidro repete esse seletor pra empatar e
-> vence por vir depois. Sem isso o fundo fica escuro com texto escuro.
+> especificidade (0,2,0). Os dois temas repetem esse seletor pra empatar e
+> vencem por vir depois. Sem isso o fundo fica escuro com texto escuro.
 
-- Links: `padding:9px 14px; radius:10px`; hover bg `rgba(10,11,13,.06)`.
+- Links: `padding:9px 14px; radius:10px`; hover bg `rgba(10,11,13,.06)` no claro
+  e `rgba(255,255,255,.1)` no escuro.
 - **Mega-menu:** painel branco, radius 20, `box-shadow 0 36px 90px rgba(0,0,0,.4)`, abre com `opacity` + `translateY` (.25–.34s). Itens com ícone salmão + chevron que entra no hover.
 - **Lang toggle:** pill com 2 botões; ativo = bg salmão.
 - **Bell + promo:** ícone com `.dot` salmão pulsante; painel `.notif-panel` escuro com card promo em gradiente salmão + shine animado.
