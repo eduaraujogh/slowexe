@@ -871,6 +871,85 @@
   .pc-cover--contained img{border-radius:24px}
   .pc-q-author{gap:0}
 </style>
+<style id="mnav-css">
+  /* ============ MENU MOBILE (drawer) ============ */
+  .mnav-backdrop{
+    position:fixed;inset:0;z-index:110;
+    background:rgba(10,11,13,.6);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    opacity:0;transition:opacity .4s cubic-bezier(.22,1,.36,1);
+  }
+  .mnav-backdrop.on{opacity:1}
+  .mnav{
+    position:fixed;top:0;right:0;bottom:0;z-index:111;
+    width:min(86vw,380px);
+    background:var(--bg);border-left:1px solid var(--border);
+    display:flex;flex-direction:column;
+    padding:20px 24px 28px;
+    transform:translateX(100%);
+    transition:transform .5s cubic-bezier(.22,1,.36,1);
+    overflow-y:auto;overscroll-behavior:contain;
+  }
+  .mnav.on{transform:none}
+  .mnav[hidden],.mnav-backdrop[hidden]{display:none}
+  .mnav-top{display:flex;align-items:center;justify-content:space-between;gap:16px;height:44px;margin-bottom:24px}
+  .mnav-brand{display:flex;align-items:center;gap:10px;font-family:"Bricolage Grotesque";font-weight:800;font-size:20px;letter-spacing:-.02em;color:#fff}
+  .mnav-brand .mark{width:20px;height:20px;border-radius:7px;background:var(--primary);box-shadow:0 0 0 4px rgba(240,122,101,.18)}
+  .mnav-close{
+    width:42px;height:42px;display:grid;place-items:center;flex:0 0 auto;
+    border:1px solid var(--border);border-radius:12px;color:#fff;
+    transition:background .25s,border-color .25s,color .25s;
+  }
+  .mnav-close:hover,.mnav-close:focus-visible{background:var(--primary);border-color:var(--primary)}
+  .mnav-close svg{width:19px;height:19px}
+  .mnav-body{display:flex;flex-direction:column}
+  .mnav-link{
+    font-family:"Bricolage Grotesque";font-weight:700;font-size:26px;letter-spacing:-.02em;
+    color:#fff;padding:13px 0;border-bottom:1px solid var(--border);
+    display:block;transition:color .25s;
+  }
+  .mnav-link:hover,.mnav-link:focus-visible{color:var(--primary)}
+  .mnav-sub{display:flex;flex-direction:column;gap:2px;padding:12px 0 18px}
+  .mnav-sub a{
+    font-size:14.5px;font-weight:500;color:var(--text-muted);padding:7px 0;
+    display:inline-flex;align-items:center;gap:9px;
+    transition:color .25s,transform .3s cubic-bezier(.22,1,.36,1);
+  }
+  .mnav-sub a::before{content:"";width:5px;height:5px;border-radius:999px;background:var(--primary);opacity:.55;transition:opacity .25s}
+  .mnav-sub a:hover,.mnav-sub a:focus-visible{color:#fff;transform:translateX(4px)}
+  .mnav-sub a:hover::before{opacity:1}
+  .mnav-foot{margin-top:auto;padding-top:28px;display:flex;flex-direction:column;gap:16px}
+  .mnav-lang{display:inline-flex;align-self:flex-start;gap:2px;padding:3px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.04)}
+  .mnav-lang button{padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:600;color:var(--text-muted);transition:background .25s,color .25s}
+  .mnav-lang button.active{background:var(--primary);color:#fff}
+  .mnav-cta{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    width:100%;padding:15px 26px;border-radius:8px;
+    background:var(--primary);color:#fff;font-weight:600;font-size:14.5px;
+    transition:background .35s cubic-bezier(.65,0,.2,1),color .35s cubic-bezier(.65,0,.2,1);
+  }
+  .mnav-cta:hover,.mnav-cta:focus-visible{background:#fff;color:var(--primary)}
+  .mnav-cta svg{width:17px;height:17px}
+  body.mnav-open{overflow:hidden}
+
+  /* o header nao cabia em 375px: o hamburguer ficava 26px fora da tela */
+  @media(max-width:760px){
+    header .notif{display:none}
+    header .btn-contact{padding:11px 16px;font-size:13.5px}
+    .nav{gap:12px}
+    .nav-right{gap:10px;flex:0 0 auto;min-width:0}
+    .logo{flex:0 0 auto}
+  }
+  @media(max-width:430px){
+    header .btn-contact{display:none}
+  }
+  @media(min-width:761px){
+    .mnav,.mnav-backdrop{display:none!important}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .mnav,.mnav-backdrop{transition:none}
+  }
+</style>
 </head>
 <body class="lang-pt ct-page">
 
@@ -936,6 +1015,38 @@
       </div>
     </nav>
   </header>
+
+  <!-- ============ MENU MOBILE ============ -->
+  <div class="mnav-backdrop" id="mnavBackdrop" hidden></div>
+  <aside class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <div class="mnav-top">
+      <a href="index.html" class="mnav-brand" aria-label="Slowexe, home"><span class="mark"></span>Slowexe</a>
+      <button class="mnav-close" id="mnavClose" type="button" aria-label="Fechar menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <nav class="mnav-body">
+      <a class="mnav-link" href="servicos.html"><span data-pt>Serviços</span><span data-en>Services</span></a>
+      <div class="mnav-sub">
+        <a href="servico-branding.html">Branding</a>
+        <a href="servico-rebranding.html">Rebranding</a>
+        <a href="servicos.html"><span data-pt>Ver todos os serviços</span><span data-en>See all services</span></a>
+      </div>
+      <a class="mnav-link" href="projetos.html"><span data-pt>Projetos</span><span data-en>Works</span></a>
+      <a class="mnav-link" href="index.html#about"><span data-pt>Estúdio</span><span data-en>Studio</span></a>
+      <a class="mnav-link" href="blog.html">Blog</a>
+    </nav>
+    <div class="mnav-foot">
+      <div class="mnav-lang" role="group" aria-label="Language">
+        <button data-set-lang="pt" type="button" class="active">PT</button>
+        <button data-set-lang="en" type="button">EN</button>
+      </div>
+      <a href="contato.html" class="mnav-cta">
+        <span data-pt>Fale Conosco</span><span data-en>Contact Now</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </aside>
 
   <main class="projx pcase">
     <section class="pc-hero"><div class="wrap">
@@ -1324,6 +1435,56 @@
     document.addEventListener('langchange',applyI18n);
     applyI18n();
   })();
+</script>
+<script id="mnav-js">
+/* ============ MENU MOBILE ============ */
+(function(){
+  var btn=document.querySelector('.menu-toggle');
+  var panel=document.getElementById('mnav');
+  var back=document.getElementById('mnavBackdrop');
+  if(!btn||!panel||!back)return;
+  var closeBtn=document.getElementById('mnavClose');
+  var lastFocus=null,timer=null;
+  panel.id='mnav';
+  btn.setAttribute('aria-controls','mnav');
+  btn.setAttribute('aria-expanded','false');
+  function open(){
+    clearTimeout(timer);
+    lastFocus=document.activeElement;
+    panel.hidden=false;back.hidden=false;
+    void panel.offsetWidth;
+    panel.classList.add('on');back.classList.add('on');
+    document.body.classList.add('mnav-open');
+    btn.setAttribute('aria-expanded','true');
+    if(closeBtn)closeBtn.focus();
+  }
+  function close(){
+    panel.classList.remove('on');back.classList.remove('on');
+    document.body.classList.remove('mnav-open');
+    btn.setAttribute('aria-expanded','false');
+    clearTimeout(timer);
+    timer=setTimeout(function(){panel.hidden=true;back.hidden=true;},500);
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  }
+  btn.addEventListener('click',function(){panel.classList.contains('on')?close():open();});
+  if(closeBtn)closeBtn.addEventListener('click',close);
+  back.addEventListener('click',close);
+  panel.addEventListener('click',function(e){if(e.target.closest('a'))close();});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&panel.classList.contains('on'))close();
+  });
+  panel.addEventListener('keydown',function(e){
+    if(e.key!=='Tab')return;
+    var f=panel.querySelectorAll('a[href],button:not([disabled])');
+    if(!f.length)return;
+    var first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  });
+  window.addEventListener('resize',function(){
+    if(window.innerWidth>760&&panel.classList.contains('on'))close();
+  });
+})();
 </script>
 </body>
 </html>
