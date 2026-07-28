@@ -251,21 +251,21 @@ f'''        <a class="pg-card" href="projeto-{c['slug']}.html" data-cat="brandin
         print('atualizado  projetos.html  (%d cards)' % len(CASES))
 
     # ---- baralho do hero da home ----
+    # 5 cards: com 7 o leque fica largo demais e os das pontas viram sliver.
+    # Sem titulo dentro do card, so a imagem, igual a referencia.
+    NO_BARALHO = 5
     ix = os.path.join(BASE, 'index.html')
     h = io.open(ix, encoding='utf-8').read()
     baralho = []
-    for k, c in enumerate(CASES):
+    for k, c in enumerate(CASES[:NO_BARALHO]):
         cover = imgs(c['slug'])[0]
-        # o card da frente e candidato a LCP: carrega com prioridade
+        # os 3 primeiros ficam visiveis de cara e contam pro LCP
         carga = ('loading="eager" fetchpriority="high" decoding="async"' if k == 0
+                 else 'loading="eager" decoding="async"' if k < 3
                  else 'loading="lazy" decoding="async"')
         baralho.append(
-f'''        <a class="deck-card" href="projeto-{c['slug']}.html">
+f'''        <a class="deck-card" href="projeto-{c['slug']}.html" aria-label="{esc(c['name'])}, {esc(c['tag_pt'])}">
           <img src="assets/cases/{cover}" alt="{esc(c['name'])}, {esc(c['tag_pt'])}" {carga}>
-          <span class="deck-meta">
-            <span class="deck-name">{esc(c['name'])}</span>
-            <span class="deck-cat"><span data-pt>{esc(c['tag_pt'])}</span><span data-en>{esc(c['tag_en'])}</span></span>
-          </span>
         </a>''')
     novo = '\n'.join(baralho)
     h2, n = re.subn(r'(<div class="deck" id="deckTrack">\n)(.*?)(^ *</div>)',
@@ -275,7 +275,7 @@ f'''        <a class="deck-card" href="projeto-{c['slug']}.html">
         print('AVISO: baralho do hero nao encontrado em index.html')
     else:
         io.open(ix, 'w', encoding='utf-8').write(h2)
-        print('atualizado  index.html  (%d cards no baralho do hero)' % len(CASES))
+        print('atualizado  index.html  (%d cards no baralho do hero)' % len(baralho))
 
 
 if __name__ == '__main__':
