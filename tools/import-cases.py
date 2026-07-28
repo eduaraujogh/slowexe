@@ -52,8 +52,12 @@ def ordem_original(nome):
     return int(m.group(1)) if m else 9999
 
 
+LIMITE_ESTRUTURA = 12   # bits de 256 que podem diferir e ainda ser a mesma arte
+LIMITE_COR = 26         # distancia media por canal RGB
+
+
 def dhash(img, tam=16):
-    """Hash perceptual. Mesma arte em resolucoes diferentes da o mesmo hash."""
+    """Hash perceptual da estrutura. Mesma arte em resolucoes diferentes = igual."""
     im = img.convert('L').resize((tam + 1, tam), Image.LANCZOS)
     px = list(im.getdata())
     bits = []
@@ -64,8 +68,31 @@ def dhash(img, tam=16):
     return ''.join(bits)
 
 
+def assinatura_cor(img, tam=4):
+    """Grade 4x4 de cor media. O dhash e cinza e nao ve cor nenhuma."""
+    im = img.convert('RGB').resize((tam, tam), Image.LANCZOS)
+    return list(im.getdata())
+
+
+def parecidas(a, b):
+    """Mesma arte? Precisa bater estrutura E cor.
+
+    So a estrutura nao serve: no Riverside o mesmo logotipo aparece em laranja
+    e em azul-marinho, com hash de estrutura praticamente identico. Sao duas
+    aplicacoes da identidade, nao uma repeticao.
+    """
+    ha, ca = a
+    hb, cb = b
+    dif = sum(1 for x, y in zip(ha, hb) if x != y)
+    if dif > LIMITE_ESTRUTURA:
+        return False
+    n = len(ca)
+    dcor = sum(abs(p[i] - q[i]) for p, q in zip(ca, cb) for i in range(3)) / (n * 3.0)
+    return dcor <= LIMITE_COR
+
+
 def carrega(pasta):
-    """(hash, largura, altura, ordem, caminho) de cada arquivo da pasta."""
+    """(assinatura, largura, altura, ordem, caminho) de cada arquivo da pasta."""
     itens = []
     for f in sorted(os.listdir(pasta)):
         p = os.path.join(pasta, f)
@@ -73,36 +100,47 @@ def carrega(pasta):
             continue
         try:
             with Image.open(p) as im:
-                itens.append((dhash(im), im.size[0], im.size[1], ordem_original(f), p))
+                assin = (dhash(im), assinatura_cor(im))
+                itens.append((assin, im.size[0], im.size[1], ordem_original(f), p))
         except Exception as e:
             print('    ignorado (nao abriu): %s (%s)' % (f, e))
     return itens
 
 
-def seleciona(pasta):
-    """Dedup + filtro + ordem da pagina original."""
-    grupos = {}
-    for h, w, alt, o, p in carrega(pasta):
-        grupos.setdefault(h, []).append((w, alt, o, p))
-    # de cada arte, a maior versao; a ordem e a menor (primeira aparicao)
+def seleciona(pasta, verbose=False):
+    """Dedup por semelhanca + filtro de tamanho + ordem da pagina original."""
+    itens = [i for i in carrega(pasta) if i[1] >= LARGURA_MIN]
+    itens.sort(key=lambda t: t[3])          # ordem da pagina original
+
+    grupos = []   # cada grupo: [assinatura, lista de versoes]
+    for assin, w, alt, o, p in itens:
+        for g in grupos:
+            if parecidas(assin, g[0]):
+                g[1].append((w, alt, o, p))
+                break
+        else:
+            grupos.append([assin, [(w, alt, o, p)]])
+
     escolhidas = []
-    for versoes in grupos.values():
+    for _, versoes in grupos:
         w, alt, _, p = max(versoes, key=lambda t: t[0] * t[1])
         primeira_ordem = min(v[2] for v in versoes)
         escolhidas.append((primeira_ordem, w, alt, p))
-    escolhidas = [e for e in escolhidas if e[1] >= LARGURA_MIN]
+        if verbose and len(versoes) > 1:
+            print('    %d versoes da mesma arte, fica %s'
+                  % (len(versoes), os.path.basename(p)[:30]))
     escolhidas.sort(key=lambda t: t[0])
-    return [(w, alt, p) for _, w, alt, p in escolhidas]
+    return [(w, alt, p) for _, w, alt, p in escolhidas], len(itens)
 
 
 def capa_atual(slug):
-    """Hash da capa que ja esta no site, pra nao trocar a cara do projeto."""
+    """Assinatura da capa que ja esta no site, pra nao trocar a cara do projeto."""
     p = os.path.join(DESTINO, '%s-01.webp' % slug)
     if not os.path.exists(p):
         return None
     try:
         with Image.open(p) as im:
-            return dhash(im)
+            return (dhash(im), assinatura_cor(im))
     except Exception:
         return None
 
@@ -133,17 +171,20 @@ def main():
             print('%-14s PASTA NAO ENCONTRADA: %s' % (slug, pasta))
             continue
 
-        escolhidas = seleciona(pasta)
+        escolhidas, lidas = seleciona(pasta)
         if not escolhidas:
             print('%-14s nenhuma imagem util' % slug)
             continue
+        if lidas != len(escolhidas):
+            print('%-14s %d arquivos -> %d artes (%d eram repeticao)'
+                  % (slug, lidas, len(escolhidas), lidas - len(escolhidas)))
 
         # a capa de hoje continua sendo a capa
         alvo = capa_atual(slug)
         if alvo:
             for i, (w, h, p) in enumerate(escolhidas):
                 with Image.open(p) as im:
-                    if dhash(im) == alvo:
+                    if parecidas((dhash(im), assinatura_cor(im)), alvo):
                         if i:
                             escolhidas.insert(0, escolhidas.pop(i))
                             print('%-14s capa preservada (era a %da da origem)' % (slug, i + 1))
