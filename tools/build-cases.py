@@ -131,11 +131,29 @@ def build_body(c, prev, nxt):
     # a capa (f[0], mais abaixo) fica eager, e ela que conta pro LCP.
     lz = ' loading="lazy" decoding="async"'
     g = f[1:]
-    gal = []
-    if len(g) >= 1: gal.append(f'      <img data-reveal src="{p}{g[0]}" alt="{esc(c["name"])}, {esc(c["tag_pt"])}"{lz}>')
-    if len(g) >= 3: gal.append(f'      <div class="pc-two"><img data-reveal src="{p}{g[1]}" alt="{esc(c["name"])}"{lz}><img data-reveal src="{p}{g[2]}" alt="{esc(c["name"])}"{lz}></div>')
-    for extra in g[3:]:
-        gal.append(f'      <img data-reveal src="{p}{extra}" alt="{esc(c["name"])}"{lz}>')
+    nome, tag = esc(c['name']), esc(c['tag_pt'])
+
+    def uma(arq, i):
+        return (f'      <img data-reveal src="{p}{arq}" '
+                f'alt="{nome}, {tag} ({i} de {len(g)})"{lz}>')
+
+    def duas(a, b, i):
+        return ('      <div class="pc-two">'
+                f'<img data-reveal src="{p}{a}" alt="{nome}, {tag} ({i} de {len(g)})"{lz}>'
+                f'<img data-reveal src="{p}{b}" alt="{nome}, {tag} ({i+1} de {len(g)})"{lz}>'
+                '</div>')
+
+    # Ritmo de 5: uma imagem cheia, depois dois pares lado a lado, e repete.
+    # Com 20 a 50 imagens por case, empilhar tudo em largura cheia daria uma
+    # pagina interminavel; o par quebra o ritmo e encurta a rolagem.
+    gal, i = [], 0
+    while i < len(g):
+        gal.append(uma(g[i], i + 1)); i += 1
+        for _ in range(2):
+            if i + 1 < len(g):
+                gal.append(duas(g[i], g[i + 1], i + 1)); i += 2
+            elif i < len(g):
+                gal.append(uma(g[i], i + 1)); i += 1
 
     scope = '\n'.join(
       f'        <div data-reveal><b><span data-pt>{a}</span><span data-en>{b}</span></b>'

@@ -16,13 +16,34 @@ case é atribuída à **Slowexe como conceito da marca**, não a um cliente.
 
 | # | Slug | Nome | Categoria | Imagens |
 |---|---|---|---|---|
-| 1 | `sabores` | Sabores de Curitiba | Gastronomia · Identidade Visual | 6 |
-| 2 | `duo` | Duo Garage | Automotivo · Identidade Visual | 6 |
-| 3 | `fense` | Fense Seguradora | Seguros · Identidade Visual | 6 |
-| 4 | `golden-vibes` | Golden Vibes | Semijoias · Branding | 6 |
-| 5 | `bioerde` | Bioerde | Agronegócio · Branding | 6 |
-| 6 | `riverside` | Riverside | Outdoor · Identidade Visual | 6 |
-| 7 | `thalles` | Thalles Consultoria | Consultoria · Identidade Visual | 6 |
+| 1 | `sabores` | Sabores de Curitiba | Gastronomia · Identidade Visual | 43 |
+| 2 | `duo` | Duo Garage | Automotivo · Identidade Visual | 38 |
+| 3 | `fense` | Fense Seguradora | Seguros · Identidade Visual | 37 |
+| 4 | `golden-vibes` | Golden Vibes | Semijoias · Branding | 48 |
+| 5 | `bioerde` | Bioerde | Agronegócio · Branding | 22 |
+| 6 | `riverside` | Riverside | Outdoor · Identidade Visual | 24 |
+| 7 | `thalles` | Thalles Consultoria | Consultoria · Identidade Visual | 34 |
+
+**246 imagens no total, 10,5 MB.** A primeira de cada case (`<slug>-01.webp`)
+é a capa: aparece na grid de `projetos.html` e no baralho do hero da home.
+O resto vira galeria, no ritmo de 5 (uma cheia, dois pares lado a lado).
+
+## Importando as imagens de origem
+
+```bash
+python tools/import-cases.py --dry-run    # mostra o que faria
+python tools/import-cases.py              # importa
+```
+
+As pastas de origem são os downloads do Behance em `~/Downloads/Projeto <Nome> _ Hascunho`.
+O script cuida do trabalho sujo: a mesma arte vem repetida em várias resoluções,
+então ele agrupa por **hash perceptual**, fica só com a maior versão de cada uma,
+descarta o que for estreito demais pra ser arte de projeto (< 700px), respeita a
+ordem original da página e converte pra WebP (máx. 1600px, qualidade 82).
+De 355 arquivos de origem sobraram 246 imagens únicas.
+
+Ele também tenta **preservar a capa atual**: se a `<slug>-01.webp` que já estava
+no site aparecer na origem, ela continua sendo a primeira.
 
 A ordem do `CASES` define a ordem da grid em `projetos.html` **e** a navegação
 anterior/próximo entre os cases.
