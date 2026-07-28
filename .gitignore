@@ -1,2 +1,29 @@
+# SO
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Python (scripts de build)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Node (caso entre depois)
+node_modules/
+
+# Ambiente / segredos
+.env
+.env.*
+!.env.example
+
+# Temporários
+*.log
+*.tmp
+*.bak
