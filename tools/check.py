@@ -131,6 +131,28 @@ def checa_duplicatas(nome, html):
             erro(nome, '%s aparece %d vezes' % (tag, n))
 
 
+# UTF-8 lido como cp1252 e regravado como UTF-8 vira isto. Ja aconteceu:
+# o index.html inteiro foi ao ar com "ServiÃ§os" e "PrÃ³xima GeraÃ§Ã£o".
+# Causa tipica: `Get-Content -Raw` no PowerShell, que sem BOM assume a
+# codepage ANSI do Windows. Editar HTML so com ferramenta que fixa utf-8.
+MOJIBAKE = ['Ã©', 'Ã§', 'Ã£', 'Ã¡', 'Ãµ', 'Ãº', 'Ã³', 'Ã­', 'Ãª', 'Ã¢', 'Ã´',
+            'Ã‡', 'Ã•', 'Ãƒ', 'Â ', 'Â·', 'Â«', 'Â»']
+
+
+def checa_encoding(nome, html):
+    achados = {}
+    for m in MOJIBAKE:
+        n = html.count(m)
+        if n:
+            achados[m] = n
+    if achados:
+        amostra = ', '.join('%s x%d' % (k, v) for k, v in sorted(achados.items())[:4])
+        erro(nome, 'texto com acento corrompido (UTF-8 duplo): %s' % amostra)
+
+    if '<meta charset="UTF-8"' not in html and '<meta charset="utf-8"' not in html:
+        erro(nome, 'sem <meta charset="UTF-8">')
+
+
 def checa_placeholders(nome, html):
     """Conteudo de rascunho que nao deveria ir pro ar."""
     for servico in ('picsum.photos', 'i.pravatar.cc', 'placehold.co', 'via.placeholder.com'):
@@ -175,6 +197,7 @@ def main():
 
     for nome in nomes:
         html = io.open(os.path.join(BASE, nome), encoding='utf-8').read()
+        checa_encoding(nome, html)
         checa_links_e_assets(nome, html)
         checa_bilingue(nome, html)
         checa_seo(nome, html)
