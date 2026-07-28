@@ -206,9 +206,25 @@ Base `.btn`: `inline-flex; gap:9px; font-weight:600; font-size:14.5px; border-ra
 - Erro: `border-color:#e26b54`. Label: 13.5–14.5px, 600. Obrigatório `*` salmão.
 - **Select customizado** (não nativo, pra garantir clique) ou dropdown próprio com seta chevron.
 
-### 8.5 Header / nav
-- Fixo, 80px → 64px ao rolar (`.scrolled`: bg `rgba(10,11,13,.72)` + `blur(16px)` + borda inferior). Esconde ao descer, reaparece ao subir (`.hide`).
-- Links: `padding:9px 14px; radius:10px; color:#D7D9DE`; hover bg `rgba(255,255,255,.05)`.
+### 8.5 Header / nav — **vidro claro**
+- Fixo, 80px → 64px ao rolar. Esconde ao descer, reaparece ao subir (`.hide`).
+- **Fundo:** `rgba(255,255,255,.82)` + `backdrop-filter:blur(20px) saturate(150%)`,
+  borda inferior `rgba(10,11,13,.07)`. Ao rolar sobe pra `.9` e `blur(24px)`.
+- **Texto sempre escuro:** logo `#0A0B0D`, links `#3a3f47`, ícones `#3a3f47`.
+  O CTA do header é **salmão** (branco sobre vidro claro sumiria).
+- Gerado por `tools/build-header.py`, igual nas 20 páginas.
+
+> **Por que vidro e não branco sólido:** o header é fixo e passa por cima de
+> coisas muito diferentes — hero branco na home, seções escuras no meio das
+> páginas e o vídeo no topo de `servico-branding.html`. O vidro claro resolve
+> os três com a **mesma** cor de texto, sem tema de header por página.
+> Contraste medido: 10,6:1 sobre branco e 7,1:1 sobre `#0A0B0D`.
+>
+> ⚠️ As páginas internas têm `.ct-page header{background:...}` com
+> especificidade (0,2,0). O bloco do vidro repete esse seletor pra empatar e
+> vence por vir depois. Sem isso o fundo fica escuro com texto escuro.
+
+- Links: `padding:9px 14px; radius:10px`; hover bg `rgba(10,11,13,.06)`.
 - **Mega-menu:** painel branco, radius 20, `box-shadow 0 36px 90px rgba(0,0,0,.4)`, abre com `opacity` + `translateY` (.25–.34s). Itens com ícone salmão + chevron que entra no hover.
 - **Lang toggle:** pill com 2 botões; ativo = bg salmão.
 - **Bell + promo:** ícone com `.dot` salmão pulsante; painel `.notif-panel` escuro com card promo em gradiente salmão + shine animado.
