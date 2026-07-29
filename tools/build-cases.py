@@ -281,10 +281,12 @@ f'''        <a class="pg-card" href="projeto-{c['slug']}.html" data-cat="brandin
         carga = ('loading="eager" fetchpriority="high" decoding="async"' if k == 0
                  else 'loading="eager" decoding="async"' if k < 3
                  else 'loading="lazy" decoding="async"')
+        # sem link: o baralho e vitrine, nao navegacao. Quem quer ver os cases
+        # usa o botao "Ver Projetos" logo abaixo.
         baralho.append(
-f'''        <a class="deck-card" href="projeto-{c['slug']}.html" aria-label="{esc(c['name'])}, {esc(c['tag_pt'])}">
+f'''        <div class="deck-card">
           <img src="assets/cases/{cover}" alt="{esc(c['name'])}, {esc(c['tag_pt'])}" {carga}>
-        </a>''')
+        </div>''')
     novo = '\n'.join(baralho)
     h2, n = re.subn(r'(<div class="deck" id="deckTrack">\n)(.*?)(^ *</div>)',
                     lambda m: m.group(1) + novo + '\n' + m.group(3),
