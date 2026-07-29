@@ -1106,6 +1106,9 @@
     display:flex;flex-direction:column;justify-content:flex-end;gap:14px;padding:clamp(28px,5vw,64px);color:#fff}
   .art-cover-type::after{content:"";position:absolute;inset:0;
     background:radial-gradient(120% 90% at 85% 10%,rgba(255,255,255.16),transparent 60%);pointer-events:none}
+  /* na capa com foto o brilho radial some: ja existe o degrade escuro que
+     garante o contraste do titulo sobre a imagem */
+  .art-cover-foto::after{display:none}
   .act-cat{position:relative;z-index:1;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.82}
   .act-title{position:relative;z-index:1;font-family:"Bricolage Grotesque";font-weight:800;
     font-size:clamp(26px,4.4vw,60px);line-height:1.05;letter-spacing:-.025em;max-width:20ch}
@@ -1222,10 +1225,10 @@
       <span class="art-date">6 <span data-pt>jul</span><span data-en>jul</span> 2026 · <span data-pt>3 min de leitura</span><span data-en>3 min read</span></span>
       <h1 class="art-h1"><span data-pt>Do algoritmo à IA: como as marcas são encontradas em 2026</span><span data-en>From algorithm to AI: how brands get found in 2026</span></h1>
     </div></section>
-    <div class="art-cover"><div class="wrap" style="padding:0"><div class="art-cover-type" data-reveal style="background:linear-gradient(135deg,#15171B 0%,#E2674F 100%)"><span class="act-cat"><span data-pt>Estratégia</span><span data-en>Strategy</span></span><span class="act-title"><span data-pt>Do algoritmo à IA: como as marcas são encontradas em 2026</span><span data-en>From algorithm to AI: how brands get found in 2026</span></span></div></div></div>
+    <div class="art-cover"><div class="wrap" style="padding:0"><div class="art-cover-type art-cover-foto" data-reveal style="background-image:linear-gradient(180deg,rgba(10,11,13,.25),rgba(10,11,13,.85)),url(assets/blog/algoritmos-ia-marcas.webp);background-size:cover;background-position:center"><span class="act-cat"><span data-pt>Estratégia</span><span data-en>Strategy</span></span><span class="act-title"><span data-pt>Do algoritmo à IA: como as marcas são encontradas em 2026</span><span data-en>From algorithm to AI: how brands get found in 2026</span></span></div></div></div>
 
     <div class="art-author" data-reveal>
-      <img src="https://i.pravatar.cc/96?img=15" alt="" loading="lazy" decoding="async">
+      <img src="assets/avatars/p1.webp" alt="" loading="lazy" decoding="async">
       <div class="aa-meta"><b>Eduardo Araujo</b><span><span data-pt>Fundador · Slowexe</span><span data-en>Founder · Slowexe</span></span></div>
       <div class="art-follow">
         <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21h-4z"/></svg></a>
@@ -1264,12 +1267,12 @@
       </div>
       <div class="art-rel-grid">
         <a class="bpost" href="blog-rebranding-2026.html" data-reveal>
-          <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="background:linear-gradient(135deg,#0A0B0D 0%,#F07A65 100%)"><b class="bf-cat"><span data-pt>Branding</span><span data-en>Branding</span></b></span><span class="bpost-face back" style="background:linear-gradient(135deg,#F07A65 0%,#0A0B0D 100%)"><b class="bf-cat"><span data-pt>Branding</span><span data-en>Branding</span></b></span></div></div>
+          <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/rebranding-2026.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Branding</span><span data-en>Branding</span></b></span><span class="bpost-face back" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/rebranding-2026.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Branding</span><span data-en>Branding</span></b></span></div></div>
           <div class="bpost-row"><span class="bpost-date">20 <span data-pt>jul</span><span data-en>jul</span> 2026</span><span class="bpost-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div>
           <h3 class="bpost-title"><span data-pt>Rebranding em 2026: quando sua marca precisa mudar de verdade</span><span data-en>Rebranding in 2026: when your brand actually needs to change</span></h3>
         </a>
         <a class="bpost" href="blog-la28-superbloom.html" data-reveal>
-          <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="background:linear-gradient(135deg,#0A0B0D 0%,#F07A65 100%)"><b class="bf-cat"><span data-pt>Design</span><span data-en>Design</span></b></span><span class="bpost-face back" style="background:linear-gradient(135deg,#F07A65 0%,#0A0B0D 100%)"><b class="bf-cat"><span data-pt>Design</span><span data-en>Design</span></b></span></div></div>
+          <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/la28-superbloom.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Design</span><span data-en>Design</span></b></span><span class="bpost-face back" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/la28-superbloom.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Design</span><span data-en>Design</span></b></span></div></div>
           <div class="bpost-row"><span class="bpost-date">15 <span data-pt>jun</span><span data-en>jun</span> 2026</span><span class="bpost-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div>
           <h3 class="bpost-title"><span data-pt>LA28: o Superbloom e a identidade que muda de forma</span><span data-en>LA28: the Superbloom and an identity that changes shape</span></h3>
         </a>

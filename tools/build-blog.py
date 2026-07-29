@@ -219,19 +219,44 @@ def corpo(p):
             out.append('      <ol data-reveal>\n%s\n      </ol>' % lis)
     return '\n'.join(out)
 
+def foto_capa(slug):
+    """Foto de capa do post, se existir em assets/blog/<slug>.webp."""
+    rel = 'assets/blog/%s.webp' % slug
+    return rel if os.path.exists(os.path.join(BASE, rel.replace('/', os.sep))) else None
+
+
 def capa(p):
+    """Capa do post.
+
+    Com foto: a foto entra de fundo, com um degrade escuro por cima pra
+    garantir o contraste do titulo (a mesma solucao do card de projeto).
+    Sem foto: cai no gradiente tipografico de antes, que nao depende de
+    arquivo nenhum.
+    """
     a, b = CAPAS[p['slug']]
+    foto = foto_capa(p['slug'])
+    if foto:
+        fundo = ('background-image:linear-gradient(180deg,rgba(10,11,13,.25),rgba(10,11,13,.85)),'
+                 'url(%s);background-size:cover;background-position:center' % foto)
+        classe = 'art-cover-type art-cover-foto'
+    else:
+        fundo = 'background:linear-gradient(135deg,%s 0%%,%s 100%%)' % (a, b)
+        classe = 'art-cover-type'
     return (
 '<div class="art-cover"><div class="wrap" style="padding:0">'
-'<div class="art-cover-type" data-reveal style="background:linear-gradient(135deg,%s 0%%,%s 100%%)">'
+'<div class="%s" data-reveal style="%s">'
 '<span class="act-cat">%s</span>'
 '<span class="act-title">%s</span>'
-'</div></div></div>' % (a, b, bil(p['cat_pt'], p['cat_en']), bil(p['title_pt'], p['title_en'])))
+'</div></div></div>' % (classe, fundo, bil(p['cat_pt'], p['cat_en']),
+                        bil(p['title_pt'], p['title_en'])))
 
 EXTRA_CSS = '''  .art-cover-type{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;
     display:flex;flex-direction:column;justify-content:flex-end;gap:14px;padding:clamp(28px,5vw,64px);color:#fff}
   .art-cover-type::after{content:"";position:absolute;inset:0;
     background:radial-gradient(120% 90% at 85% 10%,rgba(255,255,255.16),transparent 60%);pointer-events:none}
+  /* na capa com foto o brilho radial some: ja existe o degrade escuro que
+     garante o contraste do titulo sobre a imagem */
+  .art-cover-foto::after{display:none}
   .act-cat{position:relative;z-index:1;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.82}
   .act-title{position:relative;z-index:1;font-family:"Bricolage Grotesque";font-weight:800;
     font-size:clamp(26px,4.4vw,60px);line-height:1.05;letter-spacing:-.025em;max-width:20ch}
@@ -280,14 +305,28 @@ ARROW = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-widt
 # o botao tem DUAS setas: no hover a primeira sai e a segunda entra. Emitir so uma faz a seta sumir.
 GO = '<span class="bpost-go">%s%s</span>' % (ARROW, ARROW)
 
+def face(p, invertido=False):
+    """Uma das duas faces do card do blog.
+
+    Com foto: a foto de fundo e o degrade escuro por cima, pra categoria ficar
+    legivel sobre qualquer imagem. Sem foto: o gradiente de antes.
+    """
+    a, b = CAPAS[p['slug']]
+    foto = foto_capa(p['slug'])
+    if foto:
+        return ('background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),'
+                'url(%s);background-size:cover;background-position:center' % foto)
+    return 'background:linear-gradient(135deg,%s 0%%,%s 100%%)' % ((b, a) if invertido else (a, b))
+
+
 def card(p):
     y, m, d = p['date']
     return ('''        <a class="bpost" href="blog-%s.html" data-reveal>
-          <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="background:linear-gradient(135deg,%s 0%%,%s 100%%)"><b class="bf-cat">%s</b></span><span class="bpost-face back" style="background:linear-gradient(135deg,%s 0%%,%s 100%%)"><b class="bf-cat">%s</b></span></div></div>
+          <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="%s"><b class="bf-cat">%s</b></span><span class="bpost-face back" style="%s"><b class="bf-cat">%s</b></span></div></div>
           <div class="bpost-row"><span class="bpost-date">%d <span data-pt>%s</span><span data-en>%s</span> %d</span>''' + GO + '''</div>
           <h3 class="bpost-title">%s</h3>
-        </a>''') % (p['slug'], CAPAS[p['slug']][0], CAPAS[p['slug']][1], bil(p['cat_pt'], p['cat_en']),
-                   CAPAS[p['slug']][1], CAPAS[p['slug']][0], bil(p['cat_pt'], p['cat_en']),
+        </a>''') % (p['slug'], face(p), bil(p['cat_pt'], p['cat_en']),
+                   face(p, invertido=True), bil(p['cat_pt'], p['cat_en']),
                    d, MESES[m-1], MONTHS[m-1], y, bil(p['title_pt'], p['title_en']))
 
 CARD_CSS = '''  .bpost-face{display:grid;place-items:center}

@@ -61,23 +61,25 @@ autorização de quem assina.
 
 ---
 
-## 4. Imagens de placeholder externo
+## 4. Imagens provisórias (não são mais externas)
 
-66 imagens vêm de `picsum.photos` e 6 de `i.pravatar.cc`, serviços de foto
-aleatória:
+Nenhuma imagem vem mais de fora: os 71 placeholders de `picsum.photos` e
+`i.pravatar.cc` viraram arquivo local. O que continua provisório:
 
-| Página | picsum | pravatar |
-|---|---|---|
-| `servicos.html` | 32 | 0 |
-| `index.html` | 17 | 3 |
-| `contato.html` | 6 | 0 |
-| `projeto.html` (template) | 7 | 1 |
-| `blog-post.html` (template) | 4 | 1 |
+**Serviços de produto e web.** `servicos.html` oferece 8 frentes, mas só
+Branding e Rebranding têm case publicado. As outras 6 (UI/UX, App, Auditoria,
+Web Design, Landing Pages, Web Redesign) estão ilustradas com **peça de
+branding**, como provisório, até o Eduardo compilar os cases dessas frentes.
+Mapeamento em `SERVICOS`, no `tools/build-imagens.py`.
 
-Dois problemas: se o serviço cair ou for bloqueado, o site perde as imagens; e
-são fotos genéricas sem relação com o trabalho da Slowexe, num site de portfólio.
+**Avatares.** São retratos **gerados**, de pessoas que não existem. Foi
+decisão consciente: enquanto os depoimentos do item 3 forem de preenchimento,
+colar o rosto de uma pessoa real numa citação inventada seria pior que o
+placeholder. Trocar por fotos reais junto com os depoimentos reais.
 
-`tools/check.py` avisa sempre que encontrar.
+**Avatar do autor no blog.** Está com um retrato genérico, mas o nome ao lado
+é **Eduardo Araujo**, pessoa real. Aqui a foto certa é a dele. Substituir
+`assets/avatars/p1.webp` pela foto real resolve as 5 páginas de uma vez.
 
 ---
 

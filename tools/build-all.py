@@ -25,6 +25,7 @@ PASSOS = [
     ('build-cases.py',   'paginas de case'),
     ('build-blog.py',    'posts do blog'),
     ('build-header.py',  'header de vidro'),
+    ('build-imagens.py', 'imagens locais no lugar de placeholder'),
     ('build-meta.py',    'SEO e icones'),
     ('build-sitemap.py', 'sitemap e robots'),
 ]
