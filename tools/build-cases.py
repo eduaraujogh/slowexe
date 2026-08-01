@@ -288,9 +288,16 @@ f'''        <div class="deck-card">
           <img src="assets/cases/{cover}" alt="{esc(c['name'])}, {esc(c['tag_pt'])}" {carga}>
         </div>''')
     novo = '\n'.join(baralho)
-    h2, n = re.subn(r'(<div class="deck" id="deckTrack">\n)(.*?)(^ *</div>)',
-                    lambda m: m.group(1) + novo + '\n' + m.group(3),
-                    h, count=1, flags=re.S | re.M)
+    # O </div> de fecho tem que ser o do PROPRIO baralho, casado pela mesma
+    # indentacao da abertura. Com "^ *</div>" generico o casamento parava no
+    # primeiro card (que tambem fecha com </div>) e os cards se acumulavam a
+    # cada build: o index chegou a ter 29 no lugar de 5.
+    h2, n = re.subn(
+        r'(?P<ini>^(?P<ind>[ \t]*)<div class="deck" id="deckTrack">\n)'
+        r'(?P<meio>.*?)'
+        r'(?P<fim>^(?P=ind)</div>)',
+        lambda m: m.group('ini') + novo + '\n' + m.group('fim'),
+        h, count=1, flags=re.S | re.M)
     if not n:
         print('AVISO: baralho do hero nao encontrado em index.html')
     else:

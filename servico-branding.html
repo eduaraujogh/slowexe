@@ -143,7 +143,6 @@
   .promo-cta{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px;
     background:#fff;color:#0A0B0D;font-weight:600;font-size:14px;padding:11px 18px;border-radius:8px;text-decoration:none}
   .promo-cta .arr{width:16px;height:16px;transition:transform .3s ease}
-  .promo-cta:hover .arr{transform:translate(4px,-4px)}
   .promo-shine{position:absolute;top:0;left:-60%;width:45%;height:100%;pointer-events:none;
     background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);
     animation:promoshine 3.6s ease-in-out infinite}
@@ -167,7 +166,6 @@
   a:hover .roll .ltr .a,.btn:hover .roll .ltr .a{transform:translateY(-106%)}
   a:hover .roll .ltr .b,.btn:hover .roll .ltr .b{transform:translateY(0)}
   .btn .arr,.btn .play{transition:transform .35s ease}
-  .btn:hover .arr{transform:translate(4px,-4px)}
 
   .btn-contact{background:#fff;color:var(--text-on-light);padding:11px 20px}
   .btn-contact:hover{background:var(--primary);color:#fff}
@@ -336,7 +334,6 @@
   .scard-link{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;
     text-decoration:underline;text-underline-offset:4px;color:#0A0B0D}
   .scard-link svg{width:16px;height:16px;transition:transform .3s ease}
-  .scard-link:hover svg{transform:translate(4px,-4px)}
   .works2-cta{display:flex;justify-content:center;margin-top:80px}
   @media(max-width:760px){
     .scard{top:78px}
@@ -623,7 +620,6 @@
   .contact .ct-btn{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:#F07A65;color:#fff;font-weight:600;font-size:15px;padding:15px 28px;border-radius:999px;transition:background .25s,transform .25s,box-shadow .25s;text-transform:uppercase;letter-spacing:.03em;border:none;cursor:pointer}
   .contact .ct-btn:hover{background:#E2674F;transform:translateY(-2px);box-shadow:0 14px 30px rgba(240,122,101,.35)}
   .contact .ct-btn svg{width:16px;height:16px;transition:transform .25s}
-  .contact .ct-btn:hover svg{transform:translate(4px,-4px)}
   .contact .row-actions{display:flex;align-items:center;gap:18px}
   .contact .lnk-back{font-size:14px;font-weight:600;color:#6b7078;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:color .2s}
   .contact .lnk-back:hover{color:#F07A65}
@@ -1096,6 +1092,29 @@
     header,header.scrolled,.ct-page header{background:rgba(10,11,13,.86)}
   }
 </style>
+<style id="arrow-slide">
+  /* ============ SETA DOS BOTOES ============ */
+  /* Desliza no eixo X dentro do proprio container, nunca na diagonal.
+     A primeira seta esta no fluxo e da o tamanho; a segunda fica absoluta
+     por cima, esperando fora do recorte. */
+  .arr-wrap{
+    position:relative;display:inline-flex;flex:0 0 auto;
+    overflow:hidden;vertical-align:middle;
+  }
+  .arr-wrap>svg{transition:transform .5s cubic-bezier(.7,0,.2,1)}
+  .arr-wrap>svg:nth-child(2){position:absolute;left:0;top:0;transform:translateX(-165%)}
+  a:hover .arr-wrap>svg:nth-child(1),
+  button:hover .arr-wrap>svg:nth-child(1){transform:translateX(165%)}
+  a:hover .arr-wrap>svg:nth-child(2),
+  button:hover .arr-wrap>svg:nth-child(2){transform:translateX(0)}
+  a:focus-visible .arr-wrap>svg:nth-child(1),
+  button:focus-visible .arr-wrap>svg:nth-child(1){transform:translateX(165%)}
+  a:focus-visible .arr-wrap>svg:nth-child(2),
+  button:focus-visible .arr-wrap>svg:nth-child(2){transform:translateX(0)}
+  @media(prefers-reduced-motion:reduce){
+    .arr-wrap>svg{transition:none}
+  }
+</style>
 </head>
 <body class="lang-pt ct-page">
 
@@ -1149,7 +1168,7 @@
               <p class="promo-sub"><span data-pt>Por tempo limitado, as vagas deste mês estão acabando.</span><span data-en>Limited time, this month's spots are almost gone.</span></p>
               <a href="contato.html" class="promo-cta">
                 <span class="roll" data-pt>Quero meu desconto</span><span class="roll" data-en>Claim my discount</span>
-                <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                <span class="arr-wrap"><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
               </a>
             </div>
           </div>
@@ -1189,7 +1208,7 @@
       </div>
       <a href="contato.html" class="mnav-cta">
         <span data-pt>Fale Conosco</span><span data-en>Contact Now</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </div>
   </aside>
@@ -1487,7 +1506,7 @@
         '<div class="scard-foot">'+
           '<div class="scard-meta"><h3 class="scard-name">'+p.name+'</h3><span class="scard-date">'+p.date+'</span></div>'+
           '<span class="scard-link"><span class="lk"></span>'+
-            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'+
+            '<span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>'+
           '</span>'+
         '</div>';
       stack.appendChild(a);

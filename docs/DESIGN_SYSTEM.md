@@ -168,7 +168,21 @@ Base `.btn`: `inline-flex; gap:9px; font-weight:600; font-size:14.5px; border-ra
 | `.btn-cta-light` (sobre claro) | bg salmão, branco | **bg preto**, branco |
 
 - **Roll de texto (Halo):** texto em `.roll` é dividido por letra em duas cópias (`.a`/`.b`) que sobem no hover, com `transition-delay:calc(var(--i)*16ms)`. Usar em CTAs e links de nav/footer.
-- **Seta `.arr`:** no hover desliza `translate(4px,-4px)`.
+- **Seta:** desliza **só na horizontal**, dentro do próprio container.
+
+  Toda seta de botão fica dentro de um `<span class="arr-wrap">` com
+  `overflow:hidden`, contendo **duas cópias** do mesmo SVG. A primeira está no
+  fluxo e define o tamanho da caixa; a segunda fica absoluta por cima, parada
+  em `translateX(-165%)`. No hover a primeira sai por `+165%` e a segunda
+  volta a `0`. Easing `cubic-bezier(.7,0,.2,1)`, `.5s`.
+
+  Gerado por `tools/build-setas.py`, igual nas 20 páginas (113 setas).
+
+  > ⚠️ Não usar `translate(4px,-4px)`. A seta na diagonal escapa do botão e
+  > fica desalinhada com o texto. O movimento é **um só eixo**.
+
+  O texto e a seta são efeitos **independentes**: o texto rola na vertical
+  (`.roll`), a seta desliza na horizontal. Um não substitui o outro.
 
 ### 8.2 Cards — ⭐ HOVER PADRÃO DO SITE
 > **Toda vez que tiver card, é este hover.** (Extraído de `.sol-card`.)
