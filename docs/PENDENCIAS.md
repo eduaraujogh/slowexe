@@ -83,24 +83,41 @@ placeholder. Trocar por fotos reais junto com os depoimentos reais.
 
 ---
 
-## 5. Sem política de privacidade
+## 5. Política de privacidade — **precisa de revisão sua**
 
-O link no formulário (`contato.html`) aponta pra `href="#"`. Enquanto o
-formulário não envia nada, nenhum dado pessoal é tratado e não há exposição.
+`privacidade.html` já existe, gerada por `tools/build-legal.py`, linkada no
+rodapé das 21 páginas e no consentimento do formulário.
 
-**Vira bloqueio no momento em que o item 1 for resolvido:** a partir daí o site
-coleta nome, e-mail, telefone e mensagem, e a LGPD exige a política. Resolver
-os dois juntos.
+O texto descreve o que o site **faz hoje**, conferido no código: nenhum cookie,
+nenhum analytics, nenhum pixel; único armazenamento local é a preferência de
+idioma; único terceiro que recebe IP do visitante é o Google Fonts.
+
+**Duas coisas antes de considerar fechada:**
+
+1. **Revisão de quem entende.** Foi escrita por IA com base no que é praxe em
+   estúdio de design. Não substitui leitura de advogado.
+2. **A seção 6 fica desatualizada assim que o item 1 for resolvido.** No dia em
+   que o formulário passar a enviar, o serviço escolhido (Formspree, Web3Forms
+   ou outro) tem que ser **nomeado** ali, porque passa a receber dado pessoal.
+   O texto do próprio arquivo avisa isso em comentário.
+
+Editar em `BLOCOS`, no `tools/build-legal.py`, nunca no HTML gerado. Ao mudar o
+texto, atualizar `ATUALIZADO_PT` / `ATUALIZADO_EN` na mesma tela.
 
 ---
 
-## 6. Links sem destino
+## 6. ~~Links sem destino~~ — resolvido
 
-Restaram 2 por página, no rodapé: **LinkedIn** e **X**. Não foram corrigidos
-porque não se sabe as URLs. Instagram e Behance já apontam pros perfis reais.
+Zero `href="#"` no site. O que foi feito:
 
-Em `contato.html` há mais alguns, incluindo o link de FAQ (não existe página
-de FAQ) e a política de privacidade (item 5).
+- **Política de Privacidade** → `privacidade.html`, no rodapé de todas as páginas
+- **LinkedIn e X** → 47 ícones removidos. A Slowexe ainda não tem esses perfis;
+  quando tiver, é reinserir. Instagram e Behance seguem apontando pros reais
+- **Termos e FAQ** → removidos. Páginas que não existem e não estão planejadas.
+  A frase de consentimento agora cita só a política, que existe de verdade
+- **"Google Meet"** virou rótulo (`<span>`), que é o que sempre foi
+- **Botão do Google Calendar** perdeu o `href="#"`; o endereço é escrito por JS
+  no momento do clique, então antes disso ele não deve ser clicável
 
 **Como resolver:** informar as URLs, ou remover os ícones das redes que não
 existem.

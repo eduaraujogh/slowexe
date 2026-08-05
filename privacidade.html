@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Blog | Slowexe</title>
+<title>Politica de Privacidade | Slowexe</title>
+<meta name="description" content="Como a Slowexe trata os dados de quem visita o site: o que coletamos, por que, com quem compartilhamos e como exercer seus direitos pela LGPD." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -926,6 +927,39 @@
   @media(max-width:900px){.blog-grid{grid-template-columns:1fr 1fr;gap:44px 24px}}
   @media(max-width:600px){.blog-grid{grid-template-columns:1fr}.blog-hero{padding:120px 0 0}}
 
+  /* ===== blog article (post) ===== */
+  .art-hero{padding:140px 0 0;text-align:center}
+  .art-date{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9aa0a8}
+  .art-h1{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(36px,5.4vw,72px);letter-spacing:-.03em;line-height:1.02;margin:16px auto 0;max-width:20ch;color:#0A0B0D}
+  .art-cover{margin-top:48px}
+  .art-cover img{width:100%;border-radius:22px;display:block;aspect-ratio:16/9;object-fit:cover;background:#eee}
+  .art-author{display:flex;align-items:center;gap:18px;max-width:760px;margin:36px auto 0;padding:24px 24px;border-top:1px solid #ece9e4;border-bottom:1px solid #ece9e4}
+  .art-author>img{width:54px;height:54px;border-radius:50%;object-fit:cover;background:#eee;flex:0 0 auto}
+  .art-author .aa-meta{flex:1;text-align:left}
+  .art-author b{display:block;font-size:16px;color:#0A0B0D}
+  .art-author span{font-size:13.5px;color:#6b7078}
+  .art-follow{display:flex;align-items:center;gap:10px}
+  .art-follow a{width:38px;height:38px;border-radius:10px;border:1px solid #e6e2dc;display:grid;place-items:center;color:#0A0B0D;transition:background .25s,color .25s,border-color .25s,transform .25s}
+  .art-follow a:hover{background:var(--primary);border-color:var(--primary);color:#fff;transform:translateY(-2px)}
+  .art-follow svg{width:17px;height:17px}
+  .art-body{max-width:760px;margin:0 auto;padding:54px 24px 20px}
+  .art-lead{font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(22px,2.6vw,30px);line-height:1.34;letter-spacing:-.015em;color:#0A0B0D;margin:0 0 30px}
+  .art-body h3{font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(22px,2.4vw,28px);letter-spacing:-.01em;color:#0A0B0D;margin:44px 0 14px}
+  .art-body p{color:#444a52;font-size:17.5px;line-height:1.72;margin:0 0 20px}
+  .art-body>img{width:100%;border-radius:16px;display:block;margin:34px 0;aspect-ratio:16/9;object-fit:cover;background:#eee}
+  .art-quote{margin:42px 0;padding:6px 0 6px 30px;border-left:3px solid var(--primary)}
+  .art-quote p{font-family:"Bricolage Grotesque";font-weight:600;font-size:clamp(20px,2.3vw,26px);line-height:1.42;letter-spacing:-.01em;color:#0A0B0D;margin:0}
+  .art-body ol{margin:6px 0 24px;padding:0;counter-reset:ai;list-style:none}
+  .art-body ol li{position:relative;padding:15px 0 15px 52px;border-top:1px solid #ece9e4;color:#2c3138;font-size:16.5px;line-height:1.55}
+  .art-body ol li:last-child{border-bottom:1px solid #ece9e4}
+  .art-body ol li::before{counter-increment:ai;content:counter(ai,decimal-leading-zero);position:absolute;left:0;top:15px;font-family:"Bricolage Grotesque";font-weight:700;font-size:15px;color:var(--primary)}
+  .art-related{padding:84px 0 116px;border-top:1px solid #ece9e4}
+  .art-rel-head{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:40px;text-align:center}
+  .art-rel-eyebrow{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--primary)}
+  .art-rel-title{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(28px,3.4vw,44px);letter-spacing:-.02em;color:#0A0B0D;margin:0;max-width:18ch}
+  .art-rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  @media(max-width:760px){.art-rel-grid{grid-template-columns:1fr}.art-h1{font-size:clamp(32px,8vw,44px)}}
+
 </style>
 <style id="mnav-css">
   /* ============ MENU MOBILE (drawer) ============ */
@@ -1006,33 +1040,11 @@
     .mnav,.mnav-backdrop{transition:none}
   }
 </style>
-<style id="blog-card-css">
-  .bpost-face{display:grid;place-items:center}
-  .bf-cat{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(15px,1.6vw,20px);
-    letter-spacing:.02em;color:#fff;opacity:.95}
-</style>
 <link rel="icon" href="favicon.ico" sizes="any" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
 <link rel="manifest" href="site.webmanifest" />
 <meta name="theme-color" content="#0A0B0D" />
-<meta name="description" content="Artigos sobre branding, identidade visual, rebranding e estrategia de marca, escritos pelo estudio Slowexe." />
-<link rel="canonical" href="https://eduaraujogh.github.io/slowexe/blog.html" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Slowexe" />
-<meta property="og:locale" content="pt_BR" />
-<meta property="og:locale:alternate" content="en_US" />
-<meta property="og:title" content="Blog" />
-<meta property="og:description" content="Artigos sobre branding, identidade visual, rebranding e estrategia de marca, escritos pelo estudio Slowexe." />
-<meta property="og:url" content="https://eduaraujogh.github.io/slowexe/blog.html" />
-<meta property="og:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Slowexe" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Blog" />
-<meta name="twitter:description" content="Artigos sobre branding, identidade visual, rebranding e estrategia de marca, escritos pelo estudio Slowexe." />
-<meta name="twitter:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
 <style id="header-glass">
   /* ============ HEADER DE VIDRO ============ */
   /* O ".ct-page header" existe porque as paginas internas ja escopavam um
@@ -1096,6 +1108,36 @@
   .foot-priv{color:var(--text-muted);text-decoration:underline;text-underline-offset:3px;transition:color .25s}
   .foot-priv:hover{color:var(--primary)}
 </style>
+<style id="legal-css">
+  .leg-hero{padding:calc(var(--header-h) + 62px) 0 10px;background:#fff}
+  .leg-hero .wrap{max-width:760px}
+  .leg-eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--primary)}
+  .leg-title{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(34px,5.4vw,64px);
+    line-height:1.04;letter-spacing:-.03em;color:#0A0B0D;margin:14px 0 10px}
+  .leg-data{font-size:14.5px;color:#6b7078}
+  .leg-lista{margin:0 0 22px;padding:0;list-style:none}
+  .leg-lista li{position:relative;padding:11px 0 11px 26px;color:#444a52;font-size:16.5px;line-height:1.62;
+    border-bottom:1px solid #ece9e4}
+  .leg-lista li::before{content:"";position:absolute;left:4px;top:21px;width:6px;height:6px;
+    border-radius:999px;background:var(--primary)}
+  .art-body a{color:var(--primary);text-decoration:underline;text-underline-offset:3px}
+</style>
+<link rel="canonical" href="https://eduaraujogh.github.io/slowexe/privacidade.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Slowexe" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:title" content="Politica de Privacidade" />
+<meta property="og:description" content="Como a Slowexe trata os dados de quem visita o site: o que coletamos, por que, com quem compartilhamos e como exercer seus direitos pela LGPD." />
+<meta property="og:url" content="https://eduaraujogh.github.io/slowexe/privacidade.html" />
+<meta property="og:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Slowexe" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Politica de Privacidade" />
+<meta name="twitter:description" content="Como a Slowexe trata os dados de quem visita o site: o que coletamos, por que, com quem compartilhamos e como exercer seus direitos pela LGPD." />
+<meta name="twitter:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
 </head>
 <body class="lang-pt ct-page">
 
@@ -1195,63 +1237,57 @@
   </aside>
 
   <main class="projx">
-    <section class="blog-hero"><div class="wrap">
-      <span class="blog-eyebrow" data-reveal>Blog</span>
-      <h1 class="blog-title" data-reveal><span data-pt>Ideias que guiam decisões melhores</span><span data-en>Ideas that drive better decisions</span></h1>
-      <p class="blog-lead" data-reveal><span data-pt>Insights sobre design, branding e tecnologia para dar mais clareza, reduzir risco e fortalecer resultados.</span><span data-en>Insights on design, branding and technology to bring clarity, reduce risk and strengthen outcomes.</span></p>
-      <a class="scroll-badge" href="#blog-list" aria-label="Scroll down" data-reveal>
-        <svg class="sb-ring" viewBox="0 0 150 150"><defs><path id="sbcircle" d="M75,75 m-58,0 a58,58 0 1,1 116,0 a58,58 0 1,1 -116,0"/></defs><text><textPath href="#sbcircle" startOffset="0" textLength="364" lengthAdjust="spacing">SCROLL DOWN · SCROLL DOWN · SCROLL DOWN · </textPath></text></svg>
-        <span class="sb-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
-      </a>
+    <section class="leg-hero"><div class="wrap">
+      <span class="leg-eyebrow"><span data-pt>Legal</span><span data-en>Legal</span></span>
+      <h1 class="leg-title"><span data-pt>Politica de Privacidade</span><span data-en>Privacy Policy</span></h1>
+      <p class="leg-data"><span data-pt>Ultima atualizacao: 28 de julho de 2026</span><span data-en>Last updated: July 28, 2026</span></p>
     </div></section>
-    <section class="blog-list" id="blog-list"><div class="wrap">
-      <div class="blog-grid">
-        <a class="bpost" href="blog-rebranding-2026.html" data-reveal>
-          <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/rebranding-2026.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Branding</span><span data-en>Branding</span></b></span><span class="bpost-face back" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/rebranding-2026.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Branding</span><span data-en>Branding</span></b></span></div></div>
-          <div class="bpost-row"><span class="bpost-date">20 <span data-pt>jul</span><span data-en>jul</span> 2026</span><span class="bpost-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div>
-          <h3 class="bpost-title"><span data-pt>Rebranding em 2026: quando sua marca precisa mudar de verdade</span><span data-en>Rebranding in 2026: when your brand actually needs to change</span></h3>
-        </a>
-        <a class="bpost" href="blog-algoritmos-ia-marcas.html" data-reveal>
-          <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/algoritmos-ia-marcas.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Estratégia</span><span data-en>Strategy</span></b></span><span class="bpost-face back" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/algoritmos-ia-marcas.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Estratégia</span><span data-en>Strategy</span></b></span></div></div>
-          <div class="bpost-row"><span class="bpost-date">6 <span data-pt>jul</span><span data-en>jul</span> 2026</span><span class="bpost-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div>
-          <h3 class="bpost-title"><span data-pt>Do algoritmo à IA: como as marcas são encontradas em 2026</span><span data-en>From algorithm to AI: how brands get found in 2026</span></h3>
-        </a>
-        <a class="bpost" href="blog-la28-superbloom.html" data-reveal>
-          <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/la28-superbloom.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Design</span><span data-en>Design</span></b></span><span class="bpost-face back" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/la28-superbloom.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Design</span><span data-en>Design</span></b></span></div></div>
-          <div class="bpost-row"><span class="bpost-date">15 <span data-pt>jun</span><span data-en>jun</span> 2026</span><span class="bpost-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div>
-          <h3 class="bpost-title"><span data-pt>LA28: o Superbloom e a identidade que muda de forma</span><span data-en>LA28: the Superbloom and an identity that changes shape</span></h3>
-        </a>
-        <a class="bpost" href="blog-nike-why-do-it.html" data-reveal>
-          <div class="bpost-media"><div class="bpost-flip"><span class="bpost-face front" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/nike-why-do-it.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Branding</span><span data-en>Branding</span></b></span><span class="bpost-face back" style="background-image:linear-gradient(180deg,rgba(10,11,13,.3),rgba(10,11,13,.72)),url(assets/blog/nike-why-do-it.webp);background-size:cover;background-position:center"><b class="bf-cat"><span data-pt>Branding</span><span data-en>Branding</span></b></span></div></div>
-          <div class="bpost-row"><span class="bpost-date">28 <span data-pt>mai</span><span data-en>may</span> 2026</span><span class="bpost-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div>
-          <h3 class="bpost-title"><span data-pt>De "Vencer não é pra todo mundo" a "Why Do It?": a virada da Nike</span><span data-en>From "Winning Isn't For Everyone" to "Why Do It?": Nike's turn</span></h3>
-        </a>
-      </div>
-      <!-- paginacao oculta: 4 posts cabem em uma pagina -->
-    </div></section>
-    <section class="cta" id="contact">
-      <div class="wrap cta-inner">
-        <span class="cta-label"><svg viewBox="0 0 24 24"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z"/></svg><span data-pt>Pronto pra começar?</span><span data-en>Ready to start?</span></span>
-        <h2 class="cta-head"><span data-pt>Vamos tirar a sua ideia do papel</span><span data-en>Let's bring your idea to life</span></h2>
-        <a href="contato.html" class="btn btn-primary">
-          <span class="roll" data-pt>Começar um projeto</span><span class="roll" data-en>Start a project</span>
-          <span class="arr-wrap"><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
-      </div>
-      <div class="ribbons">
-        <a href="contato.html" class="ribbon r1"><div class="ribbon-track">
-          <span class="ribbon-item"><span data-pt>Vamos Começar</span><span data-en>Let's Get Started</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z"/></svg></span>
-          <span class="ribbon-item"><span data-pt>Vamos Começar</span><span data-en>Let's Get Started</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z"/></svg></span>
-          <span class="ribbon-item"><span data-pt>Vamos Começar</span><span data-en>Let's Get Started</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z"/></svg></span>
-          <span class="ribbon-item"><span data-pt>Vamos Começar</span><span data-en>Let's Get Started</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z"/></svg></span>
-        </div></a>
-        <a href="contato.html" class="ribbon r2"><div class="ribbon-track">
-          <span class="ribbon-item"><span data-pt>Design • Tecnologia</span><span data-en>Design • Technology</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z"/></svg></span>
-          <span class="ribbon-item"><span data-pt>Design • Tecnologia</span><span data-en>Design • Technology</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z"/></svg></span>
-          <span class="ribbon-item"><span data-pt>Design • Tecnologia</span><span data-en>Design • Technology</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z"/></svg></span>
-          <span class="ribbon-item"><span data-pt>Design • Tecnologia</span><span data-en>Design • Technology</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z"/></svg></span>
-        </div></a>
-      </div>
+
+    <section class="art-body">
+        <p class="art-lead"><span data-pt>Esta pagina explica quais dados a Slowexe coleta neste site, por que coleta e o que voce pode exigir da gente. Escrevemos em portugues claro, sem juridiques desnecessario.</span><span data-en>This page explains what data Slowexe collects on this site, why we collect it, and what you can demand from us. Written in plain language, without unnecessary legalese.</span></p>
+        <h3><span data-pt>1. Quem e o responsavel</span><span data-en>1. Who is responsible</span></h3>
+        <p><span data-pt>A Slowexe e um estudio de branding e design. Somos o controlador dos dados tratados neste site. Para qualquer assunto sobre privacidade, fale com <a href="mailto:ola@slowexe.com">ola@slowexe.com</a>.</span><span data-en>Slowexe is a branding and design studio. We are the controller of the data processed on this site. For anything related to privacy, contact <a href="mailto:ola@slowexe.com">ola@slowexe.com</a>.</span></p>
+        <h3><span data-pt>2. O que este site NAO faz</span><span data-en>2. What this site does NOT do</span></h3>
+        <p><span data-pt>Antes do que coletamos, o que nao coletamos. Este site nao usa cookies, nao tem Google Analytics, nao tem pixel de rede social e nao faz perfilamento nem publicidade direcionada. Nao rastreamos sua navegacao entre paginas.</span><span data-en>Before what we collect, what we do not. This site uses no cookies, has no Google Analytics, no social media pixel, and does no profiling or targeted advertising. We do not track your browsing across pages.</span></p>
+        <h3><span data-pt>3. Dados que voce nos entrega</span><span data-en>3. Data you give us</span></h3>
+        <p><span data-pt>So coletamos o que voce mesmo digita, e apenas quando voce decide enviar:</span><span data-en>We only collect what you type yourself, and only when you choose to send it:</span></p>
+        <ul class="leg-lista">
+          <li><span data-pt><b>Formulario de contato:</b> nome, e-mail, telefone (opcional), descricao do projeto e faixa de orcamento.</span><span data-en><b>Contact form:</b> name, email, phone (optional), project description and budget range.</span></li>
+          <li><span data-pt><b>Agendamento de conversa:</b> nome, e-mail e a observacao que voce escrever.</span><span data-en><b>Scheduling a call:</b> name, email and any note you write.</span></li>
+        </ul>
+        <p><span data-pt>Nao pedimos CPF, endereco, dado bancario nem qualquer dado sensivel. Se voce escrever algo assim no campo de mensagem, sera por sua conta: pedimos que nao faca.</span><span data-en>We never ask for national ID, address, banking details or any sensitive data. If you type something like that into the message field, that is on you: please do not.</span></p>
+        <h3><span data-pt>4. Para que usamos</span><span data-en>4. What we use it for</span></h3>
+        <p><span data-pt>Exclusivamente para responder voce e conduzir a conversa comercial: entender o pedido, montar proposta e dar retorno. Nao vendemos, nao alugamos e nao cedemos seus dados para ninguem. Nao mandamos newsletter sem voce pedir.</span><span data-en>Exclusively to reply to you and run the commercial conversation: understand the request, prepare a proposal and get back to you. We do not sell, rent or hand your data to anyone. We do not send newsletters unless you ask.</span></p>
+        <h3><span data-pt>5. Base legal</span><span data-en>5. Legal basis</span></h3>
+        <p><span data-pt>Tratamos seus dados com base no seu consentimento e nos procedimentos preliminares de contrato, conforme o artigo 7, incisos I e V, da Lei 13.709/2018 (LGPD). Voce entrega os dados por vontade propria, para que a gente responda.</span><span data-en>We process your data based on your consent and on preliminary contractual procedures, under article 7, items I and V, of Brazilian Law 13.709/2018 (LGPD). You provide the data voluntarily so that we can reply.</span></p>
+        <h3><span data-pt>6. Com quem compartilhamos</span><span data-en>6. Who we share with</span></h3>
+        <ul class="leg-lista">
+          <li><span data-pt><b>Hospedagem:</b> o site e servido pelo GitHub Pages, que registra o IP do visitante nos logs de acesso, como qualquer servidor web.</span><span data-en><b>Hosting:</b> the site is served by GitHub Pages, which logs visitor IPs in access logs, like any web server.</span></li>
+          <li><span data-pt><b>Google Fonts:</b> as fontes do site sao carregadas dos servidores do Google, que por isso recebe o seu IP. E o unico terceiro acionado enquanto voce apenas le o site.</span><span data-en><b>Google Fonts:</b> the site fonts load from Google servers, which therefore receive your IP. This is the only third party involved while you are merely reading the site.</span></li>
+        </ul>
+        <p><span data-pt>Alem desses, ninguem. Se um dia usarmos um servico de formulario ou de agendamento, ele sera nomeado aqui antes de entrar no ar.</span><span data-en>Beyond those, no one. If we ever adopt a form or scheduling service, it will be named here before going live.</span></p>
+        <h3><span data-pt>7. Preferencia de idioma</span><span data-en>7. Language preference</span></h3>
+        <p><span data-pt>O site guarda no seu proprio navegador, em armazenamento local, apenas qual idioma voce escolheu (PT ou EN). Nao e cookie, nao sai do seu aparelho, nao identifica voce e some quando voce limpa os dados do navegador.</span><span data-en>The site stores in your own browser, in local storage, only which language you picked (PT or EN). It is not a cookie, never leaves your device, does not identify you, and disappears when you clear browser data.</span></p>
+        <h3><span data-pt>8. Por quanto tempo guardamos</span><span data-en>8. How long we keep it</span></h3>
+        <p><span data-pt>Mensagens de contato ficam com a gente enquanto durar a conversa e por ate 2 anos depois, para historico comercial. Passado esse prazo, apagamos. Voce pode pedir a exclusao antes disso, a qualquer momento.</span><span data-en>Contact messages stay with us for as long as the conversation lasts and for up to 2 years afterwards, as commercial history. After that we delete them. You may request deletion earlier, at any time.</span></p>
+        <h3><span data-pt>9. Seus direitos</span><span data-en>9. Your rights</span></h3>
+        <p><span data-pt>Pelo artigo 18 da LGPD, voce pode exigir da gente, sem pagar nada:</span><span data-en>Under article 18 of the LGPD, you may demand from us, free of charge:</span></p>
+        <ul class="leg-lista">
+          <li><span data-pt>confirmacao de que tratamos dados seus, e acesso a eles</span><span data-en>confirmation that we process your data, and access to it</span></li>
+          <li><span data-pt>correcao de dado incompleto, desatualizado ou errado</span><span data-en>correction of incomplete, outdated or wrong data</span></li>
+          <li><span data-pt>anonimizacao, bloqueio ou eliminacao de dado desnecessario ou excessivo</span><span data-en>anonymisation, blocking or deletion of unnecessary or excessive data</span></li>
+          <li><span data-pt>portabilidade dos dados para outro fornecedor</span><span data-en>portability of your data to another provider</span></li>
+          <li><span data-pt>eliminacao dos dados tratados com base no seu consentimento</span><span data-en>deletion of data processed based on your consent</span></li>
+          <li><span data-pt>informacao sobre com quem compartilhamos seus dados</span><span data-en>information about who we shared your data with</span></li>
+          <li><span data-pt>revogacao do consentimento, a qualquer momento</span><span data-en>withdrawal of consent, at any time</span></li>
+        </ul>
+        <p><span data-pt>Escreva para <a href="mailto:ola@slowexe.com">ola@slowexe.com</a>. Respondemos em ate 15 dias.</span><span data-en>Write to <a href="mailto:ola@slowexe.com">ola@slowexe.com</a>. We reply within 15 days.</span></p>
+        <h3><span data-pt>10. Seguranca</span><span data-en>10. Security</span></h3>
+        <p><span data-pt>Tomamos medidas razoaveis para proteger o que voce nos manda, e o site e servido por HTTPS. Nenhum sistema e infalivel: se acontecer um incidente que traga risco relevante a voce, avisamos voce e a ANPD, como manda a lei.</span><span data-en>We take reasonable measures to protect what you send us, and the site is served over HTTPS. No system is infallible: if an incident occurs that poses relevant risk to you, we will notify you and the Brazilian DPA, as the law requires.</span></p>
+        <h3><span data-pt>11. Menores de idade</span><span data-en>11. Minors</span></h3>
+        <p><span data-pt>Este site e voltado a empresas e profissionais. Nao coletamos dados de menores de 18 anos de forma consciente.</span><span data-en>This site is aimed at companies and professionals. We do not knowingly collect data from anyone under 18.</span></p>
+        <h3><span data-pt>12. Mudancas nesta politica</span><span data-en>12. Changes to this policy</span></h3>
+        <p><span data-pt>Se mudarmos alguma coisa, atualizamos a data no topo. Mudanca relevante e avisada a quem ja estiver em conversa com a gente.</span><span data-en>If we change anything, we update the date at the top. Relevant changes are communicated to anyone already in conversation with us.</span></p>
     </section>
   </main>
 
