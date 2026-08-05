@@ -31,6 +31,9 @@ PASSOS = [
     ('build-setas.py',   'seta dos botoes deslizando na horizontal'),
     ('build-meta.py',    'SEO e icones'),
     ('build-sitemap.py', 'sitemap e robots'),
+    # por ultimo: os passos acima usam <style id="..."> como guarda pra nao
+    # injetar duas vezes. Este esvazia os blocos, mas preserva os ids.
+    ('build-css.py',     'CSS comum extraido pra assets/site.css'),
 ]
 
 

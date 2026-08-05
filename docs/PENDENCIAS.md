@@ -131,7 +131,35 @@ existem.
 
 ---
 
-## 8. CSS duplicado nas 20 páginas
+## 8. ~~CSS duplicado nas 20 páginas~~ — resolvido em parte
+
+As **343 regras idênticas nas 21 páginas** saíram para `assets/site.css` (36 KB).
+CSS inline: **1,43 MB → 0,67 MB**. O HTML do site caiu de 2,2 MB para 1,6 MB.
+
+O que **não** saiu, de propósito:
+
+- Regra que existe em algumas páginas e não em outras. O header tem tema claro
+  em 17 páginas e escuro nas 3 de serviço; o hero da home é claro e o das outras
+  não. Isso é diferença real de projeto.
+- **Uma regra reprovada no filtro de segurança:**
+  `@media(max-width:760px){.tcard{padding:32px 26px}}`. Ela é igual nas 21
+  páginas, mas o `.tcard` base só existe na home e vem antes dela. Movida para o
+  topo, o padding do mobile dos depoimentos se perdia. Fica inline.
+
+> ⚠️ `tools/build-css.py` é de **uma passada só**. Rodar de novo sobre o
+> resultado apagaria o `site.css`: o CSS comum já saiu do inline, a segunda
+> passada não acharia nada em comum e reescreveria o arquivo vazio. O script tem
+> guarda contra isso. Para reextrair do zero: apagar `assets/site.css` e o
+> `<link>` das páginas.
+
+**Como mudar o CSS compartilhado hoje:** editar no HTML de origem (ou no bloco
+do script de build que o gerou), apagar `assets/site.css`, rodar
+`python tools/build-all.py`. Não editar o `site.css` direto: ele é gerado.
+
+**Sobra de dívida:** ainda há ~0,67 MB de CSS inline, boa parte morta (regras de
+`.hero`, `.scard` e `.tcard` em páginas que não têm esses elementos, herdadas de
+copiar e colar). Limpar isso é o próximo passo, e o
+`tools/snapshot-estilo.js` já existe pra provar que nada mudou.
 
 Cada página carrega 60–75 KB de CSS inline, quase todo idêntico. São ~1,3 MB
 de CSS repetido no repositório. Mudar um token do design system exige editar
