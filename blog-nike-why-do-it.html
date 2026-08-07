@@ -505,8 +505,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   /* ============ AJUSTES DE MOBILE ============ */
   @media(max-width:760px){
     /* --- respiro proporcional a tela, nao ao desktop ---
-       eram 96 a 140px de padding por secao, herdados do desktop. Somados
-       davam 2.024px, quase 2,5 telas so de vazio. */
+       eram 96 a 140px por secao, somando 2.024px de vazio */
     .about,.works,.projects,.solutions,.why,.feedback,.blog{
       padding-top:64px;padding-bottom:64px;
     }
@@ -514,21 +513,33 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .cta{padding-top:64px}
     .foot{padding-top:56px}
 
-    /* --- cards sem altura reservada de desktop ---
-       o sol-card guardava 300px pra 101px de conteudo */
+    /* --- cards com a altura do proprio conteudo --- */
     .sol-card{min-height:0;padding:22px 20px}
     .why-card{padding:24px 22px}
 
-    /* --- depoimentos empilham de verdade ---
-       o baralho sticky com giro precisa de tela larga pra ler como baralho.
-       Em 390px viravam 4 cartoes sobrepostos com 30px de diferenca. */
+    /* --- depoimentos: MANTEM o baralho empilhado, so dimensionado ---
+       O titulo sai do sticky pra nao comer 244px de tela, e os cards
+       grudam logo abaixo do header. O deslocamento entre eles cai de 30
+       pra 10px e o giro pra 45%, senao em 390px viram uma pilha confusa. */
+    .fb-title{position:static;top:auto;margin-bottom:20px}
     .tcard{
-      position:static;top:auto;
-      transform:none;
-      margin-bottom:14px;
-      box-shadow:0 14px 34px rgba(0,0,0,.12);
+      position:sticky;
+      top:calc(var(--header-h) + 12px + var(--i,0) * 10px);
+      padding:26px 22px;
+      transform:rotate(calc(var(--r,0deg) * .45));
+      box-shadow:0 18px 44px rgba(0,0,0,.16);
     }
-    .fb-title{position:static;top:auto;margin-bottom:22px}
+
+    /* --- fitas do CTA: duas faixas, nao uma em cima da outra ---
+       As duas nasciam em top:50px e, com giro de 5 graus numa largura de
+       390px, se cobriam no meio. Agora sao duas faixas separadas, com giro
+       menor, mantendo a leitura em X do desktop. */
+    .ribbons{height:214px}
+    .ribbon{padding:14px 0}
+    .ribbon.r1{top:14px;transform:rotate(-3.2deg)}
+    .ribbon.r2{top:112px;transform:rotate(3.2deg)}
+    .ribbon-item{font-size:19px;gap:14px}
+    .ribbon-item svg{width:16px;height:16px}
 
     /* --- alvo de toque de 44px, o minimo confortavel --- */
     .foot-col .flink,.foot-cols a{min-height:44px;display:flex;align-items:center}
@@ -542,23 +553,10 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .about,.works,.projects,.solutions,.why,.feedback,.blog{
       padding-top:56px;padding-bottom:56px;
     }
+    .ribbons{height:196px}
+    .ribbon.r2{top:100px}
+    .ribbon-item{font-size:17px}
   }
-</style>
-<style>
-  .art-cover-type{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;
-    display:flex;flex-direction:column;justify-content:flex-end;gap:14px;padding:clamp(28px,5vw,64px);color:#fff}
-  .art-cover-type::after{content:"";position:absolute;inset:0;
-    background:radial-gradient(120% 90% at 85% 10%,rgba(255,255,255.16),transparent 60%);pointer-events:none}
-  /* na capa com foto o brilho radial some: ja existe o degrade escuro que
-     garante o contraste do titulo sobre a imagem */
-  .art-cover-foto::after{display:none}
-  .act-cat{position:relative;z-index:1;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.82}
-  .act-title{position:relative;z-index:1;font-family:"Bricolage Grotesque";font-weight:800;
-    font-size:clamp(26px,4.4vw,60px);line-height:1.05;letter-spacing:-.025em;max-width:20ch}
-  .art-cover-type .act-cat span[data-en],.art-cover-type .act-title span[data-en]{display:inherit}
-  .bpost-face{display:grid;place-items:center}
-  .bf-cat{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(15px,1.6vw,20px);
-    letter-spacing:.02em;color:#fff;opacity:.95}
 </style>
 <meta property="og:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
 <meta property="og:image:width" content="1200" />

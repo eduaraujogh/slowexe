@@ -489,8 +489,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   /* ============ AJUSTES DE MOBILE ============ */
   @media(max-width:760px){
     /* --- respiro proporcional a tela, nao ao desktop ---
-       eram 96 a 140px de padding por secao, herdados do desktop. Somados
-       davam 2.024px, quase 2,5 telas so de vazio. */
+       eram 96 a 140px por secao, somando 2.024px de vazio */
     .about,.works,.projects,.solutions,.why,.feedback,.blog{
       padding-top:64px;padding-bottom:64px;
     }
@@ -498,21 +497,33 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .cta{padding-top:64px}
     .foot{padding-top:56px}
 
-    /* --- cards sem altura reservada de desktop ---
-       o sol-card guardava 300px pra 101px de conteudo */
+    /* --- cards com a altura do proprio conteudo --- */
     .sol-card{min-height:0;padding:22px 20px}
     .why-card{padding:24px 22px}
 
-    /* --- depoimentos empilham de verdade ---
-       o baralho sticky com giro precisa de tela larga pra ler como baralho.
-       Em 390px viravam 4 cartoes sobrepostos com 30px de diferenca. */
+    /* --- depoimentos: MANTEM o baralho empilhado, so dimensionado ---
+       O titulo sai do sticky pra nao comer 244px de tela, e os cards
+       grudam logo abaixo do header. O deslocamento entre eles cai de 30
+       pra 10px e o giro pra 45%, senao em 390px viram uma pilha confusa. */
+    .fb-title{position:static;top:auto;margin-bottom:20px}
     .tcard{
-      position:static;top:auto;
-      transform:none;
-      margin-bottom:14px;
-      box-shadow:0 14px 34px rgba(0,0,0,.12);
+      position:sticky;
+      top:calc(var(--header-h) + 12px + var(--i,0) * 10px);
+      padding:26px 22px;
+      transform:rotate(calc(var(--r,0deg) * .45));
+      box-shadow:0 18px 44px rgba(0,0,0,.16);
     }
-    .fb-title{position:static;top:auto;margin-bottom:22px}
+
+    /* --- fitas do CTA: duas faixas, nao uma em cima da outra ---
+       As duas nasciam em top:50px e, com giro de 5 graus numa largura de
+       390px, se cobriam no meio. Agora sao duas faixas separadas, com giro
+       menor, mantendo a leitura em X do desktop. */
+    .ribbons{height:214px}
+    .ribbon{padding:14px 0}
+    .ribbon.r1{top:14px;transform:rotate(-3.2deg)}
+    .ribbon.r2{top:112px;transform:rotate(3.2deg)}
+    .ribbon-item{font-size:19px;gap:14px}
+    .ribbon-item svg{width:16px;height:16px}
 
     /* --- alvo de toque de 44px, o minimo confortavel --- */
     .foot-col .flink,.foot-cols a{min-height:44px;display:flex;align-items:center}
@@ -526,21 +537,10 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .about,.works,.projects,.solutions,.why,.feedback,.blog{
       padding-top:56px;padding-bottom:56px;
     }
+    .ribbons{height:196px}
+    .ribbon.r2{top:100px}
+    .ribbon-item{font-size:17px}
   }
-</style>
-<style id="legal-css">
-  .leg-hero{padding:calc(var(--header-h) + 62px) 0 10px;background:#fff}
-  .leg-hero .wrap{max-width:760px}
-  .leg-eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--primary)}
-  .leg-title{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(34px,5.4vw,64px);
-    line-height:1.04;letter-spacing:-.03em;color:#0A0B0D;margin:14px 0 10px}
-  .leg-data{font-size:14.5px;color:#6b7078}
-  .leg-lista{margin:0 0 22px;padding:0;list-style:none}
-  .leg-lista li{position:relative;padding:11px 0 11px 26px;color:#444a52;font-size:16.5px;line-height:1.62;
-    border-bottom:1px solid #ece9e4}
-  .leg-lista li::before{content:"";position:absolute;left:4px;top:21px;width:6px;height:6px;
-    border-radius:999px;background:var(--primary)}
-  .art-body a{color:var(--primary);text-decoration:underline;text-underline-offset:3px}
 </style>
 <link rel="canonical" href="https://eduaraujogh.github.io/slowexe/privacidade.html" />
 <meta property="og:type" content="website" />
