@@ -27,13 +27,15 @@
   }
 .subtitle{margin:26px auto 0;max-width:42ch;color:#6b7078;font-size:clamp(15px,1.6vw,18px);line-height:1.55}
 /* ============ HERO: BARALHO DE PROJETOS ============ */
-  /* Cards em perspectiva 3D. A profundidade vem do translateZ, entao a escala
-     e o empilhamento saem de graca, sem calcular scale por card. */
+  /* Escala e deslocamento vem do JS, em 2D. Ja foi feito com perspective +
+     translateZ, que e mais elegante, mas o Safari do iOS achata
+     transform-style:preserve-3d quando um ancestral tem overflow diferente de
+     visible, e o .hero tem overflow:hidden. No celular de verdade o Z era
+     ignorado e os cards saiam todos do mesmo tamanho. */
   .hero-deck{
     position:relative;z-index:2;
     margin:clamp(30px,4.4vw,62px) auto 0;
     height:clamp(340px,37vw,506px);
-    perspective:1500px;
   }
 .deck-word{
     position:absolute;left:50%;top:50%;
@@ -46,7 +48,7 @@
 /* grid com place-items:center empilha todos os cards na mesma celula, ja
      centrados nos dois eixos. Com position:absolute daria pra centralizar so
      na horizontal: a altura vem do aspect-ratio e nao da pra usar na margem. */
-  .deck{position:absolute;inset:0;display:grid;place-items:center;transform-style:preserve-3d}
+  .deck{position:absolute;inset:0;display:grid;place-items:center}
 .deck-card{
     grid-area:1/1;
     /* minimo 168: o baralho ocupa 2.14x a largura do card, entao com 196
@@ -1035,25 +1037,31 @@ header .menu-toggle svg{stroke:#0A0B0D}
   // com o intervalo colado na duracao a animacao nunca assenta.
   var INTERVALO=1800;
 
-  // Cada posicao e a distancia do centro. O Z empurra o card pra tras: a
-  // perspectiva do container cuida de encolher e sobrepor sozinha.
-  // O afastamento e uma razao da largura do card, nao pixel fixo: o card
-  // encolhe com a viewport e o leque precisa encolher junto. O x aqui e antes
-  // da perspectiva, que ainda divide pelo Z, entao na tela o espalhamento sai
-  // bem menor. Calibrado pra cada card mostrar uma faixa progressiva alem do
-  // vizinho de dentro (~63, ~52, ~44px no desktop).
+  // Cada posicao e a distancia do centro: escala e deslocamento X, ja no
+  // valor final que aparece na tela.
+  //
+  // Antes isso era translate3d(x,0,z) e a perspectiva do container encolhia
+  // os cards sozinha. Funcionava no desktop e QUEBRAVA no celular de verdade:
+  // o Safari do iOS achata transform-style:preserve-3d quando um ancestral
+  // tem overflow diferente de visible, e o .hero tem overflow:hidden. Achatado,
+  // o eixo Z e ignorado e todos os cards saem do mesmo tamanho.
+  //
+  // Os numeros abaixo sao exatamente o que a perspectiva de 1500px produzia
+  // (1500/(1500+z)), entao o desenho e o mesmo, sem depender de 3D:
+  //   z=-520 -> escala .743      z=-940 -> escala .615
+  // O X e razao da largura do card, pra o leque encolher junto com a tela.
   var POS=[
-    {r:0,    z:0,     o:1},
-    {r:0.62, z:-520,  o:1},
-    {r:1.24, z:-940,  o:1}
+    {rx:0,      s:1,    o:1},
+    {rx:0.4602, s:0.743, o:1},
+    {rx:0.7624, s:0.615, o:1}
   ];
 
   var atual=0, timer=null, larguraCard=0;
   var n=cards.length;
 
   function posicionar(){
-    // offsetWidth, nao getBoundingClientRect: o rect ja vem encolhido pela
-    // perspectiva, e o que precisamos aqui e a largura de layout
+    // offsetWidth, nao getBoundingClientRect: o rect ja vem com a escala
+    // aplicada, e aqui precisamos da largura de layout
     larguraCard=cards[0].offsetWidth || 262;
     for(var i=0;i<n;i++){
       var d=((i-atual)%n+n)%n;           // 0..n-1 a partir do card da frente
@@ -1062,7 +1070,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
       var p=POS[k];
       var lado=off<0?-1:1;
       var c=cards[i];
-      c.style.transform='translate3d('+(lado*p.r*larguraCard)+'px,0,'+p.z+'px)';
+      c.style.transform='translateX('+(lado*p.rx*larguraCard).toFixed(1)+'px) scale('+p.s+')';
       c.style.opacity=p.o;
       c.style.zIndex=String(50-Math.abs(off));
       c.classList.toggle('is-front',off===0);
