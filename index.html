@@ -195,6 +195,49 @@ header .menu-toggle svg{stroke:#0A0B0D}
 </style>
 <style id="arrow-slide">/* extraido pra assets/site.css */</style>
 <style id="foot-priv-css">/* extraido pra assets/site.css */</style>
+<style id="mobile-fixes">
+  /* ============ AJUSTES DE MOBILE ============ */
+  @media(max-width:760px){
+    /* --- respiro proporcional a tela, nao ao desktop ---
+       eram 96 a 140px de padding por secao, herdados do desktop. Somados
+       davam 2.024px, quase 2,5 telas so de vazio. */
+    .about,.works,.projects,.solutions,.why,.feedback,.blog{
+      padding-top:64px;padding-bottom:64px;
+    }
+    .hero{padding-top:calc(var(--header-h) + 40px);padding-bottom:56px}
+    .cta{padding-top:64px}
+    .foot{padding-top:56px}
+
+    /* --- cards sem altura reservada de desktop ---
+       o sol-card guardava 300px pra 101px de conteudo */
+    .sol-card{min-height:0;padding:22px 20px}
+    .why-card{padding:24px 22px}
+
+    /* --- depoimentos empilham de verdade ---
+       o baralho sticky com giro precisa de tela larga pra ler como baralho.
+       Em 390px viravam 4 cartoes sobrepostos com 30px de diferenca. */
+    .tcard{
+      position:static;top:auto;
+      transform:none;
+      margin-bottom:14px;
+      box-shadow:0 14px 34px rgba(0,0,0,.12);
+    }
+    .fb-title{position:static;top:auto;margin-bottom:22px}
+
+    /* --- alvo de toque de 44px, o minimo confortavel --- */
+    .foot-col .flink,.foot-cols a{min-height:44px;display:flex;align-items:center}
+    .foot-social a{min-width:44px;min-height:44px}
+
+    /* --- texto miudo demais --- */
+    .promo-tag,.promo-tag span{font-size:12px}
+  }
+
+  @media(max-width:430px){
+    .about,.works,.projects,.solutions,.why,.feedback,.blog{
+      padding-top:56px;padding-bottom:56px;
+    }
+  }
+</style>
 </head>
 <body class="lang-pt">
 
@@ -791,11 +834,34 @@ header .menu-toggle svg{stroke:#0A0B0D}
     heads.forEach(h=>obs.observe(h));
 
     // fit each title to the viewport width so it stays centered and never overflows
+    //
+    // Em tela estreita a medida NAO e a linha inteira, e sim a maior palavra.
+    // Cabendo tudo numa linha so, "Nossos Trabalhos" caia pra 38px no celular,
+    // menor que o h1 do hero: a secao do display gigante virava a menor da
+    // pagina. Deixando quebrar por palavra, o tipo volta a ser display.
+    function larguraDaMaiorPalavra(ln){
+      const grupos=[]; let atual=[];
+      [...ln.childNodes].forEach(n=>{
+        if(n.nodeType===3 && !n.textContent.trim()){ if(atual.length){grupos.push(atual);atual=[];} return; }
+        atual.push(n);
+      });
+      if(atual.length) grupos.push(atual);
+      let maior=0;
+      grupos.forEach(g=>{
+        const r=document.createRange();
+        r.setStartBefore(g[0]); r.setEndAfter(g[g.length-1]);
+        maior=Math.max(maior, r.getBoundingClientRect().width);
+      });
+      return maior;
+    }
     function fitWorks(){
+      const estreito=window.innerWidth<=760;
       heads.forEach(h=>{
         const ln=h.querySelector('.ln'); if(!ln) return;
+        ln.style.whiteSpace=estreito?'normal':'';
         h.style.fontSize='100px';
-        const w=ln.scrollWidth; if(!w) return;               // skip hidden language
+        const w=estreito?larguraDaMaiorPalavra(ln):ln.scrollWidth;
+        if(!w) return;                                       // skip hidden language
         const box=h.closest('.wrap');
         const avail=(box?box.clientWidth:window.innerWidth)-48;  // align to content column (24px padding each side)
         let size=100*avail/w;

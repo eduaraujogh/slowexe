@@ -404,6 +404,49 @@ header .menu-toggle svg{stroke:#fff}
 </style>
 <style id="arrow-slide">/* extraido pra assets/site.css */</style>
 <style id="foot-priv-css">/* extraido pra assets/site.css */</style>
+<style id="mobile-fixes">
+  /* ============ AJUSTES DE MOBILE ============ */
+  @media(max-width:760px){
+    /* --- respiro proporcional a tela, nao ao desktop ---
+       eram 96 a 140px de padding por secao, herdados do desktop. Somados
+       davam 2.024px, quase 2,5 telas so de vazio. */
+    .about,.works,.projects,.solutions,.why,.feedback,.blog{
+      padding-top:64px;padding-bottom:64px;
+    }
+    .hero{padding-top:calc(var(--header-h) + 40px);padding-bottom:56px}
+    .cta{padding-top:64px}
+    .foot{padding-top:56px}
+
+    /* --- cards sem altura reservada de desktop ---
+       o sol-card guardava 300px pra 101px de conteudo */
+    .sol-card{min-height:0;padding:22px 20px}
+    .why-card{padding:24px 22px}
+
+    /* --- depoimentos empilham de verdade ---
+       o baralho sticky com giro precisa de tela larga pra ler como baralho.
+       Em 390px viravam 4 cartoes sobrepostos com 30px de diferenca. */
+    .tcard{
+      position:static;top:auto;
+      transform:none;
+      margin-bottom:14px;
+      box-shadow:0 14px 34px rgba(0,0,0,.12);
+    }
+    .fb-title{position:static;top:auto;margin-bottom:22px}
+
+    /* --- alvo de toque de 44px, o minimo confortavel --- */
+    .foot-col .flink,.foot-cols a{min-height:44px;display:flex;align-items:center}
+    .foot-social a{min-width:44px;min-height:44px}
+
+    /* --- texto miudo demais --- */
+    .promo-tag,.promo-tag span{font-size:12px}
+  }
+
+  @media(max-width:430px){
+    .about,.works,.projects,.solutions,.why,.feedback,.blog{
+      padding-top:56px;padding-bottom:56px;
+    }
+  }
+</style>
 </head>
 <body class="lang-pt ct-page">
 
