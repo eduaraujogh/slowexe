@@ -40,36 +40,33 @@ ação real.
 
 ---
 
-## 3. ~~Depoimentos fictícios no ar~~ — resolvido
+## 3. Depoimentos fictícios — removidos, esperando os reais
 
 Mariana Costa, James Carter, Sofia Almeida, Lukas Müller e Helena Dias saíram
-do site. Nenhum nome inventado sobrou: `grep` nas 21 páginas volta zero.
+do site. `grep` nas 21 páginas volta zero.
 
-Apagar as duas seções resolveria o risco e custaria duas interações boas, o
-baralho empilhado da home e o deck que gira sozinho no contato. Então o
-**conteúdo** foi trocado, não a seção.
+**As duas seções continuam sendo o que sempre foram: depoimento de cliente.**
+Uma tentativa de trocá-las por citação de conceito dos cases foi revertida: a
+decisão de mudar a natureza da seção é do Eduardo, e ele tem depoimentos reais
+pra colocar ali.
 
-No lugar entrou a **citação de conceito de cada case**, que já existia no
-`CASES` e já é assinada pela Slowexe, não por cliente. É o mesmo critério que
-as páginas de case usam, registrado no `CASES-BRIEF.md`. O rosto virou a capa
-do case, com nome do projeto e categoria.
+Enquanto os textos reais não chegam, as duas ficam **escondidas**, sem conteúdo
+no código-fonte:
 
-O título da home mudou junto: *"Gente real, resultados reais"* prometia
-depoimento de cliente, e agora é *"O conceito por trás de cada marca"*.
+- `index.html`: `<section class="feedback" hidden>`, baralho vazio
+- `contato.html`: `<div class="qdeck" hidden>`, e o formulário passa a ocupar a
+  largura inteira em vez de deixar meia grade vazia
 
-Os dois baralhos passaram a ser **gerados** pelo `tools/build-cases.py`, como o
-baralho do hero e a grid de projetos. Case novo entra nos dois sozinho.
-São 4 cards na home (o empilhamento sticky foi desenhado pra 4) e 5 no contato
-(as classes `pos-0` a `pos-4`), com a citação cortada na primeira frase porque
-ali o card tem altura travada.
+O conteúdo agora mora em `DEPOIMENTOS`, no `tools/build-depoimentos.py`.
+Preencher a lista devolve as duas seções, com o mesmo layout e as mesmas
+interações. Nenhuma medida de design foi alterada.
+
+**A regra escrita no build:** depoimento entra com nome, cargo e autorização de
+uso de quem assina. Sem isso, não entra.
 
 > Nota de correção: a auditoria dizia que `servicos.html` também tinha
 > depoimento. Não tinha. O que existe lá é regra de CSS `.tcard` órfã, que é o
-> item 8, não conteúdo falso.
-
-**O que ainda vale, quando houver:** depoimento real, com nome, cargo e
-autorização de quem assina, é mais forte que citação de conceito. Depende de
-cliente responder, então não tem prazo.
+> item 8.
 
 ## 4. Imagens provisórias (não são mais externas)
 

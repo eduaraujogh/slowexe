@@ -267,8 +267,10 @@ textarea.cal-inp{min-height:90px;resize:vertical;line-height:1.5}
     .cal-right{border-left:none;border-top:1px solid #ececec}
     .cal-formv .cal-grid2{grid-template-columns:1fr;min-height:0}.cal-formv .cal-aside{border-right:none;border-bottom:1px solid #ececec}
   }
-/* capa de case no lugar do rosto: arte de projeto nao vai em circulo */
-.contact .qperson img.qcase{border-radius:10px}
+/* deck some enquanto nao houver depoimento real assinado, e o formulario
+   ocupa a largura inteira em vez de deixar meia grade vazia */
+.contact .qdeck[hidden]{display:none}
+.contact .grid:has(.qdeck[hidden]){grid-template-columns:1fr;max-width:660px;margin:0 auto}
 </style>
 <style id="mnav-css">/* extraido pra assets/site.css */</style>
 <link rel="icon" href="favicon.ico" sizes="any" />
@@ -481,32 +483,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   <main class="contact" id="contact">
     <div class="wrap" id="formView">
       <div class="grid">
-        <div class="qdeck">
-          <div class="qcard">
-            <div class="qbrand"><b>Sabores de Curitiba</b><span class="qcat"><span data-pt>Gastronomia · Identidade Visual</span><span data-en>Food &amp; Drink · Visual Identity</span></span></div>
-            <p class="qtext"><span data-pt>&ldquo;O formato crescente das letras dá movimento ao design, de maneira ondular, levando a ideia de sinapses propagadas através dos sentidos aguçados por cada refeição.&rdquo;</span><span data-en>&ldquo;The growing letterforms give the design an undulating movement, carrying the idea of synapses fired by the senses that each meal sharpens.&rdquo;</span></p>
-            <div class="qperson"><img class="qcase" src="assets/cases/sabores-01.webp" alt="" loading="lazy" decoding="async"><div><div class="qname">Slowexe</div><div class="qrole"><span data-pt>Conceito da marca</span><span data-en>Brand concept</span></div></div></div>
-          </div>
-          <div class="qcard">
-            <div class="qbrand"><b>Duo Garage</b><span class="qcat"><span data-pt>Automotivo · Identidade Visual</span><span data-en>Automotive · Visual Identity</span></span></div>
-            <p class="qtext"><span data-pt>&ldquo;O símbolo circular evoca várias interpretações (volante, porca, roda), uma camada de versatilidade dentro de uma marca minimalista.&rdquo;</span><span data-en>&ldquo;The circular symbol evokes several readings (steering wheel, nut, wheel), adding a layer of versatility inside a minimalist brand.&rdquo;</span></p>
-            <div class="qperson"><img class="qcase" src="assets/cases/duo-01.webp" alt="" loading="lazy" decoding="async"><div><div class="qname">Slowexe</div><div class="qrole"><span data-pt>Conceito da marca</span><span data-en>Brand concept</span></div></div></div>
-          </div>
-          <div class="qcard">
-            <div class="qbrand"><b>Fense Seguradora</b><span class="qcat"><span data-pt>Seguros · Identidade Visual</span><span data-en>Insurance · Visual Identity</span></span></div>
-            <p class="qtext"><span data-pt>&ldquo;Pensar no futuro de quem amamos.&rdquo;</span><span data-en>&ldquo;Thinking about the future of those we love.&rdquo;</span></p>
-            <div class="qperson"><img class="qcase" src="assets/cases/fense-01.webp" alt="" loading="lazy" decoding="async"><div><div class="qname">Slowexe</div><div class="qrole"><span data-pt>Conceito da marca</span><span data-en>Brand concept</span></div></div></div>
-          </div>
-          <div class="qcard">
-            <div class="qbrand"><b>Golden Vibes</b><span class="qcat"><span data-pt>Semijoias · Branding</span><span data-en>Jewellery · Branding</span></span></div>
-            <p class="qtext"><span data-pt>&ldquo;Trocar o branco pelo verde profundo foi o que tirou a marca do lugar-comum do segmento sem abrir mão da elegância.&rdquo;</span><span data-en>&ldquo;Swapping white for deep green is what pulled the brand out of the segment’s default, without giving up elegance.&rdquo;</span></p>
-            <div class="qperson"><img class="qcase" src="assets/cases/golden-vibes-01.webp" alt="" loading="lazy" decoding="async"><div><div class="qname">Slowexe</div><div class="qrole"><span data-pt>Conceito da marca</span><span data-en>Brand concept</span></div></div></div>
-          </div>
-          <div class="qcard">
-            <div class="qbrand"><b>Bioerde</b><span class="qcat"><span data-pt>Agronegócio · Branding</span><span data-en>Agribusiness · Branding</span></span></div>
-            <p class="qtext"><span data-pt>&ldquo;Transformar o campo, aumentando a produtividade de forma consciente e promovendo um futuro mais verde.&rdquo;</span><span data-en>&ldquo;Transforming the field, raising productivity consciously and building a greener future.&rdquo;</span></p>
-            <div class="qperson"><img class="qcase" src="assets/cases/bioerde-01.webp" alt="" loading="lazy" decoding="async"><div><div class="qname">Slowexe</div><div class="qrole"><span data-pt>Conceito da marca</span><span data-en>Brand concept</span></div></div></div>
-          </div>
+        <div class="qdeck" hidden>
         </div>
         <div class="fcard">
           <div class="step" data-step="1">

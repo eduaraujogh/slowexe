@@ -24,6 +24,7 @@ BASE = os.path.dirname(TOOLS)
 PASSOS = [
     ('build-cases.py',   'paginas de case'),
     ('build-blog.py',    'posts do blog'),
+    ('build-depoimentos.py', 'depoimentos de cliente'),
     ('build-legal.py',   'pagina de privacidade'),
     ('build-links.py',   'links sem destino'),
     ('build-header.py',  'header de vidro'),

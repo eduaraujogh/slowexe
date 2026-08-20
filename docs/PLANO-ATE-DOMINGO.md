@@ -29,7 +29,7 @@ Não depende do acervo de cases, então roda enquanto o material é separado.
 | 2 | Eduardo | Criar conta no Web3Forms e passar a access key |
 | 3 | Claude | `contato.html`: formulário passa a enviar de verdade. Tela de sucesso só com resposta ok, erro vira mensagem. Fluxo visual intacto. Resolve `PENDENCIAS` item 1 |
 | 4 | Claude | Modal de agendamento para de afirmar que enviou e-mail e convite. Resolve `PENDENCIAS` item 2 |
-| 5 | ✅ Claude | ~~Depoimentos fictícios~~. Feito: trocados pelas citações de conceito dos cases, com os dois baralhos passando a ser gerados pelo `build-cases.py`. `PENDENCIAS` item 3 fechado |
+| 5 | ✅ Claude | Depoimentos fictícios removidos. As seções continuam sendo de depoimento de cliente, escondidas até chegarem os reais do Eduardo. Conteúdo agora em `tools/build-depoimentos.py` |
 | 6 | Claude | Publicar, envio de teste de ponta a ponta, conferir de 320 a 1280 |
 
 ## Sexta 21/08: cases em massa
@@ -42,6 +42,7 @@ O dia principal, e o único que trava sem material do Eduardo.
 | 2 | Claude | `tools/import-cases.py` em cada pasta: dedup por hash perceptual, maior versão de cada arte, descarte de imagem estreita, ordem original, WebP |
 | 3 | Claude | Escrever desafio, solução e conceito em PT e EN no dicionário `CASES` de `tools/build-cases.py`. Sem número ou depoimento inventado |
 | 4 | Eduardo | Aprovar os textos |
+| 6 | Eduardo | **Mandar os depoimentos reais** (nome, cargo, empresa, foto e autorização). Preencher a lista devolve as duas seções ao ar |
 | 5 | Claude | `build-all`, `check`, deploy. Publicar em lotes, não segurar tudo pro fim |
 
 **Mínimo necessário por case:** pasta de imagens (mín. 2, ideal 15+), nome do
