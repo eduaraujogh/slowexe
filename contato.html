@@ -271,6 +271,11 @@ textarea.cal-inp{min-height:90px;resize:vertical;line-height:1.5}
    ocupa a largura inteira em vez de deixar meia grade vazia */
 .contact .qdeck[hidden]{display:none}
 .contact .grid:has(.qdeck[hidden]){grid-template-columns:1fr;max-width:660px;margin:0 auto}
+/* retorno de envio: erro em salmao, andamento em cinza */
+.ct-msg{font-size:14px;line-height:1.5;margin:0 0 14px;padding:11px 14px;border-radius:10px}
+.ct-msg.enviando{background:#f4f2ef;color:#5b606b}
+.ct-msg.erro{background:#fdeeea;color:#C9543B}
+.ct-msg[hidden]{display:none}
 </style>
 <style id="mnav-css">/* extraido pra assets/site.css */</style>
 <link rel="icon" href="favicon.ico" sizes="any" />
@@ -511,6 +516,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
                 <button type="button"><span data-pt>Ainda não sei</span><span data-en>Not sure yet</span></button>
               </div>
             </div></div>
+            <p class="ct-msg" id="formMsg" hidden></p>
             <div class="row-actions">
               <button class="ct-btn" id="submitForm" type="button"><span data-pt>Enviar mensagem</span><span data-en>Send message</span> <span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
               <span class="lnk-back" id="backStep1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-pt>Voltar</span><span data-en>Back</span></span>
@@ -848,6 +854,34 @@ header .menu-toggle svg{stroke:#0A0B0D}
 </script>
 
 <script>
+  // Envio de formulario do site. O formulario de contato e o modal de
+  // agendamento vivem em IIFEs separadas, entao isto precisa ser compartilhado.
+  // Antes daqui os dois validavam, mostravam sucesso e descartavam o lead em
+  // silencio. PENDENCIAS itens 1 e 2.
+  // A chave do Web3Forms e publica por definicao: ela vive no codigo do
+  // cliente, e o proprio servico documenta isso. Nao e segredo vazado.
+  window.Envio=(function(){
+    var CHAVE='ccaae9fa-2c8d-488a-b7d7-adba01014357';
+    function recado(el,tipo,pt,en){
+      if(!el)return;
+      el.hidden=false; el.className='ct-msg '+tipo;
+      el.innerHTML='<span data-pt>'+pt+'</span><span data-en>'+en+'</span>';
+    }
+    function manda(dados){
+      return fetch('https://api.web3forms.com/submit',{
+        method:'POST',
+        headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify(Object.assign({access_key:CHAVE},dados))
+      }).then(function(r){
+        return r.json().then(function(j){return r.ok&&j.success===true;})
+                       .catch(function(){return false;});
+      }).catch(function(){return false;});
+    }
+    return {recado:recado,manda:manda};
+  })();
+</script>
+
+<script>
   (function(){
     const q=s=>document.querySelector('.contact '+s);
     const fv=document.querySelector('#formView'), tv=document.querySelector('#thanksView');
@@ -873,10 +907,45 @@ header .menu-toggle svg{stroke:#0A0B0D}
       step2.classList.add('hide'); step1.classList.remove('hide');
       document.querySelector('#p2').classList.remove('on');
     });
-    document.querySelector('#submitForm').addEventListener('click',()=>{
+    const btnEnviar=document.querySelector('#submitForm');
+    const formMsg=document.querySelector('#formMsg');
+    btnEnviar.addEventListener('click',()=>{
       if(!validate(step2)) return;
-      fv.style.display='none'; tv.classList.add('show');
-      window.scrollTo({top:0,behavior:'smooth'});
+      const s1=document.querySelector('.contact .step[data-step="1"]');
+      const campos=s1.querySelectorAll('.field .inp');
+      const nome=campos[0]?campos[0].value.trim():'';
+      const email=s1.querySelector('.field[data-type="email"] .inp').value.trim();
+      const ddi=s1.querySelector('.phone select');
+      const tel=s1.querySelector('.phone .inp');
+      const texto=step2.querySelector('textarea').value.trim();
+      const orcEl=document.querySelector('#budgetDD .ct-ddval [data-pt]');
+      const en=document.documentElement.lang==='en';
+
+      btnEnviar.disabled=true;
+      Envio.recado(formMsg,'enviando','Enviando…','Sending…');
+
+      Envio.manda({
+        subject:'Novo contato pelo site da Slowexe',
+        from_name:'Site Slowexe',
+        name:nome,
+        email:email,
+        telefone:(tel&&tel.value.trim())?((ddi?ddi.value+' ':'')+tel.value.trim()):'nao informado',
+        orcamento:orcEl?orcEl.textContent.trim():'nao informado',
+        idioma:en?'EN':'PT',
+        message:texto
+      }).then(ok=>{
+        btnEnviar.disabled=false;
+        if(ok){
+          formMsg.hidden=true;
+          fv.style.display='none'; tv.classList.add('show');
+          window.scrollTo({top:0,behavior:'smooth'});
+        }else{
+          // so mostra o "obrigado" quando a mensagem saiu de verdade
+          Envio.recado(formMsg,'erro',
+            'Nao consegui enviar agora. Tente de novo em instantes.',
+            'I could not send it right now. Please try again in a moment.');
+        }
+      });
     });
     document.querySelectorAll('.contact .field input,.contact .field textarea,.contact .field select').forEach(i=>{
       i.addEventListener('input',()=>i.closest('.field').classList.remove('invalid'));
@@ -979,6 +1048,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
             </div>
             <span class="cal-addg" id="calAddGuest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M19 8v6M22 11h-6"/></svg><span class="addg-1"><span data-pt>Adicionar convidados</span><span data-en>Add guests</span></span><span class="addg-2" hidden><span data-pt>Adicionar outro</span><span data-en>Add another</span></span></span>
             <p class="cal-fprivacy"><span data-pt>Ao prosseguir, você concorda com a <a href="privacidade.html">Política de Privacidade</a> da Slowexe.</span><span data-en>By proceeding, you agree to the <a href="privacidade.html">Privacy Policy</a> of Slowexe.</span></p>
+            <p class="ct-msg" id="calMsg" hidden></p>
             <div class="cal-actions"><span class="cal-back" id="calBack"><span data-pt>Voltar</span><span data-en>Back</span></span><button class="cal-confirm" id="calConfirm" type="button"><span data-pt>Confirmar</span><span data-en>Confirm</span></button></div>
           </div>
         </div>
@@ -1139,9 +1209,43 @@ header .menu-toggle svg{stroke:#0A0B0D}
       // Nao existe envio de e-mail nem criacao de evento: a unica acao real e o
       // botao do Google Calendar, que monta uma URL TEMPLATE. O texto diz isso e
       // nada alem disso. PENDENCIAS item 2.
-      overlay.querySelector('.cal-dsub').textContent=en?('Slowexe will meet with '+nm.value+'. Add the time to your calendar with the button below.'):('A Slowexe terá uma reunião com '+nm.value+'. Adicione o horário ao seu calendário pelo botão abaixo.');
+      overlay.querySelector('.cal-dsub').textContent=en?('Slowexe will meet with '+nm.value+'. We received your request and will confirm by email. Add the time to your calendar with the button below.'):('A Slowexe terá uma reunião com '+nm.value+'. Recebemos o seu pedido e confirmamos por e-mail. Adicione o horário ao seu calendário pelo botão abaixo.');
       var g=overlay.querySelector('#calGcal');if(g)g.href='https://www.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(en?'Intro call · Slowexe':'Conversa inicial · Slowexe')+'&dates='+gcalDates()+'&details='+encodeURIComponent('Google Meet');
-      showView('done');
+
+      // O pedido de horario agora chega ate a Slowexe. Antes a pessoa escolhia
+      // um horario, via "reuniao marcada" e do outro lado ninguem ficava
+      // sabendo. PENDENCIAS item 2.
+      var convidados=[].slice.call(overlay.querySelectorAll('.cal-ginp'))
+        .map(function(i){return i.value.trim();}).filter(Boolean);
+      var calBtn=overlay.querySelector('#calConfirm');
+      var calMsg=overlay.querySelector('#calMsg');
+      var corpo=[
+        (en?'Date: ':'Data: ')+fmtDate(selDate),
+        (en?'Time: ':'Horario: ')+fmtTime(selTime)+' - '+fmtTime(addMin(selTime,durMin))+' ('+tzName()+')',
+        (en?'Duration: ':'Duracao: ')+durMin+' min',
+        (en?'Guests: ':'Convidados: ')+(convidados.length?convidados.join(', '):(en?'none':'nenhum')),
+        '',
+        (en?'Notes: ':'Observacoes: ')+((note&&note.value.trim())||(en?'none':'nenhuma'))
+      ].join('\n');
+
+      calBtn.disabled=true;
+      Envio.recado(calMsg,'enviando','Enviando…','Sending…');
+      Envio.manda({
+        subject:'Novo pedido de horario pelo site da Slowexe',
+        from_name:'Site Slowexe',
+        name:nm.value,
+        email:em.value,
+        idioma:en?'EN':'PT',
+        message:corpo
+      }).then(function(ok){
+        calBtn.disabled=false;
+        if(ok){ calMsg.hidden=true; showView('done'); }
+        else{
+          Envio.recado(calMsg,'erro',
+            'Nao consegui enviar o pedido agora. Tente de novo em instantes.',
+            'I could not send your request right now. Please try again in a moment.');
+        }
+      });
     });
     var rsBtn=overlay.querySelector('#calResched'); if(rsBtn)rsBtn.addEventListener('click',()=>showView('pick'));
     var ccBtn=overlay.querySelector('#calCancel'); if(ccBtn)ccBtn.addEventListener('click',()=>showView('cancelled'));
