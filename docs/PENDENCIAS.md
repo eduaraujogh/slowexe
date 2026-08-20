@@ -40,26 +40,36 @@ ação real.
 
 ---
 
-## 3. Depoimentos fictícios no ar
+## 3. ~~Depoimentos fictícios no ar~~ — resolvido
 
-**Onde:** `index.html`, `servicos.html`, `contato.html`.
+Mariana Costa, James Carter, Sofia Almeida, Lukas Müller e Helena Dias saíram
+do site. Nenhum nome inventado sobrou: `grep` nas 21 páginas volta zero.
 
-Mariana Costa (Head de Produto, "Nova"), James Carter (CEO, "Atlas"),
-Sofia Almeida (CMO, "Vortex"), Lukas Müller (Fundador, "Lumen") e
-Helena Dias (Head de Growth, "Pulse") não existem. As citações elogiando a
-Slowexe foram escritas como preenchimento, e os rostos vêm de stock aleatório.
+Apagar as duas seções resolveria o risco e custaria duas interações boas, o
+baralho empilhado da home e o deck que gira sozinho no contato. Então o
+**conteúdo** foi trocado, não a seção.
 
-Isso contraria a regra do próprio projeto, escrita em `CASES-BRIEF.md`:
-*"Nunca vou inventar número ou depoimento de cliente real. Fica melhor sem do
-que com dado falso."* Nos cases a regra foi respeitada; nessas três páginas não.
+No lugar entrou a **citação de conceito de cada case**, que já existia no
+`CASES` e já é assinada pela Slowexe, não por cliente. É o mesmo critério que
+as páginas de case usam, registrado no `CASES-BRIEF.md`. O rosto virou a capa
+do case, com nome do projeto e categoria.
 
-Além do risco de credibilidade (um cliente busca o nome e não acha ninguém),
-depoimento inventado em site comercial é propaganda enganosa pelo CDC.
+O título da home mudou junto: *"Gente real, resultados reais"* prometia
+depoimento de cliente, e agora é *"O conceito por trás de cada marca"*.
 
-**Como resolver:** remover as seções, ou substituir por depoimentos reais com
-autorização de quem assina.
+Os dois baralhos passaram a ser **gerados** pelo `tools/build-cases.py`, como o
+baralho do hero e a grid de projetos. Case novo entra nos dois sozinho.
+São 4 cards na home (o empilhamento sticky foi desenhado pra 4) e 5 no contato
+(as classes `pos-0` a `pos-4`), com a citação cortada na primeira frase porque
+ali o card tem altura travada.
 
----
+> Nota de correção: a auditoria dizia que `servicos.html` também tinha
+> depoimento. Não tinha. O que existe lá é regra de CSS `.tcard` órfã, que é o
+> item 8, não conteúdo falso.
+
+**O que ainda vale, quando houver:** depoimento real, com nome, cargo e
+autorização de quem assina, é mais forte que citação de conceito. Depende de
+cliente responder, então não tem prazo.
 
 ## 4. Imagens provisórias (não são mais externas)
 
@@ -72,10 +82,14 @@ Web Design, Landing Pages, Web Redesign) estão ilustradas com **peça de
 branding**, como provisório, até o Eduardo compilar os cases dessas frentes.
 Mapeamento em `SERVICOS`, no `tools/build-imagens.py`.
 
-**Avatares.** São retratos **gerados**, de pessoas que não existem. Foi
-decisão consciente: enquanto os depoimentos do item 3 forem de preenchimento,
-colar o rosto de uma pessoa real numa citação inventada seria pior que o
-placeholder. Trocar por fotos reais junto com os depoimentos reais.
+**Avatares.** São retratos **gerados**, de pessoas que não existem. Com o item 3
+resolvido, eles não assinam mais citação nenhuma: onde havia rosto de cliente
+inventado agora há capa de case. O que sobrou de avatar é decorativo ou é o
+autor do blog:
+
+- `index.html`: o grupinho de rostos do card flutuante do hero, ilustração
+- `contato.html`: um rosto no modal de agendamento
+- `projeto.html` e as 4 páginas de blog: avatar do autor
 
 **Avatar do autor no blog.** Está com um retrato genérico, mas o nome ao lado
 é **Eduardo Araujo**, pessoa real. Aqui a foto certa é a dele. Substituir

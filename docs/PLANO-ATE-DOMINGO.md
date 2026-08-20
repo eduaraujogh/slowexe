@@ -29,7 +29,7 @@ Não depende do acervo de cases, então roda enquanto o material é separado.
 | 2 | Eduardo | Criar conta no Web3Forms e passar a access key |
 | 3 | Claude | `contato.html`: formulário passa a enviar de verdade. Tela de sucesso só com resposta ok, erro vira mensagem. Fluxo visual intacto. Resolve `PENDENCIAS` item 1 |
 | 4 | Claude | Modal de agendamento para de afirmar que enviou e-mail e convite. Resolve `PENDENCIAS` item 2 |
-| 5 | Claude | Remover os 5 depoimentos fictícios de `index`, `servicos` e `contato`. Resolve `PENDENCIAS` item 3 |
+| 5 | ✅ Claude | ~~Depoimentos fictícios~~. Feito: trocados pelas citações de conceito dos cases, com os dois baralhos passando a ser gerados pelo `build-cases.py`. `PENDENCIAS` item 3 fechado |
 | 6 | Claude | Publicar, envio de teste de ponta a ponta, conferir de 320 a 1280 |
 
 ## Sexta 21/08: cases em massa
