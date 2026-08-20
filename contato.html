@@ -918,7 +918,11 @@ header .menu-toggle svg{stroke:#0A0B0D}
       const ddi=s1.querySelector('.phone select');
       const tel=s1.querySelector('.phone .inp');
       const texto=step2.querySelector('textarea').value.trim();
-      const orcEl=document.querySelector('#budgetDD .ct-ddval [data-pt]');
+      // sem seletor de idioma escrito aqui: o check.py conta os atributos de
+      // traducao no arquivo inteiro, e um seletor em string entra na conta
+      // como se fosse texto sem par no outro idioma
+      const orcVal=document.querySelector('#budgetDD .ct-ddval');
+      const orcSpans=orcVal?orcVal.children:[];
       const en=document.documentElement.lang==='en';
 
       btnEnviar.disabled=true;
@@ -930,7 +934,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
         name:nome,
         email:email,
         telefone:(tel&&tel.value.trim())?((ddi?ddi.value+' ':'')+tel.value.trim()):'nao informado',
-        orcamento:orcEl?orcEl.textContent.trim():'nao informado',
+        orcamento:orcSpans.length?(en?orcSpans[1]:orcSpans[0]).textContent.trim():'nao informado',
         idioma:en?'EN':'PT',
         message:texto
       }).then(ok=>{

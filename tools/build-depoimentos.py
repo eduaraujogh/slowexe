@@ -63,7 +63,9 @@ def bloco(html, abertura, conteudo):
     identico ao do container. Foi assim que o baralho do hero chegou a acumular
     29 cards no lugar de 5.
     """
-    padrao = (r'(?P<ini>^(?P<ind>[ \t]*)' + re.escape(abertura) + r'[^\n]*\n)'
+    # a abertura vem SEM o '>' final: marca_visibilidade() adiciona hidden na
+    # mesma tag, e casar com '>' faria a rodada seguinte nao achar mais o bloco
+    padrao = (r'(?P<ini>^(?P<ind>[ \t]*)' + re.escape(abertura) + r'[^\n]*>[^\n]*\n)'
               r'(?P<meio>.*?)'
               r'(?P<fim>^(?P=ind)</(?:div|section)>)')
     novo, n = re.subn(
@@ -103,7 +105,7 @@ f'''        <article class="tcard {TONS[k % len(TONS)]}" style="--i:{k};--r:{GIR
             <div><div class="tcard-name">{esc(d['nome'])}</div><div class="tcard-role"><span data-pt>{esc(d['cargo_pt'])}</span><span data-en>{esc(d['cargo_en'])}</span></div></div>
           </div>
         </article>''')
-    h, n = bloco(h, '<div class="fb-stack">', '\n'.join(cards))
+    h, n = bloco(h, '<div class="fb-stack"', '\n'.join(cards))
     if not n:
         print('AVISO: fb-stack nao encontrado em index.html')
     else:
@@ -127,7 +129,7 @@ f'''          <div class="qcard">
             <p class="qtext"><span data-pt>&ldquo;{pt}&rdquo;</span><span data-en>&ldquo;{en}&rdquo;</span></p>
             <div class="qperson"><img src="{d['foto']}" alt="" loading="lazy" decoding="async"><div><div class="qname">{esc(d['nome'])}</div><div class="qrole"><span data-pt>{esc(d['cargo_pt'])}</span><span data-en>{esc(d['cargo_en'])}</span></div></div></div>
           </div>''')
-    q, n = bloco(q, '<div class="qdeck">', '\n'.join(qc))
+    q, n = bloco(q, '<div class="qdeck"', '\n'.join(qc))
     if not n:
         print('AVISO: qdeck nao encontrado em contato.html')
     else:
