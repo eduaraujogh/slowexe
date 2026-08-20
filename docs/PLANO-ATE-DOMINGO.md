@@ -42,7 +42,7 @@ O dia principal, e o único que trava sem material do Eduardo.
 | 2 | Claude | `tools/import-cases.py` em cada pasta: dedup por hash perceptual, maior versão de cada arte, descarte de imagem estreita, ordem original, WebP |
 | 3 | Claude | Escrever desafio, solução e conceito em PT e EN no dicionário `CASES` de `tools/build-cases.py`. Sem número ou depoimento inventado |
 | 4 | Eduardo | Aprovar os textos |
-| 6 | Eduardo | **Mandar os depoimentos reais** (nome, cargo, empresa, foto e autorização). Preencher a lista devolve as duas seções ao ar |
+| 6 | ✅ Eduardo | Depoimentos reais entregues e no ar: Vitor França, Bruno Mello, Danilo Veiga, Rafaela Santos e Rute Souza. **Falta a foto de cada um** |
 | 5 | Claude | `build-all`, `check`, deploy. Publicar em lotes, não segurar tudo pro fim |
 
 **Mínimo necessário por case:** pasta de imagens (mín. 2, ideal 15+), nome do

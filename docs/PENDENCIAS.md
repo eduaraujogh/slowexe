@@ -40,33 +40,30 @@ ação real.
 
 ---
 
-## 3. Depoimentos fictícios — removidos, esperando os reais
+## 3. ~~Depoimentos fictícios no ar~~ — resolvido
 
-Mariana Costa, James Carter, Sofia Almeida, Lukas Müller e Helena Dias saíram
-do site. `grep` nas 21 páginas volta zero.
+Os cinco nomes inventados saíram e **cinco depoimentos reais entraram**, com
+nome, cargo e empresa de quem assina:
 
-**As duas seções continuam sendo o que sempre foram: depoimento de cliente.**
-Uma tentativa de trocá-las por citação de conceito dos cases foi revertida: a
-decisão de mudar a natureza da seção é do Eduardo, e ele tem depoimentos reais
-pra colocar ali.
+| Quem | Cargo | Empresa |
+|---|---|---|
+| Vitor França | Fundador | Sabores de Curitiba |
+| Bruno Mello | Proprietário | Duo Garage |
+| Danilo Veiga | Proprietário | Fense Seguradora |
+| Rafaela Santos | Proprietária | Golden Vibes |
+| Rute Souza | CMO | Bioerde |
 
-Enquanto os textos reais não chegam, as duas ficam **escondidas**, sem conteúdo
-no código-fonte:
+O conteúdo mora em `DEPOIMENTOS`, no `tools/build-depoimentos.py`, e alimenta
+as duas seções: o baralho empilhado da home (4 primeiros) e o deck que gira
+sozinho no contato (5). Editar lá, nunca no HTML.
 
-- `index.html`: `<section class="feedback" hidden>`, baralho vazio
-- `contato.html`: `<div class="qdeck" hidden>`, e o formulário passa a ocupar a
-  largura inteira em vez de deixar meia grade vazia
+Os textos originais são longos, de entrevista. No card entra um trecho, com as
+palavras de quem falou, sem reescrita. A versão curta de cada um vai pro deck
+do contato, onde o card tem altura travada.
 
-O conteúdo agora mora em `DEPOIMENTOS`, no `tools/build-depoimentos.py`.
-Preencher a lista devolve as duas seções, com o mesmo layout e as mesmas
-interações. Nenhuma medida de design foi alterada.
-
-**A regra escrita no build:** depoimento entra com nome, cargo e autorização de
-uso de quem assina. Sem isso, não entra.
-
-> Nota de correção: a auditoria dizia que `servicos.html` também tinha
-> depoimento. Não tinha. O que existe lá é regra de CSS `.tcard` órfã, que é o
-> item 8.
+**Falta a foto de quem assina.** Enquanto não houver, o card mostra a inicial
+num monograma. É de propósito: retrato genérico no rosto de pessoa que existe
+de verdade seria pior que não ter foto. Basta acrescentar `foto=` no item.
 
 ## 4. Imagens provisórias (não são mais externas)
 

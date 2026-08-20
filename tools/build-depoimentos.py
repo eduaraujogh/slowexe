@@ -31,7 +31,12 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #        cargo_pt='Head de Produto', cargo_en='Head of Product',
 #        empresa='Nome da Empresa',
 #        setor_pt='Fintech', setor_en='Fintech',        # so o deck do contato usa
-#        foto='assets/avatars/p1.webp',                 # foto real de quem assina
+#        foto='assets/depoimentos/fulano.webp',         # OPCIONAL, foto real de quem assina
+#        curto_pt='...', curto_en='...')                # OPCIONAL, versao curta pro contato
+#
+# Sem 'foto' o card mostra a inicial de quem assina, num monograma. E de
+# proposito: retrato generico no lugar do rosto de uma pessoa que existe de
+# verdade seria pior que nao ter foto.
 #        texto_pt='...', texto_en='...')
 #
 # A home mostra os 4 primeiros, que e pra quantos o empilhamento sticky foi
@@ -39,7 +44,63 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # pos-4 suportam, e corta o texto na primeira frase porque ali o card tem
 # altura travada em 268px.
 # ----------------------------------------------------------------------------
-DEPOIMENTOS = []
+DEPOIMENTOS = [
+ dict(slug='sabores', nome='Vitor França',
+   cargo_pt='Fundador', cargo_en='Founder',
+   empresa='Sabores de Curitiba',
+   setor_pt='Gastronomia', setor_en='Food & Drink',
+   texto_pt='Eles não desenharam simplesmente a marca que a gente tinha naquele momento. '
+            'Ajudaram a desenhar uma marca que pudesse acompanhar o que a gente quer construir.',
+   texto_en='They did not simply design the brand we had at that moment. They helped design '
+            'a brand that could keep up with what we want to build.',
+   curto_pt='A identidade finalmente estava contando a mesma história que a gente queria contar com o negócio.',
+   curto_en='The identity was finally telling the same story we wanted to tell with the business.'),
+
+ dict(slug='duo', nome='Bruno Mello',
+   cargo_pt='Proprietário', cargo_en='Owner',
+   empresa='Duo Garage',
+   setor_pt='Automotivo', setor_en='Automotive',
+   texto_pt='Você não precisa desenhar um carro para falar de automóvel. '
+            'E isso acabou deixando a marca muito mais sofisticada.',
+   texto_en='You do not need to draw a car to talk about cars. That is what ended up making '
+            'the brand far more sophisticated.',
+   curto_pt='Ficou com cara de empresa que sabe o que está fazendo.',
+   curto_en='It ended up looking like a company that knows what it is doing.'),
+
+ dict(slug='fense', nome='Danilo Veiga',
+   cargo_pt='Proprietário', cargo_en='Owner',
+   empresa='Fense Seguradora',
+   setor_pt='Seguros', setor_en='Insurance',
+   texto_pt='Não foi simplesmente trocar um logo, foi dar uma personalidade mais clara para a '
+            'empresa. Agora, quando a Fense fala de proteção, existe uma identidade por trás '
+            'dessa mensagem.',
+   texto_en='It was not simply swapping a logo, it gave the company a clearer personality. Now, '
+            'when Fense talks about protection, there is an identity behind the message.',
+   curto_pt='Não foi simplesmente trocar um logo, foi dar uma personalidade mais clara para a empresa.',
+   curto_en='It was not simply swapping a logo, it gave the company a clearer personality.'),
+
+ dict(slug='golden-vibes', nome='Rafaela Santos',
+   cargo_pt='Proprietária', cargo_en='Owner',
+   empresa='Golden Vibes',
+   setor_pt='Semijoias', setor_en='Jewellery',
+   texto_pt='O verde trouxe uma sofisticação muito mais interessante. O dourado deixa de ser a '
+            'identidade inteira e passa a ser um detalhe, e isso faz o produto aparecer mais.',
+   texto_en='The green brought a much more interesting sophistication. Gold stops being the whole '
+            'identity and becomes a detail, and that makes the product stand out more.',
+   curto_pt='Hoje eu olho para a Golden Vibes e vejo uma marca que encontrou a própria personalidade.',
+   curto_en='Today I look at Golden Vibes and see a brand that found its own personality.'),
+
+ dict(slug='bioerde', nome='Rute Souza',
+   cargo_pt='CMO', cargo_en='CMO',
+   empresa='Bioerde',
+   setor_pt='Agronegócio', setor_en='Agribusiness',
+   texto_pt='Quando você olha para a identidade e consegue imaginar o futuro da empresa dentro '
+            'dela, o branding foi bem feito. A marca parece preparada para crescer com a empresa.',
+   texto_en='When you look at the identity and can picture the future of the company inside it, '
+            'the branding was done well. The brand feels ready to grow with the company.',
+   curto_pt='A marca parece preparada para crescer com a empresa.',
+   curto_en='The brand feels ready to grow with the company.'),
+]
 
 NO_HOME = 4
 NO_CONTATO = 5
@@ -54,6 +115,14 @@ GIROS = ['-2.4deg', '2deg', '-1.8deg', '2.4deg']
 
 def esc(s):
     return (s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;'))
+
+
+def retrato(d, classe):
+    """Foto real de quem assina, ou monograma com a inicial."""
+    if d.get('foto'):
+        return ('<img src="%s" alt="" loading="lazy" decoding="async">' % d['foto'])
+    return ('<span class="%s" aria-hidden="true">%s</span>'
+            % (classe, esc(d['nome'].strip()[:1].upper())))
 
 
 def bloco(html, abertura, conteudo):
@@ -101,7 +170,7 @@ f'''        <article class="tcard {TONS[k % len(TONS)]}" style="--i:{k};--r:{GIR
           {ASPAS}
           <p class="tcard-text"><span data-pt>{esc(d['texto_pt'])}</span><span data-en>{esc(d['texto_en'])}</span></p>
           <div class="tcard-author">
-            <img src="{d['foto']}" alt="" loading="lazy" decoding="async">
+            {retrato(d, 'dp-mono')}
             <div><div class="tcard-name">{esc(d['nome'])}</div><div class="tcard-role"><span data-pt>{esc(d['cargo_pt'])}</span><span data-en>{esc(d['cargo_en'])}</span></div></div>
           </div>
         </article>''')
@@ -119,15 +188,15 @@ f'''        <article class="tcard {TONS[k % len(TONS)]}" style="--i:{k};--r:{GIR
     q = io.open(cx, encoding='utf-8').read()
     qc = []
     for d in DEPOIMENTOS[:NO_CONTATO]:
-        pt = esc(d['texto_pt'].split('.')[0]) + '.'
-        en = esc(d['texto_en'].split('.')[0]) + '.'
+        pt = esc(d.get('curto_pt') or (d['texto_pt'].split('.')[0] + '.'))
+        en = esc(d.get('curto_en') or (d['texto_en'].split('.')[0] + '.'))
         cat_pt = esc(d.get('setor_pt', d['cargo_pt']))
         cat_en = esc(d.get('setor_en', d['cargo_en']))
         qc.append(
 f'''          <div class="qcard">
             <div class="qbrand"><b>{esc(d['empresa'])}</b><span class="qcat"><span data-pt>{cat_pt}</span><span data-en>{cat_en}</span></span></div>
             <p class="qtext"><span data-pt>&ldquo;{pt}&rdquo;</span><span data-en>&ldquo;{en}&rdquo;</span></p>
-            <div class="qperson"><img src="{d['foto']}" alt="" loading="lazy" decoding="async"><div><div class="qname">{esc(d['nome'])}</div><div class="qrole"><span data-pt>{esc(d['cargo_pt'])}</span><span data-en>{esc(d['cargo_en'])}</span></div></div></div>
+            <div class="qperson">{retrato(d, 'dp-mono')}<div><div class="qname">{esc(d['nome'])}</div><div class="qrole"><span data-pt>{esc(d['cargo_pt'])}</span><span data-en>{esc(d['cargo_en'])}</span></div></div></div>
           </div>''')
     q, n = bloco(q, '<div class="qdeck"', '\n'.join(qc))
     if not n:

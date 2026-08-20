@@ -276,6 +276,10 @@ textarea.cal-inp{min-height:90px;resize:vertical;line-height:1.5}
 .ct-msg.enviando{background:#f4f2ef;color:#5b606b}
 .ct-msg.erro{background:#fdeeea;color:#C9543B}
 .ct-msg[hidden]{display:none}
+/* monograma no lugar do rosto enquanto nao houver foto real de quem assina */
+.contact .qperson .dp-mono{width:44px;height:44px;border-radius:50%;flex:none;display:flex;
+  align-items:center;justify-content:center;font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:700;font-size:18px;background:#F1EEE9;color:#0A0B0D}
 </style>
 <style id="mnav-css">/* extraido pra assets/site.css */</style>
 <link rel="icon" href="favicon.ico" sizes="any" />
@@ -488,7 +492,32 @@ header .menu-toggle svg{stroke:#0A0B0D}
   <main class="contact" id="contact">
     <div class="wrap" id="formView">
       <div class="grid">
-        <div class="qdeck" hidden>
+        <div class="qdeck">
+          <div class="qcard">
+            <div class="qbrand"><b>Sabores de Curitiba</b><span class="qcat"><span data-pt>Gastronomia</span><span data-en>Food &amp; Drink</span></span></div>
+            <p class="qtext"><span data-pt>&ldquo;A identidade finalmente estava contando a mesma história que a gente queria contar com o negócio.&rdquo;</span><span data-en>&ldquo;The identity was finally telling the same story we wanted to tell with the business.&rdquo;</span></p>
+            <div class="qperson"><span class="dp-mono" aria-hidden="true">V</span><div><div class="qname">Vitor França</div><div class="qrole"><span data-pt>Fundador</span><span data-en>Founder</span></div></div></div>
+          </div>
+          <div class="qcard">
+            <div class="qbrand"><b>Duo Garage</b><span class="qcat"><span data-pt>Automotivo</span><span data-en>Automotive</span></span></div>
+            <p class="qtext"><span data-pt>&ldquo;Ficou com cara de empresa que sabe o que está fazendo.&rdquo;</span><span data-en>&ldquo;It ended up looking like a company that knows what it is doing.&rdquo;</span></p>
+            <div class="qperson"><span class="dp-mono" aria-hidden="true">B</span><div><div class="qname">Bruno Mello</div><div class="qrole"><span data-pt>Proprietário</span><span data-en>Owner</span></div></div></div>
+          </div>
+          <div class="qcard">
+            <div class="qbrand"><b>Fense Seguradora</b><span class="qcat"><span data-pt>Seguros</span><span data-en>Insurance</span></span></div>
+            <p class="qtext"><span data-pt>&ldquo;Não foi simplesmente trocar um logo, foi dar uma personalidade mais clara para a empresa.&rdquo;</span><span data-en>&ldquo;It was not simply swapping a logo, it gave the company a clearer personality.&rdquo;</span></p>
+            <div class="qperson"><span class="dp-mono" aria-hidden="true">D</span><div><div class="qname">Danilo Veiga</div><div class="qrole"><span data-pt>Proprietário</span><span data-en>Owner</span></div></div></div>
+          </div>
+          <div class="qcard">
+            <div class="qbrand"><b>Golden Vibes</b><span class="qcat"><span data-pt>Semijoias</span><span data-en>Jewellery</span></span></div>
+            <p class="qtext"><span data-pt>&ldquo;Hoje eu olho para a Golden Vibes e vejo uma marca que encontrou a própria personalidade.&rdquo;</span><span data-en>&ldquo;Today I look at Golden Vibes and see a brand that found its own personality.&rdquo;</span></p>
+            <div class="qperson"><span class="dp-mono" aria-hidden="true">R</span><div><div class="qname">Rafaela Santos</div><div class="qrole"><span data-pt>Proprietária</span><span data-en>Owner</span></div></div></div>
+          </div>
+          <div class="qcard">
+            <div class="qbrand"><b>Bioerde</b><span class="qcat"><span data-pt>Agronegócio</span><span data-en>Agribusiness</span></span></div>
+            <p class="qtext"><span data-pt>&ldquo;A marca parece preparada para crescer com a empresa.&rdquo;</span><span data-en>&ldquo;The brand feels ready to grow with the company.&rdquo;</span></p>
+            <div class="qperson"><span class="dp-mono" aria-hidden="true">R</span><div><div class="qname">Rute Souza</div><div class="qrole"><span data-pt>CMO</span><span data-en>CMO</span></div></div></div>
+          </div>
         </div>
         <div class="fcard">
           <div class="step" data-step="1">

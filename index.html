@@ -140,6 +140,11 @@
 @media(prefers-reduced-motion:reduce){.globe-img{animation:none}}
 /* secao some enquanto nao houver depoimento real assinado */
 .feedback[hidden]{display:none}
+/* monograma no lugar do rosto enquanto nao houver foto real de quem assina */
+.tcard-author .dp-mono{width:52px;height:52px;border-radius:50%;flex:none;display:flex;
+  align-items:center;justify-content:center;font-family:"Bricolage Grotesque",system-ui,sans-serif;
+  font-weight:700;font-size:21px;letter-spacing:-.01em;background:rgba(255,255,255,.16);color:#fff}
+.tcard.light .dp-mono{background:#F1EEE9;color:#0A0B0D}
 </style>
 <style>
 .bpost-img{display:grid;place-items:center}
@@ -567,7 +572,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   </section>
 
   <!-- ============ FEEDBACK (stacking testimonials) ============ -->
-  <section class="feedback" id="feedback" hidden>
+  <section class="feedback" id="feedback">
     <div class="wrap">
       <div class="fb-title">
         <h2 class="fb-head"><span data-pt>Gente real, resultados reais</span><span data-en>Real People, Real Results Feedback</span></h2>
@@ -575,6 +580,38 @@ header .menu-toggle svg{stroke:#0A0B0D}
       </div>
 
       <div class="fb-stack">
+        <article class="tcard dark" style="--i:0;--r:-2.4deg">
+          <svg class="tq" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4c0 3-2 5-5 5v-2c1.4 0 2.5-1 2.7-2H7V7zm8 0h4v4c0 3-2 5-5 5v-2c1.4 0 2.5-1 2.7-2H15V7z"/></svg>
+          <p class="tcard-text"><span data-pt>Eles não desenharam simplesmente a marca que a gente tinha naquele momento. Ajudaram a desenhar uma marca que pudesse acompanhar o que a gente quer construir.</span><span data-en>They did not simply design the brand we had at that moment. They helped design a brand that could keep up with what we want to build.</span></p>
+          <div class="tcard-author">
+            <span class="dp-mono" aria-hidden="true">V</span>
+            <div><div class="tcard-name">Vitor França</div><div class="tcard-role"><span data-pt>Fundador</span><span data-en>Founder</span></div></div>
+          </div>
+        </article>
+        <article class="tcard light" style="--i:1;--r:2deg">
+          <svg class="tq" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4c0 3-2 5-5 5v-2c1.4 0 2.5-1 2.7-2H7V7zm8 0h4v4c0 3-2 5-5 5v-2c1.4 0 2.5-1 2.7-2H15V7z"/></svg>
+          <p class="tcard-text"><span data-pt>Você não precisa desenhar um carro para falar de automóvel. E isso acabou deixando a marca muito mais sofisticada.</span><span data-en>You do not need to draw a car to talk about cars. That is what ended up making the brand far more sophisticated.</span></p>
+          <div class="tcard-author">
+            <span class="dp-mono" aria-hidden="true">B</span>
+            <div><div class="tcard-name">Bruno Mello</div><div class="tcard-role"><span data-pt>Proprietário</span><span data-en>Owner</span></div></div>
+          </div>
+        </article>
+        <article class="tcard brand" style="--i:2;--r:-1.8deg">
+          <svg class="tq" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4c0 3-2 5-5 5v-2c1.4 0 2.5-1 2.7-2H7V7zm8 0h4v4c0 3-2 5-5 5v-2c1.4 0 2.5-1 2.7-2H15V7z"/></svg>
+          <p class="tcard-text"><span data-pt>Não foi simplesmente trocar um logo, foi dar uma personalidade mais clara para a empresa. Agora, quando a Fense fala de proteção, existe uma identidade por trás dessa mensagem.</span><span data-en>It was not simply swapping a logo, it gave the company a clearer personality. Now, when Fense talks about protection, there is an identity behind the message.</span></p>
+          <div class="tcard-author">
+            <span class="dp-mono" aria-hidden="true">D</span>
+            <div><div class="tcard-name">Danilo Veiga</div><div class="tcard-role"><span data-pt>Proprietário</span><span data-en>Owner</span></div></div>
+          </div>
+        </article>
+        <article class="tcard dark" style="--i:3;--r:2.4deg">
+          <svg class="tq" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4c0 3-2 5-5 5v-2c1.4 0 2.5-1 2.7-2H7V7zm8 0h4v4c0 3-2 5-5 5v-2c1.4 0 2.5-1 2.7-2H15V7z"/></svg>
+          <p class="tcard-text"><span data-pt>O verde trouxe uma sofisticação muito mais interessante. O dourado deixa de ser a identidade inteira e passa a ser um detalhe, e isso faz o produto aparecer mais.</span><span data-en>The green brought a much more interesting sophistication. Gold stops being the whole identity and becomes a detail, and that makes the product stand out more.</span></p>
+          <div class="tcard-author">
+            <span class="dp-mono" aria-hidden="true">R</span>
+            <div><div class="tcard-name">Rafaela Santos</div><div class="tcard-role"><span data-pt>Proprietária</span><span data-en>Owner</span></div></div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
