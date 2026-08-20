@@ -45,7 +45,7 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # altura travada em 268px.
 # ----------------------------------------------------------------------------
 DEPOIMENTOS = [
- dict(slug='sabores', nome='Vitor França',
+ dict(slug='sabores', nome='Vinicius França',
    cargo_pt='Fundador', cargo_en='Founder',
    empresa='Sabores de Curitiba',
    setor_pt='Gastronomia', setor_en='Food & Drink',
@@ -82,6 +82,7 @@ DEPOIMENTOS = [
  dict(slug='golden-vibes', nome='Rafaela Santos',
    cargo_pt='Proprietária', cargo_en='Owner',
    empresa='Golden Vibes',
+   foto='assets/depoimentos/rafaela-santos.webp',
    setor_pt='Semijoias', setor_en='Jewellery',
    texto_pt='O verde trouxe uma sofisticação muito mais interessante. O dourado deixa de ser a '
             'identidade inteira e passa a ser um detalhe, e isso faz o produto aparecer mais.',
@@ -93,6 +94,7 @@ DEPOIMENTOS = [
  dict(slug='bioerde', nome='Rute Souza',
    cargo_pt='CMO', cargo_en='CMO',
    empresa='Bioerde',
+   foto='assets/depoimentos/rute-souza.webp',
    setor_pt='Agronegócio', setor_en='Agribusiness',
    texto_pt='Quando você olha para a identidade e consegue imaginar o futuro da empresa dentro '
             'dela, o branding foi bem feito. A marca parece preparada para crescer com a empresa.',
