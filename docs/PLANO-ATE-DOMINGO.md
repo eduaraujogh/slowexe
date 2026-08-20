@@ -67,8 +67,9 @@ Verificação, não construção. Sobra de tempo vai pro que ficou pra trás.
 |---|---|---|
 | 1 | Claude | `check.py` com zero erro e zero aviso, build idempotente em 3 rodadas |
 | 2 | Claude | `privacidade.html`: nomear o serviço de formulário na seção 6, obrigatório assim que ele passa a receber dado pessoal. `PENDENCIAS` item 5 |
-| 3 | Eduardo | Domínio próprio: decidir **na sexta**, porque DNS leva até 48h |
+| 3 | Eduardo | **Comprar o domínio.** Decidido: vai comprar até domingo. Quanto mais cedo, melhor: DNS leva até 48h, então compra no domingo significa domínio resolvendo só na segunda ou terça |
 | 4 | Claude | Revisão página por página, 5 larguras, 2 idiomas, console limpo |
+| 4b | Claude | Deixar a troca de endereço pronta: `SITE_URL` em `tools/siteconfig.py`, `CNAME` e o passo de Settings documentados. Vira serviço de 3 minutos no dia em que o domínio existir, sem retrabalho |
 | 5 | Claude | Deploy final |
 
 ---
@@ -81,7 +82,9 @@ Verificação, não construção. Sobra de tempo vai pro que ficou pra trás.
    automaticamente. Melhor deixar de fora que publicar raso.
 3. **Depoimento real não cabe em 4 dias.** A remoção resolve o risco agora;
    conseguir depoimento com autorização fica pro depois de domingo.
-4. **Privacidade segue sem leitura de advogado.** Não bloqueia, continua em
+4. **Domínio comprado em cima da hora não propaga a tempo.** Não bloqueia nada:
+   o site fica no endereço do GitHub e a troca acontece depois, sem retrabalho.
+5. **Privacidade segue sem leitura de advogado.** Não bloqueia, continua em
    `PENDENCIAS`.
 
 ---
