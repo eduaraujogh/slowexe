@@ -1159,7 +1159,10 @@ header .menu-toggle svg{stroke:#0A0B0D}
       overlay.querySelector('.cal-dwho').innerHTML='Slowexe <span class="cal-chip host">'+(en?'Host':'Anfitrião')+'</span><br><span class="em">ola@slowexe.com</span><div class="who2">'+esc(nm.value)+' <span class="cal-chip part">'+(en?'Guest':'Participante')+'</span><br><span class="em">'+esc(em.value)+'</span></div>';
       var ndt=overlay.querySelector('.cal-dnt'), ndd=overlay.querySelector('.cal-dnd');
       if(note&&note.value.trim()){ndd.textContent=note.value.trim();ndt.style.display='';ndd.style.display='';}else{ndt.style.display='none';ndd.style.display='none';}
-      overlay.querySelector('.cal-dsub').textContent=en?('Slowexe will meet with '+nm.value+'. We emailed you a calendar invite with all the details for everyone involved.'):('A Slowexe terá uma reunião com '+nm.value+'. Enviamos um e-mail com um convite para o calendário contendo todos os detalhes para todos os participantes.');
+      // Nao existe envio de e-mail nem criacao de evento: a unica acao real e o
+      // botao do Google Calendar, que monta uma URL TEMPLATE. O texto diz isso e
+      // nada alem disso. PENDENCIAS item 2.
+      overlay.querySelector('.cal-dsub').textContent=en?('Slowexe will meet with '+nm.value+'. Add the time to your calendar with the button below.'):('A Slowexe terá uma reunião com '+nm.value+'. Adicione o horário ao seu calendário pelo botão abaixo.');
       var g=overlay.querySelector('#calGcal');if(g)g.href='https://www.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(en?'Intro call · Slowexe':'Conversa inicial · Slowexe')+'&dates='+gcalDates()+'&details='+encodeURIComponent('Google Meet');
       showView('done');
     });
