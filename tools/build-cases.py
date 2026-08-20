@@ -305,5 +305,74 @@ f'''        <div class="deck-card">
         print('atualizado  index.html  (%d cards no baralho do hero)' % len(baralho))
 
 
+    # ---- baralhos de citacao: home e contato ----
+    # Nao existe depoimento de cliente real com autorizacao, e inventar um e
+    # propaganda enganosa pelo CDC, alem de contrariar a regra do proprio
+    # projeto. O que existe de verdade e a citacao de conceito de cada case,
+    # assinada pela Slowexe, criterio ja usado nas paginas de case.
+    # Vindo daqui, os dois baralhos crescem sozinhos quando entrar case novo.
+    ASPAS = ('<svg class="tq" viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v4c0'
+             ' 3-2 5-5 5v-2c1.4 0 2.5-1 2.7-2H7V7zm8 0h4v4c0 3-2 5-5 5v-2c1.4 0 2.5-1'
+             ' 2.7-2H15V7z"/></svg>')
+
+    # home: o empilhamento sticky foi desenhado pra 4, com offset de 30px
+    NO_FEEDBACK = 4
+    tons = ['dark', 'light', 'brand', 'dark']
+    giros = ['-2.4deg', '2deg', '-1.8deg', '2.4deg']
+    fb = []
+    for k, c in enumerate(CASES[:NO_FEEDBACK]):
+        cover = imgs(c['slug'])[0]
+        fb.append(
+f'''        <article class="tcard {tons[k % len(tons)]}" style="--i:{k};--r:{giros[k % len(giros)]}">
+          {ASPAS}
+          <p class="tcard-text"><span data-pt>{esc(c['quote_pt'])}</span><span data-en>{esc(c['quote_en'])}</span></p>
+          <div class="tcard-author">
+            <img class="tcase" src="assets/cases/{cover}" alt="" loading="lazy" decoding="async">
+            <div><div class="tcard-name">{esc(c['name'])}</div><div class="tcard-role"><span data-pt>{esc(c['tag_pt'])}</span><span data-en>{esc(c['tag_en'])}</span></div></div>
+          </div>
+        </article>''')
+    h = io.open(ix, encoding='utf-8').read()
+    h3, n = re.subn(
+        r'(?P<ini>^(?P<ind>[ \t]*)<div class="fb-stack">\n)(?P<meio>.*?)(?P<fim>^(?P=ind)</div>)',
+        lambda m: m.group('ini') + '\n'.join(fb) + '\n' + m.group('fim'),
+        h, count=1, flags=re.S | re.M)
+    if not n:
+        print('AVISO: fb-stack nao encontrado em index.html')
+    else:
+        io.open(ix, 'w', encoding='utf-8').write(h3)
+        print('atualizado  index.html  (%d citacoes no feedback)' % len(fb))
+
+    # contato: o deck gira sozinho e so tem pos-0 ate pos-4, entao sao 5 fixos.
+    # Aqui a citacao entra so ate a primeira frase: o card tem altura travada
+    # em 268px e o texto inteiro estouraria.
+    NO_QDECK = 5
+    cx = os.path.join(BASE, 'contato.html')
+    q = io.open(cx, encoding='utf-8').read()
+    qc = []
+    for c in CASES[:NO_QDECK]:
+        cover = imgs(c['slug'])[0]
+        qpt = esc(c['quote_pt'].split('.')[0]) + '.'
+        qen = esc(c['quote_en'].split('.')[0]) + '.'
+        qc.append(
+f'''          <div class="qcard">
+            <div class="qbrand"><b>{esc(c['name'])}</b><span class="qcat"><span data-pt>{esc(c['tag_pt'])}</span><span data-en>{esc(c['tag_en'])}</span></span></div>
+            <p class="qtext"><span data-pt>&ldquo;{qpt}&rdquo;</span><span data-en>&ldquo;{qen}&rdquo;</span></p>
+            <div class="qperson"><img class="qcase" src="assets/cases/{cover}" alt="" loading="lazy" decoding="async"><div><div class="qname">Slowexe</div><div class="qrole"><span data-pt>Conceito da marca</span><span data-en>Brand concept</span></div></div></div>
+          </div>''')
+    # o fecho tem que ser casado pela indentacao da abertura: o </div> do
+    # primeiro qcard e identico ao do baralho, foi assim que o baralho do hero
+    # chegou a acumular 29 cards.
+    q2, n = re.subn(
+        r'(?P<ini>^(?P<ind>[ \t]*)<div class="qdeck">\n)(?P<meio>.*?)(?P<fim>^(?P=ind)</div>)',
+        lambda m: m.group('ini') + '\n'.join(qc) + '\n' + m.group('fim'),
+        q, count=1, flags=re.S | re.M)
+    if not n:
+        print('AVISO: qdeck nao encontrado em contato.html')
+    else:
+        io.open(cx, 'w', encoding='utf-8').write(q2)
+        print('atualizado  contato.html  (%d citacoes no deck)' % len(qc))
+
+
+
 if __name__ == '__main__':
     main()
