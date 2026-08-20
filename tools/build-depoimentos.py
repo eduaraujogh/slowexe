@@ -48,6 +48,7 @@ DEPOIMENTOS = [
  dict(slug='sabores', nome='Vinicius França',
    cargo_pt='Fundador', cargo_en='Founder',
    empresa='Sabores de Curitiba',
+   foto='assets/depoimentos/vinicius-franca.webp',
    setor_pt='Gastronomia', setor_en='Food & Drink',
    texto_pt='Eles não desenharam simplesmente a marca que a gente tinha naquele momento. '
             'Ajudaram a desenhar uma marca que pudesse acompanhar o que a gente quer construir.',
@@ -70,6 +71,7 @@ DEPOIMENTOS = [
  dict(slug='fense', nome='Danilo Veiga',
    cargo_pt='Proprietário', cargo_en='Owner',
    empresa='Fense Seguradora',
+   foto='assets/depoimentos/danilo-veiga.webp',
    setor_pt='Seguros', setor_en='Insurance',
    texto_pt='Não foi simplesmente trocar um logo, foi dar uma personalidade mais clara para a '
             'empresa. Agora, quando a Fense fala de proteção, existe uma identidade por trás '
