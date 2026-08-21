@@ -111,10 +111,15 @@ idioma; único terceiro que recebe IP do visitante é o Google Fonts.
 
 1. **Revisão de quem entende.** Foi escrita por IA com base no que é praxe em
    estúdio de design. Não substitui leitura de advogado.
-2. **A seção 6 fica desatualizada assim que o item 1 for resolvido.** No dia em
-   que o formulário passar a enviar, o serviço escolhido (Formspree, Web3Forms
-   ou outro) tem que ser **nomeado** ali, porque passa a receber dado pessoal.
-   O texto do próprio arquivo avisa isso em comentário.
+2. ~~A seção 6 fica desatualizada assim que o item 1 for resolvido.~~ **Feito
+   em 20/08/2026.** O Web3Forms está nomeado na seção 6, e a seção 3 diz que os
+   dois envios passam por ele e chegam como e-mail, sem banco de dados nosso.
+   A data de atualização da política mudou junto.
+
+   Ficou um alerta pra próxima vez: a política prometia nomear o serviço
+   **antes** de ele entrar no ar, e o formulário foi ligado algumas horas antes
+   do texto ser corrigido. Serviço novo que receba dado de visitante entra no
+   mesmo commit que o texto.
 
 Editar em `BLOCOS`, no `tools/build-legal.py`, nunca no HTML gerado. Ao mudar o
 texto, atualizar `ATUALIZADO_PT` / `ATUALIZADO_EN` na mesma tela.

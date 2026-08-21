@@ -13,8 +13,8 @@ O texto descreve o que o site FAZ HOJE, conferido no codigo:
   - nenhum cookie, nenhum analytics, nenhum pixel
   - unico armazenamento local: a chave slowexe-lang, com a preferencia de idioma
   - unico terceiro que recebe IP do visitante: Google Fonts
-  - o formulario de contato ainda nao envia (docs/PENDENCIAS.md item 1); quando
-    passar a enviar, a secao 3 precisa nomear o servico escolhido
+  - o formulario de contato passou a enviar em 20/08/2026, pelo Web3Forms, que
+    esta nomeado nas secoes 3 e 6. Se o servico mudar, mudar os dois lugares
 
 Bilingue, como o resto do site: cada bloco tem PT e EN, senao o check.py
 acusa desequilibrio.
@@ -29,8 +29,8 @@ SAIDA = os.path.join(BASE, 'privacidade.html')
 
 # Fixo de proposito: se viesse da data do build, mudaria a cada rodada e
 # quebraria a idempotencia. Atualizar a mao quando o texto mudar.
-ATUALIZADO_PT = '28 de julho de 2026'
-ATUALIZADO_EN = 'July 28, 2026'
+ATUALIZADO_PT = '20 de agosto de 2026'
+ATUALIZADO_EN = 'August 20, 2026'
 
 CONTATO = 'ola@slowexe.com'
 
@@ -75,6 +75,13 @@ BLOCOS = [
   '<b>Agendamento de conversa:</b> nome, e-mail e a observacao que voce escrever.',
   '<b>Scheduling a call:</b> name, email and any note you write.'),
  ('p',
+  'Nos dois casos, o envio passa pelo Web3Forms, nomeado na secao 6, e chega '
+  'como e-mail na caixa da Slowexe. Nao existe banco de dados nosso guardando '
+  'esses envios.',
+  'In both cases the submission goes through Web3Forms, named in section 6, and '
+  'arrives as an email in the Slowexe inbox. There is no database of ours '
+  'storing these submissions.'),
+ ('p',
   'Nao pedimos CPF, endereco, dado bancario nem qualquer dado sensivel. Se voce '
   'escrever algo assim no campo de mensagem, sera por sua conta: pedimos que nao faca.',
   'We never ask for national ID, address, banking details or any sensitive data. '
@@ -113,11 +120,18 @@ BLOCOS = [
   '<b>Google Fonts:</b> the site fonts load from Google servers, which therefore '
   'receive your IP. This is the only third party involved while you are merely '
   'reading the site.'),
+ ('l',
+  '<b>Web3Forms:</b> o formulario de contato e o pedido de horario sao enviados '
+  'por esse servico, que recebe o que voce digitou e entrega no e-mail da '
+  'Slowexe. Ele so entra em acao quando voce clica em enviar: ate la, nada do '
+  'que voce escreveu sai do seu navegador.',
+  '<b>Web3Forms:</b> the contact form and the scheduling request are delivered '
+  'through this service, which receives what you typed and forwards it to the '
+  'Slowexe inbox. It only acts when you click send: until then, nothing you '
+  'wrote leaves your browser.'),
  ('p',
-  'Alem desses, ninguem. Se um dia usarmos um servico de formulario ou de '
-  'agendamento, ele sera nomeado aqui antes de entrar no ar.',
-  'Beyond those, no one. If we ever adopt a form or scheduling service, it will '
-  'be named here before going live.'),
+  'Alem desses, ninguem.',
+  'Beyond those, no one.'),
 
  ('h', '7. Preferencia de idioma', '7. Language preference'),
  ('p',
