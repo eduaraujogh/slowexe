@@ -67,7 +67,7 @@ Verificação, não construção. Sobra de tempo vai pro que ficou pra trás.
 | # | Quem | Tarefa |
 |---|---|---|
 | 1 | Claude | `check.py` com zero erro e zero aviso, build idempotente em 3 rodadas |
-| 2 | Claude | `privacidade.html`: nomear o serviço de formulário na seção 6, obrigatório assim que ele passa a receber dado pessoal. `PENDENCIAS` item 5 |
+| 2 | ✅ Claude | ~~`privacidade.html`~~. Feito em 20/08: Web3Forms nomeado nas seções 3 e 6, data atualizada |
 | 3 | Eduardo | **Comprar o domínio.** Decidido: vai comprar até domingo. Quanto mais cedo, melhor: DNS leva até 48h, então compra no domingo significa domínio resolvendo só na segunda ou terça |
 | 4 | Claude | Revisão página por página, 5 larguras, 2 idiomas, console limpo |
 | 4b | Claude | Deixar a troca de endereço pronta: `SITE_URL` em `tools/siteconfig.py`, `CNAME` e o passo de Settings documentados. Vira serviço de 3 minutos no dia em que o domínio existir, sem retrabalho |

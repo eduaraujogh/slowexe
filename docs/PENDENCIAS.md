@@ -40,6 +40,16 @@ ação real.
 
 ---
 
+> **Decidido em 20/08/2026:** fica como está até depois de domingo. Avaliamos
+> Cal.com (plano grátis: agendamentos ilimitados, sincronia de mão dupla com o
+> Google Calendar, embutível no site, marca deles no widget) e o agendamento da
+> própria Google Agenda (grátis, mas o visitante sai do site). Os dois criam o
+> evento de verdade. O Eduardo preferiu não trocar agora: o pedido chega por
+> e-mail e ele confirma na mão, e a prioridade da semana são os cases.
+>
+> Quando voltar: qualquer um dos dois passa a receber dado de visitante, então
+> entra no mesmo commit que a atualização da política de privacidade.
+
 ## 3. ~~Depoimentos fictícios no ar~~ — resolvido
 
 Os cinco nomes inventados saíram e **cinco depoimentos reais entraram**, com
