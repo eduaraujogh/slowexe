@@ -460,10 +460,13 @@ header .menu-toggle svg{stroke:#0A0B0D}
    destaque da PAGINA. O laranja da Gedisa so aparece dentro das telas dela e
    na secao de paleta, onde e conteudo e nao interface. */
 .cw-rascunho{background:#0A0B0D;color:#A0A4AD;border-bottom:1px solid #23262C;
-  padding:14px 24px;font-size:13.5px;line-height:1.5;text-align:center}
+  padding:calc(var(--header-h) + 18px) 24px 18px;font-size:13.5px;line-height:1.5;text-align:center}
 .cw-rascunho b{color:#F07A65;display:block;font-family:"Bricolage Grotesque",system-ui,sans-serif;
-  font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
-.cw-rascunho span[data-pt],.cw-rascunho span[data-en]{max-width:70ch;display:inline-block}
+  font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
+/* a largura de leitura vai no P, nunca nos spans de idioma: dar display a eles
+   vence a regra que esconde o outro idioma e a tarja sai bilingue na tela */
+.cw-rascunho p{max-width:74ch;margin:0 auto}
+.cw-rascunho + .cw-hero{padding-top:56px}
 
 .projx.cwcase{background:#fff;color:#0A0B0D}
 .cw-eyebrow{display:block;font-size:12.5px;font-weight:600;text-transform:uppercase;
@@ -678,12 +681,12 @@ header .menu-toggle svg{stroke:#0A0B0D}
   <main class="projx cwcase">
     <div class="cw-rascunho">
       <b><span data-pt>Prévia de estrutura</span><span data-en>Structure preview</span></b>
-      <span data-pt>As imagens são reais, extraídas do projeto. Ano, prazo, resultados e
+      <p><span data-pt>As imagens são reais, extraídas do projeto. Ano, prazo, resultados e
         depoimento ainda são provisórios e estão marcados na página. Ela está com noindex
-        e fora da grade de projetos até o conteúdo fechar.</span>
-      <span data-en>The images are real, taken from the project. Year, timeline, results
-        and testimonial are still provisional and marked on the page. It carries noindex
-        and stays out of the projects grid until the content is final.</span>
+        e fora da grade de projetos até o conteúdo fechar.</span><span data-en>The images are
+        real, taken from the project. Year, timeline, results and testimonial are still
+        provisional and marked on the page. It carries noindex and stays out of the projects
+        grid until the content is final.</span></p>
     </div>
     <section class="cw-hero">
       <div class="wrap">
