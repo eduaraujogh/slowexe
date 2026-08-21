@@ -60,6 +60,7 @@ DEPOIMENTOS = [
  dict(slug='duo', nome='Bruno Mello',
    cargo_pt='Proprietário', cargo_en='Owner',
    empresa='Duo Garage',
+   foto='assets/depoimentos/bruno-mello.webp',
    setor_pt='Automotivo', setor_en='Automotive',
    texto_pt='Você não precisa desenhar um carro para falar de automóvel. '
             'E isso acabou deixando a marca muito mais sofisticada.',

@@ -61,13 +61,10 @@ Os textos originais são longos, de entrevista. No card entra um trecho, com as
 palavras de quem falou, sem reescrita. A versão curta de cada um vai pro deck
 do contato, onde o card tem altura travada.
 
-**Fotos:** quatro das cinco entraram, recortadas no rosto e convertidas pra
-WebP de 320px, em `assets/depoimentos/`. Quem não tem foto aparece com a
-inicial num monograma, e é de propósito: retrato genérico no rosto de pessoa
-real seria pior que não ter foto.
+**Fotos: as cinco entraram**, recortadas no rosto e convertidas pra WebP de
+320px, em `assets/depoimentos/`. O monograma com a inicial continua no código
+como reserva, pra quando entrar depoimento novo sem foto.
 
-- **Falta o Bruno Mello.** O Eduardo confirmou que a foto dele existe, mas o
-  arquivo não chegou ao disco. Salvar em `~/Downloads` e rodar o recorte.
 - **A foto do Danilo Veiga tem cara de banco de imagens** (homem no notebook,
   café desfocado, enquadramento típico de stock; o arquivo veio como
   `daniel.jpg`). Levantei isso e o Eduardo confirmou que pode usar, então está
