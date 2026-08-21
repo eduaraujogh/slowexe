@@ -85,7 +85,11 @@ CSS = '''<style id="mobile-fixes">
 </style>
 </head>'''
 
-BLOCO = re.compile(r'<style id="mobile-fixes">.*?</style>\s*(?=</head>)', re.S)
+# So o proprio bloco. A versao antiga terminava com (?=</head>), o que obrigava
+# o casamento a ir ate o ULTIMO </style> antes do </head>: qualquer bloco de
+# estilo criado depois deste, e antes do fecho do head, era engolido na
+# substituicao. Foi o que aconteceu com o <style id="case-web">.
+BLOCO = re.compile(r'<style id="mobile-fixes">.*?</style>\n?', re.S)
 
 
 def main():
