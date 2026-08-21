@@ -4,5 +4,6 @@ Allow: /
 # Templates dos scripts de build, nao sao paginas
 Disallow: /projeto.html
 Disallow: /blog-post.html
+Disallow: /projeto-gedisa.html
 
 Sitemap: https://eduaraujogh.github.io/slowexe/sitemap.xml

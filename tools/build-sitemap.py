@@ -53,7 +53,7 @@ def data_post(caminho):
 
 def main():
     nomes = sorted(f for f in os.listdir(BASE)
-                   if f.endswith('.html') and f not in cfg.TEMPLATES)
+                   if f.endswith('.html') and f not in cfg.NAO_INDEXAR)
 
     linhas = ['<?xml version="1.0" encoding="UTF-8"?>',
               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
@@ -78,7 +78,7 @@ def main():
         'Allow: /',
         '',
         '# Templates dos scripts de build, nao sao paginas',
-    ] + ['Disallow: /%s' % t for t in cfg.TEMPLATES] + [
+    ] + ['Disallow: /%s' % t for t in cfg.NAO_INDEXAR] + [
         '',
         'Sitemap: %s' % cfg.url('sitemap.xml'),
         '',

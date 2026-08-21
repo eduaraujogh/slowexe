@@ -76,7 +76,7 @@ def checa_bilingue(nome, html):
 
 
 def checa_seo(nome, html):
-    if nome in cfg.TEMPLATES:
+    if nome in cfg.NAO_INDEXAR:
         if 'noindex' not in html:
             erro(nome, 'template sem noindex: o Google vai indexar como pagina real')
         return
@@ -180,7 +180,7 @@ def checa_arquivos_soltos():
     if os.path.exists(sm):
         xml = io.open(sm, encoding='utf-8').read()
         for nome in paginas():
-            if nome in cfg.TEMPLATES:
+            if nome in cfg.NAO_INDEXAR:
                 if '/%s<' % nome in xml:
                     erros.append('%-32s %s' % (nome, 'template dentro do sitemap'))
                 continue

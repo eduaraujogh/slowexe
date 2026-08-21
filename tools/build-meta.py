@@ -135,7 +135,7 @@ def main():
         if 'rel="apple-touch-icon"' not in html:
             linhas += icones()
 
-        if nome in cfg.TEMPLATES:
+        if nome in cfg.NAO_INDEXAR:
             # template nao e pagina: fora do indice, sem canonical nem og
             if 'name="robots"' not in html:
                 linhas.append('<meta name="robots" content="noindex, nofollow" />')

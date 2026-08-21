@@ -25,6 +25,15 @@ THEME_COLOR = '#0A0B0D'
 # "Nova | Projeto | Slowexe" como se fosse um case de verdade.
 TEMPLATES = ('projeto.html', 'blog-post.html')
 
+# Paginas em rascunho: ja existem no repo pra serem vistas pela URL, mas ainda
+# tem conteudo por fechar. Recebem o mesmo tratamento dos templates, noindex e
+# fora do sitemap, pra nao serem indexadas com dado provisorio. Ao fechar o
+# conteudo, tirar daqui e rodar o build.
+RASCUNHOS = ('projeto-gedisa.html',)
+
+# Tudo que nao deve ser indexado.
+NAO_INDEXAR = TEMPLATES + RASCUNHOS
+
 
 def url(caminho):
     """URL absoluta de um arquivo do site."""
