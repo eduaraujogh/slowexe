@@ -5,38 +5,38 @@ Marcar aqui quando resolver.
 
 ---
 
-## 1. O formulário de contato não envia nada
+## 1. ~~O formulário de contato não envia nada~~ — resolvido no código, **entrega
+não comprovada**
 
-**Onde:** `contato.html`, handler do `#submitForm`.
+**Onde:** `contato.html`, `window.Envio` e o handler do `#submitForm`.
 
-O formulário de 2 etapas valida os campos, esconde o card e mostra a tela de
-agradecimento. Não existe `<form action>`, `fetch` nem qualquer envio. Todo
-lead que preenche é perdido em silêncio.
+O `fetch()` para o Web3Forms está no lugar, a tela de agradecimento só aparece
+com `success:true` na resposta, e a falha vira mensagem de erro na tela. O
+fluxo visual de 2 etapas não mudou.
 
-**Como resolver:** um `fetch()` no lugar das linhas que mostram o "obrigado".
-Só mostrar a tela de sucesso se a resposta vier ok, e mostrar erro se falhar.
-O fluxo visual (2 etapas, dropdown, validação) não muda em nada.
+**O que continua aberto:** ninguém nunca preencheu o formulário publicado para
+ver o e-mail chegar. O plano de 20/08 previa "envio de teste de ponta a ponta"
+e essa linha nunca foi marcada. Se a `access_key` for de conta com e-mail não
+verificado, ou se o Web3Forms bloquear o remetente, o site continua parecendo
+perfeito e perde 100% dos leads em silêncio, que é exatamente a falha original.
+Um envio de teste real resolve a dúvida em dois minutos, e é a única forma:
+não existe como validar a chave sem disparar um envio.
 
-Serviços que funcionam em site estático no GitHub Pages: Formspree,
-Web3Forms, Basin. Nenhum exige backend.
+> Levantado de novo em 28/08/2026. O Eduardo preferiu não fazer o teste agora.
 
 ---
 
-## 2. O modal de agendamento afirma algo que não acontece
+## 2. ~~O modal de agendamento afirma algo que não acontece~~ — resolvido
 
 **Onde:** `contato.html`, handler do `#calConfirm`.
 
-A tela de confirmação diz *"Enviamos um e-mail com um convite para o calendário
-contendo todos os detalhes para todos os participantes"*. Nenhum e-mail é
-enviado e nenhum evento é criado. Só o botão "Adicionar ao Google Calendar"
-funciona de verdade (monta uma URL `TEMPLATE`).
+O texto não promete mais convite de calendário: diz *"Recebemos o seu pedido e
+confirmamos por e-mail"*, e o pedido de horário passou a ser enviado pelo mesmo
+`window.Envio` do formulário. A criação do evento continua sendo manual, do lado
+da Slowexe, e o botão do Google Calendar segue como a ação real do visitante.
 
-A pessoa fecha a aba achando que tem reunião marcada. É mais grave que o item 1,
-porque não é só perder o lead: é afirmar um fato falso pro cliente.
-
-**Como resolver:** ou integrar de verdade (Cal.com, Calendly), ou reescrever o
-texto pra dizer só o que é verdade, deixando o botão do Google Calendar como a
-ação real.
+Vale a mesma ressalva do item 1: o envio nunca foi conferido de ponta a ponta.
+Se o e-mail não chegar, a frase *"confirmamos por e-mail"* volta a ser falsa.
 
 ---
 
@@ -201,8 +201,63 @@ um `assets/site.css` compartilhado é a próxima grande refatoração.
 
 ---
 
+## 9. O vídeo de fundo da `servicos.html` contradiz a política de privacidade
+
+**Onde:** `servicos.html`, o `.svc-ytwrap` do hero.
+
+O hero carrega um `<iframe>` de `www.youtube.com` com `autoplay`. Ele sobe
+sozinho, sem clique, na primeira visita. O YouTube nesse domínio grava cookie
+e o embed é do domínio comum, não do `youtube-nocookie.com`.
+
+A `privacidade.html` diz que o site não usa cookie nem pixel e que **o único
+terceiro que recebe o IP do visitante é o Google Fonts**. Com esse iframe no
+ar, as duas frases estão erradas na página que mais precisa estar certa.
+
+É a mesma regra que este projeto já escreveu pra si no item 5: serviço que
+recebe dado de visitante entra no mesmo commit que o texto da política.
+
+**Como resolver, na ordem:**
+
+1. Trocar o `src` para `https://www.youtube-nocookie.com/embed/...`, que é o
+   modo de privacidade reforçada e não grava cookie antes do play. Continua
+   recebendo o IP, então não dispensa o passo 2.
+2. Nomear o YouTube na seção 6 da política, do lado do Google Fonts, e corrigir
+   a frase do "único terceiro". Editar em `BLOCOS`, no `tools/build-legal.py`,
+   e atualizar `ATUALIZADO_PT` / `ATUALIZADO_EN`.
+
+Alternativa que dispensa as duas: hospedar o vídeo como arquivo local e usar
+`<video muted loop playsinline>`, sem terceiro nenhum.
+
+---
+
+## 10. O site publica um e-mail que não existe
+
+`ola@slowexe.com` aparece 3 vezes: uma no modal de agendamento do
+`contato.html` e duas na `privacidade.html`.
+
+O domínio `slowexe.com` está comprado na Hostinger mas não conectado, por
+decisão do Eduardo, e a caixa `ola@` ainda não foi criada. Quem escrever pra
+ela recebe erro de volta.
+
+Na `privacidade.html` pesa mais: é o canal indicado pra quem quiser exercer
+direito de titular sobre os próprios dados. A pessoa escreve e ninguém recebe.
+
+**Como resolver:** criar a caixa junto com a conexão do domínio, ou trocar o
+endereço pelo que já recebe e-mail hoje enquanto o domínio não entra.
+
+---
+
 ## Resolvidos
 
+- ~~Mobile das 21 páginas fora da home com medida de desktop.~~ Segunda passada
+  em 28/08/2026, medida em 320, 375 e 390px. Padding de seção de 84 a 124px caiu
+  pra 56 (48 abaixo de 430px); topo de página passou a contar a partir do header
+  fixo; `servicos.html` saiu de 20,4 pra 18,1 telas de rolagem; `.menu-toggle`
+  foi de 42 pra 44px e os campos do formulário de contato de 35 a 37 pra 44px,
+  mantendo o `font-size:16px` que evita o zoom automático do iOS. Tudo em
+  `tools/build-mobile.py`. **Nenhuma página tem vazamento horizontal:** o que
+  aparece no navegador de mesa emulando celular é a barra de rolagem de 14px do
+  emulador contra o `100vw` do header.
 - ~~Sem navegação no celular: `.nav-links` sumia em ≤760px, o `.menu-toggle` não
   tinha handler nem painel, e o botão renderizava 26px fora da tela.~~
   Drawer implementado nas 20 páginas.

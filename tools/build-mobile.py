@@ -17,6 +17,20 @@ inteira do desktop. Medido na home em 390x844, antes:
 Este arquivo corrige MEDIDA, nao estrutura. O efeito de cada bloco continua
 sendo o mesmo do desktop, so que dimensionado pra tela pequena.
 
+Segunda passada, 28/08/2026, nas 21 paginas fora da home. A primeira rodada
+foi calibrada nas classes da home, e nenhum seletor dela alcancava as paginas
+internas: elas seguiam com a medida do desktop. Medido em 375x844, antes:
+
+  servicos.html ......... 20,4 telas de rolagem, 1.344px so de padding
+  paginas de servico .... secoes de 92px de padding, topo de 140px fixo
+  case e blog ........... secoes de 84 a 116px
+  .menu-toggle .......... 42px, unico caminho de navegacao no celular
+  campos do contato ..... 35 a 37px, na pagina que converte
+
+Nao ha vazamento horizontal em nenhuma pagina: a rolagem lateral que aparece
+no navegador de mesa emulando celular e a barra de rolagem de 14px do proprio
+emulador contra o 100vw do header, e nao existe em aparelho de verdade.
+
 O bloco e substituido a cada build (nao so inserido quando falta), entao
 editar aqui e rodar o build ja atualiza as 21 paginas.
 """
@@ -72,6 +86,56 @@ CSS = '''<style id="mobile-fixes">
 
     /* --- texto miudo demais --- */
     .promo-tag,.promo-tag span{font-size:12px}
+
+    /* ============ PAGINAS INTERNAS ============
+       Medido em 375x812 nas 21 paginas. O bloco acima foi calibrado nas
+       classes da home, entao nada dele alcanca .svc-, .px-, .pc-, .blog-,
+       .art- ou .leg-: essas secoes continuavam com a medida do desktop.
+       A pior era servicos.html, com 20,4 telas de rolagem, das quais 1.344px
+       eram so o padding dos 8 blocos .svc-detail. */
+
+    /* --- respiro de secao: era 84 a 124px --- */
+    .svc-menu,.svc-alltype,.svc-detail,
+    .svc-sec,.svc-cta,
+    .px-grid-wrap,
+    .pc-overview,.pc-results,.pc-quote,.pc-navwrap,
+    .blog-list,.art-related{
+      padding-top:56px;padding-bottom:56px;
+    }
+    .pc-navwrap{padding-bottom:20px}
+    .cta-inner{padding-bottom:56px}
+
+    /* --- baralho de cada servico: 682px de altura, oito vezes na pagina,
+       eram 5,4 telas so de baralho. Em 560px, que e o proprio min-height
+       do design, a carta fica 345x414, retrato, sem achatar a arte --- */
+    .svc-deck{min-height:0;height:560px}
+    .svc-d-grid{gap:28px}
+
+    /* --- topo de pagina: o header e fixo, entao o respiro conta a partir
+       dele, como ja acontece no .hero da home. Eram 120 a 158px fixos --- */
+    .svc-vhero,.svc-hero,.px-hero,.pc-hero,
+    .blog-hero,.art-hero,.leg-hero,.contact{
+      padding-top:calc(var(--header-h) + 32px);
+    }
+    .svc-vhero{padding-bottom:48px}
+    .pc-hero{padding-bottom:32px}
+    .contact{padding-bottom:56px}
+
+    /* --- alvo de toque nas internas ---
+       O .menu-toggle, que e o unico caminho de navegacao no celular,
+       renderizava com 42px. Os demais sao link de texto, de 17px de altura. */
+    .menu-toggle{min-width:44px;min-height:44px}
+    .foot-priv,.pc-all,.cw-todos,.svc-d-cta,.art-back,.leg-back{
+      min-height:44px;display:inline-flex;align-items:center;
+    }
+    .px-filter{min-height:44px}
+
+    /* --- campos do formulario de contato ---
+       E a pagina que converte, e os campos vinham com 35 a 37px. O
+       font-size de 16px ja esta certo e nao muda: abaixo disso o iOS
+       da zoom sozinho ao focar o campo. */
+    .contact .inp,.contact select{min-height:44px}
+    .contact textarea.inp{min-height:120px}
   }
 
   @media(max-width:430px){
@@ -81,6 +145,14 @@ CSS = '''<style id="mobile-fixes">
     .ribbons{height:196px}
     .ribbon.r2{top:100px}
     .ribbon-item{font-size:17px}
+
+    .svc-menu,.svc-alltype,.svc-detail,
+    .svc-sec,.svc-cta,
+    .px-grid-wrap,
+    .pc-overview,.pc-results,.pc-quote,
+    .blog-list,.art-related{
+      padding-top:48px;padding-bottom:48px;
+    }
   }
 </style>
 </head>'''

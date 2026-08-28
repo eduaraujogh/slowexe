@@ -70,6 +70,7 @@ python tools/make-favicon.py  # regenera ícones, só se a marca mudar
 
 ## Pendências conhecidas
 
-Ver `docs/PENDENCIAS.md`. Em resumo: o formulário de contato não envia nada,
-o modal de agendamento afirma que envia e-mail sem enviar, e há depoimentos
-fictícios e imagens de placeholder externo no ar.
+Ver `docs/PENDENCIAS.md`. Em resumo: o formulário envia pelo Web3Forms mas a
+entrega nunca foi conferida de ponta a ponta, o hero da `servicos.html` carrega
+um iframe do YouTube que a política de privacidade não menciona, e o site
+publica o `ola@slowexe.com`, caixa que ainda não existe.
