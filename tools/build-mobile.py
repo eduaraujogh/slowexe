@@ -84,6 +84,11 @@ CSS = '''<style id="mobile-fixes">
     .foot-col .flink,.foot-cols a{min-height:44px;display:flex;align-items:center}
     .foot-social a{min-width:44px;min-height:44px}
 
+    /* --- rodape em duas colunas ---
+       Eram tres colunas iguais tambem no celular, 109px cada em 375px de
+       tela: "Por que a Slowexe" saia cortado no meio da palavra. */
+    .foot-cols{grid-template-columns:repeat(2,1fr);gap:24px 20px}
+
     /* --- texto miudo demais --- */
     .promo-tag,.promo-tag span{font-size:12px}
 
@@ -130,6 +135,13 @@ CSS = '''<style id="mobile-fixes">
     }
     .px-filter{min-height:44px}
 
+    /* --- no celular o formulario vem antes dos depoimentos ---
+       O baralho de citacoes ocupava a primeira tela inteira e empurrava o
+       formulario pra baixo da dobra, na unica pagina que existe pra captar
+       lead. No desktop as duas colunas aparecem juntas e a ordem nao pesa. */
+    .contact .grid > .fcard{order:-1}
+    .contact .grid > .qdeck{margin-top:8px}
+
     /* --- campos do formulario de contato ---
        E a pagina que converte, e os campos vinham com 35 a 37px. O
        font-size de 16px ja esta certo e nao muda: abaixo disso o iOS
@@ -145,6 +157,14 @@ CSS = '''<style id="mobile-fixes">
     .ribbons{height:196px}
     .ribbon.r2{top:100px}
     .ribbon-item{font-size:17px}
+
+    /* --- o titulo da home estava saindo da tela ---
+       `.headline` e clamp(44px,8.6vw,112px): abaixo de 512px de tela o vw
+       perde pro piso de 44px, e o piso nao cabe. "Marcas que duram" mede
+       369px em 44px de fonte, contra 327px de largura util em 375. Sobrava
+       o "m" pra fora, e o titulo tem white-space:nowrap, entao nao quebrava.
+       Abaixo de 430px o tamanho volta a seguir a tela. */
+    .headline{font-size:min(44px,10vw)}
 
     .svc-menu,.svc-alltype,.svc-detail,
     .svc-sec,.svc-cta,

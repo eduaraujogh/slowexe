@@ -545,6 +545,11 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .foot-col .flink,.foot-cols a{min-height:44px;display:flex;align-items:center}
     .foot-social a{min-width:44px;min-height:44px}
 
+    /* --- rodape em duas colunas ---
+       Eram tres colunas iguais tambem no celular, 109px cada em 375px de
+       tela: "Por que a Slowexe" saia cortado no meio da palavra. */
+    .foot-cols{grid-template-columns:repeat(2,1fr);gap:24px 20px}
+
     /* --- texto miudo demais --- */
     .promo-tag,.promo-tag span{font-size:12px}
 
@@ -591,6 +596,13 @@ header .menu-toggle svg{stroke:#0A0B0D}
     }
     .px-filter{min-height:44px}
 
+    /* --- no celular o formulario vem antes dos depoimentos ---
+       O baralho de citacoes ocupava a primeira tela inteira e empurrava o
+       formulario pra baixo da dobra, na unica pagina que existe pra captar
+       lead. No desktop as duas colunas aparecem juntas e a ordem nao pesa. */
+    .contact .grid > .fcard{order:-1}
+    .contact .grid > .qdeck{margin-top:8px}
+
     /* --- campos do formulario de contato ---
        E a pagina que converte, e os campos vinham com 35 a 37px. O
        font-size de 16px ja esta certo e nao muda: abaixo disso o iOS
@@ -607,6 +619,14 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .ribbon.r2{top:100px}
     .ribbon-item{font-size:17px}
 
+    /* --- o titulo da home estava saindo da tela ---
+       `.headline` e clamp(44px,8.6vw,112px): abaixo de 512px de tela o vw
+       perde pro piso de 44px, e o piso nao cabe. "Marcas que duram" mede
+       369px em 44px de fonte, contra 327px de largura util em 375. Sobrava
+       o "m" pra fora, e o titulo tem white-space:nowrap, entao nao quebrava.
+       Abaixo de 430px o tamanho volta a seguir a tela. */
+    .headline{font-size:min(44px,10vw)}
+
     .svc-menu,.svc-alltype,.svc-detail,
     .svc-sec,.svc-cta,
     .px-grid-wrap,
@@ -614,6 +634,107 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .blog-list,.art-related{
       padding-top:48px;padding-bottom:48px;
     }
+  }
+</style>
+<style id="mnav-v2">
+  /* ============ MENU DO CELULAR ============ */
+  /* Este bloco e o ultimo do <head>, entao vence o .mnav que ficou no
+     assets/site.css sem precisar de !important nem de seletor inflado. */
+  .mnav-backdrop{background:rgba(10,11,13,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  /* O `body.mnav-open{overflow:hidden}` sozinho nao tira a barra de rolagem
+     quando quem rola e o <html>. Ficando a barra, o painel (que e fixed, e
+     por isso mede a tela inteira, barra inclusa) empurrava 14px do proprio
+     conteudo pra tras dela: o X e o botao do CTA saiam cortados. Isso so
+     acontece em navegador de mesa estreito, porque no celular a barra e
+     sobreposta, mas o conserto vale nos dois. */
+  html:has(> body.mnav-open){overflow:hidden}
+  .mnav{
+    /* left:0 em vez de width:100%. Com right:0 e largura de 100%, o painel
+       nascia 14px pra fora no navegador de mesa emulando celular, onde a
+       barra de rolagem entra na conta. Esticado entre as duas bordas, nao. */
+    left:0;width:auto;max-width:none;border-left:0;
+    padding:18px 22px 26px;
+    background:
+      radial-gradient(125% 70% at 100% 0%,rgba(240,122,101,.18) 0%,rgba(240,122,101,0) 58%),
+      #0A0B0D;
+    transition:transform .55s cubic-bezier(.22,1,.36,1);
+  }
+  .mnav-top{margin-bottom:14px}
+  .mnav-close{width:44px;height:44px}
+
+  /* --- as linhas do menu, com o numero de indice --- */
+  .mnav-body{gap:0}
+  .mnav-row{position:relative}
+  .mnav-row::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:var(--border);transform:scaleX(0);transform-origin:left;
+    transition:transform .6s cubic-bezier(.22,1,.36,1);
+  }
+  .mnav-rowsub::after{display:none}
+  .mnav-link{
+    display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+    font-size:34px;line-height:1.1;padding:16px 0;border-bottom:0;
+    transition:color .25s,transform .35s cubic-bezier(.22,1,.36,1);
+  }
+  .mnav-txt{display:block}
+  .mnav-num{
+    font-family:Inter,system-ui,sans-serif;font-weight:500;font-size:11.5px;
+    letter-spacing:.14em;color:#6b7078;flex:0 0 auto;transition:color .25s;
+  }
+  .mnav-link:hover,.mnav-link:focus-visible,.mnav-link:active{color:var(--primary);transform:translateX(5px)}
+  .mnav-link:hover .mnav-num,.mnav-link:focus-visible .mnav-num{color:var(--primary)}
+  .mnav-row.aqui .mnav-link,.mnav-row.aqui .mnav-num{color:var(--primary)}
+  .mnav-sub{padding:12px 0 18px}
+
+  /* --- entrada em cascata: 60ms entre as linhas --- */
+  .mnav-row{opacity:0;transform:translateY(20px);
+    transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)}
+  .mnav.on .mnav-row{opacity:1;transform:none}
+  .mnav.on .mnav-row:nth-child(1),.mnav.on .mnav-row:nth-child(1)::after{transition-delay:.10s}
+  .mnav.on .mnav-row:nth-child(2),.mnav.on .mnav-row:nth-child(2)::after{transition-delay:.16s}
+  .mnav.on .mnav-row:nth-child(3),.mnav.on .mnav-row:nth-child(3)::after{transition-delay:.22s}
+  .mnav.on .mnav-row:nth-child(4),.mnav.on .mnav-row:nth-child(4)::after{transition-delay:.28s}
+  .mnav.on .mnav-row:nth-child(5),.mnav.on .mnav-row:nth-child(5)::after{transition-delay:.34s}
+  .mnav.on .mnav-row:nth-child(6),.mnav.on .mnav-row:nth-child(6)::after{transition-delay:.40s}
+  .mnav.on .mnav-row::after{transform:scaleX(1)}
+  .mnav-foot{opacity:0;transform:translateY(14px);
+    transition:opacity .5s cubic-bezier(.22,1,.36,1) .42s,transform .5s cubic-bezier(.22,1,.36,1) .42s}
+  .mnav.on .mnav-foot{opacity:1;transform:none}
+
+  /* --- rodape do painel: assinatura, idioma, redes, CTA e o legal --- */
+  .mnav-tag{
+    font-size:13.5px;line-height:1.5;color:var(--text-muted);
+    max-width:30ch;margin:0 0 4px;
+  }
+  .mnav-legal{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    flex-wrap:wrap;font-size:12px;color:#6b7078;
+  }
+  .mnav-legal a{color:#8b9098;transition:color .25s}
+  .mnav-legal a:hover,.mnav-legal a:focus-visible{color:var(--primary)}
+  .mnav-fline{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .mnav-social{display:flex;gap:9px}
+  .mnav-social a{
+    width:44px;height:44px;display:grid;place-items:center;
+    border:1px solid var(--border);border-radius:12px;color:#cfd2d8;
+    transition:background .25s,border-color .25s,color .25s,transform .25s;
+  }
+  .mnav-social a:hover,.mnav-social a:focus-visible{
+    background:var(--primary);border-color:var(--primary);color:#fff;transform:translateY(-2px);
+  }
+  .mnav-social svg{width:17px;height:17px}
+  .mnav-lang button{min-height:38px}
+  .mnav-cta{padding:17px 26px}
+
+  @media(max-width:360px){
+    .mnav-link{font-size:29px;padding:14px 0}
+  }
+
+  /* Quem pediu menos movimento recebe o menu pronto, sem cascata. */
+  @media(prefers-reduced-motion:reduce){
+    .mnav,.mnav-row,.mnav-row::after,.mnav-foot{transition:none}
+    .mnav-row,.mnav-foot{opacity:1;transform:none}
+    .mnav-row::after{transform:scaleX(1)}
   }
 </style>
 <style>
@@ -703,7 +824,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
     </nav>
   </header>
 
-  <!-- ============ MENU MOBILE ============ -->
+  <!-- ============ MENU MOBILE (tools/build-menu.py) ============ -->
   <div class="mnav-backdrop" id="mnavBackdrop" hidden></div>
   <aside class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
     <div class="mnav-top">
@@ -713,25 +834,49 @@ header .menu-toggle svg{stroke:#0A0B0D}
       </button>
     </div>
     <nav class="mnav-body">
-      <a class="mnav-link" href="servicos.html"><span data-pt>Serviços</span><span data-en>Services</span></a>
-      <div class="mnav-sub">
-        <a href="servico-branding.html">Branding</a>
-        <a href="servico-rebranding.html">Rebranding</a>
-        <a href="servicos.html"><span data-pt>Ver todos os serviços</span><span data-en>See all services</span></a>
+      <div class="mnav-row">
+        <a class="mnav-link" href="servicos.html"><span class="mnav-txt"><span data-pt>Serviços</span><span data-en>Services</span></span><span class="mnav-num">01</span></a>
       </div>
-      <a class="mnav-link" href="projetos.html"><span data-pt>Projetos</span><span data-en>Works</span></a>
-      <a class="mnav-link" href="index.html#about"><span data-pt>Estúdio</span><span data-en>Studio</span></a>
-      <a class="mnav-link" href="blog.html">Blog</a>
+      <div class="mnav-row mnav-rowsub">
+        <div class="mnav-sub">
+          <a href="servico-branding.html"><span data-pt>Branding</span><span data-en>Branding</span></a>
+          <a href="servico-rebranding.html"><span data-pt>Rebranding</span><span data-en>Rebranding</span></a>
+          <a href="servicos.html"><span data-pt>Ver todos os serviços</span><span data-en>See all services</span></a>
+        </div>
+      </div>
+      <div class="mnav-row">
+        <a class="mnav-link" href="projetos.html"><span class="mnav-txt"><span data-pt>Projetos</span><span data-en>Works</span></span><span class="mnav-num">02</span></a>
+      </div>
+      <div class="mnav-row">
+        <a class="mnav-link" href="index.html#about"><span class="mnav-txt"><span data-pt>Estúdio</span><span data-en>Studio</span></span><span class="mnav-num">03</span></a>
+      </div>
+      <div class="mnav-row aqui">
+        <a class="mnav-link" href="blog.html"><span class="mnav-txt"><span data-pt>Blog</span><span data-en>Blog</span></span><span class="mnav-num">04</span></a>
+      </div>
+      <div class="mnav-row">
+        <a class="mnav-link" href="contato.html"><span class="mnav-txt"><span data-pt>Contato</span><span data-en>Contact</span></span><span class="mnav-num">05</span></a>
+      </div>
     </nav>
     <div class="mnav-foot">
-      <div class="mnav-lang" role="group" aria-label="Language">
-        <button data-set-lang="pt" type="button" class="active">PT</button>
-        <button data-set-lang="en" type="button">EN</button>
+      <p class="mnav-tag"><span data-pt>Design e tecnologia para marcas que não param de crescer.</span><span data-en>Design and technology for brands that never stop growing.</span></p>
+      <div class="mnav-fline">
+        <div class="mnav-lang" role="group" aria-label="Language">
+          <button data-set-lang="pt" type="button" class="active">PT</button>
+          <button data-set-lang="en" type="button">EN</button>
+        </div>
+        <div class="mnav-social">
+          <a href="https://www.instagram.com/hascunho/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a>
+          <a href="https://www.behance.net/edu_ardoara85a" target="_blank" rel="noopener" aria-label="Behance"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.969 16.927a2.561 2.561 0 0 0 1.901.677 2.501 2.501 0 0 0 1.531-.475c.362-.235.636-.584.779-.99h2.585a5.091 5.091 0 0 1-1.9 2.896 5.292 5.292 0 0 1-3.091.88 5.839 5.839 0 0 1-2.284-.433 4.871 4.871 0 0 1-1.723-1.211 5.657 5.657 0 0 1-1.08-1.874 7.057 7.057 0 0 1-.383-2.393c-.005-.8.129-1.595.396-2.349a5.313 5.313 0 0 1 5.088-3.604 4.87 4.87 0 0 1 2.376.563c.661.362 1.231.87 1.668 1.485a6.2 6.2 0 0 1 .943 2.133c.194.821.263 1.666.205 2.508h-7.699c-.063.79.184 1.574.688 2.187ZM6.947 4.084a8.065 8.065 0 0 1 1.928.198 4.29 4.29 0 0 1 1.49.638c.418.303.748.711.958 1.182.241.579.357 1.203.341 1.83a3.506 3.506 0 0 1-.506 1.961 3.726 3.726 0 0 1-1.503 1.287 3.588 3.588 0 0 1 2.027 1.437c.464.747.697 1.615.67 2.494a4.593 4.593 0 0 1-.423 2.032 3.945 3.945 0 0 1-1.163 1.413 5.114 5.114 0 0 1-1.683.807 7.135 7.135 0 0 1-1.928.259H0V4.084h6.947Zm-.235 12.9c.308.004.616-.029.916-.099a2.18 2.18 0 0 0 .766-.332c.228-.158.411-.371.534-.619.142-.317.208-.663.191-1.009a2.08 2.08 0 0 0-.642-1.715 2.618 2.618 0 0 0-1.696-.505h-3.54v4.279h3.471Zm13.635-5.967a2.13 2.13 0 0 0-1.654-.619 2.336 2.336 0 0 0-1.163.259 2.474 2.474 0 0 0-.738.62 2.359 2.359 0 0 0-.396.792c-.074.239-.12.485-.137.734h4.769a3.239 3.239 0 0 0-.679-1.785l-.002-.001Zm-13.813-.648a2.254 2.254 0 0 0 1.423-.433c.399-.355.607-.88.56-1.413a1.916 1.916 0 0 0-.178-.891 1.298 1.298 0 0 0-.495-.533 1.851 1.851 0 0 0-.711-.274 3.966 3.966 0 0 0-.835-.073H3.241v3.631h3.293v-.014ZM21.62 5.122h-5.976v1.527h5.976V5.122Z"/></svg></a>
+        </div>
       </div>
       <a href="contato.html" class="mnav-cta">
         <span data-pt>Fale Conosco</span><span data-en>Contact Now</span>
         <span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
+      <div class="mnav-legal">
+        <a href="privacidade.html"><span data-pt>Política de Privacidade</span><span data-en>Privacy Policy</span></a>
+        <span>© 2026 Slowexe</span>
+      </div>
     </div>
   </aside>
 
@@ -816,8 +961,8 @@ header .menu-toggle svg{stroke:#0A0B0D}
           <a href="index.html" class="logo" aria-label="Slowexe, home"><span class="mark"></span>Slowexe</a>
           <p class="foot-tag"><span data-pt>Design e tecnologia para marcas que não param de crescer.</span><span data-en>Design and technology for brands that never stop growing.</span></p>
           <div class="foot-social">
-            <a href="https://www.instagram.com/hascunho/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-            <a href="https://www.behance.net/edu_ardoara85a" aria-label="Behance"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.2 6.5c1.6 0 2.9.9 2.9 2.6 0 1-.5 1.7-1.3 2.1 1.1.3 1.8 1.2 1.8 2.5 0 2-1.6 2.8-3.4 2.8H2V6.5zM4.4 10.8h3c.7 0 1.2-.3 1.2-1s-.5-1-1.2-1h-3zm0 4.3h3.2c.8 0 1.3-.4 1.3-1.1s-.5-1.1-1.3-1.1H4.4zM22 13.4h-5.2c.1 1.1.8 1.7 1.9 1.7.7 0 1.3-.3 1.6-.9h1.6c-.4 1.4-1.7 2.3-3.2 2.3-2.2 0-3.6-1.5-3.6-3.7s1.5-3.8 3.6-3.8c2.3 0 3.5 1.8 3.3 4.4zM15 8.3h4v1.1h-4z"/></svg></a>
+            <a href="https://www.instagram.com/hascunho/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a>
+            <a href="https://www.behance.net/edu_ardoara85a" target="_blank" rel="noopener" aria-label="Behance"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.969 16.927a2.561 2.561 0 0 0 1.901.677 2.501 2.501 0 0 0 1.531-.475c.362-.235.636-.584.779-.99h2.585a5.091 5.091 0 0 1-1.9 2.896 5.292 5.292 0 0 1-3.091.88 5.839 5.839 0 0 1-2.284-.433 4.871 4.871 0 0 1-1.723-1.211 5.657 5.657 0 0 1-1.08-1.874 7.057 7.057 0 0 1-.383-2.393c-.005-.8.129-1.595.396-2.349a5.313 5.313 0 0 1 5.088-3.604 4.87 4.87 0 0 1 2.376.563c.661.362 1.231.87 1.668 1.485a6.2 6.2 0 0 1 .943 2.133c.194.821.263 1.666.205 2.508h-7.699c-.063.79.184 1.574.688 2.187ZM6.947 4.084a8.065 8.065 0 0 1 1.928.198 4.29 4.29 0 0 1 1.49.638c.418.303.748.711.958 1.182.241.579.357 1.203.341 1.83a3.506 3.506 0 0 1-.506 1.961 3.726 3.726 0 0 1-1.503 1.287 3.588 3.588 0 0 1 2.027 1.437c.464.747.697 1.615.67 2.494a4.593 4.593 0 0 1-.423 2.032 3.945 3.945 0 0 1-1.163 1.413 5.114 5.114 0 0 1-1.683.807 7.135 7.135 0 0 1-1.928.259H0V4.084h6.947Zm-.235 12.9c.308.004.616-.029.916-.099a2.18 2.18 0 0 0 .766-.332c.228-.158.411-.371.534-.619.142-.317.208-.663.191-1.009a2.08 2.08 0 0 0-.642-1.715 2.618 2.618 0 0 0-1.696-.505h-3.54v4.279h3.471Zm13.635-5.967a2.13 2.13 0 0 0-1.654-.619 2.336 2.336 0 0 0-1.163.259 2.474 2.474 0 0 0-.738.62 2.359 2.359 0 0 0-.396.792c-.074.239-.12.485-.137.734h4.769a3.239 3.239 0 0 0-.679-1.785l-.002-.001Zm-13.813-.648a2.254 2.254 0 0 0 1.423-.433c.399-.355.607-.88.56-1.413a1.916 1.916 0 0 0-.178-.891 1.298 1.298 0 0 0-.495-.533 1.851 1.851 0 0 0-.711-.274 3.966 3.966 0 0 0-.835-.073H3.241v3.631h3.293v-.014ZM21.62 5.122h-5.976v1.527h5.976V5.122Z"/></svg></a>
           </div>
         </div>
         <div class="foot-cols">
@@ -845,7 +990,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
         </div>
       </div>
       <div class="foot-bottom">
-          <a class="foot-priv" href="privacidade.html"><span data-pt>Politica de Privacidade</span><span data-en>Privacy Policy</span></a>
+          <a class="foot-priv" href="privacidade.html"><span data-pt>Política de Privacidade</span><span data-en>Privacy Policy</span></a>
         <span>© 2026 Slowexe. <span data-pt>Todos os direitos reservados.</span><span data-en>All rights reserved.</span></span>
         <span><span data-pt>Feito com cuidado em cada pixel.</span><span data-en>Crafted with care, pixel by pixel.</span></span>
       </div>

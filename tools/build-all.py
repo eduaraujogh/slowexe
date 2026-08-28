@@ -32,6 +32,8 @@ PASSOS = [
     ('build-imagens.py', 'imagens locais no lugar de placeholder'),
     ('build-setas.py',   'seta dos botoes deslizando na horizontal'),
     ('build-mobile.py',  'ajustes de mobile'),
+    ('build-social.py',  'icones de rede social no rodape'),
+    ('build-menu.py',    'menu do celular'),
     ('build-meta.py',    'SEO e icones'),
     ('build-sitemap.py', 'sitemap e robots'),
     # por ultimo: os passos acima usam <style id="..."> como guarda pra nao

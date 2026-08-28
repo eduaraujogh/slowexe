@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Gera privacidade.html.
 
@@ -252,7 +252,7 @@ def main():
     # a pagina e real, o template nao: fora o noindex herdado
     html = re.sub(r'\s*<meta name="robots" content="noindex[^>]*>', '', html)
     html = re.sub(r'<title>.*?</title>',
-                  '<title>Politica de Privacidade | Slowexe</title>', html, count=1, flags=re.S)
+                  '<title>Política de Privacidade | Slowexe</title>', html, count=1, flags=re.S)
     # o SEO herdado do template aponta pro post; build-meta refaz o que faltar
     for pat in (r'\s*<meta name="description"[^>]*>', r'\s*<link rel="canonical"[^>]*>',
                 r'\s*<meta property="og:[^"]*"[^>]*>', r'\s*<meta name="twitter:[^"]*"[^>]*>',
@@ -270,7 +270,7 @@ def main():
     novo_main = '''<main class="projx">
     <section class="leg-hero"><div class="wrap">
       <span class="leg-eyebrow"><span data-pt>Legal</span><span data-en>Legal</span></span>
-      <h1 class="leg-title"><span data-pt>Politica de Privacidade</span><span data-en>Privacy Policy</span></h1>
+      <h1 class="leg-title"><span data-pt>Política de Privacidade</span><span data-en>Privacy Policy</span></h1>
       <p class="leg-data"><span data-pt>Ultima atualizacao: %s</span><span data-en>Last updated: %s</span></p>
     </div></section>
 

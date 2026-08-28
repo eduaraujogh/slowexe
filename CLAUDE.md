@@ -63,8 +63,16 @@ python tools/make-favicon.py  # regenera ícones, só se a marca mudar
 - Os templates levam `noindex`. Os scripts de build **removem** esse meta ao
   gerar as páginas reais. Se alguém tirar essa linha, nenhum case nem post
   será indexado.
-- O menu mobile (`#mnav`) vive nas 20 páginas. Página nova precisa dele, senão
-  fica sem navegação no celular. `check.py` acusa.
+- O menu mobile (`#mnav`) agora é **gerado** por `tools/build-menu.py`, que
+  reescreve o painel inteiro nas 22 páginas. Mexer no menu é mexer lá, nunca no
+  HTML. Só o `<script id="mnav-js">` (abrir, fechar, foco preso) continua
+  escrito em cada página. `check.py` acusa página sem menu.
+- Endereço de rede social **só** em `tools/redes.py`. Rede sem URL preenchida
+  não entra no HTML, de propósito: ícone que não leva a lugar nenhum é a
+  armadilha do `href="#"` que o projeto já limpou uma vez.
+- O rodapé clona em JS o `<svg>` de cada ícone de rede pra fazer a troca na
+  diagonal. Por isso `build-social.py` escreve **um** svg por link: escrever
+  dois deixa três na tela.
 - O `<head>` das páginas geradas vem do template. Mudança de `<head>` vai no
   template, não no arquivo gerado.
 

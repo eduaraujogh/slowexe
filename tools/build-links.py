@@ -95,10 +95,16 @@ def main():
             html, n = re.subn(
                 r'(<div class="foot-bottom">\s*\n)',
                 r'\1          <a class="foot-priv" href="privacidade.html">'
-                r'<span data-pt>Politica de Privacidade</span>'
+                r'<span data-pt>Política de Privacidade</span>'
                 r'<span data-en>Privacy Policy</span></a>\n',
                 html, count=1)
             total['privacidade'] += n
+
+        # 9b. o rotulo entrou sem acento e ficou no rodape das 22 paginas, no
+        #     titulo da aba e no h1 da propria politica. Corrige onde estiver.
+        html = html.replace('>Politica de Privacidade<', '>Política de Privacidade<')
+        html = html.replace('<title>Politica de Privacidade',
+                            '<title>Política de Privacidade')
 
         if 'foot-priv' in html and 'id="foot-priv-css"' not in html:
             html = html.replace('</head>', CSS, 1)
