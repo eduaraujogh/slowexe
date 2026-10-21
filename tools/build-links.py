@@ -32,7 +32,8 @@ CSS = '''<style id="foot-priv-css">
 
 
 def main():
-    total = {'privacidade': 0, 'social': 0, 'termos': 0, 'faq': 0, 'youtube': 0}
+    total = {'privacidade': 0, 'social': 0, 'termos': 0, 'faq': 0, 'youtube': 0,
+             'why': 0}
     paginas = 0
 
     for nome in sorted(f for f in os.listdir(BASE) if f.endswith('.html')):
@@ -102,6 +103,16 @@ def main():
                 html, count=1)
             total['privacidade'] += n
 
+        # 8b. a secao "Por Que Nos Escolher" saiu da home em 21/10/2026, e o
+        #     link dela no rodape das 22 paginas virou ancora pra lugar
+        #     nenhum: #why nao existe mais. Mesma regra dos outros links
+        #     sem destino, entao sai aqui.
+        html, n = re.subn(
+            r'[ \t]*<a href="(?:index\.html)?#why" class="flink">'
+            r'(?:(?!</a>).)*?</a>\n',
+            '', html, flags=re.S)
+        total['why'] += n
+
         # 9a. o video de fundo da servicos.html vinha de www.youtube.com, que
         #     grava cookie de publicidade assim que o iframe carrega, e o
         #     iframe tem autoplay: acontecia antes de qualquer clique. O
@@ -127,9 +138,9 @@ def main():
             paginas += 1
 
     print('paginas: %d | privacidade: %d | redes removidas: %d | termos: %d | '
-          'faq: %d | youtube sem cookie: %d'
+          'faq: %d | youtube sem cookie: %d | link do #why: %d'
           % (paginas, total['privacidade'], total['social'], total['termos'],
-             total['faq'], total['youtube']))
+             total['faq'], total['youtube'], total['why']))
 
     resta = 0
     for nome in sorted(f for f in os.listdir(BASE) if f.endswith('.html')):

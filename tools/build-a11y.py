@@ -116,9 +116,9 @@ CSS = '''<style id="a11y">
   .svc-mnum,.svc-mnum span,
   .svc-mcat,.svc-mcat span{color:#6e7379}              /* sobre faf9f7: 4,54 */
 
-  .wa-numlabel,.wa-numlabel span,
-  .wa-desc,.wa-desc span,
-  .faq p,.faq span{color:#686d75}                      /* sobre f1eee9: 4,50 */
+  /* `.wa-numlabel` e `.wa-desc` estavam aqui e sairam junto com a secao
+     "Por Que Nos Escolher", removida da home em 21/10/2026. */
+  .faq p,.faq span{color:#686d75}                      /* sobre f4f2ee: 4,56 */
 
   /* `.svc-d-fn .fn-n` tem especificidade 0,2,0 na origem: um seletor de
      classe so perderia a disputa e a cor nao mudaria. */

@@ -45,7 +45,7 @@ CSS = '''<style id="mobile-fixes">
   @media(max-width:760px){
     /* --- respiro proporcional a tela, nao ao desktop ---
        eram 96 a 140px por secao, somando 2.024px de vazio */
-    .about,.works,.projects,.solutions,.why,.feedback,.blog{
+    .about,.works,.projects,.solutions,.feedback,.blog{
       padding-top:64px;padding-bottom:64px;
     }
     .hero{padding-top:calc(var(--header-h) + 40px);padding-bottom:56px}
@@ -54,7 +54,6 @@ CSS = '''<style id="mobile-fixes">
 
     /* --- cards com a altura do proprio conteudo --- */
     .sol-card{min-height:0;padding:22px 20px}
-    .why-card{padding:24px 22px}
 
     /* --- depoimentos: MANTEM o baralho empilhado, so dimensionado ---
        O titulo sai do sticky pra nao comer 244px de tela, e os cards
@@ -151,7 +150,7 @@ CSS = '''<style id="mobile-fixes">
   }
 
   @media(max-width:430px){
-    .about,.works,.projects,.solutions,.why,.feedback,.blog{
+    .about,.works,.projects,.solutions,.feedback,.blog{
       padding-top:56px;padding-bottom:56px;
     }
     .ribbons{height:196px}

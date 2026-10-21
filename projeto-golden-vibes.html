@@ -395,7 +395,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   @media(max-width:760px){
     /* --- respiro proporcional a tela, nao ao desktop ---
        eram 96 a 140px por secao, somando 2.024px de vazio */
-    .about,.works,.projects,.solutions,.why,.feedback,.blog{
+    .about,.works,.projects,.solutions,.feedback,.blog{
       padding-top:64px;padding-bottom:64px;
     }
     .hero{padding-top:calc(var(--header-h) + 40px);padding-bottom:56px}
@@ -404,7 +404,6 @@ header .menu-toggle svg{stroke:#0A0B0D}
 
     /* --- cards com a altura do proprio conteudo --- */
     .sol-card{min-height:0;padding:22px 20px}
-    .why-card{padding:24px 22px}
 
     /* --- depoimentos: MANTEM o baralho empilhado, so dimensionado ---
        O titulo sai do sticky pra nao comer 244px de tela, e os cards
@@ -501,7 +500,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   }
 
   @media(max-width:430px){
-    .about,.works,.projects,.solutions,.why,.feedback,.blog{
+    .about,.works,.projects,.solutions,.feedback,.blog{
       padding-top:56px;padding-bottom:56px;
     }
     .ribbons{height:196px}
@@ -677,9 +676,9 @@ header .menu-toggle svg{stroke:#0A0B0D}
   .svc-mnum,.svc-mnum span,
   .svc-mcat,.svc-mcat span{color:#6e7379}              /* sobre faf9f7: 4,54 */
 
-  .wa-numlabel,.wa-numlabel span,
-  .wa-desc,.wa-desc span,
-  .faq p,.faq span{color:#686d75}                      /* sobre f1eee9: 4,50 */
+  /* `.wa-numlabel` e `.wa-desc` estavam aqui e sairam junto com a secao
+     "Por Que Nos Escolher", removida da home em 21/10/2026. */
+  .faq p,.faq span{color:#686d75}                      /* sobre f4f2ee: 4,56 */
 
   /* `.svc-d-fn .fn-n` tem especificidade 0,2,0 na origem: um seletor de
      classe so perderia a disputa e a cor nao mudaria. */
@@ -953,7 +952,6 @@ header .menu-toggle svg{stroke:#0A0B0D}
           </div>
           <div class="foot-col">
             <h4><span data-pt>Recursos</span><span data-en>Resources</span></h4>
-            <a href="index.html#why" class="flink"><span data-pt>Por que a Slowexe</span><span data-en>Why Slowexe</span></a>
             <a href="index.html#feedback" class="flink"><span data-pt>Avaliações</span><span data-en>Reviews</span></a>
             <a href="index.html#solutions" class="flink"><span data-pt>Soluções</span><span data-en>Solutions</span></a>
           </div>

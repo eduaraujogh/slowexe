@@ -209,7 +209,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   @media(max-width:760px){
     /* --- respiro proporcional a tela, nao ao desktop ---
        eram 96 a 140px por secao, somando 2.024px de vazio */
-    .about,.works,.projects,.solutions,.why,.feedback,.blog{
+    .about,.works,.projects,.solutions,.feedback,.blog{
       padding-top:64px;padding-bottom:64px;
     }
     .hero{padding-top:calc(var(--header-h) + 40px);padding-bottom:56px}
@@ -218,7 +218,6 @@ header .menu-toggle svg{stroke:#0A0B0D}
 
     /* --- cards com a altura do proprio conteudo --- */
     .sol-card{min-height:0;padding:22px 20px}
-    .why-card{padding:24px 22px}
 
     /* --- depoimentos: MANTEM o baralho empilhado, so dimensionado ---
        O titulo sai do sticky pra nao comer 244px de tela, e os cards
@@ -315,7 +314,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   }
 
   @media(max-width:430px){
-    .about,.works,.projects,.solutions,.why,.feedback,.blog{
+    .about,.works,.projects,.solutions,.feedback,.blog{
       padding-top:56px;padding-bottom:56px;
     }
     .ribbons{height:196px}
@@ -491,9 +490,9 @@ header .menu-toggle svg{stroke:#0A0B0D}
   .svc-mnum,.svc-mnum span,
   .svc-mcat,.svc-mcat span{color:#6e7379}              /* sobre faf9f7: 4,54 */
 
-  .wa-numlabel,.wa-numlabel span,
-  .wa-desc,.wa-desc span,
-  .faq p,.faq span{color:#686d75}                      /* sobre f1eee9: 4,50 */
+  /* `.wa-numlabel` e `.wa-desc` estavam aqui e sairam junto com a secao
+     "Por Que Nos Escolher", removida da home em 21/10/2026. */
+  .faq p,.faq span{color:#686d75}                      /* sobre f4f2ee: 4,56 */
 
   /* `.svc-d-fn .fn-n` tem especificidade 0,2,0 na origem: um seletor de
      classe so perderia a disputa e a cor nao mudaria. */
@@ -772,70 +771,6 @@ header .menu-toggle svg{stroke:#0A0B0D}
     </div>
   </section>
 
-  <!-- ============ WHY CHOOSE US (bento) ============ -->
-  <section class="why" id="why">
-    <div class="wrap">
-      <div class="why-label">
-        <svg viewBox="0 0 24 24"><path d="M12 0c.6 6 5.4 10.8 12 12-6.6 1.2-11.4 6-12 12-.6-6-5.4-10.8-12-12C6.6 10.8 11.4 6 12 0z"/></svg>
-        <span data-pt>Por Que Nos Escolher?</span><span data-en>Why Choose Us</span>
-      </div>
-      <h2 class="why-head fill-block">
-        <span class="fill" data-pt>Ideias inovadoras e execução arrojada que geram resultados mensuráveis.</span>
-        <span class="fill" data-en>Innovative ideas and bold execution that drive measurable results.</span>
-      </h2>
-
-      <div class="why-grid">
-        <div class="why-card why-a" data-reveal>
-          <div class="wa-top">
-            <span class="why-ph wa-ph"><img src="assets/cases/fense-03.webp" alt="" loading="lazy" decoding="async"></span>
-            <a class="wa-arrow" href="servicos.html" aria-label="Ver mais">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-            </a>
-          </div>
-          <div class="wa-stat">
-            <span class="wa-num">10X</span>
-            <span class="wa-numlabel"><span data-pt>Mais ágil do conceito ao lançamento</span><span data-en>Faster from concept to launch</span></span>
-          </div>
-          <p class="wa-desc"><span data-pt>Design e desenvolvimento no mesmo time, com um processo enxuto que tira a sua ideia do papel mais rápido, e sem retrabalho.</span><span data-en>Design and development in one team, with a lean process that takes your idea live faster, with no rework.</span></p>
-          <div class="wa-divider"></div>
-          <div class="wa-pills">
-            <span class="wa-pill"><span data-pt>Design e código no mesmo time</span><span data-en>Design and code in one team</span></span>
-            <span class="wa-pill"><span data-pt>Processo enxuto, sem retrabalho</span><span data-en>Lean process, no rework</span></span>
-          </div>
-        </div>
-
-        <div class="why-card why-b" data-reveal>
-          <span class="why-ph wb-ph"><img src="assets/cases/duo-05.webp" alt="" loading="lazy" decoding="async"></span>
-          <h3 class="wb-title"><span data-pt>Design e tecnologia sob o mesmo teto</span><span data-en>Design and technology under one roof</span></h3>
-          <p class="wb-desc"><span data-pt>Da identidade ao produto final, uma equipe só cuida de tudo, sem ruído entre fornecedores.</span><span data-en>From identity to final product, a single team handles it all, no noise between vendors.</span></p>
-        </div>
-
-        <div class="why-card why-c" data-reveal>
-          <div class="wc-stars">★★★★★</div>
-          <div class="wc-rate"><span data-pt>4.9/5 com base em 250 avaliações</span><span data-en>4.9/5 based on 250 reviews</span></div>
-          <div class="wc-marquee"><div class="wc-track">
-            <span class="wc-face" style="background-image:url('assets/avatars/p1.webp')"></span>
-            <span class="wc-face" style="background-image:url('assets/avatars/p2.webp')"></span>
-            <span class="wc-face" style="background-image:url('assets/avatars/p3.webp')"></span>
-            <span class="wc-face" style="background-image:url('assets/avatars/p4.webp')"></span>
-            <span class="wc-face" style="background-image:url('assets/avatars/p5.webp')"></span>
-            <span class="wc-face" style="background-image:url('assets/avatars/p6.webp')"></span>
-            <span class="wc-face" style="background-image:url('assets/avatars/p7.webp')"></span>
-          </div></div>
-          <div class="wc-logo">slowexe<b>.</b></div>
-        </div>
-
-        <div class="why-card why-d" data-reveal>
-          <div class="wd-img"><img src="assets/cases/thalles-06.webp" alt="" loading="lazy" decoding="async"></div>
-          <div class="wd-tint"></div>
-          <div class="wd-label"><span data-pt>Por perto em cada etapa</span><span data-en>With you at every step</span></div>
-          <div class="wd-bottom"><span data-pt>Parceria de verdade</span><span data-en>A real partnership</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ FEEDBACK (stacking testimonials) ============ -->
   <section class="feedback" id="feedback">
     <div class="wrap">
@@ -986,7 +921,6 @@ header .menu-toggle svg{stroke:#0A0B0D}
           </div>
           <div class="foot-col">
             <h4><span data-pt>Recursos</span><span data-en>Resources</span></h4>
-            <a href="#why" class="flink"><span data-pt>Por que a Slowexe</span><span data-en>Why Slowexe</span></a>
             <a href="#feedback" class="flink"><span data-pt>Avaliações</span><span data-en>Reviews</span></a>
             <a href="#solutions" class="flink"><span data-pt>Soluções</span><span data-en>Solutions</span></a>
           </div>

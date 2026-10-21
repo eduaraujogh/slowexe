@@ -326,6 +326,13 @@ endereço pelo que já recebe e-mail hoje enquanto o domínio não entra.
 
 ## Resolvidos
 
+- ~~"4,9/5 com base em 250 avaliações" e "10X mais ágil", no ar na home.~~ Os
+  dois eram número inventado, contra a regra do próprio projeto, e estavam na
+  seção "Por Que Nos Escolher", junto de cinco avatares de pessoas que não
+  existem. **O Eduardo mandou tirar a seção inteira em 21/10/2026**, por não
+  gostar dela, e isso levou os números junto. O link do rodapé que apontava
+  pra ela saiu das 22 páginas, pelo `build-links.py`.
+
 - ~~Mobile das 21 páginas fora da home com medida de desktop.~~ Segunda passada
   em 28/08/2026, medida em 320, 375 e 390px. Padding de seção de 84 a 124px caiu
   pra 56 (48 abaixo de 430px); topo de página passou a contar a partir do header
