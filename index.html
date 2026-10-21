@@ -540,12 +540,19 @@ header .menu-toggle svg{stroke:#0A0B0D}
   /* ============ RITMO VERTICAL ============ */
   @media (min-width:1024px) and (min-height:700px){
 
-    /* --- 1. o hero ocupa a tela, em qualquer monitor --- */
+    /* --- 1. o hero ocupa a tela, em qualquer monitor ---
+       grid-template-columns de uma coluna inteira NAO e enfeite: sem ela, a
+       coluna implicita se dimensiona pelo conteudo, e o .hero-deck, que so
+       tem filho absoluto, vira uma coluna de largura zero. Foi o que
+       descentralizou o baralho de cards 173px pra direita.
+       O `safe` no align-content faz o conteudo encostar no topo quando nao
+       couber, em vez de vazar metade pra cima e sumir atras do header. */
     .hero,.svc-hero,.svc-vhero,.px-hero,.pc-hero,
     .blog-hero,.art-hero,.leg-hero,.cw-hero{
       min-height:100svh;
       display:grid;
-      align-content:center;
+      grid-template-columns:minmax(0,1fr);
+      align-content:safe center;
     }
     /* O hero nasce debaixo do header fixo, entao o respiro de cima conta a
        partir dele; sem isso o conteudo centrado sobe demais. */
@@ -569,9 +576,30 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .about,.solutions,.why,.blog,.cta,.contact,.blog-list{
       min-height:100svh;
       display:grid;
-      align-content:center;
+      grid-template-columns:minmax(0,1fr);
+      align-content:safe center;
     }
     .contact{padding-top:calc(var(--header-h) + clamp(40px,5vh,90px))}
+
+    /* --- 4. o baralho do hero cabendo na altura da tela ---
+       `.hero-deck` tinha height:clamp(340px,37vw,506px) e `.deck-card`
+       width:clamp(168px,26vw,362px): as duas medidas olham so pra LARGURA.
+       Num monitor largo e baixo, 1440x900 por exemplo, o baralho ficava com
+       506px de altura e empurrava o subtitulo e os botoes pra fora da tela,
+       que e o oposto do que esta secao quer. O min() poe um teto em altura
+       de tela, e so aperta onde precisa: acima de 1100px de altura as
+       medidas antigas continuam valendo inteiras. */
+    /* O width:100% e o que conserta a centralizacao do baralho. Como item
+       de grid, o .hero-deck nao estica sozinho: ele so tem filho absoluto,
+       entao o conteudo em fluxo mede zero e nem justify-self:stretch o
+       alarga. Com largura cheia, o .deck de dentro volta a se centrar na
+       tela em vez de nascer no meio dela. */
+    .hero-deck{
+      width:100%;
+      height:min(clamp(340px,37vw,506px), 42svh);
+      margin-top:clamp(24px,4svh,62px);
+    }
+    .deck-card{width:min(clamp(168px,26vw,362px), 31svh)}
   }
 </style>
 </head>
