@@ -10,11 +10,17 @@ estilos .art-* de texto corrido), troca o <main> pelo texto legal e tira o
 noindex do template.
 
 O texto descreve o que o site FAZ HOJE, conferido no codigo:
-  - nenhum cookie, nenhum analytics, nenhum pixel
+  - nenhum cookie proprio, nenhum analytics, nenhum pixel
   - unico armazenamento local: a chave slowexe-lang, com a preferencia de idioma
-  - unico terceiro que recebe IP do visitante: Google Fonts
+  - terceiros que recebem IP do visitante: Google Fonts (todas as paginas) e
+    YouTube (so o video de fundo da servicos.html, em youtube-nocookie.com)
   - o formulario de contato passou a enviar em 20/08/2026, pelo Web3Forms, que
     esta nomeado nas secoes 3 e 6. Se o servico mudar, mudar os dois lugares
+
+O YouTube entrou no texto em 21/10/2026, junto com a troca do dominio do
+embed para youtube-nocookie.com, feita no mesmo commit. Durante um tempo a
+politica afirmou que o unico terceiro era o Google Fonts enquanto o iframe do
+youtube.com ja estava no ar: terceiro novo e texto andam juntos, sempre.
 
 Bilingue, como o resto do site: cada bloco tem PT e EN, senao o check.py
 acusa desequilibrio.
@@ -29,8 +35,8 @@ SAIDA = os.path.join(BASE, 'privacidade.html')
 
 # Fixo de proposito: se viesse da data do build, mudaria a cada rodada e
 # quebraria a idempotencia. Atualizar a mao quando o texto mudar.
-ATUALIZADO_PT = '20 de agosto de 2026'
-ATUALIZADO_EN = 'August 20, 2026'
+ATUALIZADO_PT = '21 de outubro de 2026'
+ATUALIZADO_EN = 'October 21, 2026'
 
 CONTATO = 'ola@slowexe.com'
 
@@ -55,12 +61,17 @@ BLOCOS = [
 
  ('h', '2. O que este site NAO faz', '2. What this site does NOT do'),
  ('p',
-  'Antes do que coletamos, o que nao coletamos. Este site nao usa cookies, nao '
-  'tem Google Analytics, nao tem pixel de rede social e nao faz perfilamento '
-  'nem publicidade direcionada. Nao rastreamos sua navegacao entre paginas.',
-  'Before what we collect, what we do not. This site uses no cookies, has no '
-  'Google Analytics, no social media pixel, and does no profiling or targeted '
-  'advertising. We do not track your browsing across pages.'),
+  'Antes do que coletamos, o que nao coletamos. Este site nao grava cookie '
+  'proprio, nao tem Google Analytics, nao tem pixel de rede social e nao faz '
+  'perfilamento nem publicidade direcionada. Nao rastreamos sua navegacao '
+  'entre paginas. A unica excecao e o video de fundo da pagina de servicos, '
+  'que e servido pelo YouTube: ele esta em modo de privacidade reforcada e '
+  'esta descrito na secao 6.',
+  'Before what we collect, what we do not. This site sets no cookie of its '
+  'own, has no Google Analytics, no social media pixel, and does no profiling '
+  'or targeted advertising. We do not track your browsing across pages. The '
+  'one exception is the background video on the services page, served by '
+  'YouTube: it runs in privacy enhanced mode and is described in section 6.'),
 
  ('h', '3. Dados que voce nos entrega', '3. Data you give us'),
  ('p',
@@ -115,11 +126,20 @@ BLOCOS = [
   'access logs, like any web server.'),
  ('l',
   '<b>Google Fonts:</b> as fontes do site sao carregadas dos servidores do '
-  'Google, que por isso recebe o seu IP. E o unico terceiro acionado enquanto '
-  'voce apenas le o site.',
+  'Google, que por isso recebe o seu IP.',
   '<b>Google Fonts:</b> the site fonts load from Google servers, which therefore '
-  'receive your IP. This is the only third party involved while you are merely '
-  'reading the site.'),
+  'receive your IP.'),
+ ('l',
+  '<b>YouTube:</b> o video de fundo da pagina de servicos vem do YouTube, que '
+  'recebe o seu IP ao carregar o video. Usamos o modo de privacidade reforcada '
+  '(youtube-nocookie.com), em que o YouTube nao grava cookie de publicidade '
+  'para perfilar a sua navegacao. O video comeca sozinho, sem som, e nenhuma '
+  'outra pagina do site carrega conteudo de terceiro.',
+  '<b>YouTube:</b> the background video on the services page comes from '
+  'YouTube, which receives your IP when the video loads. We use privacy '
+  'enhanced mode (youtube-nocookie.com), in which YouTube does not set '
+  'advertising cookies to profile your browsing. The video starts on its own, '
+  'muted, and no other page on the site loads third party content.'),
  ('l',
   '<b>Web3Forms:</b> o formulario de contato e o pedido de horario sao enviados '
   'por esse servico, que recebe o que voce digitou e entrega no e-mail da '

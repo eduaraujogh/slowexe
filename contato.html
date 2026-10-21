@@ -570,8 +570,69 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .mnav-row::after{transform:scaleX(1)}
   }
 </style>
+<style id="a11y">
+  /* ============ ACESSIBILIDADE ============ */
+
+  /* --- atalho pro conteudo: aparece so no Tab --- */
+  .skip-link{
+    position:fixed;top:0;left:50%;transform:translate(-50%,-130%);z-index:200;
+    padding:13px 24px;border-radius:0 0 10px 10px;
+    background:#0A0B0D;color:#fff;font-size:14.5px;font-weight:600;
+    transition:transform .25s cubic-bezier(.22,1,.36,1);
+  }
+  .skip-link:focus{transform:translate(-50%,0)}
+
+  /* --- anel de foco, nos dois temas ---
+     O contorno escuro resolve o fundo claro e some no escuro; o halo salmao
+     faz o contrario. Os dois juntos funcionam em qualquer fundo do site.
+     So no teclado: :focus-visible nao dispara no clique de mouse. */
+  a:focus-visible,button:focus-visible,[tabindex]:focus-visible,
+  input:focus-visible,select:focus-visible,textarea:focus-visible{
+    outline:2px solid #0A0B0D;
+    outline-offset:2px;
+    box-shadow:0 0 0 5px rgba(240,122,101,.65);
+  }
+  /* Os campos apagavam o contorno e deixavam so a borda salmao, de 2,74:1.
+     Estes seletores repoem o anel: mesma especificidade da regra que apaga,
+     e este bloco e o ultimo do <head>, entao vence sem !important. */
+  .contact .inp:focus-visible,.contact select.sel:focus-visible,
+  .contact .ct-ddbtn:focus-visible,.cal-inp:focus-visible{
+    outline:2px solid #0A0B0D;
+    outline-offset:2px;
+    box-shadow:0 0 0 5px rgba(240,122,101,.65);
+  }
+
+  /* --- contraste de texto cinza ---
+     O tom depende do fundo: o mesmo cinza que passa no branco reprova no
+     creme. Por isso tres tons, nao um, e todos sao o cinza do projeto
+     escurecido ate cruzar 4,5. O span entra junto do seletor porque varios
+     desses rotulos guardam o texto dentro dos spans de idioma, que tem cor
+     propria e nao herdam a do pai.
+     (E este comentario nao escreve o nome do atributo de idioma de
+     proposito: o check.py conta essas ocorrencias no arquivo inteiro, e
+     cita-lo aqui desequilibra a contagem de PT contra EN.) */
+  .mega-group h5,.mega-group h5 span,
+  .about-label,.about-label span,
+  .bpost-date,.bpost-date span,
+  .pg-cat,.pg-cat span,
+  .pc-tag,.pc-tag span,
+  .pc-meta span,.pc-meta span span{color:#71767c}      /* sobre branco: 4,58 */
+
+  .svc-mnum,.svc-mnum span,
+  .svc-mcat,.svc-mcat span{color:#6e7379}              /* sobre faf9f7: 4,54 */
+
+  .wa-numlabel,.wa-numlabel span,
+  .wa-desc,.wa-desc span,
+  .faq p,.faq span{color:#686d75}                      /* sobre f1eee9: 4,50 */
+
+  /* `.svc-d-fn .fn-n` tem especificidade 0,2,0 na origem: um seletor de
+     classe so perderia a disputa e a cor nao mudaria. */
+  .svc-d-fn .fn-n{color:#747a82}                       /* sobre 0A0B0D: 4,55 */
+</style>
 </head>
 <body class="lang-pt ct-page">
+  <!-- atalho de teclado (tools/build-a11y.py) -->
+  <a class="skip-link" href="#conteudo"><span data-pt>Pular para o conteúdo</span><span data-en>Skip to content</span></a>
 
   <!-- ============ HEADER ============ -->
   <header id="header">
@@ -692,6 +753,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
     </div>
   </aside>
 
+  <span id="conteudo" tabindex="-1"></span>
   <main class="contact" id="contact">
     <div class="wrap" id="formView">
       <div class="grid">
@@ -731,7 +793,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
             <div class="field" data-required data-type="email"><label><span data-pt>E-mail da empresa</span><span data-en>Company email</span> <span class="req">*</span></label><input class="inp" type="email" placeholder="voce@empresa.com"></div>
             <div class="field"><label><span data-pt>Telefone</span><span data-en>Phone</span></label><div class="phone"><select aria-label="País"><option>🇧🇷 +55</option><option>🇵🇹 +351</option><option>🇺🇸 +1</option></select><input class="inp" type="tel" placeholder="(11) 99999-0000"></div></div>
             <button class="ct-btn" id="toStep2" type="button"><span data-pt>Discutir o projeto</span><span data-en>Discuss the project</span> <span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
-            <p class="privacy"><span data-pt>Ao enviar o formulário, você concorda com a <a href="privacidade.html">Política de Privacidade</a> e em receber atualizações da Slowexe.</span><span data-en>By submitting, you agree to our <a href="privacidade.html">Privacy Policy</a> and to receive updates from Slowexe.</span></p>
+            <p class="privacy"><span data-pt>Ao enviar o formulário, você concorda com a <a href="privacidade.html">Política de Privacidade</a>. Usamos os seus dados só para responder a este contato.</span><span data-en>By submitting the form, you agree to our <a href="privacidade.html">Privacy Policy</a>. We use your data only to reply to this message.</span></p>
           </div>
           <div class="step hide" data-step="2">
             <h2><span data-pt>Conte mais detalhes sobre o seu projeto.</span><span data-en>Tell us more about your project.</span></h2>

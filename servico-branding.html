@@ -732,8 +732,69 @@ header .menu-toggle svg{stroke:#fff}
     .mnav-row::after{transform:scaleX(1)}
   }
 </style>
+<style id="a11y">
+  /* ============ ACESSIBILIDADE ============ */
+
+  /* --- atalho pro conteudo: aparece so no Tab --- */
+  .skip-link{
+    position:fixed;top:0;left:50%;transform:translate(-50%,-130%);z-index:200;
+    padding:13px 24px;border-radius:0 0 10px 10px;
+    background:#0A0B0D;color:#fff;font-size:14.5px;font-weight:600;
+    transition:transform .25s cubic-bezier(.22,1,.36,1);
+  }
+  .skip-link:focus{transform:translate(-50%,0)}
+
+  /* --- anel de foco, nos dois temas ---
+     O contorno escuro resolve o fundo claro e some no escuro; o halo salmao
+     faz o contrario. Os dois juntos funcionam em qualquer fundo do site.
+     So no teclado: :focus-visible nao dispara no clique de mouse. */
+  a:focus-visible,button:focus-visible,[tabindex]:focus-visible,
+  input:focus-visible,select:focus-visible,textarea:focus-visible{
+    outline:2px solid #0A0B0D;
+    outline-offset:2px;
+    box-shadow:0 0 0 5px rgba(240,122,101,.65);
+  }
+  /* Os campos apagavam o contorno e deixavam so a borda salmao, de 2,74:1.
+     Estes seletores repoem o anel: mesma especificidade da regra que apaga,
+     e este bloco e o ultimo do <head>, entao vence sem !important. */
+  .contact .inp:focus-visible,.contact select.sel:focus-visible,
+  .contact .ct-ddbtn:focus-visible,.cal-inp:focus-visible{
+    outline:2px solid #0A0B0D;
+    outline-offset:2px;
+    box-shadow:0 0 0 5px rgba(240,122,101,.65);
+  }
+
+  /* --- contraste de texto cinza ---
+     O tom depende do fundo: o mesmo cinza que passa no branco reprova no
+     creme. Por isso tres tons, nao um, e todos sao o cinza do projeto
+     escurecido ate cruzar 4,5. O span entra junto do seletor porque varios
+     desses rotulos guardam o texto dentro dos spans de idioma, que tem cor
+     propria e nao herdam a do pai.
+     (E este comentario nao escreve o nome do atributo de idioma de
+     proposito: o check.py conta essas ocorrencias no arquivo inteiro, e
+     cita-lo aqui desequilibra a contagem de PT contra EN.) */
+  .mega-group h5,.mega-group h5 span,
+  .about-label,.about-label span,
+  .bpost-date,.bpost-date span,
+  .pg-cat,.pg-cat span,
+  .pc-tag,.pc-tag span,
+  .pc-meta span,.pc-meta span span{color:#71767c}      /* sobre branco: 4,58 */
+
+  .svc-mnum,.svc-mnum span,
+  .svc-mcat,.svc-mcat span{color:#6e7379}              /* sobre faf9f7: 4,54 */
+
+  .wa-numlabel,.wa-numlabel span,
+  .wa-desc,.wa-desc span,
+  .faq p,.faq span{color:#686d75}                      /* sobre f1eee9: 4,50 */
+
+  /* `.svc-d-fn .fn-n` tem especificidade 0,2,0 na origem: um seletor de
+     classe so perderia a disputa e a cor nao mudaria. */
+  .svc-d-fn .fn-n{color:#747a82}                       /* sobre 0A0B0D: 4,55 */
+</style>
 </head>
 <body class="lang-pt ct-page">
+  <!-- atalho de teclado (tools/build-a11y.py) -->
+  <a class="skip-link" href="#conteudo"><span data-pt>Pular para o conteúdo</span><span data-en>Skip to content</span></a>
 
   <!-- ============ HEADER ============ -->
   <header id="header">
@@ -854,6 +915,7 @@ header .menu-toggle svg{stroke:#fff}
     </div>
   </aside>
 
+  <span id="conteudo" tabindex="-1"></span>
   <main class="svc">
     <section class="svc-hero svc-hero-video" id="svcHero">
       <video class="svc-bgvid" autoplay muted loop playsinline preload="auto" poster="assets/branding-hero-poster.jpg"><source src="assets/branding-hero.mp4" type="video/mp4"></video>

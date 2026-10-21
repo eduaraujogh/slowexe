@@ -10,8 +10,10 @@ Rode da raiz do repo com: python tools/build-links.py
                              45 icones levavam a href="#")
   Termos e FAQ            -> removidos (paginas que nao existem e nao estao
                              planejadas)
+  video da servicos.html  -> youtube-nocookie.com, o modo de privacidade
+                             reforcada, em vez de www.youtube.com
 
-Instagram e Behance continuam, apontando pros perfis reais.
+Os icones de rede agora saem do tools/redes.py, pelo build-social.py.
 
 Idempotente: so mexe no que ainda esta quebrado.
 """
@@ -30,7 +32,7 @@ CSS = '''<style id="foot-priv-css">
 
 
 def main():
-    total = {'privacidade': 0, 'social': 0, 'termos': 0, 'faq': 0}
+    total = {'privacidade': 0, 'social': 0, 'termos': 0, 'faq': 0, 'youtube': 0}
     paginas = 0
 
     for nome in sorted(f for f in os.listdir(BASE) if f.endswith('.html')):
@@ -100,6 +102,17 @@ def main():
                 html, count=1)
             total['privacidade'] += n
 
+        # 9a. o video de fundo da servicos.html vinha de www.youtube.com, que
+        #     grava cookie de publicidade assim que o iframe carrega, e o
+        #     iframe tem autoplay: acontecia antes de qualquer clique. O
+        #     youtube-nocookie.com e o modo de privacidade reforcada, em que o
+        #     YouTube nao perfila a navegacao. O IP continua indo pra la, e por
+        #     isso o YouTube esta nomeado na secao 6 da politica, escrita no
+        #     mesmo commit que esta troca.
+        html, n = re.subn(r'https://www\.youtube\.com/embed/',
+                          'https://www.youtube-nocookie.com/embed/', html)
+        total['youtube'] += n
+
         # 9b. o rotulo entrou sem acento e ficou no rodape das 22 paginas, no
         #     titulo da aba e no h1 da propria politica. Corrige onde estiver.
         html = html.replace('>Politica de Privacidade<', '>Política de Privacidade<')
@@ -113,8 +126,10 @@ def main():
             io.open(caminho, 'w', encoding='utf-8', newline='').write(html)
             paginas += 1
 
-    print('paginas: %d | privacidade: %d | redes removidas: %d | termos: %d | faq: %d'
-          % (paginas, total['privacidade'], total['social'], total['termos'], total['faq']))
+    print('paginas: %d | privacidade: %d | redes removidas: %d | termos: %d | '
+          'faq: %d | youtube sem cookie: %d'
+          % (paginas, total['privacidade'], total['social'], total['termos'],
+             total['faq'], total['youtube']))
 
     resta = 0
     for nome in sorted(f for f in os.listdir(BASE) if f.endswith('.html')):

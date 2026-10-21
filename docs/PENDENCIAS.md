@@ -201,6 +201,27 @@ um `assets/site.css` compartilhado é a próxima grande refatoração.
 
 ---
 
+## 9. ~~O vídeo de fundo da `servicos.html` contradiz a política~~ — resolvido
+
+Feito em 21/10/2026, no mesmo commit, como a regra do item 5 manda:
+
+- o `src` do iframe virou `youtube-nocookie.com`, o modo de privacidade
+  reforçada, em que o YouTube não grava cookie de publicidade. A troca mora em
+  `tools/build-links.py`, então não se perde em rebuild
+- o YouTube entrou na seção 6 da política, e a seção 2 deixou de dizer
+  "nenhum cookie" seco: agora diz que o site não grava cookie **próprio** e
+  aponta a exceção do vídeo
+- saiu a frase "é o único terceiro acionado enquanto você apenas lê o site",
+  que era verdade antes do vídeo e virou mentira depois dele
+- a data da política passou para 21 de outubro de 2026
+
+O IP do visitante continua chegando ao YouTube, e é isso que a política diz.
+Quem quiser zero terceiro na página tem a saída de hospedar o vídeo local e
+usar `<video muted loop playsinline>`.
+
+<details>
+<summary>O texto original do item, para histórico</summary>
+
 ## 9. O vídeo de fundo da `servicos.html` contradiz a política de privacidade
 
 **Onde:** `servicos.html`, o `.svc-ytwrap` do hero.
@@ -227,6 +248,62 @@ recebe dado de visitante entra no mesmo commit que o texto da política.
 
 Alternativa que dispensa as duas: hospedar o vídeo como arquivo local e usar
 `<video muted loop playsinline>`, sem terceiro nenhum.
+
+</details>
+
+---
+
+## 11. Acessibilidade: o que foi feito e o que depende de você
+
+Auditado em 21/10/2026 contra WCAG 2.1 AA, medindo no site publicado.
+
+**Resolvido**, em `tools/build-a11y.py`:
+
+- **Atalho de teclado** nas 22 páginas. Antes, quem navega por Tab atravessava
+  o header inteiro, com o menu de serviços aberto, em toda página, antes de
+  chegar ao texto. O atalho aparece no primeiro Tab e salta para o conteúdo
+- **Anel de foco** próprio, de dois tons: contorno `#0A0B0D` para fundo claro
+  e halo salmão para fundo escuro, visível nos dois. Os campos do formulário
+  apagavam o contorno e deixavam só a borda salmão, de 2,74:1, abaixo dos 3:1
+  que o WCAG 1.4.11 pede para indicador que não é texto
+- **Contraste do texto cinza**, em três tons conforme o fundo: `#71767c` no
+  branco, `#6e7379` no creme claro, `#686d75` no creme escuro e `#747a82` no
+  fundo preto. Todos cruzam 4,5:1. Nenhuma cor nova entrou: é o mesmo cinza
+  do projeto, escurecido até passar
+
+**Depende de uma decisão sua: o salmão como texto.**
+
+O `#F07A65` tem luminância do meio, então não contrasta nem com branco nem
+com preto o bastante para texto:
+
+| Onde | Hoje | Mínimo AA |
+|---|---|---|
+| Texto branco sobre o salmão (todo botão primário) | 2,74 | 4,5 |
+| Salmão como texto sobre branco (asterisco de obrigatório, estrelas, link da política no consentimento) | 2,74 | 4,5 |
+| Salmão sobre creme (estrelas do card de avaliação) | 2,36 | 4,5 |
+
+As duas saídas medidas:
+
+1. **Texto `#0A0B0D` sobre o salmão: 7,2:1.** Não inventa cor nenhuma, usa a
+   cor de texto que o projeto já tem. Muda a cara de todo botão do site
+2. **Escurecer o salmão para `#B4493A`: 5,31:1.** Inventa cor nova, o que o
+   `CLAUDE.md` proíbe
+
+A primeira está escrita e desligada em `build-a11y.py`, no bloco
+`CONTRASTE_BOTAO`. Para ligar, é trocar `LIGAR_CONTRASTE_BOTAO` para `True` e
+rodar o build.
+
+---
+
+## 12. Dados da empresa não aparecem em lugar nenhum
+
+Zero CNPJ, razão social ou endereço no site inteiro. Para quem vende pela
+internet isso é exigência do Código de Defesa do Consumidor; para site
+institucional é boa prática, e é das coisas que separam estúdio de página
+genérica.
+
+Precisa do dado: razão social, CNPJ e cidade bastam, no rodapé, ao lado do
+copyright. Não inventei nada aqui porque não tenho esses números.
 
 ---
 
