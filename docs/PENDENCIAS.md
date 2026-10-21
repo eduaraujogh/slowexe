@@ -330,8 +330,18 @@ endereço pelo que já recebe e-mail hoje enquanto o domínio não entra.
   dois eram número inventado, contra a regra do próprio projeto, e estavam na
   seção "Por Que Nos Escolher", junto de cinco avatares de pessoas que não
   existem. **O Eduardo mandou tirar a seção inteira em 21/10/2026**, por não
-  gostar dela, e isso levou os números junto. O link do rodapé que apontava
-  pra ela saiu das 22 páginas, pelo `build-links.py`.
+  gostar dela, e isso levou os números junto.
+
+  No lugar entrou **"Seis razões para a escolha ser a gente"**, uma grade de
+  3x2 com ícone, título e duas linhas em cada razão. A diferença que importa:
+  as seis afirmam **método**, não métrica. Nenhuma cita número, e cinco delas
+  reaproveitam texto que já estava no ar, só sem o dado inventado em volta. A
+  sexta ("cliente que assina o que diz") é verificável na própria página: o
+  visitante rola e confere nome, cargo e empresa de quem deu o depoimento.
+
+  A seção nova ficou com o mesmo `id="why"`, então o link do rodapé voltou a
+  ter destino. O `build-links.py` agora garante esse link nas 22 páginas, em
+  vez de removê-lo.
 
 - ~~Mobile das 21 páginas fora da home com medida de desktop.~~ Segunda passada
   em 28/08/2026, medida em 320, 375 e 390px. Padding de seção de 84 a 124px caiu

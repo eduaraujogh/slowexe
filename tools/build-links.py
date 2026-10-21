@@ -103,15 +103,20 @@ def main():
                 html, count=1)
             total['privacidade'] += n
 
-        # 8b. a secao "Por Que Nos Escolher" saiu da home em 21/10/2026, e o
-        #     link dela no rodape das 22 paginas virou ancora pra lugar
-        #     nenhum: #why nao existe mais. Mesma regra dos outros links
-        #     sem destino, entao sai aqui.
-        html, n = re.subn(
-            r'[ \t]*<a href="(?:index\.html)?#why" class="flink">'
-            r'(?:(?!</a>).)*?</a>\n',
-            '', html, flags=re.S)
-        total['why'] += n
+        # 8b. "Por que a Slowexe" no rodape.
+        #     A secao #why saiu da home em 21/10/2026 e o link virou ancora
+        #     pra lugar nenhum, entao este passo o removia. No mesmo dia uma
+        #     secao nova entrou no lugar, com o mesmo id e o mesmo assunto,
+        #     e agora o passo faz o contrario: garante o link de volta. Fica
+        #     escrito aqui em vez de na mao nas 22 paginas.
+        alvo = '#why' if nome == 'index.html' else 'index.html#why'
+        if 'foot-cols' in html and '#why" class="flink"' not in html:
+            html, n = re.subn(
+                r'([ \t]*)(<a href="(?:index\.html)?#feedback" class="flink">)',
+                r'\1<a href="%s" class="flink"><span data-pt>Por que a Slowexe'
+                r'</span><span data-en>Why Slowexe</span></a>\n\1\2' % alvo,
+                html, count=1)
+            total['why'] += n
 
         # 9a. o video de fundo da servicos.html vinha de www.youtube.com, que
         #     grava cookie de publicidade assim que o iframe carrega, e o
