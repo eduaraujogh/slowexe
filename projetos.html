@@ -528,13 +528,12 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .ribbon.r2{top:100px}
     .ribbon-item{font-size:17px}
 
-    /* --- o titulo da home estava saindo da tela ---
-       `.headline` e clamp(44px,8.6vw,112px): abaixo de 512px de tela o vw
-       perde pro piso de 44px, e o piso nao cabe. "Marcas que duram" mede
-       369px em 44px de fonte, contra 327px de largura util em 375. Sobrava
-       o "m" pra fora, e o titulo tem white-space:nowrap, entao nao quebrava.
-       Abaixo de 430px o tamanho volta a seguir a tela. */
-    .headline{font-size:min(44px,10vw)}
+    /* O `.headline` tinha aqui um teto de min(44px,10vw), de quando o
+       titulo era "Marcas que duram": tres palavras, white-space:nowrap e
+       piso de 44px que nao cabia em 375px. O titulo novo e uma frase de
+       duas linhas, com clamp e max-width em ch no bloco `hero-titulo` do
+       index.html, e se vira sozinho. A regra daqui saiu junto com o
+       motivo dela. */
 
     .svc-menu,.svc-alltype,.svc-detail,
     .svc-sec,.svc-cta,

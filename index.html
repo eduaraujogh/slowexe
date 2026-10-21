@@ -321,13 +321,12 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .ribbon.r2{top:100px}
     .ribbon-item{font-size:17px}
 
-    /* --- o titulo da home estava saindo da tela ---
-       `.headline` e clamp(44px,8.6vw,112px): abaixo de 512px de tela o vw
-       perde pro piso de 44px, e o piso nao cabe. "Marcas que duram" mede
-       369px em 44px de fonte, contra 327px de largura util em 375. Sobrava
-       o "m" pra fora, e o titulo tem white-space:nowrap, entao nao quebrava.
-       Abaixo de 430px o tamanho volta a seguir a tela. */
-    .headline{font-size:min(44px,10vw)}
+    /* O `.headline` tinha aqui um teto de min(44px,10vw), de quando o
+       titulo era "Marcas que duram": tres palavras, white-space:nowrap e
+       piso de 44px que nao cabia em 375px. O titulo novo e uma frase de
+       duas linhas, com clamp e max-width em ch no bloco `hero-titulo` do
+       index.html, e se vira sozinho. A regra daqui saiu junto com o
+       motivo dela. */
 
     .svc-menu,.svc-alltype,.svc-detail,
     .svc-sec,.svc-cta,
@@ -497,6 +496,26 @@ header .menu-toggle svg{stroke:#0A0B0D}
   /* `.svc-d-fn .fn-n` tem especificidade 0,2,0 na origem: um seletor de
      classe so perderia a disputa e a cor nao mudaria. */
   .svc-d-fn .fn-n{color:#747a82}                       /* sobre 0A0B0D: 4,55 */
+</style>
+<style id="hero-titulo">
+  /* ============ TITULO DO HERO ============ */
+  /* Era "Marcas que duram", tres palavras em uma linha so, com
+     white-space:nowrap e ate 112px. O titulo novo nomeia a categoria e a
+     promessa, no formato da referencia, e ocupa DUAS linhas.
+     O max-width em ch e o que decide onde a frase quebra: medida em
+     caracteres acompanha o tamanho da fonte, ao contrario de px. Em 27ch
+     as duas versoes partem no meio, a de 51 caracteres e a inglesa de 56,
+     e o text-wrap:balance iguala o peso das duas linhas. */
+  .headline{
+    white-space:normal;
+    font-size:clamp(30px,4.4vw,64px);
+    line-height:1.05;
+    letter-spacing:-.025em;
+    max-width:27ch;
+    margin-left:auto;
+    margin-right:auto;
+    text-wrap:balance;
+  }
 </style>
 <style id="razoes">
   /* ============ POR QUE A SLOWEXE (seis razoes) ============ */
@@ -756,8 +775,8 @@ header .menu-toggle svg{stroke:#0A0B0D}
 
     <div class="wrap hero-inner">
       <h1 class="headline" data-reveal>
-        <span data-pt>Marcas que duram</span>
-        <span data-en>Brands that last</span>
+        <span data-pt>Design e tecnologia para a marca alcançar o negócio</span>
+        <span data-en>Design and technology for brands that outgrew their image</span>
       </h1>
     </div>
 
@@ -785,8 +804,8 @@ header .menu-toggle svg{stroke:#0A0B0D}
 
     <div class="wrap hero-inner">
       <p class="subtitle" data-reveal>
-        <span data-pt>Design e tecnologia no mesmo time. Da identidade ao site no ar, sem passar por três fornecedores.</span>
-        <span data-en>Design and technology in one team. From identity to a live site, without going through three vendors.</span>
+        <span data-pt>Da identidade ao site no ar, com o mesmo time. Sem passar por três fornecedores.</span>
+        <span data-en>From identity to a live site, with one team. No going through three vendors.</span>
       </p>
 
       <div class="hero-cta" data-reveal>
@@ -925,9 +944,9 @@ header .menu-toggle svg{stroke:#0A0B0D}
         </div>
 
         <div class="wr-item" data-reveal>
-          <svg class="wr-ico" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/><circle cx="9" cy="7" r="2.2"/><circle cx="15" cy="12" r="2.2"/><circle cx="7.5" cy="17" r="2.2"/></svg>
-          <h3 class="wr-t"><span data-pt>Processo enxuto, sem retrabalho</span><span data-en>A lean process, no rework</span></h3>
-          <p class="wr-d"><span data-pt>Etapas curtas, com aprovação em cada uma, tiram a sua ideia do papel sem refazer o mesmo caminho três vezes.</span><span data-en>Short stages, each one signed off, take your idea off paper without walking the same path three times.</span></p>
+          <svg class="wr-ico" viewBox="0 0 24 24"><path d="M13.2 2.6l1.7 4.5 4.5 1.7-4.5 1.7-1.7 4.5-1.7-4.5-4.5-1.7 4.5-1.7z"/><path d="M5.8 14.6l.85 2.25 2.25.85-2.25.85-.85 2.25-.85-2.25L2.7 17.7l2.25-.85z"/></svg>
+          <h3 class="wr-t"><span data-pt>Feito por humanos, acelerado por IA</span><span data-en>Made by humans, sped up by AI</span></h3>
+          <p class="wr-d"><span data-pt>A IA encurta o caminho das tarefas repetidas. O que define a sua marca continua passando por gente, e é essa gente que você contrata.</span><span data-en>AI shortens the path through repetitive work. What defines your brand still goes through people, and those people are who you hire.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
