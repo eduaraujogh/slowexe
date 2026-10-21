@@ -795,6 +795,44 @@ header .menu-toggle svg{stroke:#0A0B0D}
      classe so perderia a disputa e a cor nao mudaria. */
   .svc-d-fn .fn-n{color:#747a82}                       /* sobre 0A0B0D: 4,55 */
 </style>
+<style id="ritmo">
+  /* ============ RITMO VERTICAL ============ */
+  @media (min-width:1024px) and (min-height:700px){
+
+    /* --- 1. o hero ocupa a tela, em qualquer monitor --- */
+    .hero,.svc-hero,.svc-vhero,.px-hero,.pc-hero,
+    .blog-hero,.art-hero,.leg-hero,.cw-hero{
+      min-height:100svh;
+      display:grid;
+      align-content:center;
+    }
+    /* O hero nasce debaixo do header fixo, entao o respiro de cima conta a
+       partir dele; sem isso o conteudo centrado sobe demais. */
+    .hero,.svc-hero,.svc-vhero,.px-hero,.pc-hero,
+    .blog-hero,.art-hero,.leg-hero,.cw-hero{
+      padding-top:calc(var(--header-h) + 24px);
+    }
+
+    /* --- 2. respiro proporcional, no lugar do px fixo --- */
+    .about,.solutions,.why,.blog,.feedback,.projects,.cta,
+    .svc-sec,.svc-cta,.svc-menu,.svc-alltype,.svc-detail,
+    .px-grid-wrap,.pc-overview,.pc-results,.pc-quote,
+    .blog-list,.art-related{
+      padding-top:clamp(96px,9vh,190px);
+      padding-bottom:clamp(96px,9vh,190px);
+    }
+    .cta{padding-bottom:0}
+    .projects{padding-top:clamp(30px,3vh,60px)}
+
+    /* --- 3. quem fecha um assunto ocupa a tela --- */
+    .about,.solutions,.why,.blog,.cta,.contact,.blog-list{
+      min-height:100svh;
+      display:grid;
+      align-content:center;
+    }
+    .contact{padding-top:calc(var(--header-h) + clamp(40px,5vh,90px))}
+  }
+</style>
 <style>
   .art-cover-type{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;
     display:flex;flex-direction:column;justify-content:flex-end;gap:14px;padding:clamp(28px,5vw,64px);color:#fff}

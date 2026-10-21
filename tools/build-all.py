@@ -35,6 +35,7 @@ PASSOS = [
     ('build-social.py',  'icones de rede social no rodape'),
     ('build-menu.py',    'menu do celular'),
     ('build-a11y.py',    'foco de teclado, atalho e contraste'),
+    ('build-ritmo.py',   'ritmo vertical em tela grande'),
     ('build-meta.py',    'SEO e icones'),
     ('build-sitemap.py', 'sitemap e robots'),
     # por ultimo: os passos acima usam <style id="..."> como guarda pra nao
