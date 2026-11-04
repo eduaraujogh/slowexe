@@ -534,13 +534,13 @@ VIDEO_CSS = '''<style id="video-capa-css">
 .pg-media video{width:100%;height:100%;object-fit:cover;display:block;
   transition:transform .7s cubic-bezier(.22,1,.36,1)}
 .pg-card:hover .pg-media video{transform:scale(1.06)}
-.deck-card video{width:100%;height:100%;object-fit:cover;display:block}
+.scard-media video{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 '''
 
 EXTRA_JS = '''<script id="cover-video-js">
 (function(){
-  var vs=[].slice.call(document.querySelectorAll('.pc-cover-video,.pg-vid,.deck-vid'));
+  var vs=[].slice.call(document.querySelectorAll('.pc-cover-video,.pg-vid,.scard-vid'));
   if(!vs.length)return;
   var parado=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(parado)return;
@@ -671,6 +671,13 @@ f'''        <div class="deck-card">
     if not n:
         print('AVISO: baralho do hero nao encontrado em index.html')
     else:
+        # o empilhamento da home monta os cards por JS, entao o video de la nao
+        # aparece no HTML: a guarda olha a lista de dados, nao a tag
+        if "vid:'" in h2:
+            if 'id="video-capa-css"' not in h2:
+                h2 = h2.replace('</head>', VIDEO_CSS + '</head>', 1)
+            if 'id="cover-video-js"' not in h2:
+                h2 = h2.replace('</body>', EXTRA_JS + '</body>', 1)
         io.open(ix, 'w', encoding='utf-8').write(h2)
         print('atualizado  index.html  (%d cards no baralho do hero)' % len(baralho))
 

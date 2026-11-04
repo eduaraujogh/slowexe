@@ -643,6 +643,12 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .wr-top{margin-bottom:32px}
   }
 </style>
+<style id="video-capa-css">
+.pg-media video{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.pg-card:hover .pg-media video{transform:scale(1.06)}
+.scard-media video{width:100%;height:100%;object-fit:cover;display:block}
+</style>
 </head>
 <body class="lang-pt">
   <!-- atalho de teclado (tools/build-a11y.py) -->
@@ -1344,10 +1350,12 @@ header .menu-toggle svg{stroke:#0A0B0D}
   // ===== Projects: stacking cards on scroll (Scalient style) =====
   (function(){
     const stack=document.querySelector('.stack'); if(!stack) return;
+    // vid: case com capa animada. A caixa aqui e 2/1 e o mp4 e 16:9, entao o
+    // recorte tira 11% da altura, que a arte centralizada absorve.
     const data=[
-      {name:'Sabores de Curitiba',date:'Gastronomia',img:'assets/cases/sabores-01.webp',href:'projeto-sabores.html'},
-      {name:'Duo Garage',date:'Automotivo',img:'assets/cases/duo-01.webp',href:'projeto-duo.html'},
-      {name:'Fense Seguradora',date:'Seguros',img:'assets/cases/fense-01.webp',href:'projeto-fense.html'},
+      {name:'Sabores de Curitiba',date:'Gastronomia',img:'assets/cases/sabores-01.webp',vid:'sabores',href:'projeto-sabores.html'},
+      {name:'Duo Garage',date:'Automotivo',img:'assets/cases/duo-01.webp',vid:'duo',href:'projeto-duo.html'},
+      {name:'Fense Seguradora',date:'Seguros',img:'assets/cases/fense-01.webp',vid:'fense',href:'projeto-fense.html'},
       {name:'Golden Vibes',date:'Semijoias',img:'assets/cases/golden-vibes-01.webp',href:'projeto-golden-vibes.html'}
     ];
     const L=()=>document.documentElement.lang==='en'?'en':'pt';
@@ -1357,7 +1365,9 @@ header .menu-toggle svg{stroke:#0A0B0D}
       a.innerHTML=
         // a legenda vive DENTRO da midia: entra por cima da imagem no hover
         '<div class="scard-media">'+
-          '<img src="'+p.img+'" alt="'+p.name+', '+p.date+'" loading="lazy" decoding="async">'+
+          (p.vid
+            ? '<video class="scard-vid" muted loop playsinline preload="none" poster="assets/videos/'+p.vid+'-poster.webp" aria-label="'+p.name+', '+p.date+'"><source src="assets/videos/'+p.vid+'.mp4" type="video/mp4"></video>'
+            : '<img src="'+p.img+'" alt="'+p.name+', '+p.date+'" loading="lazy" decoding="async">')+
           '<div class="scard-foot">'+
             '<div class="scard-meta"><h3 class="scard-name">'+p.name+'</h3><span class="scard-date">'+p.date+'</span></div>'+
             '<span class="scard-link"><span class="lk"></span>'+
@@ -1553,6 +1563,23 @@ header .menu-toggle svg{stroke:#0A0B0D}
   window.addEventListener('resize',function(){
     if(window.innerWidth>760&&panel.classList.contains('on'))close();
   });
+})();
+</script>
+<script id="cover-video-js">
+(function(){
+  var vs=[].slice.call(document.querySelectorAll('.pc-cover-video,.pg-vid,.scard-vid'));
+  if(!vs.length)return;
+  var parado=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(parado)return;
+  if(!('IntersectionObserver' in window)){vs.forEach(function(v){v.play().catch(function(){})});return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v=e.target;
+      if(e.isIntersecting){v.play().catch(function(){});}
+      else if(!v.paused){v.pause();}
+    });
+  },{threshold:0,rootMargin:'100px'});
+  vs.forEach(function(v){io.observe(v);});
 })();
 </script>
 </body>
