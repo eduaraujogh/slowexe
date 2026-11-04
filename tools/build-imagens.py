@@ -71,22 +71,22 @@ SERVICOS = {
     # interfaces reais: internet banking, portal do parceiro, etapas da calculadora
     'uiux':     ['artta-plataformas-01', 'artta-plataformas-02', 'artta-calculadora-02'],
     # app na mao: notificacao, uso real e as tres LPs no celular
-    'app':      ['artta-marca-07', 'artta-plataformas-03', 'gedisa-10'],
+    'app':      ['artta-marca-07', 'artta-plataformas-03', 'artta-marca-07'],
     # leitura e diagnostico: estrutura, blocos de valor e o painel
-    'audit':    ['gedisa-05', 'gedisa-09', 'artta-marca-08'],
+    'audit':    ['artta-calculadora-02', 'artta-plataformas-02', 'artta-marca-08'],
     # sites no ar
-    'web':      ['gedisa-01', 'gedisa-08', 'gedisa-04'],
+    'web':      ['artta-calculadora-01', 'artta-plataformas-01', 'artta-01'],
     # landing pages de verdade, desktop e celular
-    'lp':       ['artta-calculadora-01', 'artta-calculadora-03', 'gedisa-02'],
+    'lp':       ['artta-calculadora-01', 'artta-calculadora-03', 'artta-calculadora-03'],
     # a Gedisa E um site refeito: e o case certo pra essa frente
-    'redesign': ['gedisa-06', 'gedisa-07', 'gedisa-03'],
+    'redesign': ['artta-plataformas-03', 'artta-marca-08', 'artta-apresentacoes-01'],
     'brand':    ['sabores-05', 'sabores-11', 'sabores-17'],
     'rebrand':  ['golden-vibes-05', 'golden-vibes-10', 'golden-vibes-15'],
 }
 # a imagem que aparece no hover da lista de servicos: a primeira de cada frente
 HOVER = {'sv-uiux': 'artta-plataformas-01', 'sv-app': 'artta-marca-07',
-         'sv-audit': 'gedisa-05', 'sv-web': 'gedisa-01',
-         'sv-lp': 'artta-calculadora-01', 'sv-redesign': 'gedisa-06',
+         'sv-audit': 'artta-calculadora-02', 'sv-web': 'artta-calculadora-01',
+         'sv-lp': 'artta-calculadora-01', 'sv-redesign': 'artta-plataformas-03',
          'sv-brand': 'sabores-05', 'sv-rebrand': 'golden-vibes-05'}
 
 
