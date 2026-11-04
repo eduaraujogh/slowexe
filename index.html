@@ -652,6 +652,16 @@ header .menu-toggle svg{stroke:#0A0B0D}
 .pg-card:hover .pg-media video{transform:scale(1.06)}
 .scard-media video{width:100%;height:100%;object-fit:cover;display:block}
 </style>
+<style id="about-equipe">
+  /* As duas fotos da secao passam a ser os socios. O bloco .about-img continua
+     com a proporcao e o grayscale de antes; o que entra e o nome embaixo, por
+     isso cada um virou um .about-pessoa, com a foto e a legenda empilhadas. */
+  .about-pessoa{display:flex;flex-direction:column;gap:14px}
+  .about-nome{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;
+    font-size:16.5px;letter-spacing:-.01em;margin:0;line-height:1.25}
+  .about-cargo{display:block;margin-top:3px;font-family:Inter,system-ui,sans-serif;
+    font-weight:400;font-size:13.5px;color:#6b7078;letter-spacing:0}
+</style>
 </head>
 <body class="lang-pt">
   <!-- atalho de teclado (tools/build-a11y.py) -->
@@ -842,10 +852,16 @@ header .menu-toggle svg{stroke:#0A0B0D}
     </div>
 
     <div class="wrap about-media">
-      <div class="about-img" data-reveal><img src="assets/cases/sabores-04.webp?grayscale" alt="" loading="lazy"></div>
-      <div class="about-img" data-reveal><img src="assets/cases/golden-vibes-06.webp?grayscale" alt="" loading="lazy"></div>
+      <div class="about-pessoa" data-reveal>
+        <div class="about-img"><img src="assets/equipe/bruna-eich.webp" alt="Bruna Eich, cofundadora da Slowexe" loading="lazy" decoding="async"></div>
+        <p class="about-nome">Bruna Eich<span class="about-cargo"><span data-pt>Cofundadora, marketing</span><span data-en>Co-founder, marketing</span></span></p>
+      </div>
+      <div class="about-pessoa" data-reveal>
+        <div class="about-img"><img src="assets/equipe/eduardo-araujo.webp" alt="Eduardo Araujo, cofundador da Slowexe" loading="lazy" decoding="async"></div>
+        <p class="about-nome">Eduardo Araujo<span class="about-cargo"><span data-pt>Cofundador, design</span><span data-en>Co-founder, design</span></span></p>
+      </div>
       <div class="about-caption" data-reveal>
-        <h3><span data-pt>O trabalho,<br>caso a caso</span><span data-en>The work,<br>case by case</span></h3>
+        <h3><span data-pt>Quem atende<br>é quem faz</span><span data-en>You talk to<br>the people who build it</span></h3>
         <a href="projetos.html" class="btn btn-cta-light">
           <span class="roll" data-pt>Saiba Mais</span><span class="roll" data-en>Learn More</span>
           <span class="arr-wrap"><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
