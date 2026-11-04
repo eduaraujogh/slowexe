@@ -774,8 +774,40 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <style>
   .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
   .pc-cover--contained .wrap{max-width:1000px}
-  .pc-cover--contained img{border-radius:24px}
+  .pc-cover--contained img,.pc-cover--contained .pc-cover-video{border-radius:24px}
   .pc-q-author{gap:0}
+  /* capa animada: o poster segura o lugar e o video so toca quando entra na tela */
+  .pc-cover-video{width:100%;height:auto;display:block;background:#f1f2f4}
+  /* o video ocupa o lugar da imagem na grade e no baralho, com o mesmo zoom de hover */
+  .pg-media video{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .7s cubic-bezier(.22,1,.36,1)}
+  .pg-card:hover .pg-media video{transform:scale(1.06)}
+  .deck-card video{width:100%;height:100%;object-fit:cover;display:block}
+  /* capitulo de case com varias entregas (Artta, Grupo SBA) */
+  .pc-chapter{padding:86px 0 0}
+  .pc-cap-kick{display:block;font-size:12px;font-weight:600;text-transform:uppercase;
+    letter-spacing:.12em;color:#9aa0a8;margin-bottom:12px}
+  .pc-chapter h2{font-family:"Bricolage Grotesque";font-weight:700;
+    font-size:clamp(26px,3.4vw,42px);line-height:1.1;letter-spacing:-.022em;margin:0 0 16px}
+  .pc-chapter p{font-size:16.5px;line-height:1.62;color:#6b7078;margin:0;max-width:64ch}
+  .pc-cap-head{max-width:760px}
+  .pc-cap-res{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:30px;
+    padding:20px 24px;border:1px solid #ece9e4;border-radius:16px}
+  .pc-cap-res b{font-family:"Bricolage Grotesque";font-weight:800;
+    font-size:clamp(21px,2.5vw,29px);letter-spacing:-.02em;color:#0A0B0D}
+  .pc-cap-res svg{width:20px;height:20px;color:#F07A65;flex:none}
+  .pc-cap-res>span{font-size:14.5px;color:#6b7078}
+  /* resultados reais do case, no lugar do escopo generico */
+  .pc-res-list{list-style:none;margin:0 auto;padding:0;display:grid;gap:15px;max-width:760px}
+  .pc-res-list li{position:relative;padding-left:28px;font-size:16.5px;
+    line-height:1.55;color:#3a3f47}
+  .pc-res-list li::before{content:"";position:absolute;left:0;top:11px;
+    width:13px;height:2px;background:#F07A65}
+  @media(max-width:760px){
+    .pc-chapter{padding:56px 0 0}
+    .pc-cap-res{padding:16px 18px;gap:10px}
+    .pc-res-list li{font-size:15.5px}
+  }
 </style>
 
 <style id="case-web">
@@ -1572,6 +1604,23 @@ header .menu-toggle svg{stroke:#0A0B0D}
   window.addEventListener('resize',function(){
     if(window.innerWidth>760&&panel.classList.contains('on'))close();
   });
+})();
+</script>
+<script id="cover-video-js">
+(function(){
+  var vs=[].slice.call(document.querySelectorAll('.pc-cover-video,.pg-vid,.deck-vid'));
+  if(!vs.length)return;
+  var parado=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(parado)return;
+  if(!('IntersectionObserver' in window)){vs.forEach(function(v){v.play().catch(function(){})});return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v=e.target;
+      if(e.isIntersecting){v.play().catch(function(){});}
+      else if(!v.paused){v.pause();}
+    });
+  },{threshold:.2});
+  vs.forEach(function(v){io.observe(v);});
 })();
 </script>
 </body>

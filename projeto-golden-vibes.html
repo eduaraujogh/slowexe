@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Golden Vibes | Projeto | Slowexe</title>
-<meta name="description" content="Golden Vibes, semijoias · branding. Um logotipo de traço fluido e contemporâneo, com ligaduras desenhadas à mão, sobre uma paleta que troca o branco pelo." />
+<meta name="description" content="Golden Vibes, semijoias · branding. Um logotipo de traço fluido e contemporâneo, com ligaduras desenhadas à mão, como as peças." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -774,8 +774,40 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <style>
   .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
   .pc-cover--contained .wrap{max-width:1000px}
-  .pc-cover--contained img{border-radius:24px}
+  .pc-cover--contained img,.pc-cover--contained .pc-cover-video{border-radius:24px}
   .pc-q-author{gap:0}
+  /* capa animada: o poster segura o lugar e o video so toca quando entra na tela */
+  .pc-cover-video{width:100%;height:auto;display:block;background:#f1f2f4}
+  /* o video ocupa o lugar da imagem na grade e no baralho, com o mesmo zoom de hover */
+  .pg-media video{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .7s cubic-bezier(.22,1,.36,1)}
+  .pg-card:hover .pg-media video{transform:scale(1.06)}
+  .deck-card video{width:100%;height:100%;object-fit:cover;display:block}
+  /* capitulo de case com varias entregas (Artta, Grupo SBA) */
+  .pc-chapter{padding:86px 0 0}
+  .pc-cap-kick{display:block;font-size:12px;font-weight:600;text-transform:uppercase;
+    letter-spacing:.12em;color:#9aa0a8;margin-bottom:12px}
+  .pc-chapter h2{font-family:"Bricolage Grotesque";font-weight:700;
+    font-size:clamp(26px,3.4vw,42px);line-height:1.1;letter-spacing:-.022em;margin:0 0 16px}
+  .pc-chapter p{font-size:16.5px;line-height:1.62;color:#6b7078;margin:0;max-width:64ch}
+  .pc-cap-head{max-width:760px}
+  .pc-cap-res{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:30px;
+    padding:20px 24px;border:1px solid #ece9e4;border-radius:16px}
+  .pc-cap-res b{font-family:"Bricolage Grotesque";font-weight:800;
+    font-size:clamp(21px,2.5vw,29px);letter-spacing:-.02em;color:#0A0B0D}
+  .pc-cap-res svg{width:20px;height:20px;color:#F07A65;flex:none}
+  .pc-cap-res>span{font-size:14.5px;color:#6b7078}
+  /* resultados reais do case, no lugar do escopo generico */
+  .pc-res-list{list-style:none;margin:0 auto;padding:0;display:grid;gap:15px;max-width:760px}
+  .pc-res-list li{position:relative;padding-left:28px;font-size:16.5px;
+    line-height:1.55;color:#3a3f47}
+  .pc-res-list li::before{content:"";position:absolute;left:0;top:11px;
+    width:13px;height:2px;background:#F07A65}
+  @media(max-width:760px){
+    .pc-chapter{padding:56px 0 0}
+    .pc-cap-res{padding:16px 18px;gap:10px}
+    .pc-res-list li{font-size:15.5px}
+  }
 </style>
 <link rel="canonical" href="https://eduaraujogh.github.io/slowexe/projeto-golden-vibes.html" />
 <meta property="og:type" content="website" />
@@ -783,7 +815,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta property="og:title" content="Golden Vibes | Projeto" />
-<meta property="og:description" content="Golden Vibes, semijoias · branding. Um logotipo de traço fluido e contemporâneo, com ligaduras desenhadas à mão, sobre uma paleta que troca o branco pelo." />
+<meta property="og:description" content="Golden Vibes, semijoias · branding. Um logotipo de traço fluido e contemporâneo, com ligaduras desenhadas à mão, como as peças." />
 <meta property="og:url" content="https://eduaraujogh.github.io/slowexe/projeto-golden-vibes.html" />
 <meta property="og:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -791,7 +823,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <meta property="og:image:alt" content="Slowexe" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Golden Vibes | Projeto" />
-<meta name="twitter:description" content="Golden Vibes, semijoias · branding. Um logotipo de traço fluido e contemporâneo, com ligaduras desenhadas à mão, sobre uma paleta que troca o branco pelo." />
+<meta name="twitter:description" content="Golden Vibes, semijoias · branding. Um logotipo de traço fluido e contemporâneo, com ligaduras desenhadas à mão, como as peças." />
 <meta name="twitter:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
 </head>
 <body class="lang-pt ct-page">
@@ -926,14 +958,14 @@ header .menu-toggle svg{stroke:#0A0B0D}
       <div class="pc-meta" data-reveal>
         <div><span><span data-pt>Cliente</span><span data-en>Client</span></span><b>Golden Vibes Semijoias</b></div>
         <div><span><span data-pt>Setor</span><span data-en>Industry</span></span><b><span data-pt>Moda e acessórios</span><span data-en>Fashion &amp; accessories</span></b></div>
-        <div><span><span data-pt>Serviços</span><span data-en>Services</span></span><b><span data-pt>Branding, identidade visual</span><span data-en>Branding, visual identity</span></b></div>
+        <div><span><span data-pt>Serviços</span><span data-en>Services</span></span><b><span data-pt>Branding, identidade visual, embalagens</span><span data-en>Branding, visual identity, packaging</span></b></div>
         <div><span><span data-pt>Estúdio</span><span data-en>Studio</span></span><b>Slowexe</b></div>
       </div>
     </div></section>
     <div class="pc-cover"><div class="wrap" style="padding:0"><img data-reveal src="assets/cases/golden-vibes-01.webp" alt="Golden Vibes"></div></div>
     <section class="pc-overview"><div class="wrap pc-grid">
-      <div data-reveal><h3><span data-pt>O desafio</span><span data-en>The challenge</span></h3><p><span data-pt>Posicionar uma marca de semijoias em um segmento onde quase todo mundo comunica da mesma forma, dourado, serifa clássica e fundo branco.</span><span data-en>Positioning a semi-fine jewellery brand in a segment where nearly everyone communicates the same way, gold, classic serif, white background.</span></p></div>
-      <div data-reveal><h3><span data-pt>A solução</span><span data-en>The solution</span></h3><p><span data-pt>Um logotipo de traço fluido e contemporâneo, com ligaduras desenhadas à mão, sobre uma paleta que troca o branco pelo verde profundo. O monograma se fecha em uma forma de quatro pétalas, que funciona sozinha como selo da marca.</span><span data-en>A fluid, contemporary logotype with hand-drawn ligatures, over a palette that swaps white for deep green. The monogram closes into a four-petal shape that stands alone as the brand seal.</span></p></div>
+      <div data-reveal><h3><span data-pt>O desafio</span><span data-en>The challenge</span></h3><p><span data-pt>A Golden Vibes produz semijoias feitas à mão, peça por peça. O desafio era posicionar a marca em um segmento onde quase todo mundo comunica da mesma forma, com dourado, serifa clássica e fundo branco, e deixar claro o valor do trabalho artesanal.</span><span data-en>Golden Vibes makes semi-fine jewellery by hand, piece by piece. The challenge was positioning the brand in a segment where nearly everyone communicates the same way, with gold, a classic serif and a white background, and making the value of handmade work clear.</span></p></div>
+      <div data-reveal><h3><span data-pt>A solução</span><span data-en>The solution</span></h3><p><span data-pt>Um logotipo de traço fluido e contemporâneo, com ligaduras desenhadas à mão, como as peças. A paleta troca o branco pelo verde profundo, e o monograma se fecha em uma forma de quatro pétalas que funciona sozinho como selo da marca, do pattern das embalagens à etiqueta de cada joia.</span><span data-en>A fluid, contemporary logotype with hand-drawn ligatures, like the pieces themselves. The palette swaps white for deep green, and the monogram closes into a four-petal shape that stands alone as the brand seal, from the packaging pattern to the tag on each piece.</span></p></div>
     </div></section>
     <div class="pc-gallery"><div class="wrap">
       <img data-reveal src="assets/cases/golden-vibes-02.webp" alt="Golden Vibes, Semijoias · Branding (1 de 16)" loading="lazy" decoding="async">
@@ -948,17 +980,17 @@ header .menu-toggle svg{stroke:#0A0B0D}
       <img data-reveal src="assets/cases/golden-vibes-17.webp" alt="Golden Vibes, Semijoias · Branding (16 de 16)" loading="lazy" decoding="async">
     </div></div>
     <section class="pc-results"><div class="wrap">
-      <h2 data-reveal><span data-pt>Escopo do projeto</span><span data-en>Project scope</span></h2>
-      <div class="pc-stats pc-scope">
-        <div data-reveal><b><span data-pt>Marca</span><span data-en>Brand</span></b><span><span data-pt>logotipo, símbolo e versões</span><span data-en>logotype, symbol and versions</span></span></div>
-        <div data-reveal><b><span data-pt>Sistema</span><span data-en>System</span></b><span><span data-pt>cores, tipografia e grid</span><span data-en>colour, type and grid</span></span></div>
-        <div data-reveal><b><span data-pt>Aplicações</span><span data-en>Applied</span></b><span><span data-pt>papelaria, digital e sinalização</span><span data-en>stationery, digital and signage</span></span></div>
-      </div>
+      <h2 data-reveal><span data-pt>O que o projeto entregou</span><span data-en>What the project delivered</span></h2>
+      <ul class="pc-res-list">
+        <li data-reveal><span data-pt>Uma marca reconhecível de longe em um segmento onde quase todas as concorrentes se parecem.</span><span data-en>A brand recognisable from a distance in a segment where nearly every competitor looks alike.</span></li>
+        <li data-reveal><span data-pt>Embalagens que viraram parte da experiência de compra e passaram a ser compartilhadas pelas clientes nas redes.</span><span data-en>Packaging that became part of the buying experience and started being shared by customers on social media.</span></li>
+        <li data-reveal><span data-pt>Uma identidade que valoriza o trabalho artesanal e sustenta um preço mais alto que o da média do segmento.</span><span data-en>An identity that honours handmade work and supports a price above the segment average.</span></li>
+      </ul>
     </div></section>
     <section class="pc-quote"><div class="wrap">
       <span class="pc-q-mark" aria-hidden="true">&#8220;</span>
       <blockquote class="pc-q-text" data-reveal>
-        <span data-pt>Trocar o branco pelo verde profundo foi o que tirou a marca do lugar-comum do segmento sem abrir mão da elegância.</span>
+        <span data-pt>Trocar o branco pelo verde profundo foi o que tirou a marca do lugar-comum do segmento, sem abrir mão da elegância.</span>
         <span data-en>Swapping white for deep green is what pulled the brand out of the segment’s default, without giving up elegance.</span>
       </blockquote>
       <div class="pc-q-author" data-reveal>
@@ -968,17 +1000,17 @@ header .menu-toggle svg{stroke:#0A0B0D}
 
     <section class="pc-navwrap"><div class="wrap">
       <nav class="pc-nav" data-reveal>
-        <a class="pc-nav-card prev" href="projeto-fense.html">
-          <img src="assets/cases/fense-01.webp" alt="">
+        <a class="pc-nav-card prev" href="projeto-duo.html">
+          <img src="assets/cases/duo-01.webp" alt="">
           <span class="pc-nav-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-pt>Projeto anterior</span><span data-en>Previous project</span></span>
-          <span class="pc-nav-name">Fense Seguradora</span>
-          <span class="pc-nav-cat"><span data-pt>Seguros · Identidade Visual</span><span data-en>Insurance · Visual Identity</span></span>
+          <span class="pc-nav-name">Duo Garage</span>
+          <span class="pc-nav-cat"><span data-pt>Revenda de veículos · Identidade Visual</span><span data-en>Car dealership · Visual Identity</span></span>
         </a>
-        <a class="pc-nav-card next" href="projeto-bioerde.html">
-          <img src="assets/cases/bioerde-01.webp" alt="">
+        <a class="pc-nav-card next" href="projeto-four-pink.html">
+          <img src="assets/cases/four-pink-01.webp" alt="">
           <span class="pc-nav-dir"><span data-pt>Próximo projeto</span><span data-en>Next project</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="pc-nav-name">Bioerde</span>
-          <span class="pc-nav-cat"><span data-pt>Agronegócio · Branding</span><span data-en>Agribusiness · Branding</span></span>
+          <span class="pc-nav-name">Four Pink</span>
+          <span class="pc-nav-cat"><span data-pt>Moda · Branding</span><span data-en>Fashion · Branding</span></span>
         </a>
       </nav>
       <a class="pc-all" href="projetos.html"><span data-pt>Ver todos os projetos</span><span data-en>See all projects</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>

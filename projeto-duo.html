@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Duo Garage | Projeto | Slowexe</title>
-<meta name="description" content="Duo Garage, automotivo · identidade visual. Identidade minimalista em preto e branco, apoiada no cinza para ganhar elegância." />
+<meta name="description" content="Duo Garage, revenda de veículos · identidade visual. Identidade minimalista em preto e branco, apoiada no cinza para ganhar elegância." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -774,8 +774,40 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <style>
   .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
   .pc-cover--contained .wrap{max-width:1000px}
-  .pc-cover--contained img{border-radius:24px}
+  .pc-cover--contained img,.pc-cover--contained .pc-cover-video{border-radius:24px}
   .pc-q-author{gap:0}
+  /* capa animada: o poster segura o lugar e o video so toca quando entra na tela */
+  .pc-cover-video{width:100%;height:auto;display:block;background:#f1f2f4}
+  /* o video ocupa o lugar da imagem na grade e no baralho, com o mesmo zoom de hover */
+  .pg-media video{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .7s cubic-bezier(.22,1,.36,1)}
+  .pg-card:hover .pg-media video{transform:scale(1.06)}
+  .deck-card video{width:100%;height:100%;object-fit:cover;display:block}
+  /* capitulo de case com varias entregas (Artta, Grupo SBA) */
+  .pc-chapter{padding:86px 0 0}
+  .pc-cap-kick{display:block;font-size:12px;font-weight:600;text-transform:uppercase;
+    letter-spacing:.12em;color:#9aa0a8;margin-bottom:12px}
+  .pc-chapter h2{font-family:"Bricolage Grotesque";font-weight:700;
+    font-size:clamp(26px,3.4vw,42px);line-height:1.1;letter-spacing:-.022em;margin:0 0 16px}
+  .pc-chapter p{font-size:16.5px;line-height:1.62;color:#6b7078;margin:0;max-width:64ch}
+  .pc-cap-head{max-width:760px}
+  .pc-cap-res{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:30px;
+    padding:20px 24px;border:1px solid #ece9e4;border-radius:16px}
+  .pc-cap-res b{font-family:"Bricolage Grotesque";font-weight:800;
+    font-size:clamp(21px,2.5vw,29px);letter-spacing:-.02em;color:#0A0B0D}
+  .pc-cap-res svg{width:20px;height:20px;color:#F07A65;flex:none}
+  .pc-cap-res>span{font-size:14.5px;color:#6b7078}
+  /* resultados reais do case, no lugar do escopo generico */
+  .pc-res-list{list-style:none;margin:0 auto;padding:0;display:grid;gap:15px;max-width:760px}
+  .pc-res-list li{position:relative;padding-left:28px;font-size:16.5px;
+    line-height:1.55;color:#3a3f47}
+  .pc-res-list li::before{content:"";position:absolute;left:0;top:11px;
+    width:13px;height:2px;background:#F07A65}
+  @media(max-width:760px){
+    .pc-chapter{padding:56px 0 0}
+    .pc-cap-res{padding:16px 18px;gap:10px}
+    .pc-res-list li{font-size:15.5px}
+  }
 </style>
 <link rel="canonical" href="https://eduaraujogh.github.io/slowexe/projeto-duo.html" />
 <meta property="og:type" content="website" />
@@ -783,7 +815,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta property="og:title" content="Duo Garage | Projeto" />
-<meta property="og:description" content="Duo Garage, automotivo · identidade visual. Identidade minimalista em preto e branco, apoiada no cinza para ganhar elegância." />
+<meta property="og:description" content="Duo Garage, revenda de veículos · identidade visual. Identidade minimalista em preto e branco, apoiada no cinza para ganhar elegância." />
 <meta property="og:url" content="https://eduaraujogh.github.io/slowexe/projeto-duo.html" />
 <meta property="og:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -791,7 +823,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <meta property="og:image:alt" content="Slowexe" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Duo Garage | Projeto" />
-<meta name="twitter:description" content="Duo Garage, automotivo · identidade visual. Identidade minimalista em preto e branco, apoiada no cinza para ganhar elegância." />
+<meta name="twitter:description" content="Duo Garage, revenda de veículos · identidade visual. Identidade minimalista em preto e branco, apoiada no cinza para ganhar elegância." />
 <meta name="twitter:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
 </head>
 <body class="lang-pt ct-page">
@@ -922,43 +954,43 @@ header .menu-toggle svg{stroke:#0A0B0D}
     <section class="pc-hero"><div class="wrap">
       <div class="px-eyebrow" data-reveal><span data-pt>Case study</span><span data-en>Case study</span></div>
       <h1 class="pc-title" data-reveal>Duo Garage</h1>
-      <p class="pc-tag" data-reveal><span data-pt>Automotivo · Identidade Visual</span><span data-en>Automotive · Visual Identity</span></p>
+      <p class="pc-tag" data-reveal><span data-pt>Revenda de veículos · Identidade Visual</span><span data-en>Car dealership · Visual Identity</span></p>
       <div class="pc-meta" data-reveal>
         <div><span><span data-pt>Cliente</span><span data-en>Client</span></span><b>Duo Garage</b></div>
-        <div><span><span data-pt>Setor</span><span data-en>Industry</span></span><b><span data-pt>Automotivo</span><span data-en>Automotive</span></b></div>
-        <div><span><span data-pt>Serviços</span><span data-en>Services</span></span><b><span data-pt>Identidade visual, sistema de marca</span><span data-en>Visual identity, brand system</span></b></div>
+        <div><span><span data-pt>Setor</span><span data-en>Industry</span></span><b><span data-pt>Revenda de veículos</span><span data-en>Car dealership</span></b></div>
+        <div><span><span data-pt>Serviços</span><span data-en>Services</span></span><b><span data-pt>Identidade visual, sistema de marca, sinalização</span><span data-en>Visual identity, brand system, signage</span></b></div>
         <div><span><span data-pt>Estúdio</span><span data-en>Studio</span></span><b>Slowexe</b></div>
       </div>
     </div></section>
-    <div class="pc-cover"><div class="wrap" style="padding:0"><img data-reveal src="assets/cases/duo-01.webp" alt="Duo Garage"></div></div>
+    <div class="pc-cover"><div class="wrap" style="padding:0"><video class="pc-cover-video" data-reveal muted loop playsinline preload="none" poster="assets/videos/duo-poster.webp" aria-label="Logo da Duo Garage em movimento: uma porta de garagem sobe e revela a marca"><source src="assets/videos/duo.mp4" type="video/mp4"></video></div></div>
     <section class="pc-overview"><div class="wrap pc-grid">
-      <div data-reveal><h3><span data-pt>O desafio</span><span data-en>The challenge</span></h3><p><span data-pt>Construir uma marca de garagem com força e presença, sem recorrer ao clichê do setor, cromados, velocidade e agressividade.</span><span data-en>Building a garage brand with strength and presence, without falling back on the sector’s clichés, chrome, speed and aggression.</span></p></div>
-      <div data-reveal><h3><span data-pt>A solução</span><span data-en>The solution</span></h3><p><span data-pt>Identidade minimalista em preto e branco, apoiada no cinza para ganhar elegância. O símbolo circular admite várias leituras: volante, porca, roda. E o "E" de Garage é sutilmente estilizado para lembrar as portas de metal das garagens.</span><span data-en>A minimalist identity in black and white, with grey adding elegance. The circular symbol reads several ways: steering wheel, nut, wheel. And the "E" in Garage is subtly styled after metal garage doors.</span></p></div>
+      <div data-reveal><h3><span data-pt>O desafio</span><span data-en>The challenge</span></h3><p><span data-pt>A Duo Garage é uma revenda de automóveis de Curitiba fundada por dois irmãos. Eles queriam deixar de ser vistos como uma loja de bairro e passar a disputar clientes com as revendas premium da cidade, sem recorrer aos clichês do setor: cromados, velocidade e agressividade.</span><span data-en>Duo Garage is a car dealership in Curitiba founded by two brothers. They wanted to stop being seen as a neighbourhood shop and start competing with the city’s premium dealerships, without falling back on the sector’s clichés: chrome, speed and aggression.</span></p></div>
+      <div data-reveal><h3><span data-pt>A solução</span><span data-en>The solution</span></h3><p><span data-pt>Identidade minimalista em preto e branco, apoiada no cinza para ganhar elegância. O símbolo circular admite várias leituras: volante, porca, roda. E o “E” de Garage é sutilmente estilizado para lembrar as portas de metal das garagens. O sistema vai da fachada à sinalização interna, passando por cartazes de veículos, papelaria e brindes.</span><span data-en>A minimalist identity in black and white, with grey adding elegance. The circular symbol reads several ways: steering wheel, nut, wheel. And the “E” in Garage is subtly styled after metal garage doors. The system runs from the storefront to interior signage, taking in vehicle posters, stationery and merchandise.</span></p></div>
     </div></section>
     <div class="pc-gallery"><div class="wrap">
-      <img data-reveal src="assets/cases/duo-02.webp" alt="Duo Garage, Automotivo · Identidade Visual (1 de 15)" loading="lazy" decoding="async">
-      <div class="pc-two"><img data-reveal src="assets/cases/duo-03.webp" alt="Duo Garage, Automotivo · Identidade Visual (2 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-04.webp" alt="Duo Garage, Automotivo · Identidade Visual (3 de 15)" loading="lazy" decoding="async"></div>
-      <div class="pc-two"><img data-reveal src="assets/cases/duo-05.webp" alt="Duo Garage, Automotivo · Identidade Visual (4 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-06.webp" alt="Duo Garage, Automotivo · Identidade Visual (5 de 15)" loading="lazy" decoding="async"></div>
-      <img data-reveal src="assets/cases/duo-07.webp" alt="Duo Garage, Automotivo · Identidade Visual (6 de 15)" loading="lazy" decoding="async">
-      <div class="pc-two"><img data-reveal src="assets/cases/duo-08.webp" alt="Duo Garage, Automotivo · Identidade Visual (7 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-09.webp" alt="Duo Garage, Automotivo · Identidade Visual (8 de 15)" loading="lazy" decoding="async"></div>
-      <div class="pc-two"><img data-reveal src="assets/cases/duo-10.webp" alt="Duo Garage, Automotivo · Identidade Visual (9 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-11.webp" alt="Duo Garage, Automotivo · Identidade Visual (10 de 15)" loading="lazy" decoding="async"></div>
-      <img data-reveal src="assets/cases/duo-12.webp" alt="Duo Garage, Automotivo · Identidade Visual (11 de 15)" loading="lazy" decoding="async">
-      <div class="pc-two"><img data-reveal src="assets/cases/duo-13.webp" alt="Duo Garage, Automotivo · Identidade Visual (12 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-14.webp" alt="Duo Garage, Automotivo · Identidade Visual (13 de 15)" loading="lazy" decoding="async"></div>
-      <div class="pc-two"><img data-reveal src="assets/cases/duo-15.webp" alt="Duo Garage, Automotivo · Identidade Visual (14 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-16.webp" alt="Duo Garage, Automotivo · Identidade Visual (15 de 15)" loading="lazy" decoding="async"></div>
+      <img data-reveal src="assets/cases/duo-02.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (1 de 15)" loading="lazy" decoding="async">
+      <div class="pc-two"><img data-reveal src="assets/cases/duo-03.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (2 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-04.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (3 de 15)" loading="lazy" decoding="async"></div>
+      <div class="pc-two"><img data-reveal src="assets/cases/duo-05.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (4 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-06.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (5 de 15)" loading="lazy" decoding="async"></div>
+      <img data-reveal src="assets/cases/duo-07.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (6 de 15)" loading="lazy" decoding="async">
+      <div class="pc-two"><img data-reveal src="assets/cases/duo-08.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (7 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-09.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (8 de 15)" loading="lazy" decoding="async"></div>
+      <div class="pc-two"><img data-reveal src="assets/cases/duo-10.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (9 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-11.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (10 de 15)" loading="lazy" decoding="async"></div>
+      <img data-reveal src="assets/cases/duo-12.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (11 de 15)" loading="lazy" decoding="async">
+      <div class="pc-two"><img data-reveal src="assets/cases/duo-13.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (12 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-14.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (13 de 15)" loading="lazy" decoding="async"></div>
+      <div class="pc-two"><img data-reveal src="assets/cases/duo-15.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (14 de 15)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/duo-16.webp" alt="Duo Garage, Revenda de veículos · Identidade Visual (15 de 15)" loading="lazy" decoding="async"></div>
     </div></div>
     <section class="pc-results"><div class="wrap">
-      <h2 data-reveal><span data-pt>Escopo do projeto</span><span data-en>Project scope</span></h2>
-      <div class="pc-stats pc-scope">
-        <div data-reveal><b><span data-pt>Marca</span><span data-en>Brand</span></b><span><span data-pt>logotipo, símbolo e versões</span><span data-en>logotype, symbol and versions</span></span></div>
-        <div data-reveal><b><span data-pt>Sistema</span><span data-en>System</span></b><span><span data-pt>cores, tipografia e grid</span><span data-en>colour, type and grid</span></span></div>
-        <div data-reveal><b><span data-pt>Aplicações</span><span data-en>Applied</span></b><span><span data-pt>papelaria, digital e sinalização</span><span data-en>stationery, digital and signage</span></span></div>
-      </div>
+      <h2 data-reveal><span data-pt>O que o projeto entregou</span><span data-en>What the project delivered</span></h2>
+      <ul class="pc-res-list">
+        <li data-reveal><span data-pt>A loja passou a ser percebida como revenda premium, com uma marca à altura dos carros que vende.</span><span data-en>The dealership came to be seen as premium, with a brand worthy of the cars it sells.</span></li>
+        <li data-reveal><span data-pt>Fachada, sinalização e materiais de ponto de venda com a mesma linguagem, do estacionamento ao escritório.</span><span data-en>Storefront, signage and point-of-sale materials in one language, from the car park to the office.</span></li>
+        <li data-reveal><span data-pt>Uma marca que conta a história da empresa: o nome e o símbolo nascem da parceria entre os dois irmãos.</span><span data-en>A brand that tells the company’s story: the name and the symbol come from the partnership between the two brothers.</span></li>
+      </ul>
     </div></section>
     <section class="pc-quote"><div class="wrap">
       <span class="pc-q-mark" aria-hidden="true">&#8220;</span>
       <blockquote class="pc-q-text" data-reveal>
-        <span data-pt>O símbolo circular evoca várias interpretações (volante, porca, roda), uma camada de versatilidade dentro de uma marca minimalista.</span>
-        <span data-en>The circular symbol evokes several readings (steering wheel, nut, wheel), adding a layer of versatility inside a minimalist brand.</span>
+        <span data-pt>Duo são os dois irmãos. O símbolo circular evoca várias interpretações (volante, porca, roda), uma camada de versatilidade dentro de uma marca minimalista.</span>
+        <span data-en>Duo is the two brothers. The circular symbol evokes several readings (steering wheel, nut, wheel), a layer of versatility inside a minimalist brand.</span>
       </blockquote>
       <div class="pc-q-author" data-reveal>
         <div><b>Slowexe</b><span><span data-pt>Conceito da marca · Duo Garage</span><span data-en>Brand concept · Duo Garage</span></span></div>
@@ -967,17 +999,17 @@ header .menu-toggle svg{stroke:#0A0B0D}
 
     <section class="pc-navwrap"><div class="wrap">
       <nav class="pc-nav" data-reveal>
-        <a class="pc-nav-card prev" href="projeto-sabores.html">
-          <img src="assets/cases/sabores-01.webp" alt="">
-          <span class="pc-nav-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-pt>Projeto anterior</span><span data-en>Previous project</span></span>
-          <span class="pc-nav-name">Sabores de Curitiba</span>
-          <span class="pc-nav-cat"><span data-pt>Gastronomia · Identidade Visual</span><span data-en>Food &amp; Drink · Visual Identity</span></span>
-        </a>
-        <a class="pc-nav-card next" href="projeto-fense.html">
+        <a class="pc-nav-card prev" href="projeto-fense.html">
           <img src="assets/cases/fense-01.webp" alt="">
+          <span class="pc-nav-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-pt>Projeto anterior</span><span data-en>Previous project</span></span>
+          <span class="pc-nav-name">Fense Seguros</span>
+          <span class="pc-nav-cat"><span data-pt>Corretora de seguros · Identidade Visual</span><span data-en>Insurance broker · Visual Identity</span></span>
+        </a>
+        <a class="pc-nav-card next" href="projeto-golden-vibes.html">
+          <img src="assets/cases/golden-vibes-01.webp" alt="">
           <span class="pc-nav-dir"><span data-pt>Próximo projeto</span><span data-en>Next project</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="pc-nav-name">Fense Seguradora</span>
-          <span class="pc-nav-cat"><span data-pt>Seguros · Identidade Visual</span><span data-en>Insurance · Visual Identity</span></span>
+          <span class="pc-nav-name">Golden Vibes</span>
+          <span class="pc-nav-cat"><span data-pt>Semijoias · Branding</span><span data-en>Jewellery · Branding</span></span>
         </a>
       </nav>
       <a class="pc-all" href="projetos.html"><span data-pt>Ver todos os projetos</span><span data-en>See all projects</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
@@ -1358,6 +1390,23 @@ header .menu-toggle svg{stroke:#0A0B0D}
   window.addEventListener('resize',function(){
     if(window.innerWidth>760&&panel.classList.contains('on'))close();
   });
+})();
+</script>
+<script id="cover-video-js">
+(function(){
+  var vs=[].slice.call(document.querySelectorAll('.pc-cover-video,.pg-vid,.deck-vid'));
+  if(!vs.length)return;
+  var parado=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(parado)return;
+  if(!('IntersectionObserver' in window)){vs.forEach(function(v){v.play().catch(function(){})});return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v=e.target;
+      if(e.isIntersecting){v.play().catch(function(){});}
+      else if(!v.paused){v.pause();}
+    });
+  },{threshold:.2});
+  vs.forEach(function(v){io.observe(v);});
 })();
 </script>
 </body>

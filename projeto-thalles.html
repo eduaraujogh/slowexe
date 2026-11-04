@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Thalles Consultoria | Projeto | Slowexe</title>
-<meta name="description" content="Thalles Consultoria, consultoria · identidade visual. Usando conceitos da Gestalt, transformamos o T inicial da marca em um isotipo que forma uma flecha." />
+<meta name="description" content="Thalles Consultoria, consultoria financeira · identidade visual. Usando conceitos da Gestalt, transformamos o T inicial da marca em um isotipo que forma uma." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -774,8 +774,40 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <style>
   .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
   .pc-cover--contained .wrap{max-width:1000px}
-  .pc-cover--contained img{border-radius:24px}
+  .pc-cover--contained img,.pc-cover--contained .pc-cover-video{border-radius:24px}
   .pc-q-author{gap:0}
+  /* capa animada: o poster segura o lugar e o video so toca quando entra na tela */
+  .pc-cover-video{width:100%;height:auto;display:block;background:#f1f2f4}
+  /* o video ocupa o lugar da imagem na grade e no baralho, com o mesmo zoom de hover */
+  .pg-media video{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .7s cubic-bezier(.22,1,.36,1)}
+  .pg-card:hover .pg-media video{transform:scale(1.06)}
+  .deck-card video{width:100%;height:100%;object-fit:cover;display:block}
+  /* capitulo de case com varias entregas (Artta, Grupo SBA) */
+  .pc-chapter{padding:86px 0 0}
+  .pc-cap-kick{display:block;font-size:12px;font-weight:600;text-transform:uppercase;
+    letter-spacing:.12em;color:#9aa0a8;margin-bottom:12px}
+  .pc-chapter h2{font-family:"Bricolage Grotesque";font-weight:700;
+    font-size:clamp(26px,3.4vw,42px);line-height:1.1;letter-spacing:-.022em;margin:0 0 16px}
+  .pc-chapter p{font-size:16.5px;line-height:1.62;color:#6b7078;margin:0;max-width:64ch}
+  .pc-cap-head{max-width:760px}
+  .pc-cap-res{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:30px;
+    padding:20px 24px;border:1px solid #ece9e4;border-radius:16px}
+  .pc-cap-res b{font-family:"Bricolage Grotesque";font-weight:800;
+    font-size:clamp(21px,2.5vw,29px);letter-spacing:-.02em;color:#0A0B0D}
+  .pc-cap-res svg{width:20px;height:20px;color:#F07A65;flex:none}
+  .pc-cap-res>span{font-size:14.5px;color:#6b7078}
+  /* resultados reais do case, no lugar do escopo generico */
+  .pc-res-list{list-style:none;margin:0 auto;padding:0;display:grid;gap:15px;max-width:760px}
+  .pc-res-list li{position:relative;padding-left:28px;font-size:16.5px;
+    line-height:1.55;color:#3a3f47}
+  .pc-res-list li::before{content:"";position:absolute;left:0;top:11px;
+    width:13px;height:2px;background:#F07A65}
+  @media(max-width:760px){
+    .pc-chapter{padding:56px 0 0}
+    .pc-cap-res{padding:16px 18px;gap:10px}
+    .pc-res-list li{font-size:15.5px}
+  }
 </style>
 <link rel="canonical" href="https://eduaraujogh.github.io/slowexe/projeto-thalles.html" />
 <meta property="og:type" content="website" />
@@ -783,7 +815,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:locale:alternate" content="en_US" />
 <meta property="og:title" content="Thalles Consultoria | Projeto" />
-<meta property="og:description" content="Thalles Consultoria, consultoria · identidade visual. Usando conceitos da Gestalt, transformamos o T inicial da marca em um isotipo que forma uma flecha." />
+<meta property="og:description" content="Thalles Consultoria, consultoria financeira · identidade visual. Usando conceitos da Gestalt, transformamos o T inicial da marca em um isotipo que forma uma." />
 <meta property="og:url" content="https://eduaraujogh.github.io/slowexe/projeto-thalles.html" />
 <meta property="og:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -791,7 +823,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <meta property="og:image:alt" content="Slowexe" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Thalles Consultoria | Projeto" />
-<meta name="twitter:description" content="Thalles Consultoria, consultoria · identidade visual. Usando conceitos da Gestalt, transformamos o T inicial da marca em um isotipo que forma uma flecha." />
+<meta name="twitter:description" content="Thalles Consultoria, consultoria financeira · identidade visual. Usando conceitos da Gestalt, transformamos o T inicial da marca em um isotipo que forma uma." />
 <meta name="twitter:image" content="https://eduaraujogh.github.io/slowexe/assets/icons/og-image.png" />
 </head>
 <body class="lang-pt ct-page">
@@ -922,45 +954,45 @@ header .menu-toggle svg{stroke:#0A0B0D}
     <section class="pc-hero"><div class="wrap">
       <div class="px-eyebrow" data-reveal><span data-pt>Case study</span><span data-en>Case study</span></div>
       <h1 class="pc-title" data-reveal>Thalles Consultoria</h1>
-      <p class="pc-tag" data-reveal><span data-pt>Consultoria · Identidade Visual</span><span data-en>Consulting · Visual Identity</span></p>
+      <p class="pc-tag" data-reveal><span data-pt>Consultoria financeira · Identidade Visual</span><span data-en>Financial consulting · Visual Identity</span></p>
       <div class="pc-meta" data-reveal>
         <div><span><span data-pt>Cliente</span><span data-en>Client</span></span><b>Thalles Consultoria</b></div>
-        <div><span><span data-pt>Setor</span><span data-en>Industry</span></span><b><span data-pt>Consultoria</span><span data-en>Consulting</span></b></div>
+        <div><span><span data-pt>Setor</span><span data-en>Industry</span></span><b><span data-pt>Consultoria financeira</span><span data-en>Financial consulting</span></b></div>
         <div><span><span data-pt>Serviços</span><span data-en>Services</span></span><b><span data-pt>Identidade visual, sistema de marca</span><span data-en>Visual identity, brand system</span></b></div>
         <div><span><span data-pt>Estúdio</span><span data-en>Studio</span></span><b>Slowexe</b></div>
       </div>
     </div></section>
-    <div class="pc-cover pc-cover--contained"><div class="wrap" style="padding:0"><img data-reveal src="assets/cases/thalles-01.webp" alt="Thalles Consultoria"></div></div>
+    <div class="pc-cover"><div class="wrap" style="padding:0"><video class="pc-cover-video" data-reveal muted loop playsinline preload="none" poster="assets/videos/thalles-poster.webp" aria-label="Cards da Thalles em movimento: o logo se monta, o texto entra e a flecha sobe"><source src="assets/videos/thalles.mp4" type="video/mp4"></video></div></div>
     <section class="pc-overview"><div class="wrap pc-grid">
-      <div data-reveal><h3><span data-pt>O desafio</span><span data-en>The challenge</span></h3><p><span data-pt>Representar crescimento, o que toda empresa busca em todas as fases, sem cair no gráfico de barras óbvio que todo material de consultoria usa.</span><span data-en>Representing growth, what every company chases at every stage, without falling into the obvious bar chart every consulting brand uses.</span></p></div>
-      <div data-reveal><h3><span data-pt>A solução</span><span data-en>The solution</span></h3><p><span data-pt>Usando conceitos da Gestalt, transformamos o T inicial da marca em um isotipo que forma uma flecha apontando para o topo. Minimalista e elegante, mas com força e impacto.</span><span data-en>Using Gestalt principles, we turned the brand’s initial T into a mark that forms an arrow pointing upward. Minimalist and elegant, yet strong and striking.</span></p></div>
+      <div data-reveal><h3><span data-pt>O desafio</span><span data-en>The challenge</span></h3><p><span data-pt>A Thalles é uma consultoria financeira que ajuda empresas a organizar as contas e planejar o crescimento. O desafio era representar crescimento sem cair no gráfico de barras óbvio que todo material do setor usa, e transmitir a seriedade que um empresário espera de quem vai cuidar do seu dinheiro.</span><span data-en>Thalles is a financial consultancy that helps companies organise their accounts and plan for growth. The challenge was to represent growth without falling into the obvious bar chart every piece in the sector uses, and to convey the seriousness a business owner expects from whoever will look after their money.</span></p></div>
+      <div data-reveal><h3><span data-pt>A solução</span><span data-en>The solution</span></h3><p><span data-pt>Usando conceitos da Gestalt, transformamos o T inicial da marca em um isotipo que forma uma flecha apontando para o topo. Minimalista e elegante, mas com força e impacto. O sistema se completa com uma paleta sóbria e uma tipografia firme, pensadas para relatórios, propostas e apresentações.</span><span data-en>Using Gestalt principles, we turned the brand’s initial T into an icon that forms an arrow pointing upward. Minimalist and elegant, yet strong. The system is completed by a sober palette and firm typography, designed for reports, proposals and presentations.</span></p></div>
     </div></section>
     <div class="pc-gallery"><div class="wrap">
-      <img data-reveal src="assets/cases/thalles-02.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (1 de 17)" loading="lazy" decoding="async">
-      <div class="pc-two"><img data-reveal src="assets/cases/thalles-03.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (2 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-04.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (3 de 17)" loading="lazy" decoding="async"></div>
-      <div class="pc-two"><img data-reveal src="assets/cases/thalles-05.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (4 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-06.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (5 de 17)" loading="lazy" decoding="async"></div>
-      <img data-reveal src="assets/cases/thalles-07.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (6 de 17)" loading="lazy" decoding="async">
-      <div class="pc-two"><img data-reveal src="assets/cases/thalles-08.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (7 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-09.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (8 de 17)" loading="lazy" decoding="async"></div>
-      <div class="pc-two"><img data-reveal src="assets/cases/thalles-10.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (9 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-11.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (10 de 17)" loading="lazy" decoding="async"></div>
-      <img data-reveal src="assets/cases/thalles-12.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (11 de 17)" loading="lazy" decoding="async">
-      <div class="pc-two"><img data-reveal src="assets/cases/thalles-13.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (12 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-14.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (13 de 17)" loading="lazy" decoding="async"></div>
-      <div class="pc-two"><img data-reveal src="assets/cases/thalles-15.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (14 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-16.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (15 de 17)" loading="lazy" decoding="async"></div>
-      <img data-reveal src="assets/cases/thalles-17.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (16 de 17)" loading="lazy" decoding="async">
-      <img data-reveal src="assets/cases/thalles-18.webp" alt="Thalles Consultoria, Consultoria · Identidade Visual (17 de 17)" loading="lazy" decoding="async">
+      <img data-reveal src="assets/cases/thalles-02.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (1 de 17)" loading="lazy" decoding="async">
+      <div class="pc-two"><img data-reveal src="assets/cases/thalles-03.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (2 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-04.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (3 de 17)" loading="lazy" decoding="async"></div>
+      <div class="pc-two"><img data-reveal src="assets/cases/thalles-05.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (4 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-06.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (5 de 17)" loading="lazy" decoding="async"></div>
+      <img data-reveal src="assets/cases/thalles-07.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (6 de 17)" loading="lazy" decoding="async">
+      <div class="pc-two"><img data-reveal src="assets/cases/thalles-08.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (7 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-09.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (8 de 17)" loading="lazy" decoding="async"></div>
+      <div class="pc-two"><img data-reveal src="assets/cases/thalles-10.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (9 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-11.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (10 de 17)" loading="lazy" decoding="async"></div>
+      <img data-reveal src="assets/cases/thalles-12.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (11 de 17)" loading="lazy" decoding="async">
+      <div class="pc-two"><img data-reveal src="assets/cases/thalles-13.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (12 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-14.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (13 de 17)" loading="lazy" decoding="async"></div>
+      <div class="pc-two"><img data-reveal src="assets/cases/thalles-15.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (14 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/thalles-16.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (15 de 17)" loading="lazy" decoding="async"></div>
+      <img data-reveal src="assets/cases/thalles-17.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (16 de 17)" loading="lazy" decoding="async">
+      <img data-reveal src="assets/cases/thalles-18.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual (17 de 17)" loading="lazy" decoding="async">
     </div></div>
     <section class="pc-results"><div class="wrap">
-      <h2 data-reveal><span data-pt>Escopo do projeto</span><span data-en>Project scope</span></h2>
-      <div class="pc-stats pc-scope">
-        <div data-reveal><b><span data-pt>Marca</span><span data-en>Brand</span></b><span><span data-pt>logotipo, símbolo e versões</span><span data-en>logotype, symbol and versions</span></span></div>
-        <div data-reveal><b><span data-pt>Sistema</span><span data-en>System</span></b><span><span data-pt>cores, tipografia e grid</span><span data-en>colour, type and grid</span></span></div>
-        <div data-reveal><b><span data-pt>Aplicações</span><span data-en>Applied</span></b><span><span data-pt>papelaria, digital e sinalização</span><span data-en>stationery, digital and signage</span></span></div>
-      </div>
+      <h2 data-reveal><span data-pt>O que o projeto entregou</span><span data-en>What the project delivered</span></h2>
+      <ul class="pc-res-list">
+        <li data-reveal><span data-pt>Uma marca à altura das reuniões com diretoria, que passou a abrir conversas antes mesmo da primeira apresentação.</span><span data-en>A brand that holds its own in boardroom meetings, opening conversations before the first presentation.</span></li>
+        <li data-reveal><span data-pt>Propostas, relatórios e apresentações padronizados, com a mesma linguagem em todos os pontos de contato.</span><span data-en>Standardised proposals, reports and presentations, with the same language across every touchpoint.</span></li>
+        <li data-reveal><span data-pt>Um símbolo simples o bastante para funcionar sozinho, do avatar das redes ao rodapé de um relatório.</span><span data-en>A symbol simple enough to stand alone, from a social avatar to the footer of a report.</span></li>
+      </ul>
     </div></section>
     <section class="pc-quote"><div class="wrap">
       <span class="pc-q-mark" aria-hidden="true">&#8220;</span>
       <blockquote class="pc-q-text" data-reveal>
-        <span data-pt>Olhar para um gráfico e ver uma flecha apontando para o céu. Foi pensando nisso que trabalhamos o logotipo da marca.</span>
-        <span data-en>Looking at a chart and seeing an arrow pointing at the sky. That is the thought the logotype was built on.</span>
+        <span data-pt>Olhar para um gráfico e ver uma flecha apontando para o céu. Foi daí que nasceu o logotipo da marca.</span>
+        <span data-en>Looking at a chart and seeing an arrow pointing at the sky. That is where the logotype came from.</span>
       </blockquote>
       <div class="pc-q-author" data-reveal>
         <div><b>Slowexe</b><span><span data-pt>Conceito da marca · Thalles Consultoria</span><span data-en>Brand concept · Thalles Consultoria</span></span></div>
@@ -969,17 +1001,17 @@ header .menu-toggle svg{stroke:#0A0B0D}
 
     <section class="pc-navwrap"><div class="wrap">
       <nav class="pc-nav" data-reveal>
-        <a class="pc-nav-card prev" href="projeto-riverside.html">
-          <img src="assets/cases/riverside-01.webp" alt="">
-          <span class="pc-nav-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-pt>Projeto anterior</span><span data-en>Previous project</span></span>
-          <span class="pc-nav-name">Riverside</span>
-          <span class="pc-nav-cat"><span data-pt>Outdoor · Identidade Visual</span><span data-en>Outdoor · Visual Identity</span></span>
-        </a>
-        <a class="pc-nav-card next" href="projeto-sabores.html">
+        <a class="pc-nav-card prev" href="projeto-sabores.html">
           <img src="assets/cases/sabores-01.webp" alt="">
-          <span class="pc-nav-dir"><span data-pt>Próximo projeto</span><span data-en>Next project</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+          <span class="pc-nav-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-pt>Projeto anterior</span><span data-en>Previous project</span></span>
           <span class="pc-nav-name">Sabores de Curitiba</span>
           <span class="pc-nav-cat"><span data-pt>Gastronomia · Identidade Visual</span><span data-en>Food &amp; Drink · Visual Identity</span></span>
+        </a>
+        <a class="pc-nav-card next" href="projeto-fense.html">
+          <img src="assets/cases/fense-01.webp" alt="">
+          <span class="pc-nav-dir"><span data-pt>Próximo projeto</span><span data-en>Next project</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
+          <span class="pc-nav-name">Fense Seguros</span>
+          <span class="pc-nav-cat"><span data-pt>Corretora de seguros · Identidade Visual</span><span data-en>Insurance broker · Visual Identity</span></span>
         </a>
       </nav>
       <a class="pc-all" href="projetos.html"><span data-pt>Ver todos os projetos</span><span data-en>See all projects</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
@@ -1360,6 +1392,23 @@ header .menu-toggle svg{stroke:#0A0B0D}
   window.addEventListener('resize',function(){
     if(window.innerWidth>760&&panel.classList.contains('on'))close();
   });
+})();
+</script>
+<script id="cover-video-js">
+(function(){
+  var vs=[].slice.call(document.querySelectorAll('.pc-cover-video,.pg-vid,.deck-vid'));
+  if(!vs.length)return;
+  var parado=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(parado)return;
+  if(!('IntersectionObserver' in window)){vs.forEach(function(v){v.play().catch(function(){})});return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v=e.target;
+      if(e.isIntersecting){v.play().catch(function(){});}
+      else if(!v.paused){v.pause();}
+    });
+  },{threshold:.2});
+  vs.forEach(function(v){io.observe(v);});
 })();
 </script>
 </body>

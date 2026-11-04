@@ -774,8 +774,40 @@ header .menu-toggle svg{stroke:#0A0B0D}
 <style>
   .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
   .pc-cover--contained .wrap{max-width:1000px}
-  .pc-cover--contained img{border-radius:24px}
+  .pc-cover--contained img,.pc-cover--contained .pc-cover-video{border-radius:24px}
   .pc-q-author{gap:0}
+  /* capa animada: o poster segura o lugar e o video so toca quando entra na tela */
+  .pc-cover-video{width:100%;height:auto;display:block;background:#f1f2f4}
+  /* o video ocupa o lugar da imagem na grade e no baralho, com o mesmo zoom de hover */
+  .pg-media video{width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .7s cubic-bezier(.22,1,.36,1)}
+  .pg-card:hover .pg-media video{transform:scale(1.06)}
+  .deck-card video{width:100%;height:100%;object-fit:cover;display:block}
+  /* capitulo de case com varias entregas (Artta, Grupo SBA) */
+  .pc-chapter{padding:86px 0 0}
+  .pc-cap-kick{display:block;font-size:12px;font-weight:600;text-transform:uppercase;
+    letter-spacing:.12em;color:#9aa0a8;margin-bottom:12px}
+  .pc-chapter h2{font-family:"Bricolage Grotesque";font-weight:700;
+    font-size:clamp(26px,3.4vw,42px);line-height:1.1;letter-spacing:-.022em;margin:0 0 16px}
+  .pc-chapter p{font-size:16.5px;line-height:1.62;color:#6b7078;margin:0;max-width:64ch}
+  .pc-cap-head{max-width:760px}
+  .pc-cap-res{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:30px;
+    padding:20px 24px;border:1px solid #ece9e4;border-radius:16px}
+  .pc-cap-res b{font-family:"Bricolage Grotesque";font-weight:800;
+    font-size:clamp(21px,2.5vw,29px);letter-spacing:-.02em;color:#0A0B0D}
+  .pc-cap-res svg{width:20px;height:20px;color:#F07A65;flex:none}
+  .pc-cap-res>span{font-size:14.5px;color:#6b7078}
+  /* resultados reais do case, no lugar do escopo generico */
+  .pc-res-list{list-style:none;margin:0 auto;padding:0;display:grid;gap:15px;max-width:760px}
+  .pc-res-list li{position:relative;padding-left:28px;font-size:16.5px;
+    line-height:1.55;color:#3a3f47}
+  .pc-res-list li::before{content:"";position:absolute;left:0;top:11px;
+    width:13px;height:2px;background:#F07A65}
+  @media(max-width:760px){
+    .pc-chapter{padding:56px 0 0}
+    .pc-cap-res{padding:16px 18px;gap:10px}
+    .pc-res-list li{font-size:15.5px}
+  }
 </style>
 <link rel="canonical" href="https://eduaraujogh.github.io/slowexe/projeto-sabores.html" />
 <meta property="og:type" content="website" />
@@ -930,36 +962,38 @@ header .menu-toggle svg{stroke:#0A0B0D}
         <div><span><span data-pt>Estúdio</span><span data-en>Studio</span></span><b>Slowexe</b></div>
       </div>
     </div></section>
-    <div class="pc-cover"><div class="wrap" style="padding:0"><img data-reveal src="assets/cases/sabores-01.webp" alt="Sabores de Curitiba"></div></div>
+    <div class="pc-cover"><div class="wrap" style="padding:0"><video class="pc-cover-video" data-reveal muted loop playsinline preload="none" poster="assets/videos/sabores-poster.webp" aria-label="Cartazes dos festivais do Sabores de Curitiba em três colunas que deslizam, com um festival diferente no centro a cada parada"><source src="assets/videos/sabores.mp4" type="video/mp4"></video></div></div>
     <section class="pc-overview"><div class="wrap pc-grid">
-      <div data-reveal><h3><span data-pt>O desafio</span><span data-en>The challenge</span></h3><p><span data-pt>Traduzir em uma só identidade a diversidade gastronômica de Curitiba, bares, restaurantes e centros gastronômicos com públicos, preços e linguagens muito diferentes entre si.</span><span data-en>Translating the whole culinary diversity of Curitiba into a single identity, bars, restaurants and food halls with very different audiences, price points and languages.</span></p></div>
-      <div data-reveal><h3><span data-pt>A solução</span><span data-en>The solution</span></h3><p><span data-pt>O logotipo cresce em ondas, dando movimento ao design e sugerindo as sinapses despertadas por cada refeição. Os tamanhos variados da tipografia simbolizam a diversidade dos estabelecimentos. O ícone é a representação minimalista do Petit-Pavé, mosaico histórico da cidade, que também gera os patterns da marca.</span><span data-en>The logotype grows in waves, giving the design movement and evoking the synapses each meal awakens. Varied type sizes stand for the diversity of the venues. The icon is a minimalist take on the Petit-Pavé, the city’s historic mosaic, which also generates the brand patterns.</span></p></div>
+      <div data-reveal><h3><span data-pt>O desafio</span><span data-en>The challenge</span></h3><p><span data-pt>A Sabores de Curitiba nasceu para contar a gastronomia da cidade: bares, restaurantes, centros gastronômicos e as pessoas por trás deles. O desafio era traduzir essa diversidade, com públicos, preços e linguagens muito diferentes entre si, em uma marca só, com presença de instituição e não de perfil de dicas.</span><span data-en>Sabores de Curitiba was born to tell the story of the city’s food scene: bars, restaurants, food halls and the people behind them. The challenge was translating that diversity, with very different audiences, price points and languages, into a single brand with the presence of an institution rather than a tips account.</span></p></div>
+      <div data-reveal><h3><span data-pt>A solução</span><span data-en>The solution</span></h3><p><span data-pt>O logotipo cresce em ondas, dando movimento ao design e sugerindo as sinapses despertadas por cada refeição. Os tamanhos variados da tipografia simbolizam a diversidade dos estabelecimentos. O ícone é a representação minimalista do petit-pavé, mosaico histórico da cidade, que também gera os patterns da marca e amarra todas as aplicações, do cartão de visita às redes sociais.</span><span data-en>The logotype grows in waves, giving the design movement and evoking the synapses each meal awakens. Varied type sizes stand for the diversity of the venues. The icon is a minimalist take on the petit-pavé, the city’s historic mosaic, which also generates the brand patterns and ties every application together, from the business card to social media.</span></p></div>
     </div></section>
     <div class="pc-gallery"><div class="wrap">
-      <img data-reveal src="assets/cases/sabores-02.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (1 de 16)" loading="lazy" decoding="async">
-      <div class="pc-two"><img data-reveal src="assets/cases/sabores-03.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (2 de 16)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-04.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (3 de 16)" loading="lazy" decoding="async"></div>
-      <div class="pc-two"><img data-reveal src="assets/cases/sabores-05.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (4 de 16)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-06.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (5 de 16)" loading="lazy" decoding="async"></div>
-      <img data-reveal src="assets/cases/sabores-07.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (6 de 16)" loading="lazy" decoding="async">
-      <div class="pc-two"><img data-reveal src="assets/cases/sabores-08.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (7 de 16)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-09.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (8 de 16)" loading="lazy" decoding="async"></div>
-      <div class="pc-two"><img data-reveal src="assets/cases/sabores-10.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (9 de 16)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-11.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (10 de 16)" loading="lazy" decoding="async"></div>
-      <img data-reveal src="assets/cases/sabores-12.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (11 de 16)" loading="lazy" decoding="async">
-      <div class="pc-two"><img data-reveal src="assets/cases/sabores-13.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (12 de 16)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-14.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (13 de 16)" loading="lazy" decoding="async"></div>
-      <div class="pc-two"><img data-reveal src="assets/cases/sabores-15.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (14 de 16)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-16.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (15 de 16)" loading="lazy" decoding="async"></div>
-      <img data-reveal src="assets/cases/sabores-17.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (16 de 16)" loading="lazy" decoding="async">
+      <img data-reveal src="assets/cases/sabores-02.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (1 de 17)" loading="lazy" decoding="async">
+      <div class="pc-two"><img data-reveal src="assets/cases/sabores-03.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (2 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-04.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (3 de 17)" loading="lazy" decoding="async"></div>
+      <div class="pc-two"><img data-reveal src="assets/cases/sabores-05.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (4 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-06.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (5 de 17)" loading="lazy" decoding="async"></div>
+      <img data-reveal src="assets/cases/sabores-07.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (6 de 17)" loading="lazy" decoding="async">
+      <div class="pc-two"><img data-reveal src="assets/cases/sabores-08.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (7 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-09.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (8 de 17)" loading="lazy" decoding="async"></div>
+      <div class="pc-two"><img data-reveal src="assets/cases/sabores-10.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (9 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-11.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (10 de 17)" loading="lazy" decoding="async"></div>
+      <img data-reveal src="assets/cases/sabores-12.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (11 de 17)" loading="lazy" decoding="async">
+      <div class="pc-two"><img data-reveal src="assets/cases/sabores-13.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (12 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-14.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (13 de 17)" loading="lazy" decoding="async"></div>
+      <div class="pc-two"><img data-reveal src="assets/cases/sabores-15.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (14 de 17)" loading="lazy" decoding="async"><img data-reveal src="assets/cases/sabores-16.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (15 de 17)" loading="lazy" decoding="async"></div>
+      <img data-reveal src="assets/cases/sabores-17.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (16 de 17)" loading="lazy" decoding="async">
+      <img data-reveal src="assets/cases/sabores-18.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual (17 de 17)" loading="lazy" decoding="async">
     </div></div>
     <section class="pc-results"><div class="wrap">
-      <h2 data-reveal><span data-pt>Escopo do projeto</span><span data-en>Project scope</span></h2>
-      <div class="pc-stats pc-scope">
-        <div data-reveal><b><span data-pt>Marca</span><span data-en>Brand</span></b><span><span data-pt>logotipo, símbolo e versões</span><span data-en>logotype, symbol and versions</span></span></div>
-        <div data-reveal><b><span data-pt>Sistema</span><span data-en>System</span></b><span><span data-pt>cores, tipografia e grid</span><span data-en>colour, type and grid</span></span></div>
-        <div data-reveal><b><span data-pt>Aplicações</span><span data-en>Applied</span></b><span><span data-pt>papelaria, digital e sinalização</span><span data-en>stationery, digital and signage</span></span></div>
-      </div>
+      <h2 data-reveal><span data-pt>O que o projeto entregou</span><span data-en>What the project delivered</span></h2>
+      <ul class="pc-res-list">
+        <li data-reveal><span data-pt>A marca ganhou presença de instituição e passou a ser vista como referência na gastronomia curitibana, não como mais um perfil de dicas.</span><span data-en>The brand gained the presence of an institution and came to be seen as a reference in Curitiba’s food scene, not another tips account.</span></li>
+        <li data-reveal><span data-pt>Hoje assina parcerias como o podcast Me Passa a Receita, em conjunto com a escola de gastronomia Centro Europeu.</span><span data-en>It now signs partnerships such as the podcast Me Passa a Receita, with the Centro Europeu culinary school.</span></li>
+        <li data-reveal><span data-pt>Chegou à Câmara Municipal: o fundador, Vinicius França, é parceiro no projeto da Semana da Gastronomia Curitibana.</span><span data-en>It reached the City Council: founder Vinicius França is a partner in the Curitiba Gastronomy Week project.</span></li>
+        <li data-reveal><span data-pt>O petit-pavé virou um sistema de patterns que identifica a marca mesmo sem o logotipo.</span><span data-en>The petit-pavé became a pattern system that identifies the brand even without the logotype.</span></li>
+      </ul>
     </div></section>
     <section class="pc-quote"><div class="wrap">
       <span class="pc-q-mark" aria-hidden="true">&#8220;</span>
       <blockquote class="pc-q-text" data-reveal>
-        <span data-pt>O formato crescente das letras dá movimento ao design, de maneira ondular, levando a ideia de sinapses propagadas através dos sentidos aguçados por cada refeição.</span>
-        <span data-en>The growing letterforms give the design an undulating movement, carrying the idea of synapses fired by the senses that each meal sharpens.</span>
+        <span data-pt>O formato crescente das letras dá movimento ao design, levando a ideia de sinapses despertadas pelos sentidos a cada refeição.</span>
+        <span data-en>The growing letterforms give the design movement, carrying the idea of synapses fired by the senses at every meal.</span>
       </blockquote>
       <div class="pc-q-author" data-reveal>
         <div><b>Slowexe</b><span><span data-pt>Conceito da marca · Sabores de Curitiba</span><span data-en>Brand concept · Sabores de Curitiba</span></span></div>
@@ -968,17 +1002,17 @@ header .menu-toggle svg{stroke:#0A0B0D}
 
     <section class="pc-navwrap"><div class="wrap">
       <nav class="pc-nav" data-reveal>
-        <a class="pc-nav-card prev" href="projeto-thalles.html">
-          <img src="assets/cases/thalles-01.webp" alt="">
+        <a class="pc-nav-card prev" href="projeto-sba.html">
+          <img src="assets/cases/sba-01.webp" alt="">
           <span class="pc-nav-dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg><span data-pt>Projeto anterior</span><span data-en>Previous project</span></span>
-          <span class="pc-nav-name">Thalles Consultoria</span>
-          <span class="pc-nav-cat"><span data-pt>Consultoria · Identidade Visual</span><span data-en>Consulting · Visual Identity</span></span>
+          <span class="pc-nav-name">Grupo SBA</span>
+          <span class="pc-nav-cat"><span data-pt>Mercado financeiro · Identidade Visual</span><span data-en>Finance · Visual Identity</span></span>
         </a>
-        <a class="pc-nav-card next" href="projeto-duo.html">
-          <img src="assets/cases/duo-01.webp" alt="">
+        <a class="pc-nav-card next" href="projeto-thalles.html">
+          <img src="assets/cases/thalles-01.webp" alt="">
           <span class="pc-nav-dir"><span data-pt>Próximo projeto</span><span data-en>Next project</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="pc-nav-name">Duo Garage</span>
-          <span class="pc-nav-cat"><span data-pt>Automotivo · Identidade Visual</span><span data-en>Automotive · Visual Identity</span></span>
+          <span class="pc-nav-name">Thalles Consultoria</span>
+          <span class="pc-nav-cat"><span data-pt>Consultoria financeira · Identidade Visual</span><span data-en>Financial consulting · Visual Identity</span></span>
         </a>
       </nav>
       <a class="pc-all" href="projetos.html"><span data-pt>Ver todos os projetos</span><span data-en>See all projects</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
@@ -1359,6 +1393,23 @@ header .menu-toggle svg{stroke:#0A0B0D}
   window.addEventListener('resize',function(){
     if(window.innerWidth>760&&panel.classList.contains('on'))close();
   });
+})();
+</script>
+<script id="cover-video-js">
+(function(){
+  var vs=[].slice.call(document.querySelectorAll('.pc-cover-video,.pg-vid,.deck-vid'));
+  if(!vs.length)return;
+  var parado=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(parado)return;
+  if(!('IntersectionObserver' in window)){vs.forEach(function(v){v.play().catch(function(){})});return;}
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var v=e.target;
+      if(e.isIntersecting){v.play().catch(function(){});}
+      else if(!v.paused){v.pause();}
+    });
+  },{threshold:.2});
+  vs.forEach(function(v){io.observe(v);});
 })();
 </script>
 </body>
