@@ -65,7 +65,10 @@ CASES = [
      'Corporate and sales presentations built on the same visual system.']),
 
  dict(slug='sba', name='Grupo SBA',
-   deck='sba-marca-02.webp',
+   # imagem propria pro baralho: no recorte 3/4 a marca-02 chegava a 92% da
+   # largura do card e sufocava. Esta e o mesmo logotipo sobre o mesmo preto,
+   # com 70% da largura, pareado com o card da Fense.
+   deck='sba-deck.webp',
    tag_pt='Mercado financeiro · Identidade Visual', tag_en='Finance · Visual Identity',
    client='Grupo SBA', sector_pt='Mercado financeiro', sector_en='Finance',
    serv_pt='Identidade visual, comunicação interna',
