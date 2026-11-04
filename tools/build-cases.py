@@ -14,6 +14,7 @@ TPL  = os.path.join(BASE, 'projeto.html')
 # ordem = ordem na grid e na navegação prev/next
 CASES = [
  dict(slug='artta', name='Artta',
+   deck='artta-marca-02.webp',
    tag_pt='Mercado financeiro · Branding e UX/UI', tag_en='Finance · Branding & UX/UI',
    client='Artta', sector_pt='Mercado financeiro', sector_en='Finance',
    serv_pt='Branding, UX/UI, calculadora e landing page, apresentações',
@@ -64,6 +65,7 @@ CASES = [
      'Corporate and sales presentations built on the same visual system.']),
 
  dict(slug='sba', name='Grupo SBA',
+   deck='sba-marca-02.webp',
    tag_pt='Mercado financeiro · Identidade Visual', tag_en='Finance · Visual Identity',
    client='Grupo SBA', sector_pt='Mercado financeiro', sector_en='Finance',
    serv_pt='Identidade visual, comunicação interna',
@@ -96,6 +98,7 @@ CASES = [
      'A system that is simple to apply, from badge to shirt, with the same symbol, gradient and pattern.']),
 
  dict(slug='sabores', name='Sabores de Curitiba',
+   deck='sabores-17.webp',
    tag_pt='Gastronomia · Identidade Visual', tag_en='Food & Drink · Visual Identity',
    client='Sabores de Curitiba', sector_pt='Gastronomia', sector_en='Food & Drink',
    serv_pt='Identidade visual, sistema de marca', serv_en='Visual identity, brand system',
@@ -118,6 +121,7 @@ CASES = [
      'The petit-pavé became a pattern system that identifies the brand even without the logotype.']),
 
  dict(slug='thalles', name='Thalles Consultoria',
+   deck='thalles-12.webp',
    tag_pt='Consultoria financeira · Identidade Visual', tag_en='Financial consulting · Visual Identity',
    client='Thalles Consultoria', sector_pt='Consultoria financeira', sector_en='Financial consulting',
    serv_pt='Identidade visual, sistema de marca', serv_en='Visual identity, brand system',
@@ -138,6 +142,7 @@ CASES = [
      'A symbol simple enough to stand alone, from a social avatar to the footer of a report.']),
 
  dict(slug='fense', name='Fense Seguros',
+   deck='fense-03.webp',
    tag_pt='Corretora de seguros · Identidade Visual', tag_en='Insurance broker · Visual Identity',
    client='Fense Corretora de Seguros', sector_pt='Corretora de seguros', sector_en='Insurance broker',
    serv_pt='Identidade visual, sistema de marca', serv_en='Visual identity, brand system',
@@ -651,7 +656,11 @@ f'''        <a class="pg-card" href="projeto-{c['slug']}.html" data-cat="{c.get(
         # o logotipo. A capa estatica ja e desenhada pra esse formato, entao o
         # baralho fica com ela. Video so onde a caixa e larga: pagina do case
         # (16:9, sem recorte) e grade (4/3 ou 16/10).
-        peca = (f'<img src="assets/cases/{cover}" '
+        # A capa do case e arte larga; o card do baralho e 3/4 em pe e guarda so
+        # 42% da largura, cortando logotipo e texto. Por isso cada case escolhe
+        # aqui uma imagem que sobrevive ao recorte vertical, no campo 'deck'.
+        arte = c.get('deck', cover)
+        peca = (f'<img src="assets/cases/{arte}" '
                 f'alt="{esc(c["name"])}, {esc(c["tag_pt"])}" {carga}>')
         baralho.append(
 f'''        <div class="deck-card">
