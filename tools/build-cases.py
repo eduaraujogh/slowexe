@@ -496,11 +496,7 @@ EXTRA_CSS = '''  .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
   .pc-q-author{gap:0}
   /* capa animada: o poster segura o lugar e o video so toca quando entra na tela */
   .pc-cover-video{width:100%;height:auto;display:block;background:#f1f2f4}
-  /* o video ocupa o lugar da imagem na grade e no baralho, com o mesmo zoom de hover */
-  .pg-media video{width:100%;height:100%;object-fit:cover;display:block;
-    transition:transform .7s cubic-bezier(.22,1,.36,1)}
-  .pg-card:hover .pg-media video{transform:scale(1.06)}
-  .deck-card video{width:100%;height:100%;object-fit:cover;display:block}
+
   /* capitulo de case com varias entregas (Artta, Grupo SBA) */
   .pc-chapter{padding:86px 0 0}
   .pc-cap-kick{display:block;font-size:12px;font-weight:600;text-transform:uppercase;
@@ -531,6 +527,17 @@ EXTRA_CSS = '''  .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
 # O video de capa nao leva autoplay no HTML: quem pediu menos movimento no
 # sistema fica com o poster parado. Tocar so quando entra na tela tambem evita
 # baixar o arquivo de quem nunca rola ate la (preload="none").
+# Sem isto o <video> assume o tamanho natural do poster (1600x900) e estoura a
+# caixa do card: alem do recorte absurdo, o elemento fica tao grande que os 20%
+# exigidos pelo IntersectionObserver nunca aparecem na tela e o video nunca toca.
+VIDEO_CSS = '''<style id="video-capa-css">
+.pg-media video{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.pg-card:hover .pg-media video{transform:scale(1.06)}
+.deck-card video{width:100%;height:100%;object-fit:cover;display:block}
+</style>
+'''
+
 EXTRA_JS = '''<script id="cover-video-js">
 (function(){
   var vs=[].slice.call(document.querySelectorAll('.pc-cover-video,.pg-vid,.deck-vid'));
@@ -544,7 +551,7 @@ EXTRA_JS = '''<script id="cover-video-js">
       if(e.isIntersecting){v.play().catch(function(){});}
       else if(!v.paused){v.pause();}
     });
-  },{threshold:.2});
+  },{threshold:0,rootMargin:'100px'});
   vs.forEach(function(v){io.observe(v);});
 })();
 </script>
@@ -586,11 +593,18 @@ def main():
     # ---- grid de projetos.html ----
     px = io.open(os.path.join(BASE, 'projetos.html'), encoding='utf-8').read()
     ratios = ['4/5', '4/3', '1/1', '4/3', '4/5', '16/10', '1/1']
+    # Card com video precisa de caixa larga. Os mp4 sao todos 16:9 com a arte
+    # centralizada e com margem, feita pra tolerar recorte, mas nao qualquer
+    # recorte: 4/5 guarda so 45% da largura e come as pontas do logotipo.
+    # De 4/3 pra cima a arte cabe inteira.
+    ratios_video = ['4/3', '16/10']
     cards = []
     for k, c in enumerate(CASES):
         cover = imgs(c['slug'])[0]
         # capa animada quando o case tem uma; o poster segura o lugar
+        prop = ratios[k % len(ratios)]
         if c.get('video'):
+            prop = ratios_video[k % len(ratios_video)]
             alt_pt = VIDEO_ALT.get(c['slug'], (c['name'], c['name']))[0]
             media = (f'<video class="pg-vid" muted loop playsinline preload="none" '
                      f'poster="assets/videos/{c["slug"]}-poster.webp" '
@@ -600,7 +614,7 @@ def main():
             media = f'<img src="assets/cases/{cover}" alt="{esc(c["name"])}" loading="lazy">'
         cards.append(
 f'''        <a class="pg-card" href="projeto-{c['slug']}.html" data-cat="{c.get('cat', 'branding')}" data-reveal>
-          <div class="pg-media" style="aspect-ratio:{ratios[k % len(ratios)]}">{media}<span class="pg-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div>
+          <div class="pg-media" style="aspect-ratio:{prop}">{media}<span class="pg-go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div>
           <div class="pg-meta"><h3 class="pg-name">{esc(c['name'])}</h3><p class="pg-tag"><span data-pt>{esc(c['quote_pt'].split(".")[0])}.</span><span data-en>{esc(c['quote_en'].split(".")[0])}.</span></p><span class="pg-cat"><span data-pt>{esc(c['tag_pt'])}</span><span data-en>{esc(c['tag_en'])}</span></span></div>
         </a>''')
     new_grid = '\n'.join(cards)
@@ -609,8 +623,11 @@ f'''        <a class="pg-card" href="projeto-{c['slug']}.html" data-cat="{c.get(
     if '<a class="pg-card"' not in px2:
         print('AVISO: grid de projetos.html nao foi substituida')
     else:
-        if '<video class="pg-vid"' in px2 and 'id="cover-video-js"' not in px2:
-            px2 = px2.replace('</body>', EXTRA_JS + '</body>', 1)
+        if '<video class="pg-vid"' in px2:
+            if 'id="video-capa-css"' not in px2:
+                px2 = px2.replace('</head>', VIDEO_CSS + '</head>', 1)
+            if 'id="cover-video-js"' not in px2:
+                px2 = px2.replace('</body>', EXTRA_JS + '</body>', 1)
         io.open(os.path.join(BASE, 'projetos.html'), 'w', encoding='utf-8').write(px2)
         print('atualizado  projetos.html  (%d cards)' % len(CASES))
 
@@ -629,15 +646,13 @@ f'''        <a class="pg-card" href="projeto-{c['slug']}.html" data-cat="{c.get(
                  else 'loading="lazy" decoding="async"')
         # sem link: o baralho e vitrine, nao navegacao. Quem quer ver os cases
         # usa o botao "Ver Projetos" logo abaixo.
-        if c.get('video'):
-            alt_pt = VIDEO_ALT.get(c['slug'], (c['name'], c['name']))[0]
-            peca = (f'<video class="deck-vid" muted loop playsinline preload="none" '
-                    f'poster="assets/videos/{c["slug"]}-poster.webp" '
-                    f'aria-label="{esc(alt_pt)}">'
-                    f'<source src="assets/videos/{c["slug"]}-sq.mp4" type="video/mp4"></video>')
-        else:
-            peca = (f'<img src="assets/cases/{cover}" '
-                    f'alt="{esc(c["name"])}, {esc(c["tag_pt"])}" {carga}>')
+        # O baralho do hero e de cards EM PE (3/4). Os mp4 sao todos 16:9 com a
+        # arte centralizada; recortar pra retrato guarda 42% da largura e corta
+        # o logotipo. A capa estatica ja e desenhada pra esse formato, entao o
+        # baralho fica com ela. Video so onde a caixa e larga: pagina do case
+        # (16:9, sem recorte) e grade (4/3 ou 16/10).
+        peca = (f'<img src="assets/cases/{cover}" '
+                f'alt="{esc(c["name"])}, {esc(c["tag_pt"])}" {carga}>')
         baralho.append(
 f'''        <div class="deck-card">
           {peca}
@@ -656,8 +671,6 @@ f'''        <div class="deck-card">
     if not n:
         print('AVISO: baralho do hero nao encontrado em index.html')
     else:
-        if '<video class="deck-vid"' in h2 and 'id="cover-video-js"' not in h2:
-            h2 = h2.replace('</body>', EXTRA_JS + '</body>', 1)
         io.open(ix, 'w', encoding='utf-8').write(h2)
         print('atualizado  index.html  (%d cards no baralho do hero)' % len(baralho))
 

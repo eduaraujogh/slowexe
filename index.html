@@ -785,19 +785,19 @@ header .menu-toggle svg{stroke:#0A0B0D}
       <span class="deck-word" aria-hidden="true">SLOWEXE</span>
       <div class="deck" id="deckTrack">
         <div class="deck-card">
-          <video class="deck-vid" muted loop playsinline preload="none" poster="assets/videos/artta-poster.webp" aria-label="Três peças da marca Artta subindo uma depois da outra sobre o fundo azul"><source src="assets/videos/artta-sq.mp4" type="video/mp4"></video>
+          <img src="assets/cases/artta-01.webp" alt="Artta, Mercado financeiro · Branding e UX/UI" loading="eager" fetchpriority="high" decoding="async">
         </div>
         <div class="deck-card">
-          <video class="deck-vid" muted loop playsinline preload="none" poster="assets/videos/sba-poster.webp" aria-label="Logo do Grupo SBA em movimento: os dois anéis se desenham como um traço e se unem, e as letras se escrevem ao lado"><source src="assets/videos/sba-sq.mp4" type="video/mp4"></video>
+          <img src="assets/cases/sba-01.webp" alt="Grupo SBA, Mercado financeiro · Identidade Visual" loading="eager" decoding="async">
         </div>
         <div class="deck-card">
-          <video class="deck-vid" muted loop playsinline preload="none" poster="assets/videos/sabores-poster.webp" aria-label="Cartazes dos festivais do Sabores de Curitiba em três colunas que deslizam, com um festival diferente no centro a cada parada"><source src="assets/videos/sabores-sq.mp4" type="video/mp4"></video>
+          <img src="assets/cases/sabores-01.webp" alt="Sabores de Curitiba, Gastronomia · Identidade Visual" loading="eager" decoding="async">
         </div>
         <div class="deck-card">
-          <video class="deck-vid" muted loop playsinline preload="none" poster="assets/videos/thalles-poster.webp" aria-label="Cards da Thalles em movimento: o logo se monta, o texto entra e a flecha sobe"><source src="assets/videos/thalles-sq.mp4" type="video/mp4"></video>
+          <img src="assets/cases/thalles-01.webp" alt="Thalles Consultoria, Consultoria financeira · Identidade Visual" loading="lazy" decoding="async">
         </div>
         <div class="deck-card">
-          <video class="deck-vid" muted loop playsinline preload="none" poster="assets/videos/fense-poster.webp" aria-label="Logo da Fense em movimento: o F ganha volume e o nome entra ao lado"><source src="assets/videos/fense-sq.mp4" type="video/mp4"></video>
+          <img src="assets/cases/fense-01.webp" alt="Fense Seguros, Corretora de seguros · Identidade Visual" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -1553,23 +1553,6 @@ header .menu-toggle svg{stroke:#0A0B0D}
   window.addEventListener('resize',function(){
     if(window.innerWidth>760&&panel.classList.contains('on'))close();
   });
-})();
-</script>
-<script id="cover-video-js">
-(function(){
-  var vs=[].slice.call(document.querySelectorAll('.pc-cover-video,.pg-vid,.deck-vid'));
-  if(!vs.length)return;
-  var parado=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(parado)return;
-  if(!('IntersectionObserver' in window)){vs.forEach(function(v){v.play().catch(function(){})});return;}
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      var v=e.target;
-      if(e.isIntersecting){v.play().catch(function(){});}
-      else if(!v.paused){v.pause();}
-    });
-  },{threshold:.2});
-  vs.forEach(function(v){io.observe(v);});
 })();
 </script>
 </body>

@@ -778,11 +778,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   .pc-q-author{gap:0}
   /* capa animada: o poster segura o lugar e o video so toca quando entra na tela */
   .pc-cover-video{width:100%;height:auto;display:block;background:#f1f2f4}
-  /* o video ocupa o lugar da imagem na grade e no baralho, com o mesmo zoom de hover */
-  .pg-media video{width:100%;height:100%;object-fit:cover;display:block;
-    transition:transform .7s cubic-bezier(.22,1,.36,1)}
-  .pg-card:hover .pg-media video{transform:scale(1.06)}
-  .deck-card video{width:100%;height:100%;object-fit:cover;display:block}
+
   /* capitulo de case com varias entregas (Artta, Grupo SBA) */
   .pc-chapter{padding:86px 0 0}
   .pc-cap-kick{display:block;font-size:12px;font-weight:600;text-transform:uppercase;
@@ -1457,7 +1453,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
       if(e.isIntersecting){v.play().catch(function(){});}
       else if(!v.paused){v.pause();}
     });
-  },{threshold:.2});
+  },{threshold:0,rootMargin:'100px'});
   vs.forEach(function(v){io.observe(v);});
 })();
 </script>
