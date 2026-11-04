@@ -62,21 +62,32 @@ MAPA = {
 
 # servicos.html: cada servico puxa de um projeto. As frentes de produto e web
 # ainda nao tem case proprio; ficam com peca de branding ate terem.
+# Cada frente ilustrada com trabalho DA PROPRIA frente.
+# Ate aqui as seis frentes de produto e web usavam peca de branding por falta
+# de case proprio: UI/UX aparecia com a revenda de carros, App com a corretora
+# de seguros, Web com a marca de outdoor. Com a Artta (telas de produto) e a
+# Gedisa (tres sites) no acervo, cada uma passa a mostrar o que e.
 SERVICOS = {
-    'uiux':     ['duo-03', 'duo-07', 'duo-11'],
-    'app':      ['fense-05', 'fense-09', 'fense-13'],
-    'audit':    ['thalles-05', 'thalles-09', 'thalles-13'],
-    'web':      ['riverside-04', 'riverside-08', 'riverside-12'],
-    'lp':       ['bioerde-04', 'bioerde-08', 'bioerde-12'],
-    'redesign': ['golden-vibes-05', 'golden-vibes-10', 'golden-vibes-15'],
+    # interfaces reais: internet banking, portal do parceiro, etapas da calculadora
+    'uiux':     ['artta-plataformas-01', 'artta-plataformas-02', 'artta-calculadora-02'],
+    # app na mao: notificacao, uso real e as tres LPs no celular
+    'app':      ['artta-marca-07', 'artta-plataformas-03', 'gedisa-10'],
+    # leitura e diagnostico: estrutura, blocos de valor e o painel
+    'audit':    ['gedisa-05', 'gedisa-09', 'artta-marca-08'],
+    # sites no ar
+    'web':      ['gedisa-01', 'gedisa-08', 'gedisa-04'],
+    # landing pages de verdade, desktop e celular
+    'lp':       ['artta-calculadora-01', 'artta-calculadora-03', 'gedisa-02'],
+    # a Gedisa E um site refeito: e o case certo pra essa frente
+    'redesign': ['gedisa-06', 'gedisa-07', 'gedisa-03'],
     'brand':    ['sabores-05', 'sabores-11', 'sabores-17'],
-    'rebrand':  ['thalles-06', 'thalles-14', 'thalles-18'],
+    'rebrand':  ['golden-vibes-05', 'golden-vibes-10', 'golden-vibes-15'],
 }
-# a imagem que aparece no hover da lista de servicos
-HOVER = {'sv-uiux': 'duo-03', 'sv-app': 'fense-05', 'sv-audit': 'thalles-05',
-         'sv-web': 'riverside-04', 'sv-lp': 'bioerde-04',
-         'sv-redesign': 'golden-vibes-05', 'sv-brand': 'sabores-05',
-         'sv-rebrand': 'thalles-06'}
+# a imagem que aparece no hover da lista de servicos: a primeira de cada frente
+HOVER = {'sv-uiux': 'artta-plataformas-01', 'sv-app': 'artta-marca-07',
+         'sv-audit': 'gedisa-05', 'sv-web': 'gedisa-01',
+         'sv-lp': 'artta-calculadora-01', 'sv-redesign': 'gedisa-06',
+         'sv-brand': 'sabores-05', 'sv-rebrand': 'golden-vibes-05'}
 
 
 def existe(rel):
