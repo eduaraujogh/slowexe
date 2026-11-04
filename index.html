@@ -532,9 +532,12 @@ header .menu-toggle svg{stroke:#0A0B0D}
     border-right:1px solid #ece9e4;
   }
   .wr-item:nth-child(3n){border-right:0}
+  /* Traco de cabelo e desenho geometrico, nao pictograma: a referencia que o
+     Eduardo mandou constroi cada icone dentro de um circulo ou de uma moldura
+     de cantos. Em 38px o stroke de 1 e o que sustenta essa delicadeza. */
   .wr-ico{
-    width:32px;height:32px;display:block;margin-bottom:26px;
-    fill:none;stroke:#0A0B0D;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+    width:38px;height:38px;display:block;margin-bottom:24px;
+    fill:none;stroke:#0A0B0D;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;
     transition:stroke .3s,transform .45s cubic-bezier(.22,1,.36,1);
   }
   .wr-item:hover .wr-ico{stroke:var(--primary);transform:translateY(-3px)}
@@ -938,37 +941,37 @@ header .menu-toggle svg{stroke:#0A0B0D}
 
       <div class="wr-grid">
         <div class="wr-item" data-reveal>
-          <svg class="wr-ico" viewBox="0 0 24 24"><rect x="3" y="3" width="12" height="12" rx="3.2"/><rect x="9" y="9" width="12" height="12" rx="3.2"/></svg>
+          <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="9.1" cy="12" r="6.3"/><circle cx="14.9" cy="12" r="6.3"/></svg>
           <h3 class="wr-t"><span data-pt>Design e código no mesmo time</span><span data-en>Design and code in one team</span></h3>
           <p class="wr-d"><span data-pt>Da identidade ao produto final, uma equipe só cuida de tudo, sem ruído entre fornecedores.</span><span data-en>From identity to finished product, one team handles everything, with no noise between vendors.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
-          <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.3"/></svg>
+          <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="1.5"/><path d="M6.2 6.2l4.4 4.4"/></svg>
           <h3 class="wr-t"><span data-pt>Estratégia antes da estética</span><span data-en>Strategy before aesthetics</span></h3>
           <p class="wr-d"><span data-pt>Primeiro a gente entende o negócio. Sem base estratégica, a comunicação fica solta e não constrói percepção.</span><span data-en>We understand the business first. Without a strategic foundation, communication drifts and builds no perception.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
-          <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="10" cy="8.6" r="3.5"/><path d="M3.4 20.4c0-3.5 2.9-5.8 6.6-5.8s6.6 2.3 6.6 5.8"/><path d="M18.9 3.1l.78 2.02 2.02.78-2.02.78-.78 2.02-.78-2.02L16.1 5.9l2.02-.78z"/></svg>
+          <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="10.4" cy="13.3" r="6.5"/><path d="M18.7 3.9l.64 1.74 1.74.64-1.74.64-.64 1.74-.64-1.74-1.74-.64 1.74-.64z"/></svg>
           <h3 class="wr-t"><span data-pt>Feito por humanos, acelerado por IA</span><span data-en>Made by humans, sped up by AI</span></h3>
           <p class="wr-d"><span data-pt>A IA encurta o caminho das tarefas repetidas. O que define a sua marca continua passando por gente, e é essa gente que você contrata.</span><span data-en>AI shortens the path through repetitive work. What defines your brand still goes through people, and those people are who you hire.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
-          <svg class="wr-ico" viewBox="0 0 24 24"><path d="M6.6 3h10.8M6.6 21h10.8"/><path d="M8.2 3v3.1c0 2.1 3.8 3.6 3.8 5.9s-3.8 3.8-3.8 5.9V21"/><path d="M15.8 3v3.1c0 2.1-3.8 3.6-3.8 5.9s3.8 3.8 3.8 5.9V21"/></svg>
+          <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="5.3"/><circle cx="12" cy="12" r="2.2"/></svg>
           <h3 class="wr-t"><span data-pt>Marca feita para durar</span><span data-en>A brand built to last</span></h3>
           <p class="wr-d"><span data-pt>Construímos identidade que aguenta anos de uso, não tendência que envelhece em seis meses.</span><span data-en>We build identity that survives years of use, not a trend that ages in six months.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
-          <svg class="wr-ico" viewBox="0 0 24 24"><path d="M5.2 12h13.6"/><circle cx="4.4" cy="12" r="2.2"/><circle cx="12" cy="12" r="2.9"/><circle cx="19.6" cy="12" r="2.2"/></svg>
+          <svg class="wr-ico" viewBox="0 0 24 24"><path d="M3 7.4V4.6A1.6 1.6 0 0 1 4.6 3H7.4M16.6 3h2.8A1.6 1.6 0 0 1 21 4.6v2.8M21 16.6v2.8a1.6 1.6 0 0 1-1.6 1.6h-2.8M7.4 21H4.6A1.6 1.6 0 0 1 3 19.4v-2.8"/><circle cx="7.5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.9"/><circle cx="16.5" cy="12" r="1.2"/><path d="M8.9 12h1.3M13.8 12h1.3"/></svg>
           <h3 class="wr-t"><span data-pt>Por perto em cada etapa</span><span data-en>With you at every step</span></h3>
           <p class="wr-d"><span data-pt>Você fala direto com quem desenha e com quem programa, do briefing à entrega.</span><span data-en>You talk straight to whoever designs and whoever codes, from brief to delivery.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
-          <svg class="wr-ico" viewBox="0 0 24 24"><path d="M3.2 19.6h17.6"/><path d="M5.4 16c2.1-6.6 3.7-9.9 5-9.9 1.8 0 .5 8.9 2.4 8.9 1.1 0 1.8-2 2.9-2 1 0 1.5 1.2 2.6 1.2"/></svg>
+          <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><path d="M7.5 13.9c1.4-3.4 2.2-5.1 2.9-5.1.9 0 .3 4.6 1.4 4.6.6 0 1-1.1 1.6-1.1.5 0 .8.7 1.4.7"/></svg>
           <h3 class="wr-t"><span data-pt>Cliente que assina o que diz</span><span data-en>Clients who sign their words</span></h3>
           <p class="wr-d"><span data-pt>Todo depoimento aqui tem nome, cargo e empresa de quem falou. Role a página e confira.</span><span data-en>Every testimonial here carries the name, role and company of who said it. Scroll down and check.</span></p>
         </div>
