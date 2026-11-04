@@ -25,7 +25,10 @@
     margin:0 auto;max-width:none;white-space:nowrap;
     color:var(--text-on-light);
   }
-.subtitle{margin:26px auto 0;max-width:42ch;color:#6b7078;font-size:clamp(15px,1.6vw,18px);line-height:1.55}
+/* o subtitulo saiu do hero. Sem ele os botoes encostavam no baralho, entao o
+   respiro que era do paragrafo passa a ser margem do proprio bloco de botoes. */
+.hero-inner .hero-cta{margin-top:76px}
+@media(max-width:760px){.hero-inner .hero-cta{margin-top:44px}}
 /* ============ HERO: BARALHO DE PROJETOS ============ */
   /* Escala e deslocamento vem do JS, em 2D. Ja foi feito com perspective +
      translateZ, que e mais elegante, mas o Safari do iOS achata
@@ -524,7 +527,8 @@ header .menu-toggle svg{stroke:#0A0B0D}
      O que e novo leva prefixo wr-, porque os nomes da secao antiga
      (.why-card, .why-a ate .why-d, .wa-*, .wc-*, .wd-*) continuam no
      assets/site.css, e o .why-d de la era um CARD, nao a descricao. */
-  .wr-top{max-width:720px;margin:0 auto 58px}
+  .wr-top{max-width:880px;margin:0 auto 58px}
+  .wr-top .why-head{text-wrap:balance}
   .wr-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #ece9e4}
   .wr-item{
     padding:40px 34px 44px;
@@ -544,7 +548,6 @@ header .menu-toggle svg{stroke:#0A0B0D}
   .wr-t{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em;margin:0 0 12px}
   /* o numero ordena a leitura sem competir com o titulo */
   .wr-n{color:#9aa0a8;font-weight:600}
-  .wr-sub{margin:18px auto 0;max-width:62ch;font-size:16px;line-height:1.6;color:#686d75}
   .wr-d{font-size:15px;line-height:1.65;color:#686d75;margin:0;max-width:34ch}
 
   @media(max-width:1024px){
@@ -825,10 +828,6 @@ header .menu-toggle svg{stroke:#0A0B0D}
     </div>
 
     <div class="wrap hero-inner">
-      <p class="subtitle" data-reveal>
-        <span data-pt>Da identidade ao site no ar, com o mesmo time. Sem passar por três fornecedores.</span>
-        <span data-en>From identity to a live site, with one team. No going through three vendors.</span>
-      </p>
 
       <div class="hero-cta" data-reveal>
         <a href="contato.html" class="btn btn-primary">
@@ -956,10 +955,6 @@ header .menu-toggle svg{stroke:#0A0B0D}
           <span data-pt>Design com intenção. Tecnologia com propósito.</span>
           <span data-en>Design with intent. Technology with purpose.</span>
         </h2>
-        <p class="wr-sub">
-          <span data-pt>Não é só sobre o que entregamos. É sobre como pensamos, criamos e construímos.</span>
-          <span data-en>It is not only about what we deliver. It is about how we think, create and build.</span>
-        </p>
       </div>
 
       <div class="wr-grid">
