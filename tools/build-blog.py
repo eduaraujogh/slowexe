@@ -394,8 +394,19 @@ def main():
     def home_card(p):
         y, m, d = p['date']
         a, bcol = CAPAS[p['slug']]
+        # Mesma regra da capa do post: com foto, ela entra de fundo com um
+        # degrade escuro por cima pra garantir o contraste do rotulo. O
+        # gradiente tipografico fica so pra post sem foto. Antes a home
+        # ignorava a foto e caia sempre no gradiente, com os tres cards
+        # saindo iguais.
+        foto = foto_capa(p['slug'])
+        if foto:
+            fundo = ('background-image:linear-gradient(180deg,rgba(10,11,13,.18),rgba(10,11,13,.62)),'
+                     'url(%s);background-size:cover;background-position:center' % foto)
+        else:
+            fundo = 'background:linear-gradient(135deg,%s 0%%,%s 100%%)' % (a, bcol)
         return ('''        <a href="blog-%s.html" class="bpost" data-reveal>
-          <div class="bpost-img" style="background:linear-gradient(135deg,%s 0%%,%s 100%%)"><span class="bh-cat">%s</span></div>
+          <div class="bpost-img" style="%s"><span class="bh-cat">%s</span></div>
           <span class="bpost-cat">%s</span>
           <h3 class="bpost-title">%s</h3>
           <p class="bpost-desc">%s</p>
@@ -403,7 +414,7 @@ def main():
             <span class="bpost-av" aria-hidden="true">E</span>
             <div><div class="bpost-name">%s</div><div class="bpost-date">%s</div></div>
           </div>
-        </a>''' % (p['slug'], a, bcol, bil(p['cat_pt'], p['cat_en']), bil(p['cat_pt'], p['cat_en']),
+        </a>''' % (p['slug'], fundo, bil(p['cat_pt'], p['cat_en']), bil(p['cat_pt'], p['cat_en']),
                    bil(p['title_pt'], p['title_en']), bil(p['desc_pt'], p['desc_en']), AUTOR,
                    bil('%d %s %d' % (d, MESES[m-1], y), '%s %d, %d' % (MONTHS[m-1], d, y))))
 
