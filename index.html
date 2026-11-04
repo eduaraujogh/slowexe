@@ -528,7 +528,11 @@ header .menu-toggle svg{stroke:#0A0B0D}
      (.why-card, .why-a ate .why-d, .wa-*, .wc-*, .wd-*) continuam no
      assets/site.css, e o .why-d de la era um CARD, nao a descricao. */
   .wr-top{max-width:880px;margin:0 auto 58px}
-  .wr-top .why-head{text-wrap:balance}
+  /* o h2 tem largura propria, herdada do .why-head, e ela estava em 551px:
+     "Tecnologia com proposito." sozinho ja pede 601px, entao a frase caia em
+     tres linhas com a ultima quase orfa. Com 760 ela resolve em duas, e o
+     balance distribui o peso entre elas. */
+  .wr-top .why-head{max-width:760px;margin-left:auto;margin-right:auto;text-wrap:balance}
   .wr-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #ece9e4}
   .wr-item{
     padding:40px 34px 44px;
