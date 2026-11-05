@@ -22,6 +22,7 @@ import siteconfig as cfg
 SITE_URL = cfg.SITE_URL
 
 AUTOR   = 'Eduardo Araujo'
+AUTOR_FOTO = 'assets/equipe/eduardo-avatar.webp'
 AUTOR_PT = 'Fundador · Slowexe'
 AUTOR_EN = 'Founder · Slowexe'
 
@@ -363,8 +364,9 @@ def main():
         # capa tipográfica
         s = re.sub(r'<div class="art-cover">.*?</div></div>', capa(p), s, count=1, flags=re.S)
 
-        # autor real
-        s = re.sub(r'<img src="https://i\.pravatar\.cc/96\?img=15" alt="">', '', s, count=1)
+        # autor real: foto, nome e cargo de quem assina de verdade
+        s = re.sub(r'<img src="[^"]*(?:pravatar[^"]*|avatars/p\d+\.webp)" alt="[^"]*"',
+                   '<img src="%s" alt="%s"' % (AUTOR_FOTO, AUTOR), s, count=1)
         s = re.sub(r'<div class="aa-meta">.*?</div>',
                    '<div class="aa-meta"><b>%s</b><span>%s</span></div>' % (AUTOR, bil(AUTOR_PT, AUTOR_EN)),
                    s, count=1, flags=re.S)
@@ -389,8 +391,8 @@ def main():
     # ---- cards de blog na home ----
     HOME_CSS = ('  .bpost-img{display:grid;place-items:center}\n'
                 '  .bh-cat{font-family:"Bricolage Grotesque";font-weight:800;font-size:20px;color:#fff;opacity:.95}\n'
-                '  .bpost-av{width:40px;height:40px;border-radius:50%;flex:0 0 auto;background:var(--primary);'
-                'color:#fff;display:grid;place-items:center;font-family:"Bricolage Grotesque";font-weight:800;font-size:17px}\n')
+                '  .bpost-av{width:40px;height:40px;border-radius:50%;flex:0 0 auto;'
+                'object-fit:cover;background:#ece9e4}\n')
     def home_card(p):
         y, m, d = p['date']
         a, bcol = CAPAS[p['slug']]
@@ -411,11 +413,12 @@ def main():
           <h3 class="bpost-title">%s</h3>
           <p class="bpost-desc">%s</p>
           <div class="bpost-author">
-            <span class="bpost-av" aria-hidden="true">E</span>
+            <img class="bpost-av" src="%s" alt="" loading="lazy" decoding="async">
             <div><div class="bpost-name">%s</div><div class="bpost-date">%s</div></div>
           </div>
         </a>''' % (p['slug'], fundo, bil(p['cat_pt'], p['cat_en']), bil(p['cat_pt'], p['cat_en']),
-                   bil(p['title_pt'], p['title_en']), bil(p['desc_pt'], p['desc_en']), AUTOR,
+                   bil(p['title_pt'], p['title_en']), bil(p['desc_pt'], p['desc_en']),
+                   AUTOR_FOTO, AUTOR,
                    bil('%d %s %d' % (d, MESES[m-1], y), '%s %d, %d' % (MONTHS[m-1], d, y))))
 
     ix = os.path.join(BASE, 'index.html')
@@ -440,6 +443,13 @@ def main():
         if 'id="blog-home-css"' not in h2 and '.bh-cat{' not in h2:
             h2 = h2.replace('</head>',
                             '<style id="blog-home-css">\n%s</style>\n</head>' % HOME_CSS, 1)
+        # O bloco so e INSERIDO quando ainda nao existe. Como ele ja esta no
+        # index ha meses, mudar HOME_CSS sozinho nao chegava na pagina: a regra
+        # do avatar continuava a do monograma (grid + fundo solido), que amassa
+        # uma foto. Entao a regra e reescrita toda rodada.
+        h2 = re.sub(r'\.bpost-av\{[^}]*\}',
+                    '.bpost-av{width:40px;height:40px;border-radius:50%;flex:0 0 auto;'
+                    'object-fit:cover;background:#ece9e4}', h2)
         io.open(ix, 'w', encoding='utf-8').write(h2)
         print('atualizado  index.html  (3 cards de blog na home)')
     else:

@@ -100,11 +100,15 @@ autor do blog:
 
 - `index.html`: o grupinho de rostos do card flutuante do hero, ilustração
 - `contato.html`: um rosto no modal de agendamento
-- `projeto.html` e as 4 páginas de blog: avatar do autor
+- `projeto.html`: a citação fictícia da Marina Alves, dentro do template
 
-**Avatar do autor no blog.** Está com um retrato genérico, mas o nome ao lado
-é **Eduardo Araujo**, pessoa real. Aqui a foto certa é a dele. Substituir
-`assets/avatars/p1.webp` pela foto real resolve as 5 páginas de uma vez.
+**Avatar do autor no blog — resolvido.** Era um retrato gerado ao lado do nome
+de uma pessoa real. Agora é a foto do Eduardo, recortada em quadrado por
+`tools/crop-avatar.py` a partir do retrato de equipe, em
+`assets/equipe/eduardo-avatar.webp`. Vale para a assinatura das 4 páginas de
+post, para o template `blog-post.html` e para os 3 cards de blog da home, que
+antes mostravam um monograma. `tools/build-blog.py` reescreve o `src`, o `alt`
+e a regra `.bpost-av` a cada build.
 
 ---
 

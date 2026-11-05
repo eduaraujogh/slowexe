@@ -55,10 +55,15 @@ de stock, e o arquivo chegou com o nome `daniel.jpg`. O Eduardo confirmou que
 pode usar e ela está no ar. Fica anotado porque, se for stock mesmo, é o rosto
 de uma pessoa assinando o depoimento de outra. Ver `PENDENCIAS.md`, item 3.
 
-**O avatar do autor no blog** (`assets/avatars/p1.webp`) é um retrato gerado,
-mas o nome ao lado dele é Eduardo Araujo, pessoa real. Aqui a foto certa é a
-dele, e trocar esse arquivo resolve as cinco páginas de uma vez. Ver
-`PENDENCIAS.md`, item 4.
+**O avatar do autor no blog** é a foto real do Eduardo,
+`assets/equipe/eduardo-avatar.webp`, gerada por `tools/crop-avatar.py` a partir
+de `assets/equipe/eduardo-araujo.webp`. O retrato de equipe é 1000x880 e o
+avatar é um círculo de 54px: sem o corte fechado no rosto a cabeça some dentro
+da bolinha. Para trocar a foto, basta substituir o retrato de equipe e rodar o
+script de novo.
+
+`assets/avatars/p1.webp` continua sendo um retrato gerado, mas agora só aparece
+em `projeto.html`, que é template, não indexado e fora do sitemap.
 
 ---
 

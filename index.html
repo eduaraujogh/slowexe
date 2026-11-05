@@ -152,7 +152,7 @@
 <style>
 .bpost-img{display:grid;place-items:center}
 .bh-cat{font-family:"Bricolage Grotesque";font-weight:800;font-size:20px;color:#fff;opacity:.95}
-.bpost-av{width:40px;height:40px;border-radius:50%;flex:0 0 auto;background:var(--primary);color:#fff;display:grid;place-items:center;font-family:"Bricolage Grotesque";font-weight:800;font-size:17px}
+.bpost-av{width:40px;height:40px;border-radius:50%;flex:0 0 auto;object-fit:cover;background:#ece9e4}
 </style>
 <style id="mnav-css">/* extraido pra assets/site.css */</style>
 <link rel="icon" href="favicon.ico" sizes="any" />
@@ -550,8 +550,6 @@ header .menu-toggle svg{stroke:#0A0B0D}
   }
   .wr-item:hover .wr-ico{stroke:var(--primary);transform:translateY(-3px)}
   .wr-t{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em;margin:0 0 12px}
-  /* o numero ordena a leitura sem competir com o titulo */
-  .wr-n{color:#9aa0a8;font-weight:600}
   .wr-d{font-size:15px;line-height:1.65;color:#686d75;margin:0;max-width:34ch}
 
   @media(max-width:1024px){
@@ -964,37 +962,37 @@ header .menu-toggle svg{stroke:#0A0B0D}
       <div class="wr-grid">
         <div class="wr-item" data-reveal>
           <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="9.1" cy="12" r="6.3"/><circle cx="14.9" cy="12" r="6.3"/></svg>
-          <h3 class="wr-t"><span class="wr-n">01.</span> <span data-pt>Ideia e execução no mesmo lugar</span><span data-en>Idea and execution in one place</span></h3>
+          <h3 class="wr-t"><span data-pt>Ideia e execução no mesmo lugar.</span><span data-en>Idea and execution in one place.</span></h3>
           <p class="wr-d"><span data-pt>Estratégia, design e desenvolvimento trabalham juntos. Do primeiro conceito à experiência funcionando, sem ruído entre quem pensa e quem faz.</span><span data-en>Strategy, design and development work together. From the first concept to a working experience, with no noise between who thinks and who builds.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
           <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="1.5"/><path d="M6.2 6.2l4.4 4.4"/></svg>
-          <h3 class="wr-t"><span class="wr-n">02.</span> <span data-pt>Primeiro, entender. Depois, criar.</span><span data-en>First understand. Then create.</span></h3>
+          <h3 class="wr-t"><span data-pt>Primeiro, entender. Depois, criar.</span><span data-en>First understand. Then create.</span></h3>
           <p class="wr-d"><span data-pt>Cada projeto começa com perguntas, não com referências visuais. Entendemos o negócio, identificamos oportunidades e só então definimos o caminho.</span><span data-en>Every project starts with questions, not with visual references. We understand the business, identify opportunities and only then define the path.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
           <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="10.4" cy="13.3" r="6.5"/><path d="M18.7 3.9l.64 1.74 1.74.64-1.74.64-.64 1.74-.64-1.74-1.74-.64 1.74-.64z"/></svg>
-          <h3 class="wr-t"><span class="wr-n">03.</span> <span data-pt>IA acelera. Critério continua humano.</span><span data-en>AI accelerates. Judgement stays human.</span></h3>
+          <h3 class="wr-t"><span data-pt>IA acelera. Critério continua humano.</span><span data-en>AI accelerates. Judgement stays human.</span></h3>
           <p class="wr-d"><span data-pt>Usamos inteligência artificial para ganhar velocidade, explorar possibilidades e eliminar tarefas repetitivas. As decisões que importam continuam nas mãos de quem entende do projeto.</span><span data-en>We use artificial intelligence to gain speed, explore possibilities and remove repetitive work. The decisions that matter stay with the people who understand the project.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
           <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="5.3"/><circle cx="12" cy="12" r="2.2"/></svg>
-          <h3 class="wr-t"><span class="wr-n">04.</span> <span data-pt>Feito para funcionar amanhã também.</span><span data-en>Built to work tomorrow too.</span></h3>
+          <h3 class="wr-t"><span data-pt>Feito para funcionar amanhã também.</span><span data-en>Built to work tomorrow too.</span></h3>
           <p class="wr-d"><span data-pt>Criamos identidades, interfaces e sistemas preparados para evoluir. Não pensamos apenas na próxima entrega, mas no que o negócio vai precisar construir depois dela.</span><span data-en>We create identities, interfaces and systems ready to evolve. We do not think only about the next delivery, but about what the business will need to build after it.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
           <svg class="wr-ico" viewBox="0 0 24 24"><circle cx="5.3" cy="12" r="2.5"/><circle cx="18.7" cy="12" r="2.5"/><path d="M8.4 12h7.2"/></svg>
-          <h3 class="wr-t"><span class="wr-n">05.</span> <span data-pt>Sem intermediários. Sem ruído.</span><span data-en>No middlemen. No noise.</span></h3>
+          <h3 class="wr-t"><span data-pt>Sem intermediários. Sem ruído.</span><span data-en>No middlemen. No noise.</span></h3>
           <p class="wr-d"><span data-pt>Você conversa diretamente com quem pensa e executa o projeto. Mais proximidade, decisões mais rápidas e uma relação de trabalho transparente.</span><span data-en>You talk directly to the people who think and execute the project. More closeness, faster decisions and a transparent working relationship.</span></p>
         </div>
 
         <div class="wr-item" data-reveal>
           <svg class="wr-ico" viewBox="0 0 24 24"><path d="M2.4 12s3.5-5.7 9.6-5.7S21.6 12 21.6 12s-3.5 5.7-9.6 5.7S2.4 12 2.4 12z"/><circle cx="12" cy="12" r="2.9"/></svg>
-          <h3 class="wr-t"><span class="wr-n">06.</span> <span data-pt>Transparência do início ao fim.</span><span data-en>Transparent from start to finish.</span></h3>
+          <h3 class="wr-t"><span data-pt>Transparência do início ao fim.</span><span data-en>Transparent from start to finish.</span></h3>
           <p class="wr-d"><span data-pt>Você acompanha o processo, entende as decisões e sabe o que está sendo construído. Nada de promessas vagas ou entregas misteriosas.</span><span data-en>You follow the process, understand the decisions and know what is being built. No vague promises, no mysterious deliveries.</span></p>
         </div>
       </div>
@@ -1067,7 +1065,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
           <h3 class="bpost-title"><span data-pt>Rebranding em 2026: quando sua marca precisa mudar de verdade</span><span data-en>Rebranding in 2026: when your brand actually needs to change</span></h3>
           <p class="bpost-desc"><span data-pt>Amazon, Jaguar, Dunkin e Avon mudaram de identidade. Os sinais reais de que sua marca precisa de rebranding e os riscos de errar a mão.</span><span data-en>Amazon, Jaguar, Dunkin and Avon all changed identity. The real signs your brand needs a rebrand, total versus partial, and the risks of getting it wrong.</span></p>
           <div class="bpost-author">
-            <span class="bpost-av" aria-hidden="true">E</span>
+            <img class="bpost-av" src="assets/equipe/eduardo-avatar.webp" alt="" loading="lazy" decoding="async">
             <div><div class="bpost-name">Eduardo Araujo</div><div class="bpost-date"><span data-pt>20 jul 2026</span><span data-en>jul 20, 2026</span></div></div>
           </div>
         </a>
@@ -1077,7 +1075,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
           <h3 class="bpost-title"><span data-pt>Do algoritmo à IA: como as marcas são encontradas em 2026</span><span data-en>From algorithm to AI: how brands get found in 2026</span></h3>
           <p class="bpost-desc"><span data-pt>O grafo social morreu e o grafo de interesse tomou o lugar. O que mudou nos algoritmos e por que storytelling virou requisito técnico.</span><span data-en>The social graph is dead and the interest graph took over. What changed in the algorithms, what Generative Engine Optimization is, and why storytelling became a technical requirement.</span></p>
           <div class="bpost-author">
-            <span class="bpost-av" aria-hidden="true">E</span>
+            <img class="bpost-av" src="assets/equipe/eduardo-avatar.webp" alt="" loading="lazy" decoding="async">
             <div><div class="bpost-name">Eduardo Araujo</div><div class="bpost-date"><span data-pt>6 jul 2026</span><span data-en>jul 6, 2026</span></div></div>
           </div>
         </a>
@@ -1087,7 +1085,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
           <h3 class="bpost-title"><span data-pt>LA28: o Superbloom e a identidade que muda de forma</span><span data-en>LA28: the Superbloom and an identity that changes shape</span></h3>
           <p class="bpost-desc"><span data-pt>Los Angeles revelou o Look of the Games em março de 2026. Treze padrões inspirados no superflorescimento da Califórnia, tipografia própria e um "A" que nunca é o mesmo.</span><span data-en>Los Angeles revealed the Look of the Games in March 2026. Thirteen patterns inspired by the California superbloom, custom type and an "A" that is never the same.</span></p>
           <div class="bpost-author">
-            <span class="bpost-av" aria-hidden="true">E</span>
+            <img class="bpost-av" src="assets/equipe/eduardo-avatar.webp" alt="" loading="lazy" decoding="async">
             <div><div class="bpost-name">Eduardo Araujo</div><div class="bpost-date"><span data-pt>15 jun 2026</span><span data-en>jun 15, 2026</span></div></div>
           </div>
         </a>
