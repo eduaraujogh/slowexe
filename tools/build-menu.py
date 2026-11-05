@@ -43,7 +43,6 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ITENS = [
     ('servicos.html', 'Serviços', 'Services', 'servicos'),
     ('projetos.html', 'Projetos', 'Works', 'projetos'),
-    ('index.html#about', 'Estúdio', 'Studio', 'estudio'),
     ('blog.html', 'Blog', 'Blog', 'blog'),
     ('contato.html', 'Contato', 'Contact', 'contato'),
 ]
