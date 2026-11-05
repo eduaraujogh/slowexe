@@ -47,6 +47,66 @@ ITENS = [
     ('contato.html', 'Contato', 'Contact', 'contato'),
 ]
 
+# ---------------------------------------------------------------------------
+# Megamenu de Servicos, o painel que abre no desktop.
+#
+# Ele estava escrito a mao nas 26 paginas e foi assim que saiu do lugar: seis
+# dos oito itens caiam em servicos.html sem ancora, e um deles, "Pitch Deck",
+# nao tinha secao nenhuma atras. Agora os oito espelham exatamente os oito
+# blocos de servicos.html, pelo id da secao, e o destino mora so aqui.
+#
+# rotulo em PT (o que esta escrito no <a>) -> destino
+# ---------------------------------------------------------------------------
+MEGA = {
+    'UI/UX Design':         'servicos.html#d-uiux',
+    'Web Design':           'servicos.html#d-web',
+    'Auditoria de Produto': 'servicos.html#d-audit',
+    'Landing Pages':        'servicos.html#d-lp',
+    'Branding':             'servico-branding.html',
+    'Design de App':        'servicos.html#d-app',
+    'Rebranding':           'servico-rebranding.html',
+    'Web Redesign':         'servicos.html#d-redesign',
+}
+
+# "Pitch Deck" so existia no menu: nenhuma secao, nenhuma pagina, nenhum texto
+# no site inteiro. No lugar dele entra Web Redesign, que existe em
+# servicos.html e nao estava no menu. Icone: moldura de navegador com as setas
+# de troca, pra nao repetir o circulo do Rebranding.
+PITCH = 'Pitch Deck'
+REDESIGN = (
+    '<a class="mega-link" href="servicos.html#d-redesign">'
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" '
+    'stroke-linecap="round" stroke-linejoin="round">'
+    '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8.5h18"/>'
+    '<path d="M8.5 13.2h7l-2-2M15.5 16.4h-7l2 2"/></svg>'
+    'Web Redesign</a>')
+
+MEGA_LINK = re.compile(r'<a class="mega-link" href="([^"]*)">(.*?)</a>', re.S)
+MEGA_PITCH = re.compile(r'<a class="mega-link"[^>]*>(?:(?!</a>).)*?'
+                        + re.escape(PITCH) + r'</a>', re.S)
+
+
+def rotulo(miolo):
+    """Texto visivel do item, sem icone e sem as marcacoes de idioma."""
+    txt = re.sub(r'<svg.*?</svg>', '', miolo, flags=re.S)
+    txt = re.sub(r'<span data-en>.*?</span>', '', txt, flags=re.S)
+    txt = re.sub(r'<[^>]+>', '', txt)
+    return txt.strip()
+
+
+def arruma_mega(html):
+    """Aponta cada item do megamenu para o servico dele."""
+    html = MEGA_PITCH.sub(REDESIGN, html)
+
+    def troca(m):
+        destino = MEGA.get(rotulo(m.group(2)))
+        if not destino:
+            return m.group(0)
+        return m.group(0).replace('href="%s"' % m.group(1), 'href="%s"' % destino, 1)
+
+    return MEGA_LINK.sub(troca, html)
+
+
 SUB = [
     ('servico-branding.html', 'Branding', 'Branding'),
     ('servico-rebranding.html', 'Rebranding', 'Rebranding'),
@@ -250,6 +310,7 @@ def main():
         if not MARCA_HTML.search(html):
             raise SystemExit('menu nao encontrado em %s' % nome)
         html = MARCA_HTML.sub(lambda m: html_menu(nome), html, count=1)
+        html = arruma_mega(html)
         if html != orig:
             trocados += 1
 
