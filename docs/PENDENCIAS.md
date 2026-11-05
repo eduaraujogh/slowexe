@@ -313,7 +313,7 @@ copyright. Não inventei nada aqui porque não tenho esses números.
 
 ## 10. O site publica um e-mail que não existe
 
-`ola@slowexe.com` aparece 3 vezes: uma no modal de agendamento do
+`hello@slowexe.com` aparece 3 vezes: uma no modal de agendamento do
 `contato.html` e duas na `privacidade.html`.
 
 O domínio `slowexe.com` está comprado na Hostinger mas não conectado, por

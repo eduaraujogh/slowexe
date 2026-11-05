@@ -38,7 +38,7 @@ SAIDA = os.path.join(BASE, 'privacidade.html')
 ATUALIZADO_PT = '21 de outubro de 2026'
 ATUALIZADO_EN = 'October 21, 2026'
 
-CONTATO = 'ola@slowexe.com'
+CONTATO = 'hello@slowexe.com'
 
 # (tag, pt, en). 'h' vira h3, 'p' vira paragrafo, 'l' vira item de lista.
 BLOCOS = [

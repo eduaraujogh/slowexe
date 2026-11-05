@@ -81,4 +81,4 @@ python tools/make-favicon.py  # regenera ícones, só se a marca mudar
 Ver `docs/PENDENCIAS.md`. Em resumo: o formulário envia pelo Web3Forms mas a
 entrega nunca foi conferida de ponta a ponta, o hero da `servicos.html` carrega
 um iframe do YouTube que a política de privacidade não menciona, e o site
-publica o `ola@slowexe.com`, caixa que ainda não existe.
+publica o `hello@slowexe.com`, caixa que ainda não existe.

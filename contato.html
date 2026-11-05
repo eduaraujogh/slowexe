@@ -1583,7 +1583,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
       var en=L()==='en', durMin=dur==='1h'?60:45;
       overlay.querySelector('.cal-dwhat').textContent=(en?'Intro call between Slowexe and ':'Conversa inicial entre Slowexe e ')+nm.value;
       overlay.querySelector('.cal-dwhen').innerHTML=fmtDate(selDate)+'<br>'+fmtTime(selTime)+' - '+fmtTime(addMin(selTime,durMin))+' ('+tzName()+')';
-      overlay.querySelector('.cal-dwho').innerHTML='Slowexe <span class="cal-chip host">'+(en?'Host':'Anfitrião')+'</span><br><span class="em">ola@slowexe.com</span><div class="who2">'+esc(nm.value)+' <span class="cal-chip part">'+(en?'Guest':'Participante')+'</span><br><span class="em">'+esc(em.value)+'</span></div>';
+      overlay.querySelector('.cal-dwho').innerHTML='Slowexe <span class="cal-chip host">'+(en?'Host':'Anfitrião')+'</span><br><span class="em">hello@slowexe.com</span><div class="who2">'+esc(nm.value)+' <span class="cal-chip part">'+(en?'Guest':'Participante')+'</span><br><span class="em">'+esc(em.value)+'</span></div>';
       var ndt=overlay.querySelector('.cal-dnt'), ndd=overlay.querySelector('.cal-dnd');
       if(note&&note.value.trim()){ndd.textContent=note.value.trim();ndt.style.display='';ndd.style.display='';}else{ndt.style.display='none';ndd.style.display='none';}
       // Nao existe envio de e-mail nem criacao de evento: a unica acao real e o
