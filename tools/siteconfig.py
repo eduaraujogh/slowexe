@@ -9,7 +9,18 @@ AQUI e rode `python tools/build-all.py`. Nenhum HTML tem URL escrita a mao.
 # Endereco publico do site, SEM barra no fim.
 # Hoje: GitHub Pages. Quando o slowexe.com.br estiver comprado e apontado,
 # troque por 'https://slowexe.com.br' e rode o build de novo.
-SITE_URL = 'https://eduaraujogh.github.io/slowexe'
+SITE_URL = 'https://slowexe.com'
+
+# Enderecos que o site ja teve. O build reescreve qualquer URL que ainda
+# aponte pra um deles.
+#
+# Sem isso, trocar SITE_URL nao resolvia nada: build-meta.py so INSERE o que
+# falta, entao canonical, og:url, og:image, twitter:image e os blocos JSON-LD
+# que ja estavam na pagina continuavam apontando pro endereco antigo. O
+# comentario aqui em cima dizia que bastava trocar a linha; nao bastava.
+SITE_URL_ANTIGOS = [
+    'https://eduaraujogh.github.io/slowexe',
+]
 
 NOME = 'Slowexe'
 AUTOR = 'Eduardo Araujo'

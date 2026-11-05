@@ -131,6 +131,14 @@ def main():
         html = io.open(caminho, encoding='utf-8').read()
         orig = html
 
+        # Primeiro troca o endereco antigo pelo atual. Precisa vir ANTES do
+        # seo(), que so acrescenta o que nao existe: a canonical velha ja
+        # estava na pagina e ficaria la pra sempre. Pega tambem og:url,
+        # og:image, twitter:image e os JSON-LD, que o seo() nem olha.
+        for antigo in getattr(cfg, 'SITE_URL_ANTIGOS', []):
+            if antigo and antigo != cfg.SITE_URL:
+                html = html.replace(antigo, cfg.SITE_URL)
+
         linhas = []
         if 'rel="apple-touch-icon"' not in html:
             linhas += icones()

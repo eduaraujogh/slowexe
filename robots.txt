@@ -6,4 +6,4 @@ Disallow: /projeto.html
 Disallow: /blog-post.html
 Disallow: /projeto-gedisa.html
 
-Sitemap: https://eduaraujogh.github.io/slowexe/sitemap.xml
+Sitemap: https://slowexe.com/sitemap.xml
