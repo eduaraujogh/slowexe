@@ -20,6 +20,18 @@ RedirectMatch 404 ^/\.git(/|$)
   RewriteRule ^(.*)$ https://slowexe.com/$1 [R=301,L]
 </IfModule>
 
+# ---- protecao do navegador ----
+# HSTS: o navegador so usa https neste dominio por 1 ano. Sem includeSubDomains de proposito.
+# nosniff: o navegador nao "adivinha" o tipo de arquivo. SAMEORIGIN: nenhum outro site
+# coloca slowexe.com dentro de um iframe (golpe de clique). Permissions: nada de camera/microfone.
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
 # ---- cache: imagem e video sao versionados pelo nome, HTML nunca ----
 <IfModule mod_expires.c>
   ExpiresActive On
