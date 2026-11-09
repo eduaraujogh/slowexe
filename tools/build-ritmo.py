@@ -69,7 +69,7 @@ CSS = '''<style id="ritmo">
        descentralizou o baralho de cards 173px pra direita.
        O `safe` no align-content faz o conteudo encostar no topo quando nao
        couber, em vez de vazar metade pra cima e sumir atras do header. */
-    .hero,.svc-hero,.svc-vhero,.px-hero,.pc-hero,
+    .hero,.svc-hero,.svc-vhero,.px-hero,
     .blog-hero,.art-hero,.leg-hero,.cw-hero{
       min-height:100svh;
       display:grid;
@@ -78,9 +78,17 @@ CSS = '''<style id="ritmo">
     }
     /* O hero nasce debaixo do header fixo, entao o respiro de cima conta a
        partir dele; sem isso o conteudo centrado sobe demais. */
-    .hero,.svc-hero,.svc-vhero,.px-hero,.pc-hero,
+    .hero,.svc-hero,.svc-vhero,.px-hero,
     .blog-hero,.art-hero,.leg-hero,.cw-hero{
       padding-top:calc(var(--header-h) + 24px);
+    }
+    /* A pagina de case e a excecao: aqui o hero de tela cheia empurrava a
+       capa pra fora da primeira tela, e quem abria um case via uma pagina de
+       texto. O titulo ocupa so o que precisa e a imagem entra logo abaixo. */
+    .pc-hero{
+      min-height:0;
+      display:block;
+      padding-top:calc(var(--header-h) + 36px);
     }
 
     /* --- 2. respiro proporcional, no lugar do px fixo --- */

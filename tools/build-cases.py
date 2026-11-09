@@ -450,10 +450,17 @@ f'''    <section class="pc-chapter" id="{cap['id']}"><div class="wrap">
       </ul>
     </div></section>'''
 
+    # A ficha tecnica desceu pra DEPOIS da capa. Antes ela ficava entre o
+    # titulo e a imagem e empurrava a capa inteira pra fora da primeira tela:
+    # quem abria um case via uma pagina de texto. Agora a imagem entra logo
+    # abaixo do titulo, e cliente, setor e servicos ficam embaixo dela.
     return f'''    <section class="pc-hero"><div class="wrap">
       <div class="px-eyebrow" data-reveal><span data-pt>Case study</span><span data-en>Case study</span></div>
       <h1 class="pc-title" data-reveal>{esc(c['name'])}</h1>
       <p class="pc-tag" data-reveal><span data-pt>{esc(c['tag_pt'])}</span><span data-en>{esc(c['tag_en'])}</span></p>
+    </div></section>
+    <div class="pc-cover{cover_cls}"><div class="wrap" style="padding:0">{capa}</div></div>
+    <section class="pc-metawrap"><div class="wrap">
       <div class="pc-meta" data-reveal>
         <div><span><span data-pt>Cliente</span><span data-en>Client</span></span><b>{esc(c['client'])}</b></div>
         <div><span><span data-pt>Setor</span><span data-en>Industry</span></span><b><span data-pt>{esc(c['sector_pt'])}</span><span data-en>{esc(c['sector_en'])}</span></b></div>
@@ -461,7 +468,6 @@ f'''    <section class="pc-chapter" id="{cap['id']}"><div class="wrap">
         <div><span><span data-pt>Estúdio</span><span data-en>Studio</span></span><b>Slowexe</b></div>
       </div>
     </div></section>
-    <div class="pc-cover{cover_cls}"><div class="wrap" style="padding:0">{capa}</div></div>
     <section class="pc-overview"><div class="wrap pc-grid">
       <div data-reveal><h3><span data-pt>{lab_pt[0]}</span><span data-en>{lab_en[0]}</span></h3><p><span data-pt>{esc(c['chall_pt'])}</span><span data-en>{esc(c['chall_en'])}</span></p></div>
       <div data-reveal><h3><span data-pt>{lab_pt[1]}</span><span data-en>{lab_en[1]}</span></h3><p><span data-pt>{esc(c['sol_pt'])}</span><span data-en>{esc(c['sol_en'])}</span></p></div>
@@ -499,6 +505,19 @@ f'''    <section class="pc-chapter" id="{cap['id']}"><div class="wrap">
 '''
 
 EXTRA_CSS = '''  .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
+
+  /* ---- abertura do case: a capa tem que caber na primeira tela ---- */
+  /* O hero media uns 540px ate a imagem comecar, entao a capa nascia fora
+     da tela. Encurtado, e a ficha tecnica foi pra baixo da capa. */
+  .pc-hero{padding:116px 0 0}
+  .pc-cover{margin-top:34px}
+  .pc-metawrap{padding:44px 0 0}
+  .pc-metawrap .pc-meta{margin-top:0}
+
+  /* ---- respiro do capitulo ---- */
+  /* Era padding:86px 0 0: muito ar em cima do rotulo e quase nada entre o
+     paragrafo e a primeira imagem da galeria, que vinha logo em seguida. */
+  .pc-chapter{padding:92px 0 36px}
   .pc-cover--contained .wrap{max-width:1000px}
   .pc-cover--contained img,.pc-cover--contained .pc-cover-video{border-radius:24px}
   .pc-q-author{gap:0}
@@ -506,7 +525,6 @@ EXTRA_CSS = '''  .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
   .pc-cover-video{width:100%;height:auto;display:block;background:#f1f2f4}
 
   /* capitulo de case com varias entregas (Artta, Grupo SBA) */
-  .pc-chapter{padding:86px 0 0}
   .pc-cap-kick{display:block;font-size:12px;font-weight:600;text-transform:uppercase;
     letter-spacing:.12em;color:#9aa0a8;margin-bottom:12px}
   .pc-chapter h2{font-family:"Bricolage Grotesque";font-weight:700;
@@ -526,7 +544,10 @@ EXTRA_CSS = '''  .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
   .pc-res-list li::before{content:"";position:absolute;left:0;top:11px;
     width:13px;height:2px;background:#F07A65}
   @media(max-width:760px){
-    .pc-chapter{padding:56px 0 0}
+    .pc-hero{padding:96px 0 0}
+    .pc-cover{margin-top:24px}
+    .pc-metawrap{padding:32px 0 0}
+    .pc-chapter{padding:60px 0 26px}
     .pc-cap-res{padding:16px 18px;gap:10px}
     .pc-res-list li{font-size:15.5px}
   }

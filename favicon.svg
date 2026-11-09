@@ -1,5 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Slowexe">
   <rect width="64" height="64" rx="14" fill="#0A0B0D"/>
-  <rect x="12.8" y="12.8" width="38.4" height="38.4" rx="12.8" fill="#F07A65" opacity=".18"/>
-  <rect x="17.9" y="17.9" width="28.2" height="28.2" rx="9" fill="#F07A65"/>
+  <g transform="translate(11.2 11.2) scale(.4288)"><g transform="translate(-52.15 -1388.8)"><path fill="#d85a4d" d="M130.69,1408.82l-29.59-20.02-29.72,19.9-19.23,29.08,19.62,29.54,29.34,19.42,28.8-19.12,20.17-29.83-19.38-28.95ZM136.88,1439.39l-23.24,11.26-11.1,22.89h-3.07l-11.13-22.96-23.2-11.19v-3.07l23.2-11.43,11.13-23.09h3.07l11.56,23.48,22.78,11.04v3.07Z"/></g></g>
 </svg>

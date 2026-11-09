@@ -34,6 +34,7 @@ PASSOS = [
     ('build-mobile.py',  'ajustes de mobile'),
     ('build-social.py',  'icones de rede social no rodape'),
     ('build-menu.py',    'menu do celular'),
+    ('build-logo.py',    'logo no header, menu, rodape e favicon'),
     ('build-a11y.py',    'foco de teclado, atalho e contraste'),
     ('build-ritmo.py',   'ritmo vertical em tela grande'),
     ('build-meta.py',    'SEO e icones'),
