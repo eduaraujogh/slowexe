@@ -338,7 +338,21 @@ def descricao(c, limite=158):
     primeira = c['sol_pt'].split('. ')[0].rstrip('.')
     d = '%s, %s. %s.' % (c['name'], c['tag_pt'].lower(), primeira)
     if len(d) > limite:
-        d = d[:limite - 1].rsplit(' ', 1)[0] + '.'
+        d = d[:limite - 1].rsplit(' ', 1)[0]
+        # Frase cortada no meio e fechada com ponto parece frase inteira e
+        # errada ("...que convive ao lado."). Entao: se der pra parar numa
+        # virgula sem perder muito, para nela; senao corta na palavra e
+        # assume o corte com reticencias.
+        virgula = max(d.rfind(', '), d.rfind(': '))
+        if virgula >= 105:
+            d = d[:virgula] + '.'
+        else:
+            soltas = {'a', 'o', 'e', 'as', 'os', 'de', 'da', 'do', 'das', 'dos',
+                      'em', 'na', 'no', 'com', 'que', 'para', 'por', 'um', 'uma',
+                      'sua', 'seu', 'cada', 'ao', 'pela', 'pelo'}
+            while d.rsplit(' ', 1)[-1].strip(',:;').lower() in soltas:
+                d = d.rsplit(' ', 1)[0]
+            d = d.rstrip(',:; ') + '…'
     return esc(d).replace('"', '&quot;')
 
 def galeria(lista, nome, tag, p):

@@ -38,6 +38,7 @@ PASSOS = [
     ('build-a11y.py',    'foco de teclado, atalho e contraste'),
     ('build-ritmo.py',   'ritmo vertical em tela grande'),
     ('build-meta.py',    'SEO e icones'),
+    ('build-seo.py',     'titulos, dados estruturados e llms.txt'),
     ('build-sitemap.py', 'sitemap e robots'),
     # por ultimo: os passos acima usam <style id="..."> como guarda pra nao
     # injetar duas vezes. Este esvazia os blocos, mas preserva os ids.
