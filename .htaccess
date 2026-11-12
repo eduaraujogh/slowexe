@@ -11,6 +11,16 @@ RedirectMatch 404 ^/(tools|docs)(/|$)
 </FilesMatch>
 RedirectMatch 404 ^/\.git(/|$)
 
+# ---- verificacao de dono do site (Google Search Console) ----
+# O arquivo mora em verificacao/ e nao na raiz porque os scripts de build
+# tratam todo .html da raiz como pagina do site. Aqui o servidor entrega
+# ele no endereco que o Google pede, sem redirecionar. NAO APAGAR: sem esse
+# arquivo o Search Console perde a verificacao.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(google[0-9a-f]+\.html)$ /verificacao/$1 [L]
+</IfModule>
+
 # ---- um endereco so: https, sem www ----
 <IfModule mod_rewrite.c>
   RewriteEngine On
