@@ -251,7 +251,38 @@ def llms_txt(fichas):
     return '\n'.join(L) + '\n'
 
 
+# Icones com versao no endereco. O favicon.svg ia com cache de um ano, entao
+# depois da troca do logo o navegador continuou mostrando o quadrado laranja
+# antigo, e a CDN da Hostinger tambem guardou copia velha do icone de celular.
+# Com ?v=<hash do arquivo>, quando o arquivo muda o endereco muda junto, e
+# nenhum cache tem como servir o antigo. Se o arquivo nao muda, o endereco
+# fica igual e o cache continua valendo.
+VERSIONADOS = ['favicon.ico', 'favicon.svg', 'site.webmanifest',
+               'assets/icons/apple-touch-icon.png', 'assets/icons/icon-192.png',
+               'assets/icons/icon-512.png', 'assets/icons/og-image.png']
+
+
+def versao(arq):
+    import hashlib
+    with open(os.path.join(BASE, arq), 'rb') as f:
+        return hashlib.md5(f.read()).hexdigest()[:8]
+
+
+def versiona(txt):
+    for arq in VERSIONADOS:
+        if not os.path.exists(os.path.join(BASE, arq)):
+            continue
+        txt = re.sub(r'(?<=["/])' + re.escape(arq) + r'(?:\?v=[0-9a-f]+)?(?=")',
+                     '%s?v=%s' % (arq, versao(arq)), txt)
+    return txt
+
+
 def main():
+    mp = os.path.join(BASE, 'site.webmanifest')
+    m = io.open(mp, encoding='utf-8').read()
+    m2 = versiona(m)
+    if m2 != m:
+        io.open(mp, 'w', encoding='utf-8', newline='').write(m2)
     fichas, com_grafo = {}, 0
     for nome in sorted(f for f in os.listdir(BASE) if f.endswith('.html')):
         if nome in cfg.NAO_INDEXAR:
@@ -262,6 +293,7 @@ def main():
 
         if nome in PAGINAS:
             html = troca_meta(html, *PAGINAS[nome])
+        html = versiona(html)
         nos = grafo(nome, html)
         html = poe_grafo(html, nos)
         com_grafo += 1 if nos else 0
