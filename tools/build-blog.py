@@ -261,7 +261,6 @@ EXTRA_CSS = '''  .art-cover-type{position:relative;aspect-ratio:16/9;border-radi
   .act-cat{position:relative;z-index:1;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.82}
   .act-title{position:relative;z-index:1;font-family:"Bricolage Grotesque";font-weight:800;
     font-size:clamp(26px,4.4vw,60px);line-height:1.05;letter-spacing:-.025em;max-width:20ch}
-  .art-cover-type .act-cat span[data-en],.art-cover-type .act-title span[data-en]{display:inherit}
 '''
 
 def head_seo(p, url):
