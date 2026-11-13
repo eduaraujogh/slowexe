@@ -388,7 +388,9 @@ header .menu-toggle svg{stroke:#0A0B0D}
   .mnav-link:hover,.mnav-link:focus-visible,.mnav-link:active{color:var(--primary);transform:translateX(5px)}
   .mnav-link:hover .mnav-num,.mnav-link:focus-visible .mnav-num{color:var(--primary)}
   .mnav-row.aqui .mnav-link,.mnav-row.aqui .mnav-num{color:var(--primary)}
-  .mnav-sub{padding:12px 0 18px}
+  /* oito servicos em duas colunas: cabem na mesma altura que tres em fila */
+  .mnav-sub{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;padding:12px 0 18px}
+  .mnav-sub a:last-child{grid-column:1/-1}
 
   /* --- entrada em cascata: 60ms entre as linhas --- */
   .mnav-row{opacity:0;transform:translateY(20px);
@@ -794,8 +796,14 @@ header .menu-toggle svg{stroke:#0A0B0D}
       </div>
       <div class="mnav-row mnav-rowsub">
         <div class="mnav-sub">
+          <a href="servicos.html#d-uiux"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
+          <a href="servicos.html#d-web"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
+          <a href="servicos.html#d-audit"><span data-pt>Auditoria de Produto</span><span data-en>Product Audit</span></a>
+          <a href="servicos.html#d-lp"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
           <a href="servico-branding.html"><span data-pt>Branding</span><span data-en>Branding</span></a>
+          <a href="servicos.html#d-app"><span data-pt>Design de App</span><span data-en>Mobile App Design</span></a>
           <a href="servico-rebranding.html"><span data-pt>Rebranding</span><span data-en>Rebranding</span></a>
+          <a href="servicos.html#d-redesign"><span data-pt>Web Redesign</span><span data-en>Web Redesign</span></a>
           <a href="servicos.html"><span data-pt>Ver todos os serviços</span><span data-en>See all services</span></a>
         </div>
       </div>
@@ -954,22 +962,22 @@ header .menu-toggle svg{stroke:#0A0B0D}
       </div>
 
       <div class="sol-cards">
-        <a href="servicos.html" class="sol-card" data-reveal>
+        <a href="servicos.html#d-uiux" class="sol-card" data-reveal>
           <svg class="sc-ico" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
           <h3 class="sc-title"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></h3>
           <p class="sc-desc"><span data-pt>Interfaces intuitivas que encantam e convertem.</span><span data-en>Intuitive interfaces that delight and convert.</span></p>
         </a>
-        <a href="servicos.html" class="sol-card" data-reveal>
+        <a href="servicos.html#d-web" class="sol-card" data-reveal>
           <svg class="sc-ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg>
           <h3 class="sc-title"><span data-pt>Web Design</span><span data-en>Web Design</span></h3>
           <p class="sc-desc"><span data-pt>Sites que combinam estética e performance.</span><span data-en>Websites that pair aesthetics with performance.</span></p>
         </a>
-        <a href="servicos.html" class="sol-card" data-reveal>
+        <a href="servicos.html#d-app" class="sol-card" data-reveal>
           <svg class="sc-ico" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
           <h3 class="sc-title"><span data-pt>Design de App</span><span data-en>Mobile App Design</span></h3>
           <p class="sc-desc"><span data-pt>Experiências móveis fluidas e memoráveis.</span><span data-en>Fluid, memorable mobile experiences.</span></p>
         </a>
-        <a href="servicos.html" class="sol-card" data-reveal>
+        <a href="servicos.html#d-lp" class="sol-card" data-reveal>
           <svg class="sc-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg>
           <h3 class="sc-title"><span data-pt>Landing Pages</span><span data-en>Landing Page Design</span></h3>
           <p class="sc-desc"><span data-pt>Páginas focadas em conversão e impacto.</span><span data-en>Pages built for conversion and impact.</span></p>
@@ -1183,10 +1191,10 @@ header .menu-toggle svg{stroke:#0A0B0D}
         <div class="foot-cols">
           <div class="foot-col">
             <h4><span data-pt>Serviços</span><span data-en>Services</span></h4>
-            <a href="servicos.html" class="flink"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Design de App</span><span data-en>Mobile App</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
+            <a href="servicos.html#d-uiux" class="flink"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
+            <a href="servicos.html#d-web" class="flink"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
+            <a href="servicos.html#d-app" class="flink"><span data-pt>Design de App</span><span data-en>Mobile App</span></a>
+            <a href="servicos.html#d-lp" class="flink"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
             <a href="servico-branding.html" class="flink"><span data-pt>Branding</span><span data-en>Branding</span></a>
           </div>
           <div class="foot-col">

@@ -344,10 +344,12 @@ textarea.cal-inp{min-height:90px;resize:vertical;line-height:1.5}
 .dc-bottom{position:absolute;left:30px;right:30px;bottom:26px;display:flex;justify-content:space-between;align-items:flex-end;gap:18px;color:#fff}
 .dc-desc{max-width:40ch;font-size:clamp(15px,1.5vw,18px);line-height:1.5;margin:0;text-shadow:0 2px 14px rgba(0,0,0,.5)}
 .dc-num{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* baralho de um cartao so: imagem parada, sem cursor de avancar */
+.svc-deck.solo .deck-inner{cursor:default}
 .deck-cursor{position:fixed;top:0;left:0;z-index:90;width:96px;height:96px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-family:"Bricolage Grotesque";font-weight:600;font-size:16px;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.5);transition:opacity .25s ease,transform .25s cubic-bezier(.34,1.5,.6,1)}
 .deck-cursor.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
 @media(max-width:680px){.deck-inner{height:74%}.dc-tag,.dc-bottom{left:20px}.dc-bottom{right:20px}}
-@media(hover:none){.deck-inner{cursor:pointer}.deck-cursor{display:none}}
+@media(hover:none){.deck-inner{cursor:pointer}.deck-cursor{display:none}.svc-deck.solo .deck-inner{cursor:default}}
 </style>
 <style id="mnav-css">/* extraido pra assets/site.css */</style>
 <link rel="icon" href="favicon.ico?v=e4d9f9e5" sizes="any" />
@@ -586,7 +588,9 @@ header .menu-toggle svg{stroke:#fff}
   .mnav-link:hover,.mnav-link:focus-visible,.mnav-link:active{color:var(--primary);transform:translateX(5px)}
   .mnav-link:hover .mnav-num,.mnav-link:focus-visible .mnav-num{color:var(--primary)}
   .mnav-row.aqui .mnav-link,.mnav-row.aqui .mnav-num{color:var(--primary)}
-  .mnav-sub{padding:12px 0 18px}
+  /* oito servicos em duas colunas: cabem na mesma altura que tres em fila */
+  .mnav-sub{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;padding:12px 0 18px}
+  .mnav-sub a:last-child{grid-column:1/-1}
 
   /* --- entrada em cascata: 60ms entre as linhas --- */
   .mnav-row{opacity:0;transform:translateY(20px);
@@ -910,8 +914,14 @@ header .menu-toggle svg{stroke:#fff}
       </div>
       <div class="mnav-row mnav-rowsub">
         <div class="mnav-sub">
+          <a href="servicos.html#d-uiux"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
+          <a href="servicos.html#d-web"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
+          <a href="servicos.html#d-audit"><span data-pt>Auditoria de Produto</span><span data-en>Product Audit</span></a>
+          <a href="servicos.html#d-lp"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
           <a href="servico-branding.html"><span data-pt>Branding</span><span data-en>Branding</span></a>
+          <a href="servicos.html#d-app"><span data-pt>Design de App</span><span data-en>Mobile App Design</span></a>
           <a href="servico-rebranding.html"><span data-pt>Rebranding</span><span data-en>Rebranding</span></a>
+          <a href="servicos.html#d-redesign"><span data-pt>Web Redesign</span><span data-en>Web Redesign</span></a>
           <a href="servicos.html"><span data-pt>Ver todos os serviços</span><span data-en>See all services</span></a>
         </div>
       </div>
@@ -1002,7 +1012,7 @@ header .menu-toggle svg{stroke:#fff}
         </div>
       </div>
     </section>
-    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-plataformas-01.webp" alt=""><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Fluxos que fluem</span><span data-en>Flows that flow</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Telas claras que guiam o usuário sem esforço.</span><span data-en>Clear screens that guide users effortlessly.</span></p><span class="dc-num">01 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-plataformas-02.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Do wireframe ao pixel</span><span data-en>From wireframe to pixel</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Um sistema de design consistente em cada detalhe.</span><span data-en>A consistent design system in every detail.</span></p><span class="dc-num">02 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-calculadora-02.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Testado de verdade</span><span data-en>Truly tested</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Decisões validadas com usuários reais.</span><span data-en>Decisions validated with real users.</span></p><span class="dc-num">03 / 03</span></div></article></div></section>
+    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-plataformas-01.webp" alt=""><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Fluxos que fluem</span><span data-en>Flows that flow</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Telas claras que guiam o usuário sem esforço.</span><span data-en>Clear screens that guide users effortlessly.</span></p><span class="dc-num">01 / 02</span></div></article><article class="dcard"><img src="assets/cases/artta-plataformas-02.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Do wireframe ao pixel</span><span data-en>From wireframe to pixel</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Um sistema de design consistente em cada detalhe.</span><span data-en>A consistent design system in every detail.</span></p><span class="dc-num">02 / 02</span></div></article></div></section>
 
 
     <section class="svc-detail" id="d-app">
@@ -1023,7 +1033,7 @@ header .menu-toggle svg{stroke:#fff}
         </div>
       </div>
     </section>
-    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-marca-07.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>No bolso, todo dia</span><span data-en>In your pocket, daily</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Apps que viram hábito.</span><span data-en>Apps that become a habit.</span></p><span class="dc-num">01 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-plataformas-03.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Microinterações vivas</span><span data-en>Living microinteractions</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Cada toque com o feedback na medida.</span><span data-en>Every tap with just-right feedback.</span></p><span class="dc-num">02 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-marca-07.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>iOS & Android</span><span data-en>iOS & Android</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Uma experiência, todas as telas.</span><span data-en>One experience, every screen.</span></p><span class="dc-num">03 / 03</span></div></article></div></section>
+    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-marca-07.webp" alt=""><span class="dc-grad"></span><span class="dc-tag"><span data-pt>No bolso, todo dia</span><span data-en>In your pocket, daily</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Apps que viram hábito.</span><span data-en>Apps that become a habit.</span></p><span class="dc-num">01 / 02</span></div></article><article class="dcard"><img src="assets/cases/artta-plataformas-03.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Microinterações vivas</span><span data-en>Living microinteractions</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Cada toque com o feedback na medida.</span><span data-en>Every tap with just-right feedback.</span></p><span class="dc-num">02 / 02</span></div></article></div></section>
 
 
     <section class="svc-detail" id="d-audit">
@@ -1044,7 +1054,7 @@ header .menu-toggle svg{stroke:#fff}
         </div>
       </div>
     </section>
-    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-calculadora-02.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Onde trava?</span><span data-en>Where it breaks</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Encontramos os pontos de fricção.</span><span data-en>We find the friction points.</span></p><span class="dc-num">01 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-plataformas-02.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Dados, não achismo</span><span data-en>Data, not guesses</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Métricas que mostram o caminho.</span><span data-en>Metrics that show the way.</span></p><span class="dc-num">02 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-marca-08.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Plano de ação</span><span data-en>Action plan</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Prioridades claras pra destravar o crescimento.</span><span data-en>Clear priorities to unlock growth.</span></p><span class="dc-num">03 / 03</span></div></article></div></section>
+    <section class="svc-deck solo"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-calculadora-02.webp" alt=""><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Onde trava?</span><span data-en>Where it breaks</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Encontramos os pontos de fricção.</span><span data-en>We find the friction points.</span></p></div></article></div></section>
 
 
     <section class="svc-detail" id="d-web">
@@ -1065,7 +1075,7 @@ header .menu-toggle svg{stroke:#fff}
         </div>
       </div>
     </section>
-    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-calculadora-01.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>A porta de entrada</span><span data-en>The front door</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Sites que transmitem confiança.</span><span data-en>Websites that build trust.</span></p><span class="dc-num">01 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-plataformas-01.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Lindo em toda tela</span><span data-en>Beautiful on every screen</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Responsivo de verdade.</span><span data-en>Truly responsive.</span></p><span class="dc-num">02 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-01.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Pronto pra crescer</span><span data-en>Ready to scale</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>CMS e integrações na medida.</span><span data-en>CMS and integrations done right.</span></p><span class="dc-num">03 / 03</span></div></article></div></section>
+    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-calculadora-01.webp" alt=""><span class="dc-grad"></span><span class="dc-tag"><span data-pt>A porta de entrada</span><span data-en>The front door</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Sites que transmitem confiança.</span><span data-en>Websites that build trust.</span></p><span class="dc-num">01 / 02</span></div></article><article class="dcard"><img src="assets/cases/artta-01.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Pronto pra crescer</span><span data-en>Ready to scale</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>CMS e integrações na medida.</span><span data-en>CMS and integrations done right.</span></p><span class="dc-num">02 / 02</span></div></article></div></section>
 
 
     <section class="svc-detail" id="d-lp">
@@ -1086,7 +1096,7 @@ header .menu-toggle svg{stroke:#fff}
         </div>
       </div>
     </section>
-    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-calculadora-01.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Foco em converter</span><span data-en>Built to convert</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Cada elemento puxa pra ação.</span><span data-en>Every element drives action.</span></p><span class="dc-num">01 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-calculadora-03.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Mensagem afiada</span><span data-en>Sharp messaging</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Copy e hierarquia no ponto.</span><span data-en>Copy and hierarchy on point.</span></p><span class="dc-num">02 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-calculadora-03.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Rápida e responsiva</span><span data-en>Fast and responsive</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Performance que não perde lead.</span><span data-en>Performance that never loses a lead.</span></p><span class="dc-num">03 / 03</span></div></article></div></section>
+    <section class="svc-deck solo"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-calculadora-03.webp" alt=""><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Mensagem afiada</span><span data-en>Sharp messaging</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Copy e hierarquia no ponto.</span><span data-en>Copy and hierarchy on point.</span></p></div></article></div></section>
 
 
     <section class="svc-detail" id="d-redesign">
@@ -1107,7 +1117,7 @@ header .menu-toggle svg{stroke:#fff}
         </div>
       </div>
     </section>
-    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-plataformas-03.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Reimaginado</span><span data-en>Reimagined</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Mais moderno, sem perder o que funciona.</span><span data-en>More modern, keeping what works.</span></p><span class="dc-num">01 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-marca-08.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>UX renovada</span><span data-en>Renewed UX</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Fluxos repensados do zero.</span><span data-en>Flows rethought from scratch.</span></p><span class="dc-num">02 / 03</span></div></article><article class="dcard"><img src="assets/cases/artta-apresentacoes-01.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Migração suave</span><span data-en>Smooth migration</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Conteúdo e SEO preservados.</span><span data-en>Content and SEO preserved.</span></p><span class="dc-num">03 / 03</span></div></article></div></section>
+    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/artta-marca-08.webp" alt=""><span class="dc-grad"></span><span class="dc-tag"><span data-pt>UX renovada</span><span data-en>Renewed UX</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Fluxos repensados do zero.</span><span data-en>Flows rethought from scratch.</span></p><span class="dc-num">01 / 02</span></div></article><article class="dcard"><img src="assets/cases/artta-apresentacoes-01.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Migração suave</span><span data-en>Smooth migration</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Conteúdo e SEO preservados.</span><span data-en>Content and SEO preserved.</span></p><span class="dc-num">02 / 02</span></div></article></div></section>
 
 
     <section class="svc-detail" id="d-brand">
@@ -1128,7 +1138,7 @@ header .menu-toggle svg{stroke:#fff}
         </div>
       </div>
     </section>
-    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/sabores-05.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Marcas que marcam</span><span data-en>Brands that stick</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Identidades memoráveis.</span><span data-en>Memorable identities.</span></p><span class="dc-num">01 / 03</span></div></article><article class="dcard"><img src="assets/cases/sabores-11.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Da estratégia ao logo</span><span data-en>From strategy to logo</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Tudo coeso, do conceito ao detalhe.</span><span data-en>All cohesive, from concept to detail.</span></p><span class="dc-num">02 / 03</span></div></article><article class="dcard"><img src="assets/cases/sabores-17.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Consistência total</span><span data-en>Total consistency</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Guidelines pra aplicar em qualquer canal.</span><span data-en>Guidelines to apply anywhere.</span></p><span class="dc-num">03 / 03</span></div></article></div></section>
+    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/sabores-05.webp" alt=""><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Marcas que marcam</span><span data-en>Brands that stick</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Identidades memoráveis.</span><span data-en>Memorable identities.</span></p><span class="dc-num">01 / 03</span></div></article><article class="dcard"><img src="assets/cases/sabores-11.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Da estratégia ao logo</span><span data-en>From strategy to logo</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Tudo coeso, do conceito ao detalhe.</span><span data-en>All cohesive, from concept to detail.</span></p><span class="dc-num">02 / 03</span></div></article><article class="dcard"><img src="assets/cases/sabores-17.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Consistência total</span><span data-en>Total consistency</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Guidelines pra aplicar em qualquer canal.</span><span data-en>Guidelines to apply anywhere.</span></p><span class="dc-num">03 / 03</span></div></article></div></section>
 
 
     <section class="svc-detail" id="d-rebrand">
@@ -1149,7 +1159,7 @@ header .menu-toggle svg{stroke:#fff}
         </div>
       </div>
     </section>
-    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/golden-vibes-05.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Evoluímos com você</span><span data-en>We adapt as you grow</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Do branding inicial ao rebranding completo.</span><span data-en>From initial branding to full rebranding.</span></p><span class="dc-num">01 / 03</span></div></article><article class="dcard"><img src="assets/cases/golden-vibes-10.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Evolui sem perder</span><span data-en>Evolve without losing</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Moderniza mantendo o reconhecimento.</span><span data-en>Modernize while keeping recognition.</span></p><span class="dc-num">02 / 03</span></div></article><article class="dcard"><img src="assets/cases/golden-vibes-15.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Lançamento sem ruído</span><span data-en>A clean rollout</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Transição suave em todos os canais.</span><span data-en>A smooth transition across channels.</span></p><span class="dc-num">03 / 03</span></div></article></div></section>
+    <section class="svc-deck"><div class="deck-inner"><article class="dcard"><img src="assets/cases/golden-vibes-05.webp" alt=""><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Evoluímos com você</span><span data-en>We adapt as you grow</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Do branding inicial ao rebranding completo.</span><span data-en>From initial branding to full rebranding.</span></p><span class="dc-num">01 / 03</span></div></article><article class="dcard"><img src="assets/cases/golden-vibes-10.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Evolui sem perder</span><span data-en>Evolve without losing</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Moderniza mantendo o reconhecimento.</span><span data-en>Modernize while keeping recognition.</span></p><span class="dc-num">02 / 03</span></div></article><article class="dcard"><img src="assets/cases/golden-vibes-15.webp" alt="" loading="lazy" decoding="async"><span class="dc-grad"></span><span class="dc-tag"><span data-pt>Lançamento sem ruído</span><span data-en>A clean rollout</span></span><div class="dc-bottom"><p class="dc-desc"><span data-pt>Transição suave em todos os canais.</span><span data-en>A smooth transition across channels.</span></p><span class="dc-num">03 / 03</span></div></article></div></section>
 
 
 
@@ -1206,10 +1216,10 @@ header .menu-toggle svg{stroke:#fff}
         <div class="foot-cols">
           <div class="foot-col">
             <h4><span data-pt>Serviços</span><span data-en>Services</span></h4>
-            <a href="servicos.html" class="flink"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Design de App</span><span data-en>Mobile App</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
+            <a href="servicos.html#d-uiux" class="flink"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
+            <a href="servicos.html#d-web" class="flink"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
+            <a href="servicos.html#d-app" class="flink"><span data-pt>Design de App</span><span data-en>Mobile App</span></a>
+            <a href="servicos.html#d-lp" class="flink"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
             <a href="servico-branding.html" class="flink"><span data-pt>Branding</span><span data-en>Branding</span></a>
           </div>
           <div class="foot-col">
@@ -1520,7 +1530,7 @@ header .menu-toggle svg{stroke:#fff}
     var dc=document.createElement('div'); dc.className='deck-cursor'; dc.setAttribute('aria-hidden','true');
     dc.innerHTML='<span data-pt>Avançar</span><span data-en>Next</span>'; document.body.appendChild(dc);
     decks.forEach(function(deck){
-      var inner=deck.querySelector('.deck-inner'); if(!inner) return;
+      var inner=deck.querySelector('.deck-inner'); if(!inner||deck.querySelectorAll('.dcard').length<2) return;
       inner.addEventListener('mouseenter',function(){dc.classList.add('show');});
       inner.addEventListener('mouseleave',function(){dc.classList.remove('show');});
       inner.addEventListener('mousemove',function(e){dc.style.left=e.clientX+'px';dc.style.top=e.clientY+'px';});

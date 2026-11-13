@@ -571,7 +571,9 @@ header .menu-toggle svg{stroke:#0A0B0D}
   .mnav-link:hover,.mnav-link:focus-visible,.mnav-link:active{color:var(--primary);transform:translateX(5px)}
   .mnav-link:hover .mnav-num,.mnav-link:focus-visible .mnav-num{color:var(--primary)}
   .mnav-row.aqui .mnav-link,.mnav-row.aqui .mnav-num{color:var(--primary)}
-  .mnav-sub{padding:12px 0 18px}
+  /* oito servicos em duas colunas: cabem na mesma altura que tres em fila */
+  .mnav-sub{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;padding:12px 0 18px}
+  .mnav-sub a:last-child{grid-column:1/-1}
 
   /* --- entrada em cascata: 60ms entre as linhas --- */
   .mnav-row{opacity:0;transform:translateY(20px);
@@ -894,8 +896,14 @@ header .menu-toggle svg{stroke:#0A0B0D}
       </div>
       <div class="mnav-row mnav-rowsub">
         <div class="mnav-sub">
+          <a href="servicos.html#d-uiux"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
+          <a href="servicos.html#d-web"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
+          <a href="servicos.html#d-audit"><span data-pt>Auditoria de Produto</span><span data-en>Product Audit</span></a>
+          <a href="servicos.html#d-lp"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
           <a href="servico-branding.html"><span data-pt>Branding</span><span data-en>Branding</span></a>
+          <a href="servicos.html#d-app"><span data-pt>Design de App</span><span data-en>Mobile App Design</span></a>
           <a href="servico-rebranding.html"><span data-pt>Rebranding</span><span data-en>Rebranding</span></a>
+          <a href="servicos.html#d-redesign"><span data-pt>Web Redesign</span><span data-en>Web Redesign</span></a>
           <a href="servicos.html"><span data-pt>Ver todos os serviços</span><span data-en>See all services</span></a>
         </div>
       </div>
@@ -1044,10 +1052,10 @@ header .menu-toggle svg{stroke:#0A0B0D}
         <div class="foot-cols">
           <div class="foot-col">
             <h4><span data-pt>Serviços</span><span data-en>Services</span></h4>
-            <a href="servicos.html" class="flink"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Design de App</span><span data-en>Mobile App</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
+            <a href="servicos.html#d-uiux" class="flink"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
+            <a href="servicos.html#d-web" class="flink"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
+            <a href="servicos.html#d-app" class="flink"><span data-pt>Design de App</span><span data-en>Mobile App</span></a>
+            <a href="servicos.html#d-lp" class="flink"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
             <a href="servico-branding.html" class="flink"><span data-pt>Branding</span><span data-en>Branding</span></a>
           </div>
           <div class="foot-col">

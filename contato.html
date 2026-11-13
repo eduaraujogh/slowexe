@@ -98,6 +98,7 @@
 .contact .ct-dd.open .ct-ddbtn,.contact .ct-ddbtn:focus{outline:none;border-color:#F07A65}
 .contact .ct-ddbtn svg{width:18px;height:18px;color:#0A0B0D;transition:transform .2s;flex:0 0 auto}
 .contact .ct-dd.open .ct-ddbtn svg{transform:rotate(180deg)}
+.contact .ct-ddval[data-vazio]{color:#6b7078}
 .contact .ct-ddmenu{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1px solid #e6e2dc;border-radius:14px;box-shadow:0 18px 46px rgba(0,0,0,.16);padding:6px;z-index:30;max-height:260px;overflow:auto}
 .contact .ct-ddmenu button{display:block;width:100%;text-align:left;padding:12px 14px;border-radius:9px;font-size:15px;color:#0A0B0D;cursor:pointer;background:none;border:0;font-family:inherit}
 .contact .ct-ddmenu button:hover{background:#FDF1ED}
@@ -515,7 +516,9 @@ header .menu-toggle svg{stroke:#0A0B0D}
   .mnav-link:hover,.mnav-link:focus-visible,.mnav-link:active{color:var(--primary);transform:translateX(5px)}
   .mnav-link:hover .mnav-num,.mnav-link:focus-visible .mnav-num{color:var(--primary)}
   .mnav-row.aqui .mnav-link,.mnav-row.aqui .mnav-num{color:var(--primary)}
-  .mnav-sub{padding:12px 0 18px}
+  /* oito servicos em duas colunas: cabem na mesma altura que tres em fila */
+  .mnav-sub{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;padding:12px 0 18px}
+  .mnav-sub a:last-child{grid-column:1/-1}
 
   /* --- entrada em cascata: 60ms entre as linhas --- */
   .mnav-row{opacity:0;transform:translateY(20px);
@@ -839,8 +842,14 @@ header .menu-toggle svg{stroke:#0A0B0D}
       </div>
       <div class="mnav-row mnav-rowsub">
         <div class="mnav-sub">
+          <a href="servicos.html#d-uiux"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
+          <a href="servicos.html#d-web"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
+          <a href="servicos.html#d-audit"><span data-pt>Auditoria de Produto</span><span data-en>Product Audit</span></a>
+          <a href="servicos.html#d-lp"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
           <a href="servico-branding.html"><span data-pt>Branding</span><span data-en>Branding</span></a>
+          <a href="servicos.html#d-app"><span data-pt>Design de App</span><span data-en>Mobile App Design</span></a>
           <a href="servico-rebranding.html"><span data-pt>Rebranding</span><span data-en>Rebranding</span></a>
+          <a href="servicos.html#d-redesign"><span data-pt>Web Redesign</span><span data-en>Web Redesign</span></a>
           <a href="servicos.html"><span data-pt>Ver todos os serviços</span><span data-en>See all services</span></a>
         </div>
       </div>
@@ -925,11 +934,11 @@ header .menu-toggle svg{stroke:#0A0B0D}
             <div class="field" data-required><label><span data-pt>Sobre o projeto</span><span data-en>About the project</span> <span class="req">*</span></label><textarea class="inp" placeholder="Conte um pouco sobre o que você precisa…" data-ph-pt="Conte um pouco sobre o que você precisa…" data-ph-en="Tell us a bit about what you need…"></textarea></div>
             <div class="field"><label><span data-pt>Qual é o seu orçamento?</span><span data-en>What&rsquo;s your budget?</span></label>
             <div class="ct-dd" id="budgetDD">
-              <button class="ct-ddbtn" type="button"><span class="ct-ddval"><span data-pt>R$ 100 mil – R$ 200 mil</span><span data-en>R$100k – R$200k</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+              <button class="ct-ddbtn" type="button"><span class="ct-ddval" data-vazio><span data-pt>Selecione uma faixa</span><span data-en>Pick a range</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
               <div class="ct-ddmenu" hidden>
                 <button type="button"><span data-pt>Até R$ 50 mil</span><span data-en>Up to R$50k</span></button>
                 <button type="button"><span data-pt>R$ 50 mil – R$ 100 mil</span><span data-en>R$50k – R$100k</span></button>
-                <button type="button" class="on"><span data-pt>R$ 100 mil – R$ 200 mil</span><span data-en>R$100k – R$200k</span></button>
+                <button type="button"><span data-pt>R$ 100 mil – R$ 200 mil</span><span data-en>R$100k – R$200k</span></button>
                 <button type="button"><span data-pt>R$ 200 mil+</span><span data-en>R$200k+</span></button>
                 <button type="button"><span data-pt>Ainda não sei</span><span data-en>Not sure yet</span></button>
               </div>
@@ -1009,10 +1018,10 @@ header .menu-toggle svg{stroke:#0A0B0D}
         <div class="foot-cols">
           <div class="foot-col">
             <h4><span data-pt>Serviços</span><span data-en>Services</span></h4>
-            <a href="servicos.html" class="flink"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Design de App</span><span data-en>Mobile App</span></a>
-            <a href="servicos.html" class="flink"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
+            <a href="servicos.html#d-uiux" class="flink"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
+            <a href="servicos.html#d-web" class="flink"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
+            <a href="servicos.html#d-app" class="flink"><span data-pt>Design de App</span><span data-en>Mobile App</span></a>
+            <a href="servicos.html#d-lp" class="flink"><span data-pt>Landing Pages</span><span data-en>Landing Pages</span></a>
             <a href="servico-branding.html" class="flink"><span data-pt>Branding</span><span data-en>Branding</span></a>
           </div>
           <div class="foot-col">
@@ -1363,7 +1372,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
         name:nome,
         email:email,
         telefone:(tel&&tel.value.trim())?((ddi?ddi.value+' ':'')+tel.value.trim()):'nao informado',
-        orcamento:orcSpans.length?(en?orcSpans[1]:orcSpans[0]).textContent.trim():'nao informado',
+        orcamento:(orcSpans.length&&!orcVal.hasAttribute('data-vazio'))?(en?orcSpans[1]:orcSpans[0]).textContent.trim():'nao informado',
         idioma:en?'EN':'PT',
         message:texto
       }).then(ok=>{
@@ -1482,37 +1491,28 @@ header .menu-toggle svg{stroke:#0A0B0D}
             <span class="cal-addg" id="calAddGuest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M19 8v6M22 11h-6"/></svg><span class="addg-1"><span data-pt>Adicionar convidados</span><span data-en>Add guests</span></span><span class="addg-2" hidden><span data-pt>Adicionar outro</span><span data-en>Add another</span></span></span>
             <p class="cal-fprivacy"><span data-pt>Ao prosseguir, você concorda com a <a href="privacidade.html">Política de Privacidade</a> da Slowexe.</span><span data-en>By proceeding, you agree to the <a href="privacidade.html">Privacy Policy</a> of Slowexe.</span></p>
             <p class="ct-msg" id="calMsg" hidden></p>
-            <div class="cal-actions"><span class="cal-back" id="calBack"><span data-pt>Voltar</span><span data-en>Back</span></span><button class="cal-confirm" id="calConfirm" type="button"><span data-pt>Confirmar</span><span data-en>Confirm</span></button></div>
+            <div class="cal-actions"><span class="cal-back" id="calBack"><span data-pt>Voltar</span><span data-en>Back</span></span><button class="cal-confirm" id="calConfirm" type="button"><span data-pt>Enviar pedido</span><span data-en>Send request</span></button></div>
           </div>
         </div>
       </div>
 
       <div class="cal-view cal-donev" data-view="done">
-        <h2 class="cal-dhead"><span data-pt>Reunião confirmada! Veja todos os detalhes</span><span data-en>Meeting confirmed! See all the details</span></h2>
+        <h2 class="cal-dhead"><span data-pt>Pedido de horário enviado</span><span data-en>Time request sent</span></h2>
         <div class="cal-dcard">
           <div class="cal-dtop">
             <div class="cal-dcheck"><span class="cal-davatar">S</span><span class="cal-dok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l4 4 10-10"/></svg></span></div>
-            <div class="cal-dtitle"><span data-pt>Esta reunião está agendada</span><span data-en>This meeting is scheduled</span></div>
+            <div class="cal-dtitle"><span data-pt>Aguardando a nossa confirmação</span><span data-en>Waiting for our confirmation</span></div>
             <p class="cal-dsub"></p>
           </div>
           <dl class="cal-drow">
             <dt><span data-pt>O quê</span><span data-en>What</span></dt><dd class="cal-dwhat"></dd>
             <dt><span data-pt>Quando</span><span data-en>When</span></dt><dd class="cal-dwhen"></dd>
             <dt><span data-pt>Quem</span><span data-en>Who</span></dt><dd class="cal-dwho"></dd>
-            <dt><span data-pt>Onde</span><span data-en>Where</span></dt><dd><span class="cal-meet"><span>Google Meet</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg></span></dd>
+            <dt><span data-pt>Onde</span><span data-en>Where</span></dt><dd><span class="cal-meet"><span data-pt>Google Meet, link enviado na confirmação</span><span data-en>Google Meet, link sent with the confirmation</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg></span></dd>
             <dt class="cal-dnt" style="display:none"><span data-pt>Observações adicionais</span><span data-en>Additional notes</span></dt><dd class="cal-dnd" style="display:none"></dd>
           </dl>
-          <div class="cal-dcal">
-            <span><span data-pt>Adicionar ao calendário</span><span data-en>Add to calendar</span></span>
-            <div class="cal-dcalbtns">
-              <a class="cal-calbtn" id="calGcal" target="_blank" rel="noopener" title="Google Calendar">G</a>
-              <span class="cal-calbtn" title="Outlook 365">365</span>
-              <span class="cal-calbtn" title="Outlook">Out</span>
-              <span class="cal-calbtn" title="iCal / ICS">ICS</span>
-            </div>
-          </div>
         </div>
-        <div class="cal-dchange"><span data-pt>Precisa alterar?</span><span data-en>Need to make a change?</span> <a id="calResched"><span data-pt>Reagendar</span><span data-en>Reschedule</span></a> <span data-pt>ou</span><span data-en>or</span> <a id="calCancel"><span data-pt>Cancelar</span><span data-en>Cancel</span></a></div>
+        <div class="cal-dchange"><span data-pt>Precisa de outro horário?</span><span data-en>Need a different time?</span> <a id="calResched"><span data-pt>Escolher de novo</span><span data-en>Pick again</span></a></div>
       </div>
 
       <div class="cal-view cal-cancelv" data-view="cancelled">
@@ -1554,7 +1554,17 @@ header .menu-toggle svg{stroke:#0A0B0D}
     const grid=overlay.querySelector('.cal-grid'), mtitle=overlay.querySelector('.cal-mtitle');
     const slotsWrap=overlay.querySelector('.cal-slots'), rday=overlay.querySelector('.cal-rday');
 
-    function firstAvail(){const d=new Date(today);while(d.getDay()===0||d.getDay()===6)d.setDate(d.getDate()+1);return d;}
+    // Horarios sao de Sao Paulo. No dia de hoje so entra o que ainda esta a pelo
+    // menos 1h de distancia: antes a lista oferecia 07:30 de hoje as 15h.
+    function agoraSP(){try{return new Date(new Date().toLocaleString('en-US',{timeZone:'America/Sao_Paulo'}));}catch(e){return new Date();}}
+    function livres(dt){
+      const n=agoraSP(), d0=new Date(n); d0.setHours(0,0,0,0);
+      if(dt.getTime()<d0.getTime()) return [];
+      if(dt.getTime()>d0.getTime()) return SLOTS;
+      const lim=n.getHours()*60+n.getMinutes()+60;
+      return SLOTS.filter(t=>{const p=t.split(':');return (+p[0])*60+(+p[1])>=lim;});
+    }
+    function firstAvail(){const d=new Date(today);while(d.getDay()===0||d.getDay()===6||!livres(d).length)d.setDate(d.getDate()+1);return d;}
     function renderCal(){
       mtitle.innerHTML='<b>'+MESM[L()][viewM]+'</b> '+viewY;
       grid.innerHTML='';
@@ -1566,7 +1576,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
         const cell=document.createElement('div'); cell.className='cal-day';
         cell.appendChild(document.createTextNode(dt.getDate()));
         if(dt.getDate()===1&&dt.getMonth()!==viewM){const mo=document.createElement('span');mo.className='mo';mo.textContent=MESM[L()][dt.getMonth()].slice(0,3);cell.appendChild(mo);}
-        const wend=(dt.getDay()===0||dt.getDay()===6), past=dt<today;
+        const wend=(dt.getDay()===0||dt.getDay()===6), past=dt<today||!livres(dt).length;
         if(past||wend){cell.classList.add('muted');}
         else{cell.classList.add('avail');const d=new Date(dt);cell.addEventListener('click',()=>selectDay(d));}
         if(dt.getTime()===today.getTime()){const dot=document.createElement('span');dot.className='dot';cell.appendChild(dot);}
@@ -1586,7 +1596,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
     function renderSlots(){
       if(!selDate)return;
       slotsWrap.innerHTML='';
-      SLOTS.forEach(t=>{var b=document.createElement('button');b.type='button';b.className='cal-slot';b.textContent=fmtTime(t);b.addEventListener('click',()=>pickSlot(t));slotsWrap.appendChild(b);});
+      livres(selDate).forEach(t=>{var b=document.createElement('button');b.type='button';b.className='cal-slot';b.textContent=fmtTime(t);b.addEventListener('click',()=>pickSlot(t));slotsWrap.appendChild(b);});
     }
     function selectDay(dt){
       selDate=dt;
@@ -1639,10 +1649,9 @@ header .menu-toggle svg{stroke:#0A0B0D}
       overlay.querySelector('.cal-dwho').innerHTML='Slowexe <span class="cal-chip host">'+(en?'Host':'Anfitrião')+'</span><br><span class="em">hello@slowexe.com</span><div class="who2">'+esc(nm.value)+' <span class="cal-chip part">'+(en?'Guest':'Participante')+'</span><br><span class="em">'+esc(em.value)+'</span></div>';
       var ndt=overlay.querySelector('.cal-dnt'), ndd=overlay.querySelector('.cal-dnd');
       if(note&&note.value.trim()){ndd.textContent=note.value.trim();ndt.style.display='';ndd.style.display='';}else{ndt.style.display='none';ndd.style.display='none';}
-      // Nao existe envio de e-mail nem criacao de evento: a unica acao real e o
-      // botao do Google Calendar, que monta uma URL TEMPLATE. O texto diz isso e
-      // nada alem disso. PENDENCIAS item 2.
-      overlay.querySelector('.cal-dsub').textContent=en?('Slowexe will meet with '+nm.value+'. We received your request and will confirm by email. Add the time to your calendar with the button below.'):('A Slowexe terá uma reunião com '+nm.value+'. Recebemos o seu pedido e confirmamos por e-mail. Adicione o horário ao seu calendário pelo botão abaixo.');
+      // Isto e um PEDIDO de horario, nao uma reuniao marcada: nao existe agenda
+      // por tras, so o e-mail que chega na Slowexe. O texto diz isso e nada alem.
+      overlay.querySelector('.cal-dsub').textContent=en?('We received your request, '+nm.value+'. This time is not confirmed yet: we will confirm it by email within 24 hours, with the call link.'):('Recebemos o seu pedido, '+nm.value+'. O horário ainda não está confirmado: confirmamos por e-mail em até 24 horas, com o link da conversa.');
       var g=overlay.querySelector('#calGcal');if(g)g.href='https://www.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(en?'Intro call · Slowexe':'Conversa inicial · Slowexe')+'&dates='+gcalDates()+'&details='+encodeURIComponent('Google Meet');
 
       // O pedido de horario agora chega ate a Slowexe. Antes a pessoa escolhia
@@ -1706,7 +1715,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
     var dd=document.getElementById('budgetDD'); if(!dd) return;
     var btn=dd.querySelector('.ct-ddbtn'), menu=dd.querySelector('.ct-ddmenu'), val=dd.querySelector('.ct-ddval');
     btn.addEventListener('click',function(e){e.stopPropagation();var op=dd.classList.toggle('open');menu.hidden=!op;});
-    menu.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){menu.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');val.innerHTML=b.innerHTML;dd.classList.remove('open');menu.hidden=true;});});
+    menu.querySelectorAll('button').forEach(function(b){b.addEventListener('click',function(){menu.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');val.innerHTML=b.innerHTML;val.removeAttribute('data-vazio');dd.classList.remove('open');menu.hidden=true;});});
     document.addEventListener('click',function(){if(dd.classList.contains('open')){dd.classList.remove('open');menu.hidden=true;}});
   })();
 </script>

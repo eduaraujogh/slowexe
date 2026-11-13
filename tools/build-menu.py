@@ -107,11 +107,50 @@ def arruma_mega(html):
     return MEGA_LINK.sub(troca, html)
 
 
-SUB = [
-    ('servico-branding.html', 'Branding', 'Branding'),
-    ('servico-rebranding.html', 'Rebranding', 'Rebranding'),
+# Submenu de Servicos no celular. Tinha so Branding e Rebranding, enquanto o
+# megamenu do desktop leva direto aos oito servicos: quem estava no celular nao
+# chegava em UI/UX, Web Design e os outros sem rolar a pagina inteira.
+# Agora sao os mesmos oito, na mesma ordem, com o destino lido de MEGA.
+SUB_EN = {
+    'UI/UX Design': 'UI/UX Design',
+    'Web Design': 'Web Design',
+    'Auditoria de Produto': 'Product Audit',
+    'Landing Pages': 'Landing Pages',
+    'Branding': 'Branding',
+    'Design de App': 'Mobile App Design',
+    'Rebranding': 'Rebranding',
+    'Web Redesign': 'Web Redesign',
+}
+SUB = [(MEGA[pt], pt, SUB_EN[pt]) for pt in MEGA] + [
     ('servicos.html', 'Ver todos os serviços', 'See all services'),
 ]
+
+# ---------------------------------------------------------------------------
+# Os outros dois lugares que listam servico: o rodape (.flink) e os cards da
+# home (.sol-card). Os dois apontavam pro topo de servicos.html, entao clicar
+# em "Web Design" no rodape nao levava ao Web Design. Mesmo mapa do megamenu.
+# ---------------------------------------------------------------------------
+FLINK = re.compile(r'<a href="([^"]*)" class="flink">(.*?)</a>', re.S)
+SOLCARD = re.compile(r'<a href="([^"]*)" class="sol-card"([^>]*)>(.*?)</a>', re.S)
+SC_TITLE = re.compile(r'<h3 class="sc-title">(.*?)</h3>', re.S)
+
+
+def arruma_servicos(html):
+    """Rodape e cards da home apontam para o servico certo."""
+    def flink(m):
+        destino = MEGA.get(rotulo(m.group(2)))
+        if not destino or not m.group(1).startswith('servico'):
+            return m.group(0)
+        return '<a href="%s" class="flink">%s</a>' % (destino, m.group(2))
+
+    def card(m):
+        t = SC_TITLE.search(m.group(3))
+        destino = MEGA.get(rotulo(t.group(1))) if t else None
+        if not destino:
+            return m.group(0)
+        return '<a href="%s" class="sol-card"%s>%s</a>' % (destino, m.group(2), m.group(3))
+
+    return SOLCARD.sub(card, FLINK.sub(flink, html))
 
 
 def secao_da_pagina(nome):
@@ -238,7 +277,9 @@ CSS = '''<style id="mnav-v2">
   .mnav-link:hover,.mnav-link:focus-visible,.mnav-link:active{color:var(--primary);transform:translateX(5px)}
   .mnav-link:hover .mnav-num,.mnav-link:focus-visible .mnav-num{color:var(--primary)}
   .mnav-row.aqui .mnav-link,.mnav-row.aqui .mnav-num{color:var(--primary)}
-  .mnav-sub{padding:12px 0 18px}
+  /* oito servicos em duas colunas: cabem na mesma altura que tres em fila */
+  .mnav-sub{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px;padding:12px 0 18px}
+  .mnav-sub a:last-child{grid-column:1/-1}
 
   /* --- entrada em cascata: 60ms entre as linhas --- */
   .mnav-row{opacity:0;transform:translateY(20px);
@@ -311,6 +352,7 @@ def main():
             raise SystemExit('menu nao encontrado em %s' % nome)
         html = MARCA_HTML.sub(lambda m: html_menu(nome), html, count=1)
         html = arruma_mega(html)
+        html = arruma_servicos(html)
         if html != orig:
             trocados += 1
 
