@@ -12,6 +12,91 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TPL  = os.path.join(BASE, 'projeto.html')
 
 # ordem = ordem na grid e na navegação prev/next
+
+def servicos_do_case(c):
+    """Paginas de servico ligadas ao case: [(pt, en, destino)].
+
+    Link interno de mao dupla: o servico mostra o case e, agora, o case
+    leva ao servico. Antes o case terminava em "Ver todos os projetos" e
+    quem chegava pelo Google num case nao tinha caminho pro que contratar.
+    """
+    tag, serv = c['tag_pt'], c['serv_pt'].lower()
+    out = []
+    if 'Branding' in tag or 'Identidade' in tag or 'identidade' in serv:
+        out.append(('Branding e identidade visual', 'Branding & visual identity',
+                    'servico-branding.html'))
+    if 'UX/UI' in tag or 'ux/ui' in serv:
+        out.append(('UI/UX Design', 'UI/UX Design', 'servicos.html#d-uiux'))
+    if 'landing page' in serv:
+        out.append(('Landing Pages', 'Landing Pages', 'servicos.html#d-lp'))
+    return out
+
+
+def links_servico(c):
+    itens = ''.join(
+        '<a href="%s"><span data-pt>%s</span><span data-en>%s</span></a>' % (d, pt, en)
+        for pt, en, d in servicos_do_case(c))
+    if not itens:
+        return ''
+    varios = len(servicos_do_case(c)) > 1
+    rot_pt = 'Serviços deste case' if varios else 'Serviço deste case'
+    rot_en = 'Services in this case' if varios else 'Service in this case'
+    return ('\n      <p class="pc-servs" data-reveal><span class="pc-servs-l"><span data-pt>'
+            '%s</span><span data-en>%s</span></span>%s</p>' % (rot_pt, rot_en, itens))
+
+
+# ---------------------------------------------------------------------------
+# Imagens do baralho da home em tamanho de cartao.
+#
+# Os cinco cartoes do topo da home sao o que o Google mede como "maior
+# conteudo visivel" (LCP), e os tres primeiros carregam de cara. Iam no
+# tamanho original (ate 1920 px de largura) para ocupar 168 px no celular e
+# no maximo 362 px no computador. Aqui sai uma copia de 520 e uma de 760 px
+# em assets/resp/ (fora de assets/cases/, senao viravam foto de galeria), e
+# o navegador escolhe pelo srcset a menor que ainda fica nitida na tela.
+# ---------------------------------------------------------------------------
+RESP_DIR = 'assets/resp'
+BARALHO_LARGURAS = (520, 760)
+# largura do cartao: .deck-card{width:min(clamp(168px,26vw,362px),31svh)}
+BARALHO_SIZES = '(max-width: 760px) 46vw, 362px'
+
+
+def variante(arquivo, largura):
+    """Copia reduzida de assets/cases/<arquivo>; None se a original ja e menor."""
+    from PIL import Image
+    src = os.path.join(BASE, 'assets', 'cases', arquivo)
+    with Image.open(src) as im:
+        w, h = im.size
+        if w <= largura:
+            return None, w
+        rel = '%s/%s-%d.webp' % (RESP_DIR, arquivo.rsplit('.', 1)[0], largura)
+        dst = os.path.join(BASE, rel)
+        if not (os.path.exists(dst) and os.path.getmtime(dst) >= os.path.getmtime(src)):
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            im.convert('RGB').resize((largura, round(h * largura / w)), Image.LANCZOS) \
+              .save(dst, 'WEBP', quality=82, method=6)
+        return rel, w
+
+
+def srcset_baralho(arquivo):
+    cands, original = [], None
+    for lg in BARALHO_LARGURAS:
+        rel, original = variante(arquivo, lg)
+        if rel:
+            cands.append('%s %dw' % (rel, lg))
+    if not cands:
+        return ''
+    cands.append('assets/cases/%s %dw' % (arquivo, original))
+    return 'srcset="%s" sizes="%s" ' % (', '.join(cands), BARALHO_SIZES)
+
+
+def titulo_case(c):
+    """'Artta: case de branding e UX/UI' a partir do tag_pt do case."""
+    servico = c['tag_pt'].split('·')[-1].strip()
+    servico = ' '.join(w if (w.isupper() or '/' in w) else w.lower()
+                       for w in servico.split())
+    return '%s: case de %s' % (c['name'], servico)
+
 CASES = [
  dict(slug='artta', name='Artta',
    deck='artta-marca-02.webp',
@@ -514,11 +599,15 @@ f'''    <section class="pc-chapter" id="{cap['id']}"><div class="wrap">
           <span class="pc-nav-cat"><span data-pt>{esc(nxt['tag_pt'])}</span><span data-en>{esc(nxt['tag_en'])}</span></span>
         </a>
       </nav>
-      <a class="pc-all" href="projetos.html"><span data-pt>Ver todos os projetos</span><span data-en>See all projects</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="pc-all" href="projetos.html"><span data-pt>Ver todos os projetos</span><span data-en>See all projects</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>{links_servico(c)}
     </div></section>
 '''
 
-EXTRA_CSS = '''  .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
+EXTRA_CSS = '''  .pc-servs{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 18px;margin:18px 0 0;font-size:14.5px;color:#6b7078}
+  .pc-servs-l{font-weight:500}
+  .pc-servs a{color:#0A0B0D;font-weight:600;text-decoration:underline;text-decoration-color:rgba(240,122,101,.6);text-underline-offset:4px;transition:color .25s}
+  .pc-servs a:hover,.pc-servs a:focus-visible{color:var(--primary)}
+  .pc-scope b{font-size:clamp(22px,2.6vw,32px);margin-bottom:8px}
 
   /* ---- abertura do case: a capa tem que caber na primeira tela ---- */
   /* O hero media uns 540px ate a imagem comecar, entao a capa nascia fora
@@ -616,8 +705,11 @@ def main():
         # projeto.html e template e leva noindex. O case gerado e pagina de
         # verdade: se o noindex vazasse, nenhum case seria indexado.
         out = re.sub(r'\s*<meta name="robots" content="noindex[^>]*>', '', out)
+        # Titulo com o que o case e, nao so o nome do cliente: "Artta: case de
+        # branding e UX/UI". "Artta | Projeto | Slowexe" nao dizia ao Google
+        # (nem a quem ve o resultado) que ali tem um trabalho de branding.
         out = re.sub(r'<title>.*?</title>',
-                     '<title>%s | Projeto | Slowexe</title>' % c['name'], out, count=1)
+                     '<title>%s | Slowexe</title>' % esc(titulo_case(c)), out, count=1)
         # description vem do conteudo do case; o resto do SEO entra no build-meta.py
         if '<meta name="description"' not in out:
             out = out.replace('</title>',
@@ -698,7 +790,7 @@ f'''        <a class="pg-card" href="projeto-{c['slug']}.html" data-cat="{c.get(
         # 42% da largura, cortando logotipo e texto. Por isso cada case escolhe
         # aqui uma imagem que sobrevive ao recorte vertical, no campo 'deck'.
         arte = c.get('deck', cover)
-        peca = (f'<img src="assets/cases/{arte}" '
+        peca = (f'<img src="assets/cases/{arte}" {srcset_baralho(arte)}'
                 f'alt="{esc(c["name"])}, {esc(c["tag_pt"])}" {carga}>')
         baralho.append(
 f'''        <div class="deck-card">

@@ -58,19 +58,19 @@ PAGINAS = {
    'Construção de marca do posicionamento à identidade visual: símbolo, sistema '
    'de cores, tipografia e o manual que mantém tudo consistente na aplicação.'),
  'servico-rebranding.html': (
-   'Rebranding | Slowexe',
+   'Rebranding de marca: método e transição | Slowexe',
    'Rebranding com método: diagnóstico do que já existe, decisão entre mudança '
    'total ou parcial, e transição sem perder o que a marca já conquistou.'),
  'projetos.html': (
-   'Projetos e cases | Slowexe',
+   'Projetos e cases de branding e design | Slowexe',
    'Cases de branding, UI/UX e web da Slowexe: Artta, Grupo SBA, Sabores de '
    'Curitiba, Thalles Consultoria, Fense Seguros, Duo Garage, Golden Vibes e outros.'),
  'blog.html': (
-   'Blog | Slowexe',
+   'Blog sobre branding e design de marca | Slowexe',
    'Artigos sobre branding, identidade visual, rebranding e estratégia de marca, '
    'escritos pelo estúdio Slowexe.'),
  'contato.html': (
-   'Contato | Slowexe',
+   'Contato e orçamento de projeto | Slowexe',
    'Conte sobre o seu projeto e receba retorno em até 24 horas. Formulário rápido '
    'ou agendamento de uma conversa inicial com o estúdio Slowexe.'),
 }
@@ -183,7 +183,7 @@ def grafo(nome, html):
     if nome.startswith('projeto-'):
         slug = nome[len('projeto-'):-len('.html')]
         cliente = pega(html, r'<h1 class="pc-title"[^>]*>(.*?)</h1>')
-        capa = 'assets/cases/%s-01.webp' % slug
+        capa = capa_da_pagina(nome, html) or 'assets/cases/%s-01.webp' % slug
         no = {'@type': 'CreativeWork', 'name': cliente, 'headline': titulo,
               'description': desc, 'url': u, 'inLanguage': 'pt-BR',
               'creator': ref_org, 'isPartOf': {'@id': SITE_ID}}
@@ -205,6 +205,12 @@ def grafo(nome, html):
         return [{'@type': 'ContactPage', 'url': u, 'name': titulo,
                  'description': desc, 'about': ref_org},
                 migalhas(('Contato', nome))]
+
+    if nome == 'privacidade.html':
+        return [{'@type': 'WebPage', 'url': u, 'name': titulo, 'description': desc,
+                 'isPartOf': {'@id': SITE_ID}, 'publisher': ref_org,
+                 'inLanguage': 'pt-BR'},
+                migalhas(('Política de Privacidade', nome))]
 
     if nome.startswith('blog-'):
         # o BlogPosting ja vem do build-blog.py; aqui so a trilha
@@ -277,6 +283,73 @@ def versiona(txt):
     return txt
 
 
+# ---------------------------------------------------------------------------
+# Imagem de compartilhamento por pagina.
+#
+# Todo case e todo artigo mostravam a mesma imagem (o logo) quando o link era
+# colado no WhatsApp, no LinkedIn ou numa busca com imagem. Para quem recebe
+# um case pelo WhatsApp, a capa do trabalho vende; o logo nao diz nada.
+# Aqui cada um ganha a propria capa, cortada em 1200x630 (o formato que as
+# redes pedem), em JPG (o WhatsApp nao mostra WebP em toda versao).
+# So refaz o JPG quando a imagem de origem e mais nova que ele.
+# ---------------------------------------------------------------------------
+OG_DIR = 'assets/og'
+OG_W, OG_H = 1200, 630
+
+
+def capa_da_pagina(nome, html):
+    """Arquivo de imagem que representa a pagina, ou None."""
+    if nome.startswith('projeto-'):
+        slug = nome[len('projeto-'):-len('.html')]
+        primeira = 'assets/cases/%s-01.webp' % slug
+        if os.path.exists(os.path.join(BASE, primeira)):
+            return primeira
+        m = re.search(r'assets/cases/%s-[^"\s)]+\.webp' % re.escape(slug), html)
+        return m.group(0) if m else None
+    if nome.startswith('blog-'):
+        m = re.search(r'class="art-cover-type[^"]*"[^>]*url\((assets/blog/[^)]+)\)', html)
+        return m.group(1) if m else None
+    return None
+
+
+def gera_og(origem, destino):
+    from PIL import Image
+    src, dst = os.path.join(BASE, origem), os.path.join(BASE, destino)
+    if os.path.exists(dst) and os.path.getmtime(dst) >= os.path.getmtime(src):
+        return
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    im = Image.open(src).convert('RGB')
+    # corta pelo centro ate a proporcao 1200x630 e depois reduz
+    alvo = OG_W / OG_H
+    w, h = im.size
+    if w / h > alvo:
+        nw = int(h * alvo)
+        im = im.crop(((w - nw) // 2, 0, (w - nw) // 2 + nw, h))
+    else:
+        nh = int(w / alvo)
+        im = im.crop((0, (h - nh) // 2, w, (h - nh) // 2 + nh))
+    im = im.resize((OG_W, OG_H), Image.LANCZOS)
+    im.save(dst, 'JPEG', quality=82, optimize=True, progressive=True)
+
+
+def poe_og(nome, html):
+    origem = capa_da_pagina(nome, html)
+    if not origem:
+        return html
+    destino = '%s/%s.jpg' % (OG_DIR, nome[:-len('.html')])
+    gera_og(origem, destino)
+    u = '%s?v=%s' % (cfg.url(destino), versao(destino))
+    alt = pega(html, r'<meta property="og:title" content="([^"]*)"') or cfg.NOME
+    for padrao, valor in [
+        (r'(<meta property="og:image" content=")[^"]*(")', u),
+        (r'(<meta name="twitter:image" content=")[^"]*(")', u),
+        (r'(<meta property="og:image:alt" content=")[^"]*(")', alt),
+    ]:
+        html = re.sub(padrao, lambda m, v=valor: m.group(1) + esc(v) + m.group(2),
+                      html, count=1)
+    return html
+
+
 def main():
     mp = os.path.join(BASE, 'site.webmanifest')
     m = io.open(mp, encoding='utf-8').read()
@@ -294,6 +367,7 @@ def main():
         if nome in PAGINAS:
             html = troca_meta(html, *PAGINAS[nome])
         html = versiona(html)
+        html = poe_og(nome, html)
         nos = grafo(nome, html)
         html = poe_grafo(html, nos)
         com_grafo += 1 if nos else 0

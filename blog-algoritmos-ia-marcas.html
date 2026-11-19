@@ -903,6 +903,14 @@ header .menu-toggle svg{stroke:#0A0B0D}
     .logo .logo-svg{height:23px;width:111.7px}
   }
 </style>
+<style id="titulos-css">
+  /* tools/build-titulos.py: mesmas medidas das tags antigas */
+  .foot-col .foot-h{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);font-weight:600;margin:0 0 16px}
+  .mega-group .mega-h{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:#71767c;font-weight:600;margin:0 0 14px}
+  .about-caption h2{font-family:"Bricolage Grotesque";font-weight:700;font-size:23px;line-height:1.18;margin-bottom:20px;color:#0A0B0D}
+  .pc-grid h2{font-family:"Bricolage Grotesque";font-weight:700;font-size:25px;margin:0 0 14px}
+  .art-body h2{font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(22px,2.4vw,28px);letter-spacing:-.01em;color:#0A0B0D;margin:44px 0 14px}
+</style>
 <style>
   .art-cover-type{position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;
     display:flex;flex-direction:column;justify-content:flex-end;gap:14px;padding:clamp(28px,5vw,64px);color:#fff}
@@ -911,6 +919,9 @@ header .menu-toggle svg{stroke:#0A0B0D}
   /* na capa com foto o brilho radial some: ja existe o degrade escuro que
      garante o contraste do titulo sobre a imagem */
   .art-cover-foto::after{display:none}
+  .art-next{margin-top:48px;padding-top:24px;border-top:1px solid #ece9e4}
+  .art-next a{color:#0A0B0D;font-weight:600;text-decoration:underline;text-decoration-color:rgba(240,122,101,.6);text-underline-offset:4px}
+  .art-next a:hover,.art-next a:focus-visible{color:var(--primary)}
   .act-cat{position:relative;z-index:1;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.82}
   .act-title{position:relative;z-index:1;font-family:"Bricolage Grotesque";font-weight:800;
     font-size:clamp(26px,4.4vw,60px);line-height:1.05;letter-spacing:-.025em;max-width:20ch}
@@ -918,11 +929,11 @@ header .menu-toggle svg{stroke:#0A0B0D}
   .bf-cat{font-family:"Bricolage Grotesque";font-weight:800;font-size:clamp(15px,1.6vw,20px);
     letter-spacing:.02em;color:#fff;opacity:.95}
 </style>
-<meta property="og:image" content="https://slowexe.com/assets/icons/og-image.png?v=bffc5f53" />
+<meta property="og:image" content="https://slowexe.com/assets/og/blog-algoritmos-ia-marcas.jpg?v=f36b89a9" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Slowexe" />
-<meta name="twitter:image" content="https://slowexe.com/assets/icons/og-image.png?v=bffc5f53" />
+<meta property="og:image:alt" content="Do algoritmo à IA: como as marcas são encontradas em 2026" />
+<meta name="twitter:image" content="https://slowexe.com/assets/og/blog-algoritmos-ia-marcas.jpg?v=f36b89a9" />
 <script type="application/ld+json" id="ld-seo">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://slowexe.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://slowexe.com/blog.html"},{"@type":"ListItem","position":3,"name":"Do algoritmo à IA: como as marcas são encontradas em 2026","item":"https://slowexe.com/blog-algoritmos-ia-marcas.html"}]}]}</script>
 </head>
 <body class="lang-pt ct-page">
@@ -932,7 +943,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   <!-- ============ HEADER ============ -->
   <header id="header">
     <nav class="nav">
-      <a href="index.html" class="logo" aria-label="Slowexe, home"><svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 475.57 97.94" aria-hidden="true" focusable="false"><g transform="translate(-52.15 -1388.8)"><g>
+      <a href="./" class="logo" aria-label="Slowexe, home"><svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 475.57 97.94" aria-hidden="true" focusable="false"><g transform="translate(-52.15 -1388.8)"><g>
         <path fill="#d85a4d" d="M130.69,1408.82l-29.59-20.02-29.72,19.9-19.23,29.08,19.62,29.54,29.34,19.42,28.8-19.12,20.17-29.83-19.38-28.95ZM136.88,1439.39l-23.24,11.26-11.1,22.89h-3.07l-11.13-22.96-23.2-11.19v-3.07l23.2-11.43,11.13-23.09h3.07l11.56,23.48,22.78,11.04v3.07Z"/>
         <g>
           <path fill="currentColor" d="M209.16,1470.4c-4.17,0-7.88-.44-11.14-1.33-3.26-.89-6.02-2.18-8.29-3.89-2.28-1.71-4.01-3.82-5.21-6.35-1.2-2.53-1.8-5.4-1.8-8.62l12.23-3.41c.06,2.97.74,5.4,2.04,7.3,1.29,1.9,3.06,3.29,5.31,4.17,2.24.89,4.75,1.33,7.54,1.33,2.59,0,4.8-.33,6.63-.99,1.83-.66,3.24-1.55,4.22-2.65.98-1.1,1.47-2.35,1.47-3.74,0-1.64-.63-2.99-1.9-4.03-1.27-1.04-2.97-1.91-5.12-2.61-2.15-.7-4.58-1.39-7.3-2.09-2.97-.69-5.88-1.48-8.72-2.37-2.84-.89-5.43-2.02-7.77-3.41-2.34-1.39-4.22-3.18-5.64-5.35-1.42-2.18-2.13-4.94-2.13-8.29,0-3.85.98-7.19,2.94-10,1.96-2.81,4.77-4.99,8.44-6.54,3.66-1.55,8.02-2.32,13.08-2.32s9.48.79,13.27,2.37c3.79,1.58,6.71,3.86,8.77,6.82,2.05,2.97,3.05,6.51,2.99,10.62l-12.42,2.94c.06-1.96-.21-3.69-.81-5.21-.6-1.52-1.44-2.76-2.51-3.74s-2.42-1.74-4.03-2.28c-1.61-.54-3.46-.81-5.54-.81-2.34,0-4.35.32-6.02.95-1.67.63-2.94,1.47-3.79,2.51-.85,1.04-1.28,2.26-1.28,3.65,0,1.7.65,3.08,1.94,4.12,1.3,1.04,3.06,1.91,5.31,2.61,2.24.7,4.75,1.39,7.53,2.08,2.72.63,5.47,1.37,8.25,2.23,2.78.85,5.35,1.98,7.72,3.36,2.37,1.39,4.28,3.24,5.73,5.54,1.45,2.31,2.18,5.2,2.18,8.67,0,3.92-1.03,7.28-3.08,10.09-2.05,2.81-5.04,4.96-8.95,6.45-3.92,1.48-8.63,2.23-14.12,2.23Z"/>
@@ -952,7 +963,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
           </a>
           <div class="mega">
             <div class="mega-group">
-              <h5>Design</h5>
+              <p class="mega-h">Design</p>
               <div class="mega-items">
                 <a class="mega-link" href="servicos.html#d-uiux"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M3 9h18M9 9v12"/></svg>UI/UX Design</a>
                 <a class="mega-link" href="servicos.html#d-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Web Design</a>
@@ -985,7 +996,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
             <div class="promo">
               <span class="promo-shine"></span>
               <span class="promo-tag"><span data-pt>Oferta de lançamento</span><span data-en>Launch offer</span></span>
-              <h4 class="promo-title"><span data-pt>20% OFF no seu primeiro projeto</span><span data-en>20% OFF your first project</span></h4>
+              <p class="promo-title"><span data-pt>20% OFF no seu primeiro projeto</span><span data-en>20% OFF your first project</span></p>
               <p class="promo-sub"><span data-pt>Por tempo limitado, as vagas deste mês estão acabando.</span><span data-en>Limited time, this month's spots are almost gone.</span></p>
               <a href="contato.html" class="promo-cta">
                 <span class="roll" data-pt>Quero meu desconto</span><span class="roll" data-en>Claim my discount</span>
@@ -1006,7 +1017,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
   <div class="mnav-backdrop" id="mnavBackdrop" hidden></div>
   <aside class="mnav" id="mnav" role="dialog" aria-modal="true" aria-label="Menu" hidden>
     <div class="mnav-top">
-      <a href="index.html" class="mnav-brand" aria-label="Slowexe, home"><svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 475.57 97.94" aria-hidden="true" focusable="false"><g transform="translate(-52.15 -1388.8)"><g>
+      <a href="./" class="mnav-brand" aria-label="Slowexe, home"><svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 475.57 97.94" aria-hidden="true" focusable="false"><g transform="translate(-52.15 -1388.8)"><g>
         <path fill="#d85a4d" d="M130.69,1408.82l-29.59-20.02-29.72,19.9-19.23,29.08,19.62,29.54,29.34,19.42,28.8-19.12,20.17-29.83-19.38-28.95ZM136.88,1439.39l-23.24,11.26-11.1,22.89h-3.07l-11.13-22.96-23.2-11.19v-3.07l23.2-11.43,11.13-23.09h3.07l11.56,23.48,22.78,11.04v3.07Z"/>
         <g>
           <path fill="currentColor" d="M209.16,1470.4c-4.17,0-7.88-.44-11.14-1.33-3.26-.89-6.02-2.18-8.29-3.89-2.28-1.71-4.01-3.82-5.21-6.35-1.2-2.53-1.8-5.4-1.8-8.62l12.23-3.41c.06,2.97.74,5.4,2.04,7.3,1.29,1.9,3.06,3.29,5.31,4.17,2.24.89,4.75,1.33,7.54,1.33,2.59,0,4.8-.33,6.63-.99,1.83-.66,3.24-1.55,4.22-2.65.98-1.1,1.47-2.35,1.47-3.74,0-1.64-.63-2.99-1.9-4.03-1.27-1.04-2.97-1.91-5.12-2.61-2.15-.7-4.58-1.39-7.3-2.09-2.97-.69-5.88-1.48-8.72-2.37-2.84-.89-5.43-2.02-7.77-3.41-2.34-1.39-4.22-3.18-5.64-5.35-1.42-2.18-2.13-4.94-2.13-8.29,0-3.85.98-7.19,2.94-10,1.96-2.81,4.77-4.99,8.44-6.54,3.66-1.55,8.02-2.32,13.08-2.32s9.48.79,13.27,2.37c3.79,1.58,6.71,3.86,8.77,6.82,2.05,2.97,3.05,6.51,2.99,10.62l-12.42,2.94c.06-1.96-.21-3.69-.81-5.21-.6-1.52-1.44-2.76-2.51-3.74s-2.42-1.74-4.03-2.28c-1.61-.54-3.46-.81-5.54-.81-2.34,0-4.35.32-6.02.95-1.67.63-2.94,1.47-3.79,2.51-.85,1.04-1.28,2.26-1.28,3.65,0,1.7.65,3.08,1.94,4.12,1.3,1.04,3.06,1.91,5.31,2.61,2.24.7,4.75,1.39,7.53,2.08,2.72.63,5.47,1.37,8.25,2.23,2.78.85,5.35,1.98,7.72,3.36,2.37,1.39,4.28,3.24,5.73,5.54,1.45,2.31,2.18,5.2,2.18,8.67,0,3.92-1.03,7.28-3.08,10.09-2.05,2.81-5.04,4.96-8.95,6.45-3.92,1.48-8.63,2.23-14.12,2.23Z"/>
@@ -1091,18 +1102,18 @@ header .menu-toggle svg{stroke:#0A0B0D}
 
     <article class="art-body">
       <p class="art-lead" data-reveal><span data-pt>Durante anos o jogo foi entender o algoritmo do feed. Em 2026 o jogo virou outro: ser citado por uma inteligência artificial que a pessoa consultou antes de chegar em qualquer feed.</span><span data-en>For years the game was understanding the feed algorithm. In 2026 the game changed: being cited by an artificial intelligence the person consulted before reaching any feed at all.</span></p>
-      <h3 data-reveal><span data-pt>O grafo social morreu</span><span data-en>The social graph is dead</span></h3>
+      <h2 data-reveal><span data-pt>O grafo social morreu</span><span data-en>The social graph is dead</span></h2>
       <p data-reveal><span data-pt>A lógica antiga era simples: você via o que seus amigos postavam. Essa era acabou. No lugar entrou o grafo de interesse, um motor preditivo que se importa muito mais com o que você provavelmente quer ver do que com quem você conhece.</span><span data-en>The old logic was simple: you saw what your friends posted. That era is over. In its place came the interest graph, a predictive engine that cares far more about what you probably want to see than about who you know.</span></p>
       <p data-reveal><span data-pt>A consequência prática é dura para quem não mudou de método. Marcas que seguem apostando em táticas de engajamento herdadas do modelo anterior perdem em média 35% do alcance orgânico por ano. Não é penalidade, é obsolescência.</span><span data-en>The practical consequence is harsh for anyone who did not change method. Brands still betting on engagement tactics inherited from the old model lose an average of 35% of organic reach per year. It is not a penalty, it is obsolescence.</span></p>
-      <h3 data-reveal><span data-pt>GEO: otimizar para ser citado, não para ranquear</span><span data-en>GEO: optimising to be cited, not to rank</span></h3>
+      <h2 data-reveal><span data-pt>GEO: otimizar para ser citado, não para ranquear</span><span data-en>GEO: optimising to be cited, not to rank</span></h2>
       <p data-reveal><span data-pt>Generative Engine Optimization é a disciplina que nasceu quando ChatGPT, Gemini e Perplexity passaram a ser o ponto de partida da pesquisa de compra, no lugar do buscador tradicional. A pergunta deixou de ser em que posição você aparece e virou se você é mencionado na resposta.</span><span data-en>Generative Engine Optimization is the discipline born when ChatGPT, Gemini and Perplexity became the starting point for purchase research instead of the traditional search engine. The question stopped being what position you rank in and became whether you get mentioned in the answer.</span></p>
       <p data-reveal><span data-pt>Na prática, isso muda a forma de escrever. Títulos claros, afirmações objetivas e alta densidade de entidades, ou seja, nomes concretos de produtos, lugares, pessoas e conceitos. Modelos de linguagem extraem e citam o que conseguem isolar com segurança. Texto vago não é citado.</span><span data-en>In practice this changes how you write. Clear headings, objective claims and high entity density, meaning concrete names of products, places, people and concepts. Language models extract and cite what they can isolate safely. Vague text does not get cited.</span></p>
       <p data-reveal><span data-pt>O mesmo vale dentro das plataformas. Legendas e transcrições de vídeo hoje alimentam buscas nativas de IA no Instagram e no TikTok. O que não está transcrito, para efeito de descoberta, não existe.</span><span data-en>The same applies inside the platforms. Captions and video transcripts now feed native AI search on Instagram and TikTok. Whatever is not transcribed does not exist for discovery purposes.</span></p>
       <blockquote class="art-quote" data-reveal><p><span data-pt>“Os algoritmos determinam o alcance, mas é o storytelling que determina se alguém fica. Otimizar um sem o outro produz números que não viram marca.”</span><span data-en>“Algorithms determine reach, but storytelling determines whether anyone stays. Optimising one without the other produces numbers that never become a brand.”</span></p></blockquote>
-      <h3 data-reveal><span data-pt>Por que storytelling virou requisito técnico</span><span data-en>Why storytelling became a technical requirement</span></h3>
+      <h2 data-reveal><span data-pt>Por que storytelling virou requisito técnico</span><span data-en>Why storytelling became a technical requirement</span></h2>
       <p data-reveal><span data-pt>As plataformas passaram a avaliar conteúdo de forma multimodal, cruzando texto, imagem e som para prever a resposta emocional que um post vai gerar antes mesmo de distribuí-lo. Ou seja, emoção deixou de ser efeito colateral do bom conteúdo e virou variável de ranqueamento.</span><span data-en>Platforms now evaluate content multimodally, cross-referencing text, image and sound to predict the emotional response a post will generate before even distributing it. Emotion has stopped being a side effect of good content and become a ranking variable.</span></p>
       <p data-reveal><span data-pt>É por isso que marcas que misturam emoção humana e narrativa performam melhor que marcas que publicam peças promocionais evidentes. Não é preferência de gosto do público, é o sistema medindo reação e distribuindo de acordo.</span><span data-en>This is why brands mixing human emotion and narrative outperform brands publishing obviously promotional pieces. It is not audience taste, it is the system measuring reaction and distributing accordingly.</span></p>
-      <h3 data-reveal><span data-pt>O que fazer com isso</span><span data-en>What to do with this</span></h3>
+      <h2 data-reveal><span data-pt>O que fazer com isso</span><span data-en>What to do with this</span></h2>
       <ol data-reveal>
         <li><span data-pt>Escreva para ser extraído: um conceito por bloco, com título que já entrega a conclusão.</span><span data-en>Write to be extracted: one concept per block, with a heading that already delivers the conclusion.</span></li>
         <li><span data-pt>Transcreva tudo. Vídeo sem legenda é conteúdo invisível para a busca nativa.</span><span data-en>Transcribe everything. Video without captions is invisible content for native search.</span></li>
@@ -1110,6 +1121,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
         <li><span data-pt>Produza variações da mesma narrativa para públicos diferentes, já que a distribuição é segmentada por cluster.</span><span data-en>Produce variations of the same narrative for different audiences, since distribution is segmented by cluster.</span></li>
         <li><span data-pt>Meça citação em respostas de IA, não só posição no buscador.</span><span data-en>Measure citation in AI answers, not just search position.</span></li>
       </ol>
+      <p class="art-next" data-reveal><span data-pt>Serviço relacionado: <a href="servico-branding.html">Branding e identidade visual</a>. Veja também os <a href="projetos.html">projetos da Slowexe</a>.</span><span data-en>Related service: <a href="servico-branding.html">Branding &amp; visual identity</a>. See also <a href="projetos.html">Slowexe projects</a>.</span></p>
     </article>
 
     <section class="art-related"><div class="wrap">
@@ -1160,7 +1172,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
     <div class="wrap">
       <div class="foot-top">
         <div class="foot-brand">
-          <a href="index.html" class="logo" aria-label="Slowexe, home"><svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 475.57 97.94" aria-hidden="true" focusable="false"><g transform="translate(-52.15 -1388.8)"><g>
+          <a href="./" class="logo" aria-label="Slowexe, home"><svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 475.57 97.94" aria-hidden="true" focusable="false"><g transform="translate(-52.15 -1388.8)"><g>
         <path fill="#d85a4d" d="M130.69,1408.82l-29.59-20.02-29.72,19.9-19.23,29.08,19.62,29.54,29.34,19.42,28.8-19.12,20.17-29.83-19.38-28.95ZM136.88,1439.39l-23.24,11.26-11.1,22.89h-3.07l-11.13-22.96-23.2-11.19v-3.07l23.2-11.43,11.13-23.09h3.07l11.56,23.48,22.78,11.04v3.07Z"/>
         <g>
           <path fill="currentColor" d="M209.16,1470.4c-4.17,0-7.88-.44-11.14-1.33-3.26-.89-6.02-2.18-8.29-3.89-2.28-1.71-4.01-3.82-5.21-6.35-1.2-2.53-1.8-5.4-1.8-8.62l12.23-3.41c.06,2.97.74,5.4,2.04,7.3,1.29,1.9,3.06,3.29,5.31,4.17,2.24.89,4.75,1.33,7.54,1.33,2.59,0,4.8-.33,6.63-.99,1.83-.66,3.24-1.55,4.22-2.65.98-1.1,1.47-2.35,1.47-3.74,0-1.64-.63-2.99-1.9-4.03-1.27-1.04-2.97-1.91-5.12-2.61-2.15-.7-4.58-1.39-7.3-2.09-2.97-.69-5.88-1.48-8.72-2.37-2.84-.89-5.43-2.02-7.77-3.41-2.34-1.39-4.22-3.18-5.64-5.35-1.42-2.18-2.13-4.94-2.13-8.29,0-3.85.98-7.19,2.94-10,1.96-2.81,4.77-4.99,8.44-6.54,3.66-1.55,8.02-2.32,13.08-2.32s9.48.79,13.27,2.37c3.79,1.58,6.71,3.86,8.77,6.82,2.05,2.97,3.05,6.51,2.99,10.62l-12.42,2.94c.06-1.96-.21-3.69-.81-5.21-.6-1.52-1.44-2.76-2.51-3.74s-2.42-1.74-4.03-2.28c-1.61-.54-3.46-.81-5.54-.81-2.34,0-4.35.32-6.02.95-1.67.63-2.94,1.47-3.79,2.51-.85,1.04-1.28,2.26-1.28,3.65,0,1.7.65,3.08,1.94,4.12,1.3,1.04,3.06,1.91,5.31,2.61,2.24.7,4.75,1.39,7.53,2.08,2.72.63,5.47,1.37,8.25,2.23,2.78.85,5.35,1.98,7.72,3.36,2.37,1.39,4.28,3.24,5.73,5.54,1.45,2.31,2.18,5.2,2.18,8.67,0,3.92-1.03,7.28-3.08,10.09-2.05,2.81-5.04,4.96-8.95,6.45-3.92,1.48-8.63,2.23-14.12,2.23Z"/>
@@ -1180,7 +1192,7 @@ header .menu-toggle svg{stroke:#0A0B0D}
         </div>
         <div class="foot-cols">
           <div class="foot-col">
-            <h4><span data-pt>Serviços</span><span data-en>Services</span></h4>
+            <p class="foot-h"><span data-pt>Serviços</span><span data-en>Services</span></p>
             <a href="servicos.html#d-uiux" class="flink"><span data-pt>UI/UX Design</span><span data-en>UI/UX Design</span></a>
             <a href="servicos.html#d-web" class="flink"><span data-pt>Web Design</span><span data-en>Web Design</span></a>
             <a href="servicos.html#d-app" class="flink"><span data-pt>Design de App</span><span data-en>Mobile App</span></a>
@@ -1188,17 +1200,17 @@ header .menu-toggle svg{stroke:#0A0B0D}
             <a href="servico-branding.html" class="flink"><span data-pt>Branding</span><span data-en>Branding</span></a>
           </div>
           <div class="foot-col">
-            <h4><span data-pt>Empresa</span><span data-en>Company</span></h4>
-            <a href="index.html#about" class="flink"><span data-pt>Sobre</span><span data-en>About</span></a>
+            <p class="foot-h"><span data-pt>Empresa</span><span data-en>Company</span></p>
+            <a href="./#about" class="flink"><span data-pt>Sobre</span><span data-en>About</span></a>
             <a href="projetos.html" class="flink"><span data-pt>Projetos</span><span data-en>Works</span></a>
             <a href="blog.html" class="flink"><span>Blog</span></a>
             <a href="contato.html" class="flink"><span data-pt>Contato</span><span data-en>Contact</span></a>
           </div>
           <div class="foot-col">
-            <h4><span data-pt>Recursos</span><span data-en>Resources</span></h4>
-            <a href="index.html#why" class="flink"><span data-pt>Por que a Slowexe</span><span data-en>Why Slowexe</span></a>
-            <a href="index.html#feedback" class="flink"><span data-pt>Avaliações</span><span data-en>Reviews</span></a>
-            <a href="index.html#solutions" class="flink"><span data-pt>Soluções</span><span data-en>Solutions</span></a>
+            <p class="foot-h"><span data-pt>Recursos</span><span data-en>Resources</span></p>
+            <a href="./#why" class="flink"><span data-pt>Por que a Slowexe</span><span data-en>Why Slowexe</span></a>
+            <a href="./#feedback" class="flink"><span data-pt>Avaliações</span><span data-en>Reviews</span></a>
+            <a href="./#solutions" class="flink"><span data-pt>Soluções</span><span data-en>Solutions</span></a>
           </div>
         </div>
       </div>

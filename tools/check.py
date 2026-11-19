@@ -108,6 +108,26 @@ def checa_seo(nome, html):
 
     if html.count('<h1') == 0:
         erro(nome, 'pagina sem <h1>')
+    checa_titulos(nome, html)
+
+
+def checa_titulos(nome, html):
+    """Um h1 so, e nenhum titulo pulando nivel (h1 -> h3, h2 -> h4).
+
+    Ja aconteceu em quase todas as paginas: secao logo abaixo do h1 em h3,
+    rodape em h4, megamenu em h5. O Google e o leitor de tela leem os
+    titulos como sumario; pular nivel quebra o sumario.
+    Quem conserta e o tools/build-titulos.py.
+    """
+    niveis = [int(n) for n in re.findall(r'<h([1-6])\b', sem_scripts(html))]
+    if niveis.count(1) != 1:
+        erro(nome, '%d titulos <h1> (tem que ser 1)' % niveis.count(1))
+    if niveis and niveis[0] != 1:
+        erro(nome, 'primeiro titulo da pagina e <h%d>, nao <h1>' % niveis[0])
+    for antes, depois in zip(niveis, niveis[1:]):
+        if depois > antes + 1:
+            erro(nome, 'titulo pula nivel: <h%d> seguido de <h%d>' % (antes, depois))
+            break
 
 
 def checa_menu_mobile(nome, html):

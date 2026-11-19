@@ -134,7 +134,7 @@ POSTS = [
   slug='la28-superbloom', date=(2026,6,15), cat_pt='Design', cat_en='Design',
   title_pt='LA28: o Superbloom e a identidade que muda de forma',
   title_en='LA28: the Superbloom and an identity that changes shape',
-  desc_pt='Los Angeles revelou o Look of the Games em março de 2026. Treze padrões inspirados no superflorescimento da Califórnia, tipografia própria e um "A" que nunca é o mesmo.',
+  desc_pt='Los Angeles revelou o Look of the Games em março de 2026: treze padrões inspirados no superflorescimento da Califórnia e um "A" que nunca é o mesmo.',
   desc_en='Los Angeles revealed the Look of the Games in March 2026. Thirteen patterns inspired by the California superbloom, custom type and an "A" that is never the same.',
   kw='LA28, identidade visual olímpica, design cambiante, superbloom, branding esportivo',
   lead_pt='Por anos o emblema de Los Angeles 2028 foi um exercício de promessa: um "A" trocável e a ideia de uma marca que muda. Em março de 2026 a promessa virou sistema completo.',
@@ -163,7 +163,7 @@ POSTS = [
   slug='nike-why-do-it', date=(2026,5,28), cat_pt='Branding', cat_en='Branding',
   title_pt='De "Vencer não é pra todo mundo" a "Why Do It?": a virada da Nike',
   title_en='From "Winning Isn\'t For Everyone" to "Why Do It?": Nike\'s turn',
-  desc_pt='Em 2024 a Nike apostou na dureza competitiva. Em 2025 entregou o "Just Do It" para uma nova geração perguntar por quê. Como o reposicionamento se conecta com a estratégia Win Now.',
+  desc_pt='Em 2024 a Nike apostou na dureza competitiva. Em 2025 entregou o "Just Do It" para uma nova geração perguntar por quê, dentro da estratégia Win Now.',
   desc_en='In 2024 Nike bet on competitive hardness. In 2025 it handed "Just Do It" to a new generation to ask why. How the repositioning connects to the Win Now strategy.',
   kw='Nike, reposicionamento de marca, Why Do It, Just Do It, estratégia de marca',
   lead_pt='Em agosto de 2024 a Nike disse que vencer não era para todo mundo. Um ano depois, mudou o tom por completo. A distância entre as duas campanhas conta uma história de negócio, não de criação.',
@@ -196,7 +196,11 @@ POSTS = [
 
 
 def esc(s):
-    return s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
+    # As aspas tambem: titulo e descricao vao pra dentro de content="...".
+    # Sem isso, o post da Nike ("Vencer nao e pra todo mundo") cortava a
+    # description e o og:title na primeira aspa, e o Google via "De ".
+    return (s.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
+             .replace('"','&quot;'))
 
 def bil(pt, en):
     return '<span data-pt>%s</span><span data-en>%s</span>' % (esc(pt), esc(en))
@@ -218,7 +222,28 @@ def corpo(p):
         elif b[0] == 'list':
             lis = '\n'.join('        <li>%s</li>' % bil(pt, en) for pt, en in zip(b[1], b[2]))
             out.append('      <ol data-reveal>\n%s\n      </ol>' % lis)
+    out.append(fecho(p))
     return '\n'.join(out)
+
+
+# Servico ligado a cada artigo. Quem chega pelo Google num artigo lia ate o
+# fim e nao tinha um link sequer pro que a Slowexe faz: os quatro posts nao
+# apontavam pra nenhuma pagina do site.
+SERVICO_DO_POST = {
+    'rebranding-2026': ('Rebranding', 'Rebranding', 'servico-rebranding.html'),
+}
+SERVICO_PADRAO = ('Branding e identidade visual', 'Branding & visual identity',
+                  'servico-branding.html')
+
+
+def fecho(p):
+    pt, en, destino = SERVICO_DO_POST.get(p['slug'], SERVICO_PADRAO)
+    return ('      <p class="art-next" data-reveal>'
+            '<span data-pt>Serviço relacionado: <a href="%s">%s</a>. '
+            'Veja também os <a href="projetos.html">projetos da Slowexe</a>.</span>'
+            '<span data-en>Related service: <a href="%s">%s</a>. '
+            'See also <a href="projetos.html">Slowexe projects</a>.</span></p>'
+            % (destino, esc(pt), destino, esc(en)))
 
 def foto_capa(slug):
     """Foto de capa do post, se existir em assets/blog/<slug>.webp."""
@@ -258,6 +283,9 @@ EXTRA_CSS = '''  .art-cover-type{position:relative;aspect-ratio:16/9;border-radi
   /* na capa com foto o brilho radial some: ja existe o degrade escuro que
      garante o contraste do titulo sobre a imagem */
   .art-cover-foto::after{display:none}
+  .art-next{margin-top:48px;padding-top:24px;border-top:1px solid #ece9e4}
+  .art-next a{color:#0A0B0D;font-weight:600;text-decoration:underline;text-decoration-color:rgba(240,122,101,.6);text-underline-offset:4px}
+  .art-next a:hover,.art-next a:focus-visible{color:var(--primary)}
   .act-cat{position:relative;z-index:1;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;opacity:.82}
   .act-title{position:relative;z-index:1;font-family:"Bricolage Grotesque";font-weight:800;
     font-size:clamp(26px,4.4vw,60px);line-height:1.05;letter-spacing:-.025em;max-width:20ch}

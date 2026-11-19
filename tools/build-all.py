@@ -36,9 +36,12 @@ PASSOS = [
     ('build-menu.py',    'menu do celular'),
     ('build-logo.py',    'logo no header, menu, rodape e favicon'),
     ('build-a11y.py',    'foco de teclado, atalho e contraste'),
+    ('build-titulos.py', 'hierarquia de titulos h1 a h6'),
+    ('build-alt.py',     'texto alternativo das imagens de portfolio'),
     ('build-ritmo.py',   'ritmo vertical em tela grande'),
     ('build-meta.py',    'SEO e icones'),
     ('build-seo.py',     'titulos, dados estruturados e llms.txt'),
+    ('build-urls.py',    'links internos pra raiz, nao /index.html'),
     ('build-sitemap.py', 'sitemap e robots'),
     # por ultimo: os passos acima usam <style id="..."> como guarda pra nao
     # injetar duas vezes. Este esvazia os blocos, mas preserva os ids.
