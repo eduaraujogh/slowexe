@@ -24,15 +24,16 @@ RedirectMatch 404 ^/\.git(/|$)
 # ---- um endereco so: https, sem www ----
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteCond %{HTTPS} !=on
-  RewriteRule ^(.*)$ https://slowexe.com/$1 [R=301,L]
-  RewriteCond %{HTTP_HOST} ^www\.slowexe\.com$ [NC]
-  RewriteRule ^(.*)$ https://slowexe.com/$1 [R=301,L]
-  # a home tem um endereco so: /index.html redireciona pra raiz. THE_REQUEST
+  # a home tem um endereco so: /index.html redireciona pra raiz, de
+  # qualquer host, num salto so (antes: www/index.html -> index.html -> raiz). THE_REQUEST
   # olha o pedido original, entao o DirectoryIndex (que serve o index.html
   # quando alguem pede /) nao entra em laco.
   RewriteCond %{THE_REQUEST} \s/index\.html[\s?#] [NC]
   RewriteRule ^index\.html$ https://slowexe.com/ [R=301,L]
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://slowexe.com/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^www\.slowexe\.com$ [NC]
+  RewriteRule ^(.*)$ https://slowexe.com/$1 [R=301,L]
 </IfModule>
 
 # ---- protecao do navegador ----
