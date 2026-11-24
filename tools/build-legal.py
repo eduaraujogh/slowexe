@@ -12,8 +12,9 @@ noindex do template.
 O texto descreve o que o site FAZ HOJE, conferido no codigo:
   - nenhum cookie proprio, nenhum analytics, nenhum pixel
   - unico armazenamento local: a chave slowexe-lang, com a preferencia de idioma
-  - terceiros que recebem IP do visitante: Google Fonts (todas as paginas) e
-    YouTube (so o video de fundo da servicos.html, em youtube-nocookie.com)
+  - terceiro que recebe IP do visitante: Google Fonts (todas as paginas).
+    O YouTube saiu em 24/11/2026: o video de fundo da servicos.html agora e
+    arquivo proprio (assets/videos/servicos-reel.mp4), servido pela Hostinger
   - o formulario de contato passou a enviar em 20/08/2026, pelo Web3Forms, que
     esta nomeado nas secoes 3 e 6. Se o servico mudar, mudar os dois lugares
 
@@ -35,8 +36,8 @@ SAIDA = os.path.join(BASE, 'privacidade.html')
 
 # Fixo de proposito: se viesse da data do build, mudaria a cada rodada e
 # quebraria a idempotencia. Atualizar a mao quando o texto mudar.
-ATUALIZADO_PT = '21 de outubro de 2026'
-ATUALIZADO_EN = 'October 21, 2026'
+ATUALIZADO_PT = '24 de novembro de 2026'
+ATUALIZADO_EN = 'November 24, 2026'
 
 CONTATO = 'hello@slowexe.com'
 
@@ -64,14 +65,10 @@ BLOCOS = [
   'Antes do que coletamos, o que nao coletamos. Este site nao grava cookie '
   'proprio, nao tem Google Analytics, nao tem pixel de rede social e nao faz '
   'perfilamento nem publicidade direcionada. Nao rastreamos sua navegacao '
-  'entre paginas. A unica excecao e o video de fundo da pagina de servicos, '
-  'que e servido pelo YouTube: ele esta em modo de privacidade reforcada e '
-  'esta descrito na secao 6.',
+  'entre paginas.',
   'Before what we collect, what we do not. This site sets no cookie of its '
   'own, has no Google Analytics, no social media pixel, and does no profiling '
-  'or targeted advertising. We do not track your browsing across pages. The '
-  'one exception is the background video on the services page, served by '
-  'YouTube: it runs in privacy enhanced mode and is described in section 6.'),
+  'or targeted advertising. We do not track your browsing across pages.'),
 
  ('h', '3. Dados que voce nos entrega', '3. Data you give us'),
  ('p',
@@ -120,26 +117,15 @@ BLOCOS = [
 
  ('h', '6. Com quem compartilhamos', '6. Who we share with'),
  ('l',
-  '<b>Hospedagem:</b> o site e servido pelo GitHub Pages, que registra o IP do '
+  '<b>Hospedagem:</b> o site e servido pela Hostinger, que registra o IP do '
   'visitante nos logs de acesso, como qualquer servidor web.',
-  '<b>Hosting:</b> the site is served by GitHub Pages, which logs visitor IPs in '
+  '<b>Hosting:</b> the site is served by Hostinger, which logs visitor IPs in '
   'access logs, like any web server.'),
  ('l',
   '<b>Google Fonts:</b> as fontes do site sao carregadas dos servidores do '
   'Google, que por isso recebe o seu IP.',
   '<b>Google Fonts:</b> the site fonts load from Google servers, which therefore '
   'receive your IP.'),
- ('l',
-  '<b>YouTube:</b> o video de fundo da pagina de servicos vem do YouTube, que '
-  'recebe o seu IP ao carregar o video. Usamos o modo de privacidade reforcada '
-  '(youtube-nocookie.com), em que o YouTube nao grava cookie de publicidade '
-  'para perfilar a sua navegacao. O video comeca sozinho, sem som, e nenhuma '
-  'outra pagina do site carrega conteudo de terceiro.',
-  '<b>YouTube:</b> the background video on the services page comes from '
-  'YouTube, which receives your IP when the video loads. We use privacy '
-  'enhanced mode (youtube-nocookie.com), in which YouTube does not set '
-  'advertising cookies to profile your browsing. The video starts on its own, '
-  'muted, and no other page on the site loads third party content.'),
  ('l',
   '<b>Web3Forms:</b> o formulario de contato e o pedido de horario sao enviados '
   'por esse servico, que recebe o que voce digitou e entrega no e-mail da '
