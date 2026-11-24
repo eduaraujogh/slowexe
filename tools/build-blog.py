@@ -298,10 +298,21 @@ def head_seo(p, url):
       "@context":"https://schema.org","@type":"BlogPosting",
       "headline":p['title_pt'],"description":p['desc_pt'],
       "inLanguage":"pt-BR","datePublished":iso,"dateModified":iso,
-      "author":{"@type":"Person","name":AUTOR},
+      # autor com link (a secao dos fundadores na home), publisher com logo e
+      # imagem do artigo: os tres campos que o Google pede pro resultado rico
+      # de artigo e que faltavam (auditoria de SEO, 24/11/2026)
+      "author":{"@type":"Person","name":AUTOR,"url":SITE_URL + "/#about"},
       "publisher":{"@type":"Organization","name":"Slowexe",
-                   "url":SITE_URL},
+                   "url":SITE_URL,
+                   "logo":{"@type":"ImageObject",
+                           "url":SITE_URL + "/assets/icons/icon-512.png",
+                           "width":512,"height":512}},
       "mainEntityOfPage":{"@type":"WebPage","@id":url},
+      # a capa em 1200x630 que o build-seo.py gera em assets/og/ a partir da
+      # foto do post; sem foto, o post nao tem capa propria e o campo fica fora
+      **({"image":{"@type":"ImageObject",
+                   "url":"%s/assets/og/blog-%s.jpg" % (SITE_URL, p['slug']),
+                   "width":1200,"height":630}} if foto_capa(p['slug']) else {}),
       "keywords":p['kw'],
       "articleSection":p['cat_pt'],
       "timeRequired":"PT%dM" % leitura(p),

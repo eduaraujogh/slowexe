@@ -83,6 +83,10 @@ SERVICOS = [
     ('d-brand', 'Branding'), ('d-rebrand', 'Rebranding'),
 ]
 
+# Perfis oficiais da Slowexe (LinkedIn da empresa, Google Meu Negocio,
+# Instagram/Behance da marca). Vazio ate eles existirem.
+PERFIS_DA_EMPRESA = []
+
 ORG_ID = cfg.url('#org')
 SITE_ID = cfg.url('#site')
 
@@ -136,9 +140,13 @@ def organizacao():
                          'email': EMAIL, 'url': cfg.url('contato.html'),
                          'availableLanguage': ['pt-BR', 'en']},
     }
-    links = [redes.PERFIS[k] for k in redes.ativas()]
-    if links:
-        o['sameAs'] = links
+    # sameAs diz "esta empresa tambem e esta conta". Os perfis de redes.py sao
+    # pessoais do Eduardo (Instagram hascunho, Behance edu_ardoara85a) e
+    # confundiam a entidade Slowexe com outra pessoa/nome (auditoria de SEO,
+    # 24/11/2026). Aqui entram so perfis DA EMPRESA; o rodape continua
+    # mostrando os de redes.py.
+    if PERFIS_DA_EMPRESA:
+        o['sameAs'] = PERFIS_DA_EMPRESA
     return o
 
 
@@ -162,7 +170,8 @@ def grafo(nome, html):
         return [organizacao(),
                 {'@type': 'WebSite', '@id': SITE_ID, 'url': cfg.url(''),
                  'name': cfg.NOME, 'description': RESUMO,
-                 'inLanguage': ['pt-BR', 'en'], 'publisher': ref_org}]
+                 # so pt-BR: o ingles ainda nao tem URL propria indexavel
+                 'inLanguage': 'pt-BR', 'publisher': ref_org}]
 
     if nome == 'servicos.html':
         return [{'@type': 'CollectionPage', 'url': u, 'name': titulo,
