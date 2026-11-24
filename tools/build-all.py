@@ -28,6 +28,7 @@ PASSOS = [
     ('build-case-web.py', 'cases de projeto de site'),
     ('build-legal.py',   'pagina de privacidade'),
     ('build-links.py',   'links sem destino'),
+    ('build-sem-oferta.py', 'sem o sino da oferta de 20%'),
     ('build-header.py',  'header de vidro'),
     ('build-imagens.py', 'imagens locais no lugar de placeholder'),
     ('build-setas.py',   'seta dos botoes deslizando na horizontal'),
