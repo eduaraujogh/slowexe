@@ -920,7 +920,14 @@ header .menu-toggle svg{stroke:#0A0B0D}
   <!-- ============ PROJECTS (stacking cards) ============ -->
   <section class="projects" id="projects">
     <div class="wrap">
-      <div class="stack"></div>
+      <!-- cards no HTML (antes so via JS): o Google segue estes links para os cases.
+           O script abaixo reaproveita os cards que ja existem. -->
+      <div class="stack">
+        <a class="scard" href="projeto-artta.html" style="--i:0"><div class="scard-media"><video class="scard-vid" muted loop playsinline preload="none" poster="assets/videos/artta-poster.webp" aria-label="Artta, Mercado financeiro"><source src="assets/videos/artta.mp4" type="video/mp4"></video><div class="scard-foot"><div class="scard-meta"><h3 class="scard-name">Artta</h3><span class="scard-date">Mercado financeiro</span></div><span class="scard-link"><span class="lk">Ver projeto</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div></div></a>
+        <a class="scard" href="projeto-sabores.html" style="--i:1"><div class="scard-media"><video class="scard-vid" muted loop playsinline preload="none" poster="assets/videos/sabores-poster.webp" aria-label="Sabores de Curitiba, Gastronomia"><source src="assets/videos/sabores.mp4" type="video/mp4"></video><div class="scard-foot"><div class="scard-meta"><h3 class="scard-name">Sabores de Curitiba</h3><span class="scard-date">Gastronomia</span></div><span class="scard-link"><span class="lk">Ver projeto</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div></div></a>
+        <a class="scard" href="projeto-duo.html" style="--i:2"><div class="scard-media"><video class="scard-vid" muted loop playsinline preload="none" poster="assets/videos/duo-poster.webp" aria-label="Duo Garage, Automotivo"><source src="assets/videos/duo.mp4" type="video/mp4"></video><div class="scard-foot"><div class="scard-meta"><h3 class="scard-name">Duo Garage</h3><span class="scard-date">Automotivo</span></div><span class="scard-link"><span class="lk">Ver projeto</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div></div></a>
+        <a class="scard" href="projeto-fense.html" style="--i:3"><div class="scard-media"><video class="scard-vid" muted loop playsinline preload="none" poster="assets/videos/fense-poster.webp" aria-label="Fense Seguros, Seguros"><source src="assets/videos/fense.mp4" type="video/mp4"></video><div class="scard-foot"><div class="scard-meta"><h3 class="scard-name">Fense Seguros</h3><span class="scard-date">Seguros</span></div><span class="scard-link"><span class="lk">Ver projeto</span><span class="arr-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></div></div></a>
+      </div>
       <div class="works2-cta">
         <a href="projetos.html" class="btn btn-cta-light">
           <span class="roll" data-pt>Ver todos os projetos</span><span class="roll" data-en>View all works</span>
@@ -1429,7 +1436,9 @@ header .menu-toggle svg{stroke:#0A0B0D}
     ];
     const L=()=>document.documentElement.lang==='en'?'en':'pt';
     const refs=[];
+    const pre=[...stack.querySelectorAll('.scard')];
     data.forEach((p,i)=>{
+      if(pre[i]){const a=pre[i];refs.push({lk:a.querySelector('.lk'),dt:a.querySelector('.scard-date'),p:p});return;}
       const a=document.createElement('a');a.className='scard';a.href=p.href||'projetos.html';a.style.setProperty('--i',i);
       a.innerHTML=
         // a legenda vive DENTRO da midia: entra por cima da imagem no hover
